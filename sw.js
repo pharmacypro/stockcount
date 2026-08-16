@@ -1,4 +1,4 @@
-﻿const CACHE_NAME = 'stockcount-v2';
+﻿const CACHE_NAME = 'pharmacypro-v2';
 const ASSETS = [
     '/',
     '/index.html',
@@ -52,7 +52,7 @@ self.addEventListener('fetch', event => {
                         return response;
                     })
                     .catch(() => {
-                        if (event.request.headers.get('accept').includes('text/html')) {
+                        if (event.request.headers.get('accept')?.includes('text/html')) {
                             return caches.match('/index.html');
                         }
                     });
