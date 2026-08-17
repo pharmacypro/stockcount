@@ -1,6 +1,6 @@
-# 💊 PharmacyPro - ระบบนับสต็อกอัจฉริยะ
+# 💊 PharmacyPro - ระบบนับสินค้าร้านยา
 
-> ระบบนับสต็อกที่ทำงานได้ทั้งแบบ Offline และ Online สำหรับร้านขายยา
+> ระบบนับสินค้าที่ทำงานได้ทั้งแบบ Offline และ Online สำหรับร้านขายยา
 
 [![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](https://github.com/PharmacyPro/stockcount)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
