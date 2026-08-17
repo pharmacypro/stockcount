@@ -3,6 +3,8 @@ const ASSETS = [
     '/stockcount/',              // ← เปลี่ยนจาก "/"
     '/stockcount/index.html',    // ← เปลี่ยนจาก "/index.html"
     '/stockcount/manifest.json', // ← เปลี่ยนจาก "/manifest.json"
+    '/stockcount/android-chrome-192x192.png',   // ← เปลี่ยนชื่อ
+    '/stockcount/android-chrome-512x512.png',   // ← เปลี่ยนชื่อ
     'https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap',
     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css',
     'https://unpkg.com/@zxing/library@0.20.0/umd/index.min.js',
