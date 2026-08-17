@@ -1126,8 +1126,8 @@
                     <i class="fas fa-cubes"></i>
                 </div>
                 <div class="logo-text">
-                    <span class="brand"><i class="fas fa-chart-simple" style="opacity:0.7;"></i> StockCount</span>
-                    <span class="tagline"><i class="fas fa-circle" style="font-size:6px;color:#34d399;margin-right:4px;"></i> ระบบนับสิรค้าในร้านยา</span>
+                    <span class="brand"><i class="fas fa-chart-simple" style="opacity:0.7;"></i> PharmacyPro</span>
+                    <span class="tagline"><i class="fas fa-circle" style="font-size:6px;color:#34d399;margin-right:4px;"></i> ระบบนับสินค้าในร้านยา</span>
                 </div>
             </a>
             <div class="header-actions">
@@ -1598,7 +1598,7 @@
     INSTALL BANNER
     ============================================ -->
     <div id="installBanner">
-        <p><i class="fas fa-rocket"></i> ติดตั้ง StockCount</p>
+        <p><i class="fas fa-rocket"></i> ติดตั้ง PharmacyPro</p>
         <div class="sub">ใช้งานสะดวกรวดเร็ว เสมือนแอปพลิเคชันบนมือถือ</div>
         <button class="btn-install" onclick="app.installApp()">
             <i class="fas fa-download"></i> ติดตั้งเลย
@@ -2388,7 +2388,12 @@
             }
 
             async startScanner() {
-                try {
+            // ✅ เพิ่มการตรวจสอบความพร้อมของ ZXing
+                if (typeof ZXing === 'undefined') {
+                this.showToast('⚠️ กำลังโหลดไลบรารีสแกน กรุณารอสักครู่...', 'warning');
+                await new Promise(r => setTimeout(r, 2000));
+            }
+                    try {
                     const stream = await navigator.mediaDevices.getUserMedia({
                         video: { facingMode: 'environment', width: { ideal: 1280 }, height: { ideal: 720 } },
                         audio: false
