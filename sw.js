@@ -1,5 +1,5 @@
 ﻿const CACHE_NAME = 'pharmacypro-v4';
-onst ASSETS = [
+const ASSETS = [
     '/stockcount/',
     '/stockcount/index.html',
     '/stockcount/manifest.json',
