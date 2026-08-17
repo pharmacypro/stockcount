@@ -1,23 +1,23 @@
 {
-  "name": "PharmacyPro - ระบบนับสินค้าร้านยา",
+  "name": "PharmacyPro - ระบบนับสินค้าในร้านยา",
   "short_name": "PharmacyPro",
-  "description": "ระบบนับสินค้าที่ทำงานได้ทั้ง Offline และ Online สำหรับร้านขายยา",
-  "start_url": "/stockcount/",
-  "scope": "/stockcount/",
+  "description": "ระบบนับสินค้าทั้ง offline และ Online สำหรับร้านขายยา",
+  "start_url": "https://pharmacypro.github.io/stockcount/",
+  "scope": "https://pharmacypro.github.io/stockcount/",
   "display": "standalone",
-  "background_color": "#4f46e5",
-  "theme_color": "#4f46e5",
+  "background_color": "#a6f5e5",
+  "theme_color": "#a6f5e5",
   "orientation": "portrait",
   "categories": ["business", "productivity", "utilities"],
   "icons": [
     {
-      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='100' fill='%234f46e5'/%3E%3Ctext x='256' y='340' text-anchor='middle' font-size='200' font-family='Arial' fill='white'%3E💊%3C/text%3E%3C/svg%3E",
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3C/svg%3E",
       "sizes": "192x192",
       "type": "image/svg+xml",
       "purpose": "any maskable"
     },
     {
-      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='100' fill='%234f46e5'/%3E%3Ctext x='256' y='340' text-anchor='middle' font-size='200' font-family='Arial' fill='white'%3E💊%3C/text%3E%3C/svg%3E",
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3C/svg%3E",
       "sizes": "512x512",
       "type": "image/svg+xml",
       "purpose": "any maskable"
