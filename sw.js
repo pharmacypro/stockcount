@@ -1,4 +1,4 @@
-﻿const CACHE_NAME = 'pharmacypro-v3';
+﻿const CACHE_NAME = 'pharmacypro-v4';
 const ASSETS = [
     '/stockcount/',              // ← เปลี่ยนจาก "/"
     '/stockcount/index.html',    // ← เปลี่ยนจาก "/index.html"
