@@ -1,4 +1,4 @@
-﻿const CACHE_NAME = 'pharmacypro-v2';
+﻿const CACHE_NAME = 'pharmacypro-v3';
 const ASSETS = [
     '/',
     '/index.html',
