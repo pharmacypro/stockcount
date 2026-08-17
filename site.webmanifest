@@ -1,0 +1,26 @@
+{
+  "name": "PharmacyPro - ระบบนับสินค้าในร้านยา",
+  "short_name": "PharmacyPro",
+  "description": "ระบบนับสินค้าทั้ง offline และ Online สำหรับร้านขายยา",
+  "start_url": "https://pharmacypro.github.io/stockcount/",
+  "scope": "https://pharmacypro.github.io/stockcount/",
+  "display": "standalone",
+  "background_color": "#4f46e5",
+  "theme_color": "#4f46e5",
+  "orientation": "portrait",
+  "categories": ["business", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "/stockcount/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/stockcount/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
