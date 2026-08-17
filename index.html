@@ -6,11 +6,11 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="StockCount">
+    <meta name="apple-mobile-web-app-title" content="PharmacyPro">
     <meta name="theme-color" content="#4f46e5">
-    <meta name="description" content="ระบบนับสต็อกอัจฉริยะ ทำงานได้ทั้ง Offline และ Online">
+    <meta name="description" content="ระบบนับสินค้าในร้านยา ทำงานได้ทั้ง Offline และ Online">
     <link rel="manifest" href="manifest.json">
-    <title>StockCount - ระบบนับสต็อกอัจฉริยะ</title>
+    <title>PharmacyPro - ระบบนับสินค้าในร้านยา</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1127,7 +1127,7 @@
                 </div>
                 <div class="logo-text">
                     <span class="brand"><i class="fas fa-chart-simple" style="opacity:0.7;"></i> StockCount</span>
-                    <span class="tagline"><i class="fas fa-circle" style="font-size:6px;color:#34d399;margin-right:4px;"></i> ระบบนับสต็อกอัจฉริยะ</span>
+                    <span class="tagline"><i class="fas fa-circle" style="font-size:6px;color:#34d399;margin-right:4px;"></i> ระบบนับสิรค้าในร้านยา</span>
                 </div>
             </a>
             <div class="header-actions">
@@ -1647,7 +1647,7 @@
                     HISTORY: 'History!A:E'
                 }
             },
-            APP_NAME: 'StockCount',
+            APP_NAME: 'PharmacyPro',
             VERSION: '2.0.0',
             STORE_ID: localStorage.getItem('storeId') || 'default'
             // ❌ ไม่มี SAMPLE_DATA เพื่อความปลอดภัย
@@ -1691,7 +1691,7 @@
                 this.initNetworkListener();
                 this.initKeyboardShortcuts();
                 this.updateStatus('พร้อมใช้งาน');
-                console.log('✅ StockCount v2.0.0 เริ่มทำงานเรียบร้อย');
+                console.log('✅ PharmacyPro v2.0.0 เริ่มทำงานเรียบร้อย');
 
                 // แจ้งให้ผู้ใช้นำเข้าข้อมูล
                 if (this.products.length === 0) {
@@ -3106,7 +3106,7 @@
         window.installApp = () => app.installApp();
         window.closeInstallBanner = () => app.closeInstallBanner();
 
-        console.log('✅ StockCount v2.0.0 พร้อมใช้งาน!');
+        console.log('✅ PharmacyPro v2.0.0 พร้อมใช้งาน!');
         console.log('📖 เริ่มต้นใช้งาน: อัปโหลดไฟล์ Excel/CSV หรือเชื่อมต่อ Google Sheets');
     </script>
 
