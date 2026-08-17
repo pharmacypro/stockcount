@@ -2388,51 +2388,64 @@
             }
 
             async startScanner() {
-            // ✅ เพิ่มการตรวจสอบความพร้อมของ ZXing
-                if (typeof ZXing === 'undefined') {
-                this.showToast('⚠️ กำลังโหลดไลบรารีสแกน กรุณารอสักครู่...', 'warning');
-                await new Promise(r => setTimeout(r, 2000));
-            }
-                    try {
-                    const stream = await navigator.mediaDevices.getUserMedia({
-                        video: { facingMode: 'environment', width: { ideal: 1280 }, height: { ideal: 720 } },
-                        audio: false
-                    });
-                    const video = document.getElementById('video');
-                    video.srcObject = stream;
-                    video.style.display = 'block';
-                    await video.play();
-                    document.getElementById('scannerPlaceholder').style.display = 'none';
-                    document.getElementById('scannerOverlay').style.display = 'block';
-                    document.getElementById('scannerStatus').innerHTML =
-                        '<i class="fas fa-circle" style="color:var(--success);font-size:10px;"></i> กล้องกำลังทำงาน...';
-                    document.getElementById('scannerStatus').className = 'scanner-status success';
-                    document.getElementById('btnToggleScanner').innerHTML = '<i class="fas fa-stop"></i> ปิดกล้อง';
-                    this.codeReader = new ZXing.BrowserMultiFormatReader();
-                    this.scanning = true;
-                    this.lastScan = 0;
-                    const scan = () => {
-                        if (!this.scanning) return;
-                        const now = Date.now();
-                        if (now - this.lastScan < 2000) { setTimeout(scan, 500); return; }
-                        this.codeReader.decodeFromVideoElement(video)
-                            .then(result => {
-                                this.lastScan = now;
-                                this.onScan(result.text);
-                                setTimeout(scan, 1500);
-                            })
-                            .catch(() => { setTimeout(scan, 500); });
-                    };
-                    scan();
-                    this.showToast('📷 กล้องพร้อมส่องบาร์โค้ดแล้ว', 'success');
-                } catch (err) {
-                    console.error('Camera error:', err);
-                    document.getElementById('scannerStatus').innerHTML =
-                        '<i class="fas fa-exclamation-circle"></i> ไม่สามารถเปิดกล้องได้';
-                    document.getElementById('scannerStatus').className = 'scanner-status error';
-                    this.showToast('❌ กรุณาอนุญาตสิทธิ์การใช้กล้อง', 'error');
+    if (typeof ZXing === 'undefined') {
+        this.showToast('⚠️ กำลังโหลดไลบรารีสแกน กรุณารอสักครู่...', 'warning');
+        await new Promise(r => setTimeout(r, 2000));
+    }
+    try {
+        const video = document.getElementById('video');
+        video.style.display = 'block';
+        
+        // สร้าง CodeReader instance
+        this.codeReader = new ZXing.BrowserMultiFormatReader();
+        
+        // ค้นหากล้องทั้งหมดในเครื่อง
+        const videoInputDevices = await this.codeReader.listVideoInputDevices();
+        
+        // พยายามเลือกกล้องหลัง (Back camera / environment) ถ้ามี
+        let selectedDeviceId = videoInputDevices[0]?.deviceId;
+        const backCamera = videoInputDevices.find(device => 
+            device.label.toLowerCase().includes('back') || 
+            device.label.toLowerCase().includes('rear') ||
+            device.label.toLowerCase().includes('หลัง')
+        );
+        if (backCamera) {
+            selectedDeviceId = backCamera.deviceId;
+        }
+
+        document.getElementById('scannerPlaceholder').style.display = 'none';
+        document.getElementById('scannerOverlay').style.display = 'block';
+        document.getElementById('scannerStatus').innerHTML = '<i class="fas fa-circle" style="color:var(--success);font-size:10px;"></i> กล้องกำลังทำงาน...';
+        document.getElementById('scannerStatus').className = 'scanner-status success';
+        document.getElementById('btnToggleScanner').innerHTML = '<i class="fas fa-stop"></i> ปิดกล้อง';
+        
+        this.scanning = true;
+        this.lastScan = 0;
+
+        // เริ่มต้น decode จากอุปกรณ์ที่เลือก (หรือใช้ค่าเริ่มต้นถ้าไม่พบ ID)
+        this.codeReader.decodeFromVideoDevice(selectedDeviceId, video, (result, err) => {
+            if (result && this.scanning) {
+                const now = Date.now();
+                if (now - this.lastScan > 2000) { // หน่วงเวลาไม่ให้สแกนซ้ำรัวๆ
+                    this.lastScan = now;
+                    this.onScan(result.getText());
                 }
             }
+            if (err && !(err instanceof ZXing.NotFoundException)) {
+                //จัดการข้อผิดพลาดอื่นๆ ที่ไม่ใช่กรณีไม่พบบาร์โค้ดในเฟรมนั้น
+                console.debug(err);
+            }
+        });
+
+        this.showToast('📷 กล้องพร้อมส่องบาร์โค้ดแล้ว', 'success');
+    } catch (err) {
+        console.error('Camera error:', err);
+        document.getElementById('scannerStatus').innerHTML = '<i class="fas fa-exclamation-circle"></i> ไม่สามารถเปิดกล้องได้';
+        document.getElementById('scannerStatus').className = 'scanner-status error';
+        this.showToast('❌ กรุณาตรวจสอบสิทธิ์การใช้กล้องหรือรันผ่าน HTTPS', 'error');
+        this.stopScanner();
+    }
+}
 
             stopScanner() {
                 this.scanning = false;
