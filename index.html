@@ -14,17 +14,25 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/stockcount/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/stockcount/favicon-16x16.png">
     <title>PharmacyPro - ระบบนับสินค้าในร้านยา</title>
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <!-- External Libraries -->
-    <script src="https://cdn.jsdelivr.net/npm/@zxing/library@0.19.0/umd/index.min.js" defer></script>
+
+    <!-- ⭐ ZXing Library for Barcode Scanning (สำคัญที่สุด!) ⭐ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zxing-library/0.18.0/umd/index.min.js"></script>
+
+    <!-- XLSX for Excel -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+    <!-- jsPDF for PDF export -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+
     <style>
         /* ===== CSS ทั้งหมด (เหมือนเดิม) ===== */
         :root {
@@ -53,6 +61,9 @@
             --shadow-lg: 0 20px 60px rgba(0,0,0,0.12);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
+        /* ... CSS ที่เหลือทั้งหมดของคุณ ... */
+    </style>
+</head>
         [data-theme="dark"] {
             --bg-body: #0f172a;
             --bg-card: #1e293b;
