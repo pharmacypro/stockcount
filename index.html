@@ -21,7 +21,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <!-- External Libraries -->
-    <script src="https://unpkg.com/@zxing/library@0.20.0/umd/index.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zxing-library/0.18.0/umd/index.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
@@ -1212,18 +1212,25 @@
 
                     // เริ่มต้น decode จากอุปกรณ์ที่เลือก
                     this.codeReader.decodeFromVideoDevice(selectedDeviceId, video, (result, err) => {
-                        if (result && this.scanning) {
-                            const now = Date.now();
-                            if (now - this.lastScan > 2000) { // หน่วงเวลาไม่ให้สแกนซ้ำรัวๆ
-                                this.lastScan = now;
-                                this.onScan(result.getText());
-                            }
-                        }
-                        if (err && !(err instanceof ZXing.NotFoundException)) {
-                            // จัดการข้อผิดพลาดอื่นๆ ที่ไม่ใช่กรณีไม่พบบาร์โค้ดในเฟรมนั้น
-                            console.debug(err);
-                        }
-                    });
+                    if (result) {
+                    console.log('✅ สแกนเจอ:', result.getText());
+                    const now = Date.now();
+                    if (now - this.lastScan > 2000) {
+                    this.lastScan = now;
+                    // สั่นเพื่อแจ้งเตือน
+                    if (navigator.vibrate) navigator.vibrate(200);
+                    this.onScan(result.getText());
+                    }
+                  }
+                  if (err) {
+                  // แสดง Error เฉพาะที่สำคัญ
+                  if (err.message && err.message.includes('NotFoundException')) {
+                 // ไม่แสดง Error นี้ เพราะมันเกิดขึ้นตลอดเวลา (หาบาร์โค้ดไม่เจอในแต่ละเฟรม)
+              } else {
+                    console.warn('⚠️ ZXing Error:', err.message);
+                }
+              }
+        });
 
                     this.showToast('📷 กล้องพร้อมส่องบาร์โค้ดแล้ว', 'success');
                 } catch (err) {
