@@ -1169,78 +1169,83 @@
                 else { await this.startScanner(); }
             }
 
-            async startScanner() {
-                // รอให้ ZXing โหลดเสร็จ (รอสูงสุด 10 วินาที)
-                let retries = 0;
-                while (typeof ZXing === 'undefined' && retries < 20) {
-                    await new Promise(r => setTimeout(r, 500));
-                    retries++;
-                }
-                if (typeof ZXing === 'undefined') {
-                    this.showToast('⚠️ ไลบรารีสแกนโหลดไม่สำเร็จ กรุณารีเฟรช', 'error');
-                    return;
-                }
-                try {
-                    const video = document.getElementById('video');
-                    video.style.display = 'block';
-                    
-                    // สร้าง CodeReader instance
-                    this.codeReader = new ZXing.BrowserMultiFormatReader();
-                    
-                    // ค้นหากล้องทั้งหมดในเครื่อง
-                    const videoInputDevices = await this.codeReader.listVideoInputDevices();
-                    
-                    // พยายามเลือกกล้องหลัง (Back camera / environment) ถ้ามี
-                    let selectedDeviceId = videoInputDevices[0]?.deviceId;
-                    const backCamera = videoInputDevices.find(device => 
-                        device.label.toLowerCase().includes('back') || 
-                        device.label.toLowerCase().includes('rear') ||
-                        device.label.toLowerCase().includes('หลัง')
-                    );
-                    if (backCamera) {
-                        selectedDeviceId = backCamera.deviceId;
-                    }
+async startScanner() {
+    // รอให้ ZXing โหลดเสร็จ (รอสูงสุด 10 วินาที)
+    let retries = 0;
+    while (typeof ZXing === 'undefined' && retries < 20) {
+        await new Promise(r => setTimeout(r, 500));
+        retries++;
+    }
+    if (typeof ZXing === 'undefined') {
+        this.showToast('⚠️ ไลบรารีสแกนโหลดไม่สำเร็จ กรุณารีเฟรช', 'error');
+        return;
+    }
+    try {
+        const video = document.getElementById('video');
+        video.style.display = 'block';
 
-                    document.getElementById('scannerPlaceholder').style.display = 'none';
-                    document.getElementById('scannerOverlay').style.display = 'block';
-                    document.getElementById('scannerStatus').innerHTML = '<i class="fas fa-circle" style="color:var(--success);font-size:10px;"></i> กล้องกำลังทำงาน...';
-                    document.getElementById('scannerStatus').className = 'scanner-status success';
-                    document.getElementById('btnToggleScanner').innerHTML = '<i class="fas fa-stop"></i> ปิดกล้อง';
-                    
-                    this.scanning = true;
-                    this.lastScan = 0;
+        // ✅ เพิ่มการตั้งค่ากล้องให้เหมาะกับมือถือ
+        const constraints = {
+            video: {
+                facingMode: "environment",  // ใช้กล้องหลัง
+                width: { ideal: 640 },
+                height: { ideal: 480 },
+                focusMode: "continuous"
+            }
+        };
 
-                    // เริ่มต้น decode จากอุปกรณ์ที่เลือก
-                    this.codeReader.decodeFromVideoDevice(selectedDeviceId, video, (result, err) => {
-                    if (result) {
-                    console.log('✅ สแกนเจอ:', result.getText());
-                    const now = Date.now();
-                    if (now - this.lastScan > 2000) {
-                    this.lastScan = now;
-                    // สั่นเพื่อแจ้งเตือน
-                    if (navigator.vibrate) navigator.vibrate(200);
-                    this.onScan(result.getText());
-                    }
-                  }
-                  if (err) {
-                  // แสดง Error เฉพาะที่สำคัญ
-                  if (err.message && err.message.includes('NotFoundException')) {
-                 // ไม่แสดง Error นี้ เพราะมันเกิดขึ้นตลอดเวลา (หาบาร์โค้ดไม่เจอในแต่ละเฟรม)
-              } else {
-                    console.warn('⚠️ ZXing Error:', err.message);
-                }
-              }
+        // ✅ ใช้ getUserMedia โดยตรงเพื่อควบคุมกล้อง
+        const stream = await navigator.mediaDevices.getUserMedia(constraints);
+        video.srcObject = stream;
+        await video.play();
+
+        // สร้าง CodeReader และเริ่มสแกน
+        this.codeReader = new ZXing.BrowserMultiFormatReader();
+        
+        // ✅ ตั้งค่าให้อ่านบาร์โค้ดหลายรูปแบบ
+        this.codeReader.setHints({
+            'FORMATS': [
+                ZXing.BarcodeFormat.EAN_13,
+                ZXing.BarcodeFormat.EAN_8,
+                ZXing.BarcodeFormat.CODE_128,
+                ZXing.BarcodeFormat.QR_CODE,
+                ZXing.BarcodeFormat.UPC_A,
+                ZXing.BarcodeFormat.CODE_39
+            ]
         });
 
-                    this.showToast('📷 กล้องพร้อมส่องบาร์โค้ดแล้ว', 'success');
-                } catch (err) {
-                    console.error('Camera error:', err);
-                    document.getElementById('scannerStatus').innerHTML = '<i class="fas fa-exclamation-circle"></i> ไม่สามารถเปิดกล้องได้';
-                    document.getElementById('scannerStatus').className = 'scanner-status error';
-                    this.showToast('❌ กรุณาตรวจสอบสิทธิ์การใช้กล้องหรือรันผ่าน HTTPS', 'error');
-                    this.stopScanner();
+        document.getElementById('scannerPlaceholder').style.display = 'none';
+        document.getElementById('scannerOverlay').style.display = 'block';
+        document.getElementById('scannerStatus').innerHTML = '<i class="fas fa-circle" style="color:var(--success);font-size:10px;"></i> กล้องกำลังทำงาน...';
+        document.getElementById('scannerStatus').className = 'scanner-status success';
+        document.getElementById('btnToggleScanner').innerHTML = '<i class="fas fa-stop"></i> ปิดกล้อง';
+        this.scanning = true;
+        this.lastScan = 0;
+
+        // ✅ เริ่ม decode จากวิดีโอ (ใช้ decodeFromVideoElement แทน)
+        this.codeReader.decodeFromVideoElement(video, (result, err) => {
+            if (result && this.scanning) {
+                const now = Date.now();
+                if (now - this.lastScan > 2000) {
+                    this.lastScan = now;
+                    if (navigator.vibrate) navigator.vibrate(200);
+                    this.onScan(result.getText());
                 }
             }
+            if (err && !(err instanceof ZXing.NotFoundException)) {
+                console.warn('ZXing error:', err.message);
+            }
+        });
+
+        this.showToast('📷 กล้องพร้อมส่องบาร์โค้ดแล้ว', 'success');
+    } catch (err) {
+        console.error('Camera error:', err);
+        document.getElementById('scannerStatus').innerHTML = '<i class="fas fa-exclamation-circle"></i> ไม่สามารถเปิดกล้องได้';
+        document.getElementById('scannerStatus').className = 'scanner-status error';
+        this.showToast('❌ กรุณาตรวจสอบสิทธิ์การใช้กล้องหรือรันผ่าน HTTPS', 'error');
+        this.stopScanner();
+    }
+}
 
             stopScanner() {
                 this.scanning = false;
@@ -1796,5 +1801,11 @@
         console.log('✅ PharmacyPro v2.0.0 พร้อมใช้งาน!');
         console.log('📖 เริ่มต้นใช้งาน: อัปโหลดไฟล์ Excel/CSV หรือเชื่อมต่อ Google Sheets');
     </script>
+<!-- Eruda - Console บนมือถือ -->
+<script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+<script>
+    eruda.init();
+    console.log('✅ Eruda เปิดใช้งานแล้ว!');
+</script>    
 </body>
 </html>
