@@ -2286,97 +2286,109 @@
                 }
             }
 
-            async startScanner() {
-                // 1. รอให้ ZXing โหลดเสร็จ
-                let retries = 0;
-                while (typeof ZXing === 'undefined' && retries < 30) {
-                    await new Promise(r => setTimeout(r, 300));
-                    retries++;
-                }
-                if (typeof ZXing === 'undefined') {
-                    this.showToast('⚠️ ไลบรารีสแกนโหลดไม่สำเร็จ กรุณารีเฟรช', 'error');
-                    return;
-                }
+async startScanner() {
+    // 1. รอให้ ZXing โหลดเสร็จ
+    let retries = 0;
+    while (typeof ZXing === 'undefined' && retries < 30) {
+        await new Promise(r => setTimeout(r, 300));
+        retries++;
+    }
+    if (typeof ZXing === 'undefined') {
+        this.showToast('⚠️ ไลบรารีสแกนโหลดไม่สำเร็จ กรุณารีเฟรช', 'error');
+        return;
+    }
 
-                try {
-                    const video = document.getElementById('video');
-                    video.style.display = 'block';
+    try {
+        const video = document.getElementById('video');
+        video.style.display = 'block';
 
-                    const constraints = {
-                        video: {
-                            facingMode: "environment",
-                            width: { ideal: 640 },
-                            height: { ideal: 480 }
-                        }
-                    };
-
-                    const stream = await navigator.mediaDevices.getUserMedia(constraints);
-                    video.srcObject = stream;
-                    await video.play();
-
-                    // ✅ สร้าง CodeReader ใหม่
-                    this.codeReader = new ZXing.BrowserMultiFormatReader();
-
-                    document.getElementById('scannerPlaceholder').style.display = 'none';
-                    document.getElementById('scannerOverlay').style.display = 'block';
-                    document.getElementById('scannerStatus').innerHTML =
-                        '<i class="fas fa-circle" style="color:var(--success);font-size:10px;"></i> กล้องกำลังทำงาน...';
-                    document.getElementById('scannerStatus').className = 'scanner-status success';
-                    document.getElementById('btnToggleScanner').innerHTML = '<i class="fas fa-stop"></i> ปิดกล้อง';
-                    this.scanning = true;
-                    this.lastScan = 0;
-
-                    // ✅ ใช้ decodeFromVideoElement แบบต่อเนื่อง (continuous)
-                    this.codeReader.decodeFromVideoElement(video, (result, err) => {
-                        if (result && this.scanning) {
-                            const now = Date.now();
-                            if (now - this.lastScan > 1500) {
-                                this.lastScan = now;
-                                if (navigator.vibrate) navigator.vibrate(150);
-                                this.onScan(result.getText());
-                            }
-                        }
-                        // ไม่ต้องแสดง error ทุกครั้ง
-                    });
-
-                    this.showToast('📷 กล้องพร้อมส่องบาร์โค้ดแล้ว', 'success');
-
-                } catch (err) {
-                    console.error('Camera error:', err);
-                    document.getElementById('scannerStatus').innerHTML =
-                        '<i class="fas fa-exclamation-circle"></i> ไม่สามารถเปิดกล้องได้';
-                    document.getElementById('scannerStatus').className = 'scanner-status error';
-                    this.showToast('❌ กรุณาตรวจสอบสิทธิ์การใช้กล้องหรือรันผ่าน HTTPS', 'error');
-                    this.stopScanner();
-                }
+        const constraints = {
+            video: {
+                facingMode: "environment",
+                width: { ideal: 640 },
+                height: { ideal: 480 }
             }
+        };
 
-            stopScanner() {
-                this.scanning = false;
-                const video = document.getElementById('video');
+        const stream = await navigator.mediaDevices.getUserMedia(constraints);
+        video.srcObject = stream;
+        await video.play();
 
-                // หยุด CodeReader
-                if (this.codeReader) {
-                    try {
-                        this.codeReader.reset();
-                    } catch (e) {}
-                    this.codeReader = null;
+        document.getElementById('scannerPlaceholder').style.display = 'none';
+        document.getElementById('scannerOverlay').style.display = 'block';
+        document.getElementById('scannerStatus').innerHTML =
+            '<i class="fas fa-circle" style="color:var(--success);font-size:10px;"></i> กล้องกำลังทำงาน...';
+        document.getElementById('scannerStatus').className = 'scanner-status success';
+        document.getElementById('btnToggleScanner').innerHTML = '<i class="fas fa-stop"></i> ปิดกล้อง';
+        this.scanning = true;
+        this.lastScan = 0;
+
+        // ✅ ใช้ decodeOnceFromVideoElement แบบวนลูปแทน (เสถียรกว่า)
+        const scanLoop = async () => {
+            if (!this.scanning) return;
+            try {
+                const result = await this.codeReader.decodeOnceFromVideoElement(video);
+                if (result && this.scanning) {
+                    const now = Date.now();
+                    if (now - this.lastScan > 1500) {
+                        this.lastScan = now;
+                        if (navigator.vibrate) navigator.vibrate(150);
+                        this.onScan(result.getText());
+                    }
                 }
-
-                // หยุด stream
-                if (video.srcObject) {
-                    video.srcObject.getTracks().forEach(t => t.stop());
-                    video.srcObject = null;
-                }
-
-                video.style.display = 'none';
-                document.getElementById('scannerPlaceholder').style.display = 'flex';
-                document.getElementById('scannerOverlay').style.display = 'none';
-                document.getElementById('scannerStatus').innerHTML =
-                '<i class="fas fa-circle" style="font-size:10px;"></i> กล้องปิดอยู่';
-                document.getElementById('scannerStatus').className = 'scanner-status idle';
-                document.getElementById('btnToggleScanner').innerHTML = '<i class="fas fa-camera"></i> เปิดกล้อง';
+            } catch (err) {
+                // ไม่มีบาร์โค้ดในเฟรมนี้ (ปกติ)
             }
+            // วนลูปต่อไปเรื่อยๆ
+            if (this.scanning) {
+                requestAnimationFrame(scanLoop);
+            }
+        };
+
+        // สร้าง CodeReader ใหม่
+        this.codeReader = new ZXing.BrowserMultiFormatReader();
+        
+        // เริ่มวนลูปสแกน
+        scanLoop();
+
+        this.showToast('📷 กล้องพร้อมส่องบาร์โค้ดแล้ว', 'success');
+
+    } catch (err) {
+        console.error('Camera error:', err);
+        document.getElementById('scannerStatus').innerHTML =
+            '<i class="fas fa-exclamation-circle"></i> ไม่สามารถเปิดกล้องได้';
+        document.getElementById('scannerStatus').className = 'scanner-status error';
+        this.showToast('❌ กรุณาตรวจสอบสิทธิ์การใช้กล้องหรือรันผ่าน HTTPS', 'error');
+        this.stopScanner();
+    }
+}
+
+stopScanner() {
+    this.scanning = false;
+    const video = document.getElementById('video');
+
+    // หยุด CodeReader
+    if (this.codeReader) {
+        try {
+            this.codeReader.reset();
+        } catch (e) {}
+        this.codeReader = null;
+    }
+
+    // หยุด stream
+    if (video.srcObject) {
+        video.srcObject.getTracks().forEach(t => t.stop());
+        video.srcObject = null;
+    }
+
+    video.style.display = 'none';
+    document.getElementById('scannerPlaceholder').style.display = 'flex';
+    document.getElementById('scannerOverlay').style.display = 'none';
+    document.getElementById('scannerStatus').innerHTML =
+        '<i class="fas fa-circle" style="font-size:10px;"></i> กล้องปิดอยู่';
+    document.getElementById('scannerStatus').className = 'scanner-status idle';
+    document.getElementById('btnToggleScanner').innerHTML = '<i class="fas fa-camera"></i> เปิดกล้อง';
+}
 
             // -------------------------------------------------------
             // MANUAL BARCODE
