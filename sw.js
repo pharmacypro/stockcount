@@ -1,13 +1,14 @@
-﻿const CACHE_NAME = 'pharmacypro-v4';
+﻿const CACHE_NAME = 'pharmacypro-v5';  // ← เปลี่ยนเวอร์ชัน
 const ASSETS = [
     '/stockcount/',
     '/stockcount/index.html',
     '/stockcount/manifest.json',
-    '/stockcount/android-chrome-192x192.png',   // ← เปลี่ยน
-    '/stockcount/android-chrome-512x512.png',   // ← เปลี่ยน
+    '/stockcount/android-chrome-192x192.png',
+    '/stockcount/android-chrome-512x512.png',
     'https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap',
     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css',
-    'https://unpkg.com/@zxing/library@0.20.0/umd/index.min.js',
+    // ✅ ใช้ CDN เดียวกับ index.html
+    'https://cdnjs.cloudflare.com/ajax/libs/zxing-library/0.18.0/umd/index.min.js',
     'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js',
     'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js',
     'https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js'
