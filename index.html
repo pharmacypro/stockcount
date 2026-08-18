@@ -2323,33 +2323,21 @@ async startScanner() {
         this.scanning = true;
         this.lastScan = 0;
 
-        // ✅ ใช้ decodeOnceFromVideoElement แบบวนลูปแทน (เสถียรกว่า)
-        const scanLoop = async () => {
-            if (!this.scanning) return;
-            try {
-                const result = await this.codeReader.decodeOnceFromVideoElement(video);
-                if (result && this.scanning) {
-                    const now = Date.now();
-                    if (now - this.lastScan > 1500) {
-                        this.lastScan = now;
-                        if (navigator.vibrate) navigator.vibrate(150);
-                        this.onScan(result.getText());
-                    }
-                }
-            } catch (err) {
-                // ไม่มีบาร์โค้ดในเฟรมนี้ (ปกติ)
-            }
-            // วนลูปต่อไปเรื่อยๆ
-            if (this.scanning) {
-                requestAnimationFrame(scanLoop);
-            }
-        };
-
-        // สร้าง CodeReader ใหม่
+        // ✅ ใช้ ZXing BrowserMultiFormatReader แบบใหม่
         this.codeReader = new ZXing.BrowserMultiFormatReader();
         
-        // เริ่มวนลูปสแกน
-        scanLoop();
+        // ✅ ใช้ decodeFromVideoElement แบบมี callback (วิธีที่ถูกต้องของ ZXing)
+        this.codeReader.decodeFromVideoElement(video, (result, err) => {
+            if (result && this.scanning) {
+                const now = Date.now();
+                if (now - this.lastScan > 1500) {
+                    this.lastScan = now;
+                    if (navigator.vibrate) navigator.vibrate(150);
+                    this.onScan(result.getText());
+                }
+            }
+            // ไม่ต้องแสดง error ทุกครั้ง มันจะโผล่เยอะเกินไป
+        });
 
         this.showToast('📷 กล้องพร้อมส่องบาร์โค้ดแล้ว', 'success');
 
