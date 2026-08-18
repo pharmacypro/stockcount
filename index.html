@@ -21,7 +21,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <!-- External Libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/zxing-library/0.18.0/umd/index.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@zxing/library@0.19.0/umd/index.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
@@ -1170,7 +1170,7 @@
             }
 
 async startScanner() {
-    // รอให้ ZXing โหลดเสร็จ (รอสูงสุด 10 วินาที)
+    // รอให้ ZXing โหลดเสร็จ
     let retries = 0;
     while (typeof ZXing === 'undefined' && retries < 20) {
         await new Promise(r => setTimeout(r, 500));
@@ -1184,35 +1184,22 @@ async startScanner() {
         const video = document.getElementById('video');
         video.style.display = 'block';
 
-        // ✅ เพิ่มการตั้งค่ากล้องให้เหมาะกับมือถือ
+        // ตั้งค่ากล้อง
         const constraints = {
             video: {
-                facingMode: "environment",  // ใช้กล้องหลัง
+                facingMode: "environment",
                 width: { ideal: 640 },
-                height: { ideal: 480 },
-                focusMode: "continuous"
+                height: { ideal: 480 }
             }
         };
 
-        // ✅ ใช้ getUserMedia โดยตรงเพื่อควบคุมกล้อง
+        // เปิดกล้อง
         const stream = await navigator.mediaDevices.getUserMedia(constraints);
         video.srcObject = stream;
         await video.play();
 
-        // สร้าง CodeReader และเริ่มสแกน
+        // สร้าง CodeReader
         this.codeReader = new ZXing.BrowserMultiFormatReader();
-        
-        // ✅ ตั้งค่าให้อ่านบาร์โค้ดหลายรูปแบบ
-        this.codeReader.setHints({
-            'FORMATS': [
-                ZXing.BarcodeFormat.EAN_13,
-                ZXing.BarcodeFormat.EAN_8,
-                ZXing.BarcodeFormat.CODE_128,
-                ZXing.BarcodeFormat.QR_CODE,
-                ZXing.BarcodeFormat.UPC_A,
-                ZXing.BarcodeFormat.CODE_39
-            ]
-        });
 
         document.getElementById('scannerPlaceholder').style.display = 'none';
         document.getElementById('scannerOverlay').style.display = 'block';
@@ -1222,7 +1209,7 @@ async startScanner() {
         this.scanning = true;
         this.lastScan = 0;
 
-        // ✅ เริ่ม decode จากวิดีโอ (ใช้ decodeFromVideoElement แทน)
+        // เริ่มสแกน
         this.codeReader.decodeFromVideoElement(video, (result, err) => {
             if (result && this.scanning) {
                 const now = Date.now();
@@ -1232,9 +1219,7 @@ async startScanner() {
                     this.onScan(result.getText());
                 }
             }
-            if (err && !(err instanceof ZXing.NotFoundException)) {
-                console.warn('ZXing error:', err.message);
-            }
+            // ไม่ต้องแสดง Error ทุกครั้ง เพราะมันจะโผล่เยอะ
         });
 
         this.showToast('📷 กล้องพร้อมส่องบาร์โค้ดแล้ว', 'success');
@@ -1246,7 +1231,6 @@ async startScanner() {
         this.stopScanner();
     }
 }
-
             stopScanner() {
                 this.scanning = false;
                 const video = document.getElementById('video');
