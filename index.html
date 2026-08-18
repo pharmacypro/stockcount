@@ -1,44 +1,32 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="PharmacyPro" />
-    <meta name="theme-color" content="#4f46e5" />
-    <meta name="description" content="ระบบนับสินค้าในร้านยา ทำงานได้ทั้ง Offline และ Online" />
-    <link rel="manifest" href="/stockcount/manifest.json" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/stockcount/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/stockcount/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/stockcount/favicon-16x16.png" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="PharmacyPro">
+    <meta name="theme-color" content="#4f46e5">
+    <meta name="description" content="ระบบนับสินค้าในร้านยา ทำงานได้ทั้ง Offline และ Online">
+    <link rel="manifest" href="/stockcount/manifest.json">
+    <link rel="apple-touch-icon" sizes="180x180" href="/stockcount/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/stockcount/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/stockcount/favicon-16x16.png">
     <title>PharmacyPro - ระบบนับสินค้าในร้านยา</title>
-
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
-    <!-- ⭐ ZXing Library for Barcode Scanning -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/zxing-library/0.18.0/umd/index.min.js">
-    </script>
-
-    <!-- XLSX for Excel -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js">
-    </script>
-
-    <!-- jsPDF for PDF export -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js">
-    </script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- External Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zxing-library/0.18.0/umd/index.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
     <style>
-        /* ===== CSS Variables ===== */
+        /* ===== CSS ทั้งหมด (เหมือนเดิม) ===== */
         :root {
             --primary: #4f46e5;
             --primary-dark: #4338ca;
@@ -60,13 +48,11 @@
             --radius-md: 12px;
             --radius-lg: 20px;
             --radius-xl: 28px;
-            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
-            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
-            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.12);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-lg: 0 20px 60px rgba(0,0,0,0.12);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
-        /* ===== Dark Theme ===== */
         [data-theme="dark"] {
             --bg-body: #0f172a;
             --bg-card: #1e293b;
@@ -74,1238 +60,204 @@
             --text-muted: #94a3b8;
             --text-light: #64748b;
             --border-color: #334155;
-            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
-            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.4);
-            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
-        }
-
-        /* ===== Reset ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background: var(--bg-body);
-            color: var(--text-main);
-            min-height: 100vh;
-            padding-bottom: 100px;
-            transition: var(--transition);
-        }
-
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--bg-body);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary-light);
-            border-radius: 3px;
-        }
-
-        /* ===== Header ===== */
-        .header {
-            background: var(--primary-gradient);
-            color: #fff;
-            padding: 14px 20px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 30px rgba(79, 70, 229, 0.3);
-        }
-        .header-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            color: #fff;
-        }
-        .logo-icon {
-            width: 42px;
-            height: 42px;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: var(--radius-md);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            backdrop-filter: blur(4px);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            flex-shrink: 0;
-            transition: var(--transition);
-        }
-        .logo-icon:hover {
-            transform: rotate(-5deg) scale(1.05);
-            background: rgba(255, 255, 255, 0.25);
-        }
-        .logo-text {
-            display: flex;
-            flex-direction: column;
-            line-height: 1.2;
-        }
-        .logo-text .brand {
-            font-family: 'Outfit', sans-serif;
-            font-size: 20px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-        }
-        .logo-text .brand i {
-            font-size: 18px;
-            margin-right: 4px;
-        }
-        .logo-text .tagline {
-            font-size: 10px;
-            opacity: 0.75;
-            font-weight: 400;
-            letter-spacing: 0.3px;
-        }
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .network-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 10px;
-            font-weight: 700;
-            background: rgba(255, 255, 255, 0.15);
-            cursor: pointer;
-            transition: var(--transition);
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .network-badge:hover {
-            background: rgba(255, 255, 255, 0.25);
-        }
-        .network-dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            transition: var(--transition);
-        }
-        .network-badge.online .network-dot {
-            background: var(--success);
-            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
-        }
-        .network-badge.offline .network-dot {
-            background: var(--danger);
-            box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
-        }
-        .network-badge.syncing .network-dot {
-            background: var(--warning);
-            animation: pulse-dot 1s infinite;
-        }
-        .theme-toggle {
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #fff;
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 15px;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(4px);
-        }
-        .theme-toggle:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: rotate(20deg);
-        }
-
-        /* ===== Status Bar ===== */
-        .status-bar {
-            background: var(--warning-light);
-            color: #92400e;
-            padding: 8px 16px;
-            font-size: 12px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border-bottom: 2px solid #fcd34d;
-            transition: var(--transition);
-        }
-        [data-theme="dark"] .status-bar {
-            background: #451a03;
-            color: #fcd34d;
-            border-bottom-color: #78350f;
-        }
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--warning);
-            animation: pulse-dot 1.5s infinite;
-            flex-shrink: 0;
-        }
-        .status-bar.success .status-dot {
-            background: var(--success);
-        }
-        .status-bar.error .status-dot {
-            background: var(--danger);
-            animation: none;
-        }
-
-        @keyframes pulse-dot {
-            0%,
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 0.4;
-                transform: scale(0.8);
-            }
-        }
-
-        /* ===== Main Content ===== */
-        .main-content {
-            max-width: 640px;
-            margin: 0 auto;
-            padding: 16px;
-        }
-
-        /* ===== Tab Navigation ===== */
-        .tab-nav {
-            display: flex;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg);
-            padding: 4px;
-            margin-bottom: 20px;
-            box-shadow: var(--shadow-sm);
-            gap: 4px;
-            position: sticky;
-            top: 80px;
-            z-index: 50;
-            backdrop-filter: blur(12px);
-        }
-        .tab-btn {
-            flex: 1;
-            padding: 10px 6px;
-            border: none;
-            background: transparent;
-            border-radius: var(--radius-md);
-            font-size: 11px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            color: var(--text-muted);
-            text-align: center;
-            position: relative;
-        }
-        .tab-btn i {
-            font-size: 16px;
-            display: block;
-            margin-bottom: 2px;
-        }
-        .tab-btn.active {
-            background: var(--primary-gradient);
-            color: #fff;
-            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.35);
-        }
-        .tab-btn .badge-tab {
-            position: absolute;
-            top: -4px;
-            right: -4px;
-            background: var(--danger);
-            color: #fff;
-            font-size: 9px;
-            padding: 2px 6px;
-            border-radius: 10px;
-            font-weight: 700;
-        }
-
-        /* ===== Pages ===== */
-        .page {
-            display: none;
-            animation: fadeSlideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .page.active {
-            display: block;
-        }
-        @keyframes fadeSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(12px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* ===== Cards ===== */
-        .card {
-            background: var(--bg-card);
-            border-radius: var(--radius-lg);
-            padding: 20px;
-            margin-bottom: 16px;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--border-color);
-            transition: var(--transition);
-        }
-        .card:hover {
-            box-shadow: var(--shadow-md);
-        }
-        .card-title {
-            font-family: 'Outfit', sans-serif;
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 14px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--text-main);
-        }
-        .card-title i {
-            color: var(--primary);
-            width: 24px;
-            text-align: center;
-        }
-
-        /* ===== Buttons ===== */
-        .btn {
-            padding: 12px 20px;
-            border: none;
-            border-radius: var(--radius-md);
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            box-shadow: var(--shadow-sm);
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
-        .btn:active {
-            transform: scale(0.96);
-        }
-        .btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-        .btn-primary {
-            background: var(--primary-gradient);
-            color: #fff;
-        }
-        .btn-primary:hover {
-            box-shadow: 0 4px 20px rgba(79, 70, 229, 0.4);
-            transform: translateY(-1px);
-        }
-        .btn-success {
-            background: var(--success);
-            color: #fff;
-        }
-        .btn-success:hover {
-            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
-            transform: translateY(-1px);
-        }
-        .btn-danger {
-            background: var(--danger);
-            color: #fff;
-        }
-        .btn-danger:hover {
-            box-shadow: 0 4px 20px rgba(239, 68, 68, 0.4);
-            transform: translateY(-1px);
-        }
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-            box-shadow: none;
-        }
-        .btn-outline:hover {
-            background: var(--primary);
-            color: #fff;
-        }
-        .btn-outline-danger {
-            border-color: var(--danger);
-            color: var(--danger);
-        }
-        .btn-outline-danger:hover {
-            background: var(--danger);
-            color: #fff;
-        }
-        .btn-outline-success {
-            border-color: var(--success);
-            color: var(--success);
-        }
-        .btn-outline-success:hover {
-            background: var(--success);
-            color: #fff;
-        }
-        .btn-sm {
-            padding: 8px 14px;
-            font-size: 12px;
-            border-radius: var(--radius-sm);
-        }
-        .btn-lg {
-            padding: 16px 28px;
-            font-size: 16px;
-            border-radius: var(--radius-lg);
-        }
-        .btn-block {
-            width: 100%;
-        }
-
-        /* ===== Inputs ===== */
-        .input-group {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-        .input {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid var(--border-color);
-            border-radius: var(--radius-md);
-            font-size: 14px;
-            color: var(--text-main);
-            background: var(--bg-body);
-            transition: var(--transition);
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
-        .input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
-        }
-        .input::placeholder {
-            color: var(--text-light);
-        }
-        select.input {
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748b' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 12px center;
-            padding-right: 36px;
-        }
-
-        /* ===== Scanner ===== */
-        .scanner-wrapper {
-            position: relative;
-            border-radius: var(--radius-md);
-            overflow: hidden;
-            background: #0f172a;
-            min-height: 240px;
-            box-shadow: inset 0 2px 20px rgba(0, 0, 0, 0.4);
-        }
-        .scanner-wrapper video {
-            width: 100%;
-            height: auto;
-            max-height: 320px;
-            object-fit: cover;
-            display: block;
-        }
-        .scanner-placeholder {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 240px;
-            color: #94a3b8;
-            text-align: center;
-            padding: 30px 20px;
-        }
-        .scanner-placeholder i {
-            font-size: 56px;
-            margin-bottom: 12px;
-            color: #475569;
-        }
-        .scanner-placeholder p {
-            font-size: 14px;
-            font-weight: 500;
-        }
-        .scanner-placeholder small {
-            font-size: 12px;
-            opacity: 0.7;
-        }
-        .scanner-overlay {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 70%;
-            height: 60px;
-            border: 2px solid #34d399;
-            border-radius: var(--radius-sm);
-            pointer-events: none;
-            box-shadow: 0 0 0 9999px rgba(15, 23, 42, 0.6);
-            display: none;
-        }
-        .scanner-overlay .corner {
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            border-color: #34d399;
-            border-style: solid;
-            border-width: 0;
-        }
-        .scanner-overlay .corner-tl {
-            top: -2px;
-            left: -2px;
-            border-top-width: 3px;
-            border-left-width: 3px;
-            border-radius: 4px 0 0 0;
-        }
-        .scanner-overlay .corner-tr {
-            top: -2px;
-            right: -2px;
-            border-top-width: 3px;
-            border-right-width: 3px;
-            border-radius: 0 4px 0 0;
-        }
-        .scanner-overlay .corner-bl {
-            bottom: -2px;
-            left: -2px;
-            border-bottom-width: 3px;
-            border-left-width: 3px;
-            border-radius: 0 0 0 4px;
-        }
-        .scanner-overlay .corner-br {
-            bottom: -2px;
-            right: -2px;
-            border-bottom-width: 3px;
-            border-right-width: 3px;
-            border-radius: 0 0 4px 0;
-        }
-        .scanner-status {
-            text-align: center;
-            padding: 8px;
-            font-size: 13px;
-            font-weight: 500;
-            margin-top: 8px;
-        }
-        .scanner-status.success {
-            color: var(--success);
-        }
-        .scanner-status.error {
-            color: var(--danger);
-        }
-        .scanner-status.idle {
-            color: var(--text-muted);
-        }
-
-        /* ===== Product Detail ===== */
-        .product-detail {
-            background: linear-gradient(135deg, var(--success-light) 0%, #f0fdf4 100%);
-            border: 2px solid #6ee7b7;
-            border-radius: var(--radius-lg);
-            padding: 20px;
-            margin-bottom: 16px;
-            box-shadow: var(--shadow-sm);
-            display: none;
-            animation: fadeSlideIn 0.3s ease;
-        }
-        [data-theme="dark"] .product-detail {
-            background: linear-gradient(135deg, #064e3b 0%, #065f46 100%);
-            border-color: #34d399;
-        }
-        .product-name {
-            font-family: 'Outfit', sans-serif;
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 4px;
-            color: #065f46;
-        }
-        [data-theme="dark"] .product-name {
-            color: #6ee7b7;
-        }
-        .product-info {
-            font-size: 13px;
-            color: #047857;
-            margin-bottom: 2px;
-            font-weight: 500;
-        }
-        [data-theme="dark"] .product-info {
-            color: #a7f3d0;
-        }
-        .qty-control {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin: 16px 0;
-        }
-        .qty-btn {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            border: 2px solid var(--border-color);
-            background: var(--bg-card);
-            font-size: 20px;
-            font-weight: 700;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-            transition: var(--transition);
-            box-shadow: var(--shadow-sm);
-            flex-shrink: 0;
-        }
-        .qty-btn:hover {
-            border-color: var(--primary);
-            background: #eef2ff;
-            transform: scale(1.05);
-        }
-        .qty-btn:active {
-            transform: scale(0.92);
-        }
-        .qty-input {
-            flex: 1;
-            height: 48px;
-            text-align: center;
-            font-size: 24px;
-            font-weight: 700;
-            border: 2px solid var(--border-color);
-            border-radius: var(--radius-md);
-            font-family: 'Outfit', sans-serif;
-            background: var(--bg-card);
-            color: var(--text-main);
-            min-width: 60px;
-        }
-        .qty-input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
-        }
-
-        /* ===== Lot ===== */
-        .lot-item {
-            display: flex;
-            align-items: center;
-            padding: 12px 14px;
-            border: 2px solid var(--border-color);
-            border-radius: var(--radius-md);
-            margin-bottom: 6px;
-            cursor: pointer;
-            gap: 12px;
-            background: var(--bg-card);
-            transition: var(--transition);
-        }
-        .lot-item:hover {
-            border-color: var(--primary-light);
-        }
-        .lot-item.selected {
-            border-color: var(--primary);
-            background: #eef2ff;
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
-        }
-        [data-theme="dark"] .lot-item.selected {
-            background: #1e293b;
-        }
-        .lot-radio {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            border: 2px solid var(--border-color);
-            flex-shrink: 0;
-            transition: var(--transition);
-        }
-        .lot-item.selected .lot-radio {
-            border-color: var(--primary);
-            background: var(--primary);
-            box-shadow: inset 0 0 0 4px #fff;
-        }
-
-        /* ===== Progress ===== */
-        .progress-container {
-            width: 100%;
-            height: 8px;
-            background: var(--border-color);
-            border-radius: 4px;
-            margin-top: 8px;
-            overflow: hidden;
-        }
-        .progress-bar {
-            height: 100%;
-            border-radius: 4px;
-            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            background: var(--primary-gradient);
-            width: 0%;
-        }
-        .progress-bar.low {
-            background: var(--danger);
-        }
-        .progress-bar.medium {
-            background: var(--warning);
-        }
-        .progress-bar.high {
-            background: var(--success);
-        }
-
-        /* ===== Pharmacy Map ===== */
-        .pharmacy-map {
-            background: var(--bg-body);
-            border-radius: var(--radius-md);
-            padding: 16px;
-            min-height: 200px;
-            border: 2px dashed var(--border-color);
-        }
-        .pharmacy-grid {
-            display: grid;
-            gap: 12px;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-        }
-        .cabinet-block {
-            background: var(--bg-card);
-            border: 2px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: 14px;
-            cursor: pointer;
-            transition: var(--transition);
-            text-align: center;
-            box-shadow: var(--shadow-sm);
-        }
-        .cabinet-block:hover {
-            border-color: var(--primary-light);
-            box-shadow: var(--shadow-md);
-            transform: translateY(-2px);
-        }
-        .cabinet-block.selected {
-            border-color: var(--primary);
-            background: #eef2ff;
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
-        }
-        [data-theme="dark"] .cabinet-block.selected {
-            background: #1e293b;
-        }
-        .cabinet-icon {
-            font-size: 28px;
-            margin-bottom: 4px;
-        }
-        .cabinet-name {
-            font-weight: 700;
-            font-size: 13px;
-            font-family: 'Outfit', sans-serif;
-        }
-        .cabinet-shelves {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            margin-top: 8px;
-        }
-        .shelf-row {
-            background: var(--bg-body);
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 11px;
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 500;
-            color: var(--text-muted);
-        }
-        .shelf-row:hover {
-            background: #e0e7ff;
-            color: var(--text-main);
-        }
-        [data-theme="dark"] .shelf-row:hover {
-            background: #334155;
-        }
-        .shelf-row.selected {
-            background: var(--primary);
-            color: #fff;
-        }
-        .shelf-count {
-            background: rgba(0, 0, 0, 0.06);
-            padding: 1px 8px;
-            border-radius: 10px;
-            font-size: 10px;
-        }
-        .shelf-row.selected .shelf-count {
-            background: rgba(255, 255, 255, 0.25);
-            color: #fff;
-        }
-        .map-legend {
-            display: flex;
-            gap: 16px;
-            margin-top: 14px;
-            font-size: 11px;
-            color: var(--text-muted);
-            flex-wrap: wrap;
-        }
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .legend-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 4px;
-            flex-shrink: 0;
-        }
-
-        /* ===== Recent ===== */
-        .recent-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid var(--border-color);
-            font-size: 13px;
-            gap: 8px;
-        }
-        .recent-item:last-child {
-            border-bottom: none;
-        }
-        .recent-item .name {
-            font-weight: 600;
-        }
-        .recent-item .detail {
-            font-size: 11px;
-            color: var(--text-muted);
-        }
-        .recent-item .qty-diff {
-            font-weight: 700;
-            padding: 2px 10px;
-            border-radius: 12px;
-            font-size: 12px;
-        }
-        .recent-item .qty-diff.positive {
-            color: var(--success);
-            background: var(--success-light);
-        }
-        .recent-item .qty-diff.negative {
-            color: var(--danger);
-            background: var(--danger-light);
-        }
-        .recent-item .qty-diff.zero {
-            color: var(--text-muted);
-            background: var(--bg-body);
-        }
-        [data-theme="dark"] .recent-item .qty-diff.positive {
-            background: #064e3b;
-        }
-        [data-theme="dark"] .recent-item .qty-diff.negative {
-            background: #7f1d1d;
-        }
-        [data-theme="dark"] .recent-item .qty-diff.zero {
-            background: #1e293b;
-        }
-
-        /* ===== Stats ===== */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-        .stat-card {
-            background: var(--bg-card);
-            padding: 16px;
-            border-radius: var(--radius-md);
-            text-align: center;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--border-color);
-        }
-        .stat-value {
-            font-family: 'Outfit', sans-serif;
-            font-size: 26px;
-            font-weight: 800;
-            margin: 4px 0;
-            color: var(--primary);
-        }
-        .stat-label {
-            font-size: 11px;
-            color: var(--text-muted);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* ===== Table ===== */
-        .table-wrap {
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            border-radius: var(--radius-md);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-sm);
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 12px;
-        }
-        th {
-            background: var(--bg-body);
-            padding: 10px 8px;
-            text-align: left;
-            font-weight: 600;
-            white-space: nowrap;
-            position: sticky;
-            top: 0;
-            color: var(--text-main);
-            border-bottom: 2px solid var(--border-color);
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-        td {
-            padding: 8px;
-            border-top: 1px solid var(--border-color);
-            font-size: 12px;
-        }
-        .text-right {
-            text-align: right;
-        }
-        .text-center {
-            text-align: center;
-        }
-
-        /* ===== Badges ===== */
-        .badge {
-            display: inline-block;
-            padding: 3px 10px;
-            border-radius: 12px;
-            font-size: 11px;
-            font-weight: 700;
-        }
-        .badge-red {
-            background: var(--danger-light);
-            color: #991b1b;
-        }
-        [data-theme="dark"] .badge-red {
-            background: #7f1d1d;
-            color: #fca5a5;
-        }
-        .badge-green {
-            background: var(--success-light);
-            color: #166534;
-        }
-        [data-theme="dark"] .badge-green {
-            background: #064e3b;
-            color: #6ee7b7;
-        }
-        .badge-yellow {
-            background: var(--warning-light);
-            color: #92400e;
-        }
-        [data-theme="dark"] .badge-yellow {
-            background: #451a03;
-            color: #fcd34d;
-        }
-        .uncounted-row {
-            background: var(--danger-light);
-            border-left: 4px solid var(--danger);
-        }
-        [data-theme="dark"] .uncounted-row {
-            background: #7f1d1d;
-        }
-
-        /* ===== Modal ===== */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            z-index: 200;
-            display: none;
-            align-items: flex-end;
-            justify-content: center;
-            animation: fadeIn 0.3s ease;
-        }
-        .modal-overlay.show {
-            display: flex;
-        }
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-        .modal {
-            background: var(--bg-card);
-            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-            padding: 24px;
-            width: 100%;
-            max-width: 600px;
-            max-height: 80vh;
-            overflow-y: auto;
-            animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: var(--shadow-lg);
-        }
-        @keyframes slideUp {
-            from {
-                transform: translateY(100%);
-            }
-            to {
-                transform: translateY(0);
-            }
-        }
-        .modal-handle {
-            width: 40px;
-            height: 4px;
-            background: var(--border-color);
-            border-radius: 2px;
-            margin: 0 auto 16px;
-        }
-        .modal-title {
-            font-family: 'Outfit', sans-serif;
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 16px;
-        }
-
-        /* ===== Toast ===== */
-        .toast-container {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 300;
-            max-width: 90%;
-            width: 400px;
-            pointer-events: none;
-        }
-        .toast {
-            background: var(--text-main);
-            color: #fff;
-            padding: 12px 20px;
-            border-radius: var(--radius-md);
-            font-size: 13px;
-            font-weight: 600;
-            box-shadow: var(--shadow-lg);
-            text-align: center;
-            margin-bottom: 8px;
-            animation: toastIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            pointer-events: auto;
-            transition: all 0.3s ease;
-        }
-        .toast.success {
-            background: var(--success);
-        }
-        .toast.error {
-            background: var(--danger);
-        }
-        .toast.warning {
-            background: var(--warning);
-            color: #0f172a;
-        }
-        .toast.hide {
-            opacity: 0;
-            transform: translateY(-20px) scale(0.95);
-        }
-        @keyframes toastIn {
-            from {
-                opacity: 0;
-                transform: translateY(-30px) scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        /* ===== Install Banner ===== */
-        #installBanner {
-            display: none;
-            background: var(--primary-gradient);
-            color: #fff;
-            padding: 16px 20px;
-            text-align: center;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            z-index: 999;
-            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.2);
-            animation: slideUp 0.4s ease;
-        }
-        #installBanner p {
-            margin-bottom: 2px;
-            font-weight: 700;
-            font-size: 15px;
-            font-family: 'Outfit', sans-serif;
-        }
-        #installBanner .sub {
-            font-size: 12px;
-            opacity: 0.85;
-            margin-bottom: 10px;
-        }
-        #installBanner .btn-install {
-            background: #fff;
-            color: var(--primary);
-            border: none;
-            padding: 10px 28px;
-            border-radius: var(--radius-md);
-            font-weight: 700;
-            font-size: 14px;
-            cursor: pointer;
-            box-shadow: var(--shadow-sm);
-            transition: var(--transition);
-        }
-        #installBanner .btn-install:hover {
-            transform: scale(1.02);
-            box-shadow: var(--shadow-md);
-        }
-        #installBanner .btn-close {
-            background: transparent;
-            color: #fff;
-            border: none;
-            padding: 8px 12px;
-            font-size: 18px;
-            cursor: pointer;
-            position: absolute;
-            top: 8px;
-            right: 12px;
-            opacity: 0.7;
-        }
-        #installBanner .btn-close:hover {
-            opacity: 1;
-        }
-
-        /* ===== Responsive ===== */
-        @media (max-width: 480px) {
-            .logo-icon {
-                width: 36px;
-                height: 36px;
-                font-size: 16px;
-            }
-            .logo-text .brand {
-                font-size: 17px;
-            }
-            .logo-text .tagline {
-                font-size: 9px;
-            }
-            .tab-btn {
-                font-size: 10px;
-                padding: 8px 4px;
-            }
-            .tab-btn i {
-                font-size: 14px;
-            }
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 8px;
-            }
-            .stat-value {
-                font-size: 20px;
-            }
-            .card {
-                padding: 14px;
-            }
-            .product-name {
-                font-size: 17px;
-            }
-            .pharmacy-grid {
-                grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-            }
-            .modal {
-                padding: 18px;
-            }
-            .btn {
-                font-size: 12px;
-                padding: 10px 14px;
-            }
-            .qty-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 16px;
-            }
-            .qty-input {
-                font-size: 20px;
-                height: 40px;
-            }
-        }
-
-        @media (min-width: 768px) {
-            .main-content {
-                padding: 24px;
-            }
-            .header {
-                padding: 18px 32px;
-            }
-            .logo-text .brand {
-                font-size: 24px;
-            }
-        }
-
-        /* ===== Utilities ===== */
-        .flex {
-            display: flex;
-        }
-        .flex-between {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .gap-8 {
-            gap: 8px;
-        }
-        .gap-12 {
-            gap: 12px;
-        }
-        .mt-8 {
-            margin-top: 8px;
-        }
-        .mt-12 {
-            margin-top: 12px;
-        }
-        .mt-16 {
-            margin-top: 16px;
-        }
-        .mb-8 {
-            margin-bottom: 8px;
-        }
-        .mb-12 {
-            margin-bottom: 12px;
-        }
-        .text-center {
-            text-align: center;
-        }
-        .text-muted {
-            color: var(--text-muted);
-        }
-        .text-success {
-            color: var(--success);
-        }
-        .text-danger {
-            color: var(--danger);
-        }
-        .text-warning {
-            color: var(--warning);
-        }
-        .fw-700 {
-            font-weight: 700;
-        }
-        .fw-600 {
-            font-weight: 600;
-        }
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+            --shadow-md: 0 4px 20px rgba(0,0,0,0.4);
+            --shadow-lg: 0 20px 60px rgba(0,0,0,0.5);
+        }
+        * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+        body { font-family:'Plus Jakarta Sans',sans-serif; background:var(--bg-body); color:var(--text-main); min-height:100vh; padding-bottom:100px; transition:var(--transition); }
+        ::-webkit-scrollbar { width:6px; height:6px; }
+        ::-webkit-scrollbar-track { background:var(--bg-body); }
+        ::-webkit-scrollbar-thumb { background:var(--primary-light); border-radius:3px; }
+        .header { background:var(--primary-gradient); color:#fff; padding:14px 20px; position:sticky; top:0; z-index:100; box-shadow:0 4px 30px rgba(79,70,229,0.3); }
+        .header-top { display:flex; justify-content:space-between; align-items:center; }
+        .logo { display:flex; align-items:center; gap:12px; text-decoration:none; color:#fff; }
+        .logo-icon { width:42px; height:42px; background:rgba(255,255,255,0.15); border-radius:var(--radius-md); display:flex; align-items:center; justify-content:center; font-size:20px; backdrop-filter:blur(4px); border:2px solid rgba(255,255,255,0.2); flex-shrink:0; transition:var(--transition); }
+        .logo-icon:hover { transform:rotate(-5deg) scale(1.05); background:rgba(255,255,255,0.25); }
+        .logo-text { display:flex; flex-direction:column; line-height:1.2; }
+        .logo-text .brand { font-family:'Outfit',sans-serif; font-size:20px; font-weight:800; letter-spacing:-0.5px; }
+        .logo-text .brand i { font-size:18px; margin-right:4px; }
+        .logo-text .tagline { font-size:10px; opacity:0.75; font-weight:400; letter-spacing:0.3px; }
+        .header-actions { display:flex; align-items:center; gap:8px; }
+        .network-badge { display:inline-flex; align-items:center; gap:6px; padding:4px 10px; border-radius:20px; font-size:10px; font-weight:700; background:rgba(255,255,255,0.15); cursor:pointer; transition:var(--transition); backdrop-filter:blur(4px); border:1px solid rgba(255,255,255,0.1); }
+        .network-badge:hover { background:rgba(255,255,255,0.25); }
+        .network-dot { width:7px; height:7px; border-radius:50%; transition:var(--transition); }
+        .network-badge.online .network-dot { background:var(--success); box-shadow:0 0 10px rgba(16,185,129,0.5); }
+        .network-badge.offline .network-dot { background:var(--danger); box-shadow:0 0 10px rgba(239,68,68,0.5); }
+        .network-badge.syncing .network-dot { background:var(--warning); animation:pulse-dot 1s infinite; }
+        .theme-toggle { background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.1); color:#fff; width:34px; height:34px; border-radius:50%; cursor:pointer; font-size:15px; transition:var(--transition); display:flex; align-items:center; justify-content:center; backdrop-filter:blur(4px); }
+        .theme-toggle:hover { background:rgba(255,255,255,0.25); transform:rotate(20deg); }
+        .status-bar { background:var(--warning-light); color:#92400e; padding:8px 16px; font-size:12px; font-weight:600; display:flex; align-items:center; gap:10px; border-bottom:2px solid #fcd34d; transition:var(--transition); }
+        [data-theme="dark"] .status-bar { background:#451a03; color:#fcd34d; border-bottom-color:#78350f; }
+        .status-dot { width:8px; height:8px; border-radius:50%; background:var(--warning); animation:pulse-dot 1.5s infinite; flex-shrink:0; }
+        .status-bar.success .status-dot { background:var(--success); }
+        .status-bar.error .status-dot { background:var(--danger); animation:none; }
+        .main-content { max-width:640px; margin:0 auto; padding:16px; }
+        .tab-nav { display:flex; background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-lg); padding:4px; margin-bottom:20px; box-shadow:var(--shadow-sm); gap:4px; position:sticky; top:80px; z-index:50; backdrop-filter:blur(12px); }
+        .tab-btn { flex:1; padding:10px 6px; border:none; background:transparent; border-radius:var(--radius-md); font-size:11px; font-weight:600; cursor:pointer; transition:var(--transition); color:var(--text-muted); text-align:center; position:relative; }
+        .tab-btn i { font-size:16px; display:block; margin-bottom:2px; }
+        .tab-btn.active { background:var(--primary-gradient); color:#fff; box-shadow:0 4px 15px rgba(79,70,229,0.35); }
+        .tab-btn .badge-tab { position:absolute; top:-4px; right:-4px; background:var(--danger); color:#fff; font-size:9px; padding:2px 6px; border-radius:10px; font-weight:700; }
+        .page { display:none; animation:fadeSlideIn 0.4s cubic-bezier(0.16,1,0.3,1); }
+        .page.active { display:block; }
+        @keyframes fadeSlideIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+        .card { background:var(--bg-card); border-radius:var(--radius-lg); padding:20px; margin-bottom:16px; box-shadow:var(--shadow-sm); border:1px solid var(--border-color); transition:var(--transition); }
+        .card:hover { box-shadow:var(--shadow-md); }
+        .card-title { font-family:'Outfit',sans-serif; font-size:16px; font-weight:700; margin-bottom:14px; display:flex; align-items:center; gap:10px; color:var(--text-main); }
+        .card-title i { color:var(--primary); width:24px; text-align:center; }
+        .btn { padding:12px 20px; border:none; border-radius:var(--radius-md); font-size:14px; font-weight:600; cursor:pointer; transition:var(--transition); display:inline-flex; align-items:center; justify-content:center; gap:8px; box-shadow:var(--shadow-sm); font-family:'Plus Jakarta Sans',sans-serif; }
+        .btn:active { transform:scale(0.96); }
+        .btn:disabled { opacity:0.5; cursor:not-allowed; transform:none; }
+        .btn-primary { background:var(--primary-gradient); color:#fff; }
+        .btn-primary:hover { box-shadow:0 4px 20px rgba(79,70,229,0.4); transform:translateY(-1px); }
+        .btn-success { background:var(--success); color:#fff; }
+        .btn-success:hover { box-shadow:0 4px 20px rgba(16,185,129,0.4); transform:translateY(-1px); }
+        .btn-danger { background:var(--danger); color:#fff; }
+        .btn-danger:hover { box-shadow:0 4px 20px rgba(239,68,68,0.4); transform:translateY(-1px); }
+        .btn-outline { background:transparent; border:2px solid var(--primary); color:var(--primary); box-shadow:none; }
+        .btn-outline:hover { background:var(--primary); color:#fff; }
+        .btn-outline-danger { border-color:var(--danger); color:var(--danger); }
+        .btn-outline-danger:hover { background:var(--danger); color:#fff; }
+        .btn-outline-success { border-color:var(--success); color:var(--success); }
+        .btn-outline-success:hover { background:var(--success); color:#fff; }
+        .btn-sm { padding:8px 14px; font-size:12px; border-radius:var(--radius-sm); }
+        .btn-lg { padding:16px 28px; font-size:16px; border-radius:var(--radius-lg); }
+        .btn-block { width:100%; }
+        .input-group { display:flex; gap:8px; align-items:center; }
+        .input { width:100%; padding:12px 16px; border:2px solid var(--border-color); border-radius:var(--radius-md); font-size:14px; color:var(--text-main); background:var(--bg-body); transition:var(--transition); font-family:'Plus Jakarta Sans',sans-serif; }
+        .input:focus { outline:none; border-color:var(--primary); box-shadow:0 0 0 4px rgba(79,70,229,0.1); }
+        .input::placeholder { color:var(--text-light); }
+        select.input { appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748b' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 12px center; padding-right:36px; }
+        .scanner-wrapper { position:relative; border-radius:var(--radius-md); overflow:hidden; background:#0f172a; min-height:240px; box-shadow:inset 0 2px 20px rgba(0,0,0,0.4); }
+        .scanner-wrapper video { width:100%; height:auto; max-height:320px; object-fit:cover; display:block; }
+        .scanner-placeholder { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:240px; color:#94a3b8; text-align:center; padding:30px 20px; }
+        .scanner-placeholder i { font-size:56px; margin-bottom:12px; color:#475569; }
+        .scanner-placeholder p { font-size:14px; font-weight:500; }
+        .scanner-placeholder small { font-size:12px; opacity:0.7; }
+        .scanner-overlay { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:70%; height:60px; border:2px solid #34d399; border-radius:var(--radius-sm); pointer-events:none; box-shadow:0 0 0 9999px rgba(15,23,42,0.6); display:none; }
+        .scanner-overlay .corner { position:absolute; width:15px; height:15px; border-color:#34d399; border-style:solid; border-width:0; }
+        .scanner-overlay .corner-tl { top:-2px; left:-2px; border-top-width:3px; border-left-width:3px; border-radius:4px 0 0 0; }
+        .scanner-overlay .corner-tr { top:-2px; right:-2px; border-top-width:3px; border-right-width:3px; border-radius:0 4px 0 0; }
+        .scanner-overlay .corner-bl { bottom:-2px; left:-2px; border-bottom-width:3px; border-left-width:3px; border-radius:0 0 0 4px; }
+        .scanner-overlay .corner-br { bottom:-2px; right:-2px; border-bottom-width:3px; border-right-width:3px; border-radius:0 0 4px 0; }
+        .scanner-status { text-align:center; padding:8px; font-size:13px; font-weight:500; margin-top:8px; }
+        .scanner-status.success { color:var(--success); }
+        .scanner-status.error { color:var(--danger); }
+        .scanner-status.idle { color:var(--text-muted); }
+        .product-detail { background:linear-gradient(135deg, var(--success-light) 0%, #f0fdf4 100%); border:2px solid #6ee7b7; border-radius:var(--radius-lg); padding:20px; margin-bottom:16px; box-shadow:var(--shadow-sm); display:none; animation:fadeSlideIn 0.3s ease; }
+        [data-theme="dark"] .product-detail { background:linear-gradient(135deg, #064e3b 0%, #065f46 100%); border-color:#34d399; }
+        .product-name { font-family:'Outfit',sans-serif; font-size:20px; font-weight:700; margin-bottom:4px; color:#065f46; }
+        [data-theme="dark"] .product-name { color:#6ee7b7; }
+        .product-info { font-size:13px; color:#047857; margin-bottom:2px; font-weight:500; }
+        [data-theme="dark"] .product-info { color:#a7f3d0; }
+        .qty-control { display:flex; align-items:center; gap:12px; margin:16px 0; }
+        .qty-btn { width:48px; height:48px; border-radius:50%; border:2px solid var(--border-color); background:var(--bg-card); font-size:20px; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; color:var(--primary); transition:var(--transition); box-shadow:var(--shadow-sm); flex-shrink:0; }
+        .qty-btn:hover { border-color:var(--primary); background:#eef2ff; transform:scale(1.05); }
+        .qty-btn:active { transform:scale(0.92); }
+        .qty-input { flex:1; height:48px; text-align:center; font-size:24px; font-weight:700; border:2px solid var(--border-color); border-radius:var(--radius-md); font-family:'Outfit',sans-serif; background:var(--bg-card); color:var(--text-main); min-width:60px; }
+        .qty-input:focus { border-color:var(--primary); box-shadow:0 0 0 4px rgba(79,70,229,0.1); }
+        .lot-item { display:flex; align-items:center; padding:12px 14px; border:2px solid var(--border-color); border-radius:var(--radius-md); margin-bottom:6px; cursor:pointer; gap:12px; background:var(--bg-card); transition:var(--transition); }
+        .lot-item:hover { border-color:var(--primary-light); }
+        .lot-item.selected { border-color:var(--primary); background:#eef2ff; box-shadow:0 0 0 3px rgba(79,70,229,0.15); }
+        [data-theme="dark"] .lot-item.selected { background:#1e293b; }
+        .lot-radio { width:20px; height:20px; border-radius:50%; border:2px solid var(--border-color); flex-shrink:0; transition:var(--transition); }
+        .lot-item.selected .lot-radio { border-color:var(--primary); background:var(--primary); box-shadow:inset 0 0 0 4px #fff; }
+        .progress-container { width:100%; height:8px; background:var(--border-color); border-radius:4px; margin-top:8px; overflow:hidden; }
+        .progress-bar { height:100%; border-radius:4px; transition:width 0.6s cubic-bezier(0.4,0,0.2,1); background:var(--primary-gradient); width:0%; }
+        .progress-bar.low { background:var(--danger); }
+        .progress-bar.medium { background:var(--warning); }
+        .progress-bar.high { background:var(--success); }
+        .pharmacy-map { background:var(--bg-body); border-radius:var(--radius-md); padding:16px; min-height:200px; border:2px dashed var(--border-color); }
+        .pharmacy-grid { display:grid; gap:12px; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); }
+        .cabinet-block { background:var(--bg-card); border:2px solid var(--border-color); border-radius:var(--radius-md); padding:14px; cursor:pointer; transition:var(--transition); text-align:center; box-shadow:var(--shadow-sm); }
+        .cabinet-block:hover { border-color:var(--primary-light); box-shadow:var(--shadow-md); transform:translateY(-2px); }
+        .cabinet-block.selected { border-color:var(--primary); background:#eef2ff; box-shadow:0 0 0 3px rgba(79,70,229,0.2); }
+        [data-theme="dark"] .cabinet-block.selected { background:#1e293b; }
+        .cabinet-icon { font-size:28px; margin-bottom:4px; }
+        .cabinet-name { font-weight:700; font-size:13px; font-family:'Outfit',sans-serif; }
+        .cabinet-shelves { display:flex; flex-direction:column; gap:4px; margin-top:8px; }
+        .shelf-row { background:var(--bg-body); padding:4px 10px; border-radius:6px; font-size:11px; cursor:pointer; transition:var(--transition); display:flex; justify-content:space-between; align-items:center; font-weight:500; color:var(--text-muted); }
+        .shelf-row:hover { background:#e0e7ff; color:var(--text-main); }
+        [data-theme="dark"] .shelf-row:hover { background:#334155; }
+        .shelf-row.selected { background:var(--primary); color:#fff; }
+        .shelf-count { background:rgba(0,0,0,0.06); padding:1px 8px; border-radius:10px; font-size:10px; }
+        .shelf-row.selected .shelf-count { background:rgba(255,255,255,0.25); color:#fff; }
+        .map-legend { display:flex; gap:16px; margin-top:14px; font-size:11px; color:var(--text-muted); flex-wrap:wrap; }
+        .legend-item { display:flex; align-items:center; gap:6px; }
+        .legend-dot { width:12px; height:12px; border-radius:4px; flex-shrink:0; }
+        .recent-item { display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--border-color); font-size:13px; gap:8px; }
+        .recent-item:last-child { border-bottom:none; }
+        .recent-item .name { font-weight:600; }
+        .recent-item .detail { font-size:11px; color:var(--text-muted); }
+        .recent-item .qty-diff { font-weight:700; padding:2px 10px; border-radius:12px; font-size:12px; }
+        .recent-item .qty-diff.positive { color:var(--success); background:var(--success-light); }
+        .recent-item .qty-diff.negative { color:var(--danger); background:var(--danger-light); }
+        .recent-item .qty-diff.zero { color:var(--text-muted); background:var(--bg-body); }
+        [data-theme="dark"] .recent-item .qty-diff.positive { background:#064e3b; }
+        [data-theme="dark"] .recent-item .qty-diff.negative { background:#7f1d1d; }
+        [data-theme="dark"] .recent-item .qty-diff.zero { background:#1e293b; }
+        .stats-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px; }
+        .stat-card { background:var(--bg-card); padding:16px; border-radius:var(--radius-md); text-align:center; box-shadow:var(--shadow-sm); border:1px solid var(--border-color); }
+        .stat-value { font-family:'Outfit',sans-serif; font-size:26px; font-weight:800; margin:4px 0; color:var(--primary); }
+        .stat-label { font-size:11px; color:var(--text-muted); font-weight:600; text-transform:uppercase; letter-spacing:0.5px; }
+        .table-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; border-radius:var(--radius-md); border:1px solid var(--border-color); box-shadow:var(--shadow-sm); }
+        table { width:100%; border-collapse:collapse; font-size:12px; }
+        th { background:var(--bg-body); padding:10px 8px; text-align:left; font-weight:600; white-space:nowrap; position:sticky; top:0; color:var(--text-main); border-bottom:2px solid var(--border-color); font-size:11px; text-transform:uppercase; letter-spacing:0.3px; }
+        td { padding:8px; border-top:1px solid var(--border-color); font-size:12px; }
+        .text-right { text-align:right; }
+        .text-center { text-align:center; }
+        .badge { display:inline-block; padding:3px 10px; border-radius:12px; font-size:11px; font-weight:700; }
+        .badge-red { background:var(--danger-light); color:#991b1b; }
+        [data-theme="dark"] .badge-red { background:#7f1d1d; color:#fca5a5; }
+        .badge-green { background:var(--success-light); color:#166534; }
+        [data-theme="dark"] .badge-green { background:#064e3b; color:#6ee7b7; }
+        .badge-yellow { background:var(--warning-light); color:#92400e; }
+        [data-theme="dark"] .badge-yellow { background:#451a03; color:#fcd34d; }
+        .uncounted-row { background:var(--danger-light); border-left:4px solid var(--danger); }
+        [data-theme="dark"] .uncounted-row { background:#7f1d1d; }
+        .modal-overlay { position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(15,23,42,0.6); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); z-index:200; display:none; align-items:flex-end; justify-content:center; animation:fadeIn 0.3s ease; }
+        .modal-overlay.show { display:flex; }
+        @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+        .modal { background:var(--bg-card); border-radius:var(--radius-xl) var(--radius-xl) 0 0; padding:24px; width:100%; max-width:600px; max-height:80vh; overflow-y:auto; animation:slideUp 0.4s cubic-bezier(0.16,1,0.3,1); box-shadow:var(--shadow-lg); }
+        @keyframes slideUp { from { transform:translateY(100%); } to { transform:translateY(0); } }
+        .modal-handle { width:40px; height:4px; background:var(--border-color); border-radius:2px; margin:0 auto 16px; }
+        .modal-title { font-family:'Outfit',sans-serif; font-size:18px; font-weight:700; margin-bottom:16px; }
+        .toast-container { position:fixed; top:20px; left:50%; transform:translateX(-50%); z-index:300; max-width:90%; width:400px; pointer-events:none; }
+        .toast { background:var(--text-main); color:#fff; padding:12px 20px; border-radius:var(--radius-md); font-size:13px; font-weight:600; box-shadow:var(--shadow-lg); text-align:center; margin-bottom:8px; animation:toastIn 0.4s cubic-bezier(0.16,1,0.3,1); pointer-events:auto; transition:all 0.3s ease; }
+        .toast.success { background:var(--success); }
+        .toast.error { background:var(--danger); }
+        .toast.warning { background:var(--warning); color:#0f172a; }
+        .toast.hide { opacity:0; transform:translateY(-20px) scale(0.95); }
+        @keyframes toastIn { from { opacity:0; transform:translateY(-30px) scale(0.95); } to { opacity:1; transform:translateY(0) scale(1); } }
+        #installBanner { display:none; background:var(--primary-gradient); color:#fff; padding:16px 20px; text-align:center; position:fixed; bottom:0; width:100%; z-index:999; border-radius:var(--radius-xl) var(--radius-xl) 0 0; box-shadow:0 -10px 40px rgba(0,0,0,0.2); animation:slideUp 0.4s ease; }
+        #installBanner p { margin-bottom:2px; font-weight:700; font-size:15px; font-family:'Outfit',sans-serif; }
+        #installBanner .sub { font-size:12px; opacity:0.85; margin-bottom:10px; }
+        #installBanner .btn-install { background:#fff; color:var(--primary); border:none; padding:10px 28px; border-radius:var(--radius-md); font-weight:700; font-size:14px; cursor:pointer; box-shadow:var(--shadow-sm); transition:var(--transition); }
+        #installBanner .btn-install:hover { transform:scale(1.02); box-shadow:var(--shadow-md); }
+        #installBanner .btn-close { background:transparent; color:#fff; border:none; padding:8px 12px; font-size:18px; cursor:pointer; position:absolute; top:8px; right:12px; opacity:0.7; }
+        #installBanner .btn-close:hover { opacity:1; }
+        @media (max-width:480px) { .logo-icon { width:36px; height:36px; font-size:16px; } .logo-text .brand { font-size:17px; } .logo-text .tagline { font-size:9px; } .tab-btn { font-size:10px; padding:8px 4px; } .tab-btn i { font-size:14px; } .stats-grid { grid-template-columns:1fr 1fr; gap:8px; } .stat-value { font-size:20px; } .card { padding:14px; } .product-name { font-size:17px; } .pharmacy-grid { grid-template-columns:repeat(auto-fill, minmax(110px, 1fr)); } .modal { padding:18px; } .btn { font-size:12px; padding:10px 14px; } .qty-btn { width:40px; height:40px; font-size:16px; } .qty-input { font-size:20px; height:40px; } }
+        @media (min-width:768px) { .main-content { padding:24px; } .header { padding:18px 32px; } .logo-text .brand { font-size:24px; } }
+        .flex { display:flex; }
+        .flex-between { display:flex; justify-content:space-between; align-items:center; }
+        .gap-8 { gap:8px; }
+        .gap-12 { gap:12px; }
+        .mt-8 { margin-top:8px; }
+        .mt-12 { margin-top:12px; }
+        .mt-16 { margin-top:16px; }
+        .mb-8 { margin-bottom:8px; }
+        .mb-12 { margin-bottom:12px; }
+        .text-center { text-align:center; }
+        .text-muted { color:var(--text-muted); }
+        .text-success { color:var(--success); }
+        .text-danger { color:var(--danger); }
+        .text-warning { color:var(--warning); }
+        .fw-700 { font-weight:700; }
+        .fw-600 { font-weight:600; }
     </style>
 </head>
 <body>
-
-    <!-- ========== HEADER ========== -->
+    <!-- ============================================ HEADER ============================================ -->
     <header class="header">
         <div class="header-top">
             <a href="#" class="logo" onclick="app.switchTab('import'); return false;">
@@ -1324,15 +276,13 @@
             </div>
         </div>
     </header>
-
     <div class="status-bar" id="statusBar">
         <span class="status-dot"></span>
         <span id="statusText">กำลังเริ่มต้นระบบ...</span>
     </div>
 
     <div class="main-content">
-
-        <!-- ========== TAB NAV ========== -->
+        <!-- TAB NAVIGATION -->
         <nav class="tab-nav">
             <button class="tab-btn active" onclick="app.switchTab('import')"><i class="fas fa-file-import"></i> นำเข้า</button>
             <button class="tab-btn" onclick="app.switchTab('layout')"><i class="fas fa-sitemap"></i> ผังร้าน</button>
@@ -1340,7 +290,7 @@
             <button class="tab-btn" onclick="app.switchTab('report')"><i class="fas fa-chart-bar"></i> รายงาน</button>
         </nav>
 
-        <!-- ========== PAGE: IMPORT ========== -->
+        <!-- ===================== PAGE: IMPORT ===================== -->
         <div class="page active" id="page-import">
             <div class="card">
                 <div class="card-title"><i class="fas fa-file-import"></i> นำเข้าข้อมูลสินค้า</div>
@@ -1398,7 +348,7 @@
             </div>
         </div>
 
-        <!-- ========== PAGE: LAYOUT ========== -->
+        <!-- ===================== PAGE: LAYOUT ===================== -->
         <div class="page" id="page-layout">
             <div class="card">
                 <div class="card-title"><i class="fas fa-sitemap"></i> แผนผังร้าน</div>
@@ -1430,7 +380,7 @@
             </div>
         </div>
 
-        <!-- ========== PAGE: SCAN ========== -->
+        <!-- ===================== PAGE: SCAN ===================== -->
         <div class="page" id="page-scan">
             <div class="card" style="padding:12px;">
                 <div class="input-group">
@@ -1499,7 +449,7 @@
             </div>
         </div>
 
-        <!-- ========== PAGE: REPORT ========== -->
+        <!-- ===================== PAGE: REPORT ===================== -->
         <div class="page" id="page-report">
             <div class="card" style="background:linear-gradient(135deg,var(--success-light) 0%,#d1fae5 100%);border:2px solid #6ee7b7;">
                 <div class="card-title" style="color:#065f46;"><i class="fas fa-chart-pie"></i> สรุปภาพรวมการนับสต็อก</div>
@@ -1556,7 +506,7 @@
         </div>
     </div>
 
-    <!-- ========== INSTALL BANNER ========== -->
+    <!-- ============================================ INSTALL BANNER ============================================ -->
     <div id="installBanner">
         <p><i class="fas fa-rocket"></i> ติดตั้ง PharmacyPro</p>
         <div class="sub">ใช้งานสะดวกรวดเร็ว เสมือนแอปพลิเคชันบนมือถือ</div>
@@ -1564,7 +514,7 @@
         <button class="btn-close" onclick="app.closeInstallBanner()">✕</button>
     </div>
 
-    <!-- ========== BARCODE MODAL ========== -->
+    <!-- ============================================ BARCODE MODAL ============================================ -->
     <div class="modal-overlay" id="barcodeModal">
         <div class="modal">
             <div class="modal-handle"></div>
@@ -1574,31 +524,18 @@
             <button class="btn btn-outline btn-block" onclick="app.closeBarcodeModal()" style="margin-top:8px;"><i class="fas fa-times"></i> ปิดหน้าต่าง</button>
         </div>
     </div>
-
     <div class="toast-container" id="toastContainer"></div>
 
     <script>
-        // =======================================================
-        // CONFIG
-        // =======================================================
+        // ============================================ CONFIG ============================================
         const CONFIG = {
-            GOOGLE_SHEETS: {
-                API_KEY: '',
-                SPREADSHEET_ID: '',
-                RANGES: {
-                    PRODUCTS: 'Products!A:F',
-                    REPORTS: 'Reports!A:G',
-                    HISTORY: 'History!A:E'
-                }
-            },
+            GOOGLE_SHEETS: { API_KEY: '', SPREADSHEET_ID: '', RANGES: { PRODUCTS: 'Products!A:F', REPORTS: 'Reports!A:G', HISTORY: 'History!A:E' } },
             APP_NAME: 'PharmacyPro',
             VERSION: '2.0.0',
             STORE_ID: localStorage.getItem('storeId') || 'default'
         };
 
-        // =======================================================
-        // MAIN APP CLASS
-        // =======================================================
+        // ============================================ MAIN APP ============================================
         class StockApp {
             constructor() {
                 this.db = null;
@@ -1607,7 +544,6 @@
                 this.sessionItems = [];
                 this.offlineQueue = JSON.parse(localStorage.getItem('offlineQueue') || '[]');
                 this.barcodeHistory = JSON.parse(localStorage.getItem('barcodeHistory_' + CONFIG.STORE_ID) || '{}');
-
                 this.scanning = false;
                 this.currentProduct = null;
                 this.currentBarcode = '';
@@ -1617,16 +553,9 @@
                 this.continuousMode = false;
                 this.isDarkMode = localStorage.getItem('darkMode') === 'true';
                 this.deferredPrompt = null;
-                this.lastScan = 0;
-                this.codeReader = null;
-                this.scanningActive = false;
-
                 this.init();
             }
 
-            // -------------------------------------------------------
-            // INIT
-            // -------------------------------------------------------
             async init() {
                 await this.initDB();
                 await this.loadLocations();
@@ -1640,16 +569,13 @@
                 this.initKeyboardShortcuts();
                 this.updateStatus('พร้อมใช้งาน');
                 console.log('✅ PharmacyPro v2.0.0 เริ่มทำงานเรียบร้อย');
-
                 if (this.products.length === 0) {
                     this.updateStatus('📥 กรุณานำเข้าข้อมูลสินค้าก่อนใช้งาน');
                     this.showToast('📥 กรุณานำเข้าข้อมูลสินค้าจาก Excel หรือ Google Sheets', 'info');
                 }
             }
 
-            // -------------------------------------------------------
-            // INDEXEDDB
-            // -------------------------------------------------------
+            // --- INDEXEDDB ---
             initDB() {
                 return new Promise((resolve) => {
                     const request = indexedDB.open('StockCountDB', 3);
@@ -1670,10 +596,8 @@
                             db.createObjectStore('history', { keyPath: 'id' });
                         }
                     };
-                    request.onsuccess = (e) => { this.db = e.target.result;
-                        resolve(); };
-                    request.onerror = () => { console.error('IndexedDB error:', request.error);
-                        resolve(); };
+                    request.onsuccess = (e) => { this.db = e.target.result; resolve(); };
+                    request.onerror = () => { console.error('IndexedDB error:', request.error); resolve(); };
                 });
             }
 
@@ -1682,11 +606,9 @@
                     const tx = this.db.transaction('products', 'readonly');
                     const store = tx.objectStore('products');
                     const req = store.getAll();
-                    this.products = await new Promise(r => { req.onsuccess = () => r(req.result || []);
-                        req.onerror = () => r([]); });
+                    this.products = await new Promise(r => { req.onsuccess = () => r(req.result || []); req.onerror = () => r([]); });
                     this.updateProgress();
-                } catch (e) { this.products = [];
-                    console.error('Load products error:', e); }
+                } catch (e) { this.products = []; console.error('Load products error:', e); }
             }
 
             async loadLocations() {
@@ -1694,20 +616,16 @@
                     const tx = this.db.transaction('locations', 'readonly');
                     const store = tx.objectStore('locations');
                     const req = store.getAll();
-                    this.locations = await new Promise(r => { req.onsuccess = () => r(req.result || []);
-                        req.onerror = () => r([]); });
+                    this.locations = await new Promise(r => { req.onsuccess = () => r(req.result || []); req.onerror = () => r([]); });
                     this.renderMap();
                     this.updateLocationSelect();
-                } catch (e) { this.locations = [];
-                    console.error('Load locations error:', e); }
+                } catch (e) { this.locations = []; console.error('Load locations error:', e); }
             }
 
             async saveProduct(product) {
                 const tx = this.db.transaction('products', 'readwrite');
                 const store = tx.objectStore('products');
-                await new Promise(r => { const req = store.put(product);
-                    req.onsuccess = r;
-                    req.onerror = r; });
+                await new Promise(r => { const req = store.put(product); req.onsuccess = r; req.onerror = r; });
             }
 
             async saveLocations() {
@@ -1718,9 +636,7 @@
                 await new Promise(r => { tx.oncomplete = r; });
             }
 
-            // -------------------------------------------------------
-            // NETWORK & SYNC
-            // -------------------------------------------------------
+            // --- NETWORK & SYNC ---
             initNetworkListener() {
                 window.addEventListener('online', () => this.updateNetworkStatus(true));
                 window.addEventListener('offline', () => this.updateNetworkStatus(false));
@@ -1766,23 +682,17 @@
             async syncToGoogleSheets(data) {
                 if (!CONFIG.GOOGLE_SHEETS.API_KEY || !CONFIG.GOOGLE_SHEETS.SPREADSHEET_ID) return;
                 try {
-                    const url =
-                        `https://sheets.googleapis.com/v4/spreadsheets/${CONFIG.GOOGLE_SHEETS.SPREADSHEET_ID}/values/${CONFIG.GOOGLE_SHEETS.RANGES.HISTORY}:append?valueInputOption=USER_ENTERED&key=${CONFIG.GOOGLE_SHEETS.API_KEY}`;
+                    const url = `https://sheets.googleapis.com/v4/spreadsheets/${CONFIG.GOOGLE_SHEETS.SPREADSHEET_ID}/values/${CONFIG.GOOGLE_SHEETS.RANGES.HISTORY}:append?valueInputOption=USER_ENTERED&key=${CONFIG.GOOGLE_SHEETS.API_KEY}`;
                     const values = data.map(item => [
                         item.barcode || '', item.name || '', item.lot || '',
                         item.system_qty || 0, item.counted_qty || 0, item.difference || 0,
                         item.cost || 0, item.cost_diff || 0,
                         new Date(item.timestamp || Date.now()).toISOString(), CONFIG.STORE_ID
                     ]);
-                    const response = await fetch(url, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ values })
-                    });
+                    const response = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ values }) });
                     if (!response.ok) throw new Error('Google Sheets API error: ' + response.status);
                     return await response.json();
-                } catch (e) { console.error('Google Sheets sync error:', e);
-                    throw e; }
+                } catch (e) { console.error('Google Sheets sync error:', e); throw e; }
             }
 
             forceSync() {
@@ -1790,9 +700,7 @@
                 else this.showToast('⚠️ อยู่นอกระบบ กรุณาเชื่อมต่ออินเทอร์เน็ต', 'warning');
             }
 
-            // -------------------------------------------------------
-            // THEME & UI
-            // -------------------------------------------------------
+            // --- THEME & UI ---
             loadTheme() {
                 if (this.isDarkMode) {
                     document.documentElement.setAttribute('data-theme', 'dark');
@@ -1844,8 +752,7 @@
             updateScanBadge() {
                 const badge = document.getElementById('scanBadge');
                 const count = this.sessionItems.length;
-                if (count > 0) { badge.style.display = 'inline';
-                    badge.textContent = count; } else { badge.style.display = 'none'; }
+                if (count > 0) { badge.style.display = 'inline'; badge.textContent = count; } else { badge.style.display = 'none'; }
             }
 
             initKeyboardShortcuts() {
@@ -1862,16 +769,11 @@
                 });
             }
 
-            // -------------------------------------------------------
-            // FILE IMPORT
-            // -------------------------------------------------------
+            // --- FILE IMPORT ---
             setupDragDrop() {
                 const zone = document.getElementById('dropZone');
-                zone.addEventListener('dragover', (e) => { e.preventDefault();
-                    zone.style.borderColor = 'var(--primary)';
-                    zone.style.background = '#eef2ff'; });
-                zone.addEventListener('dragleave', () => { zone.style.borderColor = 'var(--border-color)';
-                    zone.style.background = 'var(--bg-body)'; });
+                zone.addEventListener('dragover', (e) => { e.preventDefault(); zone.style.borderColor = 'var(--primary)'; zone.style.background = '#eef2ff'; });
+                zone.addEventListener('dragleave', () => { zone.style.borderColor = 'var(--border-color)'; zone.style.background = 'var(--bg-body)'; });
                 zone.addEventListener('drop', (e) => {
                     e.preventDefault();
                     zone.style.borderColor = 'var(--border-color)';
@@ -1965,8 +867,7 @@
             showMapping() {
                 const div = document.getElementById('mappingFields');
                 const fields = ['barcode', 'name', 'stock', 'lot', 'cost', 'expiry'];
-                const labels = { barcode: '🏷️ บาร์โค้ด', name: '📦 ชื่อสินค้า', stock: '🔢 จำนวน', lot: '🔖 Lot',
-                    cost: '💰 ต้นทุน', expiry: '⏳ วันหมดอายุ' };
+                const labels = { barcode: '🏷️ บาร์โค้ด', name: '📦 ชื่อสินค้า', stock: '🔢 จำนวน', lot: '🔖 Lot', cost: '💰 ต้นทุน', expiry: '⏳ วันหมดอายุ' };
                 div.innerHTML = fields.map(f =>
                     '<div style="margin-bottom:8px;">' +
                     '<label style="font-size:12px;font-weight:600;">' + labels[f] + '</label>' +
@@ -1990,8 +891,7 @@
 
             async confirmImport() {
                 if (!this.currentPOS) { this.showToast('⚠️ กรุณาเลือกระบบ POS ก่อน', 'warning'); return; }
-                if (!this.pendingRows || this.pendingRows.length === 0) { this.showToast('⚠️ ไม่มีข้อมูลที่จะนำเข้า',
-                        'warning'); return; }
+                if (!this.pendingRows || this.pendingRows.length === 0) { this.showToast('⚠️ ไม่มีข้อมูลที่จะนำเข้า', 'warning'); return; }
                 this.showToast('📥 กำลังนำเข้าข้อมูล...', 'info');
                 try {
                     const clearTx = this.db.transaction('products', 'readwrite');
@@ -2019,8 +919,7 @@
                             };
                         } else {
                             const m = this.customMapping || {};
-                            const barcode = m.barcode ? String(row[this.pendingHeaders.indexOf(m.barcode)]) : this
-                                .genTempBarcode(row[this.pendingHeaders.indexOf(m.name)]);
+                            const barcode = m.barcode ? String(row[this.pendingHeaders.indexOf(m.barcode)]) : this.genTempBarcode(row[this.pendingHeaders.indexOf(m.name)]);
                             product = {
                                 id: Date.now() + count + Math.random() * 1000,
                                 barcodes: [barcode],
@@ -2036,8 +935,7 @@
                         if (product.name) {
                             await new Promise(r => {
                                 const req = store.put(product);
-                                req.onsuccess = () => { count++;
-                                    r(); };
+                                req.onsuccess = () => { count++; r(); };
                                 req.onerror = () => r();
                             });
                         }
@@ -2070,18 +968,15 @@
                 let spreadsheetId = url;
                 const match = url.match(/\/d\/([a-zA-Z0-9-_]+)/);
                 if (match) spreadsheetId = match[1];
-                if (!CONFIG.GOOGLE_SHEETS.API_KEY) { this.showToast('⚠️ ต้องตั้งค่า API Key ในไฟล์ CONFIG',
-                        'warning'); return; }
+                if (!CONFIG.GOOGLE_SHEETS.API_KEY) { this.showToast('⚠️ ต้องตั้งค่า API Key ในไฟล์ CONFIG', 'warning'); return; }
                 this.showToast('📥 กำลังดึงข้อมูลจาก Google Sheets...', 'info');
                 try {
-                    const apiUrl =
-                        `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/Sheet1?key=${CONFIG.GOOGLE_SHEETS.API_KEY}`;
+                    const apiUrl = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/Sheet1?key=${CONFIG.GOOGLE_SHEETS.API_KEY}`;
                     const response = await fetch(apiUrl);
                     if (!response.ok) throw new Error('Google Sheets API error: ' + response.status);
                     const data = await response.json();
                     const values = data.values;
-                    if (!values || values.length < 2) { this.showToast('❌ ไม่พบข้อมูลใน Google Sheets',
-                        'error'); return; }
+                    if (!values || values.length < 2) { this.showToast('❌ ไม่พบข้อมูลใน Google Sheets', 'error'); return; }
                     this.pendingHeaders = values[0].map(h => String(h).trim());
                     this.pendingRows = values.slice(1);
                     this.currentPOS = 'generic';
@@ -2095,9 +990,7 @@
                 }
             }
 
-            // -------------------------------------------------------
-            // PRODUCT LOOKUP & DISPLAY
-            // -------------------------------------------------------
+            // --- PRODUCT LOOKUP & DISPLAY ---
             async lookupProduct(barcode) {
                 if (!barcode) return;
                 let product = this.products.find(p => p.barcodes && p.barcodes.includes(barcode));
@@ -2138,8 +1031,7 @@
                                     product.barcodes.push(barcode);
                                     await this.saveProduct(product);
                                     this.barcodeHistory[barcode] = product.id;
-                                    localStorage.setItem('barcodeHistory_' + CONFIG.STORE_ID, JSON.stringify(this
-                                        .barcodeHistory));
+                                    localStorage.setItem('barcodeHistory_' + CONFIG.STORE_ID, JSON.stringify(this.barcodeHistory));
                                     this.showToast('✅ ผูกบาร์โค้ดสำเร็จ', 'success');
                                 }
                                 this.currentProduct = product;
@@ -2155,8 +1047,7 @@
                                         product.barcodes.push(barcode);
                                         await this.saveProduct(product);
                                         this.barcodeHistory[barcode] = product.id;
-                                        localStorage.setItem('barcodeHistory_' + CONFIG.STORE_ID, JSON.stringify(this
-                                            .barcodeHistory));
+                                        localStorage.setItem('barcodeHistory_' + CONFIG.STORE_ID, JSON.stringify(this.barcodeHistory));
                                         this.showToast('✅ ผูกบาร์โค้ดสำเร็จ', 'success');
                                     }
                                     this.currentProduct = product;
@@ -2181,8 +1072,7 @@
                                         await this.saveProduct(product);
                                         this.products.push(product);
                                         this.barcodeHistory[barcode] = product.id;
-                                        localStorage.setItem('barcodeHistory_' + CONFIG.STORE_ID, JSON.stringify(this
-                                            .barcodeHistory));
+                                        localStorage.setItem('barcodeHistory_' + CONFIG.STORE_ID, JSON.stringify(this.barcodeHistory));
                                         this.showToast('✅ เพิ่มสินค้าใหม่สำเร็จ', 'success');
                                         this.currentProduct = product;
                                         this.showProduct(product);
@@ -2210,10 +1100,8 @@
                 const detail = document.getElementById('productDetail');
                 detail.style.display = 'block';
                 document.getElementById('productName').textContent = '📦 ' + product.name;
-                document.getElementById('productBarcode').textContent = '🏷️ บาร์โค้ด: ' + (product.barcodes || []).join(
-                ', ');
-                document.getElementById('productStock').textContent = '📊 ในระบบ: ' + (product.stock || 0) +
-                    ' ชิ้น | 💰 ต้นทุน: ' + (product.cost || 0).toFixed(2);
+                document.getElementById('productBarcode').textContent = '🏷️ บาร์โค้ด: ' + (product.barcodes || []).join(', ');
+                document.getElementById('productStock').textContent = '📊 ในระบบ: ' + (product.stock || 0) + ' ชิ้น | 💰 ต้นทุน: ' + (product.cost || 0).toFixed(2);
                 document.getElementById('qtyInput').value = 1;
                 if (product.lot) {
                     document.getElementById('lotSelection').style.display = 'block';
@@ -2275,119 +1163,94 @@
                 }
             }
 
-            // -------------------------------------------------------
-            // SCANNER - FIXED VERSION
-            // -------------------------------------------------------
+            // ============================================ SCANNER (แก้ไขแล้ว) ============================================
             async toggleScanner() {
-                if (this.scanning) {
-                    this.stopScanner();
-                } else {
-                    await this.startScanner();
+                if (this.scanning) { this.stopScanner(); } 
+                else { await this.startScanner(); }
+            }
+
+            async startScanner() {
+                // รอให้ ZXing โหลดเสร็จ (รอสูงสุด 10 วินาที)
+                let retries = 0;
+                while (typeof ZXing === 'undefined' && retries < 20) {
+                    await new Promise(r => setTimeout(r, 500));
+                    retries++;
                 }
-            }
-
-async startScanner() {
-    let retries = 0;
-    while (typeof ZXing === 'undefined' && retries < 30) {
-        await new Promise(r => setTimeout(r, 300));
-        retries++;
-    }
-    if (typeof ZXing === 'undefined') {
-        this.showToast('⚠️ ไลบรารีสแกนโหลดไม่สำเร็จ กรุณารีเฟรช', 'error');
-        return;
-    }
-
-    try {
-        const video = document.getElementById('video');
-        video.style.display = 'block';
-
-        const constraints = {
-            video: {
-                facingMode: "environment",
-                width: { ideal: 640 },
-                height: { ideal: 480 }
-            }
-        };
-
-        const stream = await navigator.mediaDevices.getUserMedia(constraints);
-        video.srcObject = stream;
-        await video.play();
-
-        document.getElementById('scannerPlaceholder').style.display = 'none';
-        document.getElementById('scannerOverlay').style.display = 'block';
-        document.getElementById('scannerStatus').innerHTML =
-            '<i class="fas fa-circle" style="color:var(--success);font-size:10px;"></i> กล้องกำลังทำงาน...';
-        document.getElementById('scannerStatus').className = 'scanner-status success';
-        document.getElementById('btnToggleScanner').innerHTML = '<i class="fas fa-stop"></i> ปิดกล้อง';
-        this.scanning = true;
-        this.lastScan = 0;
-
-        // ✅ ใช้ decodeOnceFromVideoElement แบบวนลูป (เสถียรกว่า)
-        this.codeReader = new ZXing.BrowserMultiFormatReader();
-
-        const scanLoop = async () => {
-            if (!this.scanning) return;
-            try {
-                const result = await this.codeReader.decodeOnceFromVideoElement(video);
-                if (result && this.scanning) {
-                    const now = Date.now();
-                    if (now - this.lastScan > 1500) {
-                        this.lastScan = now;
-                        if (navigator.vibrate) navigator.vibrate(150);
-                        this.onScan(result.getText());
+                if (typeof ZXing === 'undefined') {
+                    this.showToast('⚠️ ไลบรารีสแกนโหลดไม่สำเร็จ กรุณารีเฟรช', 'error');
+                    return;
+                }
+                try {
+                    const video = document.getElementById('video');
+                    video.style.display = 'block';
+                    
+                    // สร้าง CodeReader instance
+                    this.codeReader = new ZXing.BrowserMultiFormatReader();
+                    
+                    // ค้นหากล้องทั้งหมดในเครื่อง
+                    const videoInputDevices = await this.codeReader.listVideoInputDevices();
+                    
+                    // พยายามเลือกกล้องหลัง (Back camera / environment) ถ้ามี
+                    let selectedDeviceId = videoInputDevices[0]?.deviceId;
+                    const backCamera = videoInputDevices.find(device => 
+                        device.label.toLowerCase().includes('back') || 
+                        device.label.toLowerCase().includes('rear') ||
+                        device.label.toLowerCase().includes('หลัง')
+                    );
+                    if (backCamera) {
+                        selectedDeviceId = backCamera.deviceId;
                     }
+
+                    document.getElementById('scannerPlaceholder').style.display = 'none';
+                    document.getElementById('scannerOverlay').style.display = 'block';
+                    document.getElementById('scannerStatus').innerHTML = '<i class="fas fa-circle" style="color:var(--success);font-size:10px;"></i> กล้องกำลังทำงาน...';
+                    document.getElementById('scannerStatus').className = 'scanner-status success';
+                    document.getElementById('btnToggleScanner').innerHTML = '<i class="fas fa-stop"></i> ปิดกล้อง';
+                    
+                    this.scanning = true;
+                    this.lastScan = 0;
+
+                    // เริ่มต้น decode จากอุปกรณ์ที่เลือก
+                    this.codeReader.decodeFromVideoDevice(selectedDeviceId, video, (result, err) => {
+                        if (result && this.scanning) {
+                            const now = Date.now();
+                            if (now - this.lastScan > 2000) { // หน่วงเวลาไม่ให้สแกนซ้ำรัวๆ
+                                this.lastScan = now;
+                                this.onScan(result.getText());
+                            }
+                        }
+                        if (err && !(err instanceof ZXing.NotFoundException)) {
+                            // จัดการข้อผิดพลาดอื่นๆ ที่ไม่ใช่กรณีไม่พบบาร์โค้ดในเฟรมนั้น
+                            console.debug(err);
+                        }
+                    });
+
+                    this.showToast('📷 กล้องพร้อมส่องบาร์โค้ดแล้ว', 'success');
+                } catch (err) {
+                    console.error('Camera error:', err);
+                    document.getElementById('scannerStatus').innerHTML = '<i class="fas fa-exclamation-circle"></i> ไม่สามารถเปิดกล้องได้';
+                    document.getElementById('scannerStatus').className = 'scanner-status error';
+                    this.showToast('❌ กรุณาตรวจสอบสิทธิ์การใช้กล้องหรือรันผ่าน HTTPS', 'error');
+                    this.stopScanner();
                 }
-            } catch (err) {
-                // ไม่มีบาร์โค้ดในเฟรมนี้ (ปล่อยผ่าน)
             }
-            if (this.scanning) {
-                requestAnimationFrame(scanLoop);
+
+            stopScanner() {
+                this.scanning = false;
+                const video = document.getElementById('video');
+                if (video.srcObject) {
+                    video.srcObject.getTracks().forEach(t => t.stop());
+                    video.srcObject = null;
+                }
+                video.style.display = 'none';
+                document.getElementById('scannerPlaceholder').style.display = 'flex';
+                document.getElementById('scannerOverlay').style.display = 'none';
+                document.getElementById('scannerStatus').innerHTML = '<i class="fas fa-circle" style="font-size:10px;"></i> กล้องปิดอยู่';
+                document.getElementById('scannerStatus').className = 'scanner-status idle';
+                document.getElementById('btnToggleScanner').innerHTML = '<i class="fas fa-camera"></i> เปิดกล้อง';
             }
-        };
 
-        scanLoop();
-        this.showToast('📷 กล้องพร้อมส่องบาร์โค้ดแล้ว', 'success');
-
-    } catch (err) {
-        console.error('Camera error:', err);
-        document.getElementById('scannerStatus').innerHTML =
-            '<i class="fas fa-exclamation-circle"></i> ไม่สามารถเปิดกล้องได้';
-        document.getElementById('scannerStatus').className = 'scanner-status error';
-        this.showToast('❌ กรุณาตรวจสอบสิทธิ์การใช้กล้องหรือรันผ่าน HTTPS', 'error');
-        this.stopScanner();
-    }
-}
-            
-stopScanner() {
-    this.scanning = false;
-    const video = document.getElementById('video');
-
-    // หยุด CodeReader
-    if (this.codeReader) {
-        try {
-            this.codeReader.reset();
-        } catch (e) {}
-        this.codeReader = null;
-    }
-
-    // หยุด stream
-    if (video.srcObject) {
-        video.srcObject.getTracks().forEach(t => t.stop());
-        video.srcObject = null;
-    }
-
-    video.style.display = 'none';
-    document.getElementById('scannerPlaceholder').style.display = 'flex';
-    document.getElementById('scannerOverlay').style.display = 'none';
-    document.getElementById('scannerStatus').innerHTML =
-        '<i class="fas fa-circle" style="font-size:10px;"></i> กล้องปิดอยู่';
-    document.getElementById('scannerStatus').className = 'scanner-status idle';
-    document.getElementById('btnToggleScanner').innerHTML = '<i class="fas fa-camera"></i> เปิดกล้อง';
-}
-
-            // -------------------------------------------------------
-            // MANUAL BARCODE
-            // -------------------------------------------------------
+            // ============================================ MANUAL BARCODE ============================================
             onScan(barcode) {
                 if (navigator.vibrate) navigator.vibrate(200);
                 this.currentBarcode = barcode;
@@ -2402,8 +1265,8 @@ stopScanner() {
             submitManualBarcode() {
                 const input = document.getElementById('manualBarcodeInput');
                 const barcode = input.value.trim();
-                if (barcode) { this.closeBarcodeModal();
-                    this.onScan(barcode); } else { this.showToast('⚠️ กรุณาใส่บาร์โค้ด', 'warning'); }
+                if (barcode) { this.closeBarcodeModal(); this.onScan(barcode); } 
+                else { this.showToast('⚠️ กรุณาใส่บาร์โค้ด', 'warning'); }
             }
 
             closeBarcodeModal() {
@@ -2411,9 +1274,7 @@ stopScanner() {
                 document.getElementById('manualBarcodeInput').value = '';
             }
 
-            // -------------------------------------------------------
-            // CONTINUOUS MODE
-            // -------------------------------------------------------
+            // ============================================ CONTINUOUS MODE ============================================
             toggleContinuousMode() {
                 this.continuousMode = !this.continuousMode;
                 const btn = document.getElementById('btnContinuous');
@@ -2430,9 +1291,7 @@ stopScanner() {
                 }
             }
 
-            // -------------------------------------------------------
-            // QTY CONTROL
-            // -------------------------------------------------------
+            // ============================================ QTY CONTROL ============================================
             changeQty(delta) {
                 const input = document.getElementById('qtyInput');
                 let val = parseInt(input.value) || 0;
@@ -2496,8 +1355,7 @@ stopScanner() {
                 const total = this.products.filter(p => (p.stock || 0) > 0).length;
                 const counted = this.sessionItems.length;
                 const pct = total > 0 ? (counted / total * 100) : 0;
-                document.getElementById('progressText').textContent = counted + ' / ' + total + ' (' + pct.toFixed(1) +
-                '%)';
+                document.getElementById('progressText').textContent = counted + ' / ' + total + ' (' + pct.toFixed(1) + '%)';
                 const bar = document.getElementById('progressBar');
                 bar.style.width = Math.min(pct, 100) + '%';
                 bar.className = 'progress-bar';
@@ -2519,13 +1377,11 @@ stopScanner() {
                 const container = document.getElementById('recentScans');
                 document.getElementById('scanCount').textContent = this.sessionItems.length;
                 if (this.sessionItems.length === 0) {
-                    container.innerHTML =
-                        `<p style="text-align:center;color:var(--text-muted);padding:20px;"><i class="fas fa-inbox" style="font-size:24px;display:block;margin-bottom:8px;opacity:0.5;"></i>ยังไม่มีประวัติการสแกนในรอบนี้</p>`;
+                    container.innerHTML = `<p style="text-align:center;color:var(--text-muted);padding:20px;"><i class="fas fa-inbox" style="font-size:24px;display:block;margin-bottom:8px;opacity:0.5;"></i>ยังไม่มีประวัติการสแกนในรอบนี้</p>`;
                     return;
                 }
                 container.innerHTML = this.sessionItems.slice(-20).reverse().map(item => {
-                    const diffClass = item.difference > 0 ? 'positive' : item.difference < 0 ? 'negative' :
-                        'zero';
+                    const diffClass = item.difference > 0 ? 'positive' : item.difference < 0 ? 'negative' : 'zero';
                     const diffText = item.difference > 0 ? '+' + item.difference : item.difference;
                     return `<div class="recent-item">
                             <div>
@@ -2537,14 +1393,11 @@ stopScanner() {
                 }).join('');
             }
 
-            // -------------------------------------------------------
-            // LAYOUT
-            // -------------------------------------------------------
+            // ============================================ LAYOUT ============================================
             addCabinet() {
                 const name = document.getElementById('newCabinetName').value.trim();
                 if (!name) { this.showToast('⚠️ กรุณาใส่ชื่อตู้', 'warning'); return; }
-                const cabinet = { id: Date.now(), name: name, type: 'cabinet', shelves: [],
-                createdAt: new Date().toISOString() };
+                const cabinet = { id: Date.now(), name: name, type: 'cabinet', shelves: [], createdAt: new Date().toISOString() };
                 this.locations.push(cabinet);
                 this.saveLocations();
                 this.renderMap();
@@ -2598,8 +1451,7 @@ stopScanner() {
                 document.getElementById('shelfCard').style.display = 'block';
                 const cabinet = this.locations.find(l => l.id === cabinetId);
                 if (cabinet) {
-                    document.getElementById('shelfCardTitle').innerHTML =
-                        `<i class="fas fa-layer-group"></i> จัดการชั้นใน ${cabinet.name}`;
+                    document.getElementById('shelfCardTitle').innerHTML = `<i class="fas fa-layer-group"></i> จัดการชั้นใน ${cabinet.name}`;
                     this.renderShelfList(cabinet);
                 }
                 document.querySelectorAll('.cabinet-block').forEach(b => b.classList.remove('selected'));
@@ -2623,13 +1475,11 @@ stopScanner() {
             renderMap() {
                 const grid = document.getElementById('cabinetGrid');
                 if (this.locations.length === 0) {
-                    grid.innerHTML =
-                        `<div style="text-align:center;color:var(--text-muted);padding:40px;grid-column:1/-1;"><i class="fas fa-boxes" style="font-size:40px;display:block;margin-bottom:8px;opacity:0.5;"></i>ยังไม่มีตู้สินค้า<br><small>เพิ่มตู้ด้านบนเพื่อเริ่มจัดผังร้านของคุณ</small></div>`;
+                    grid.innerHTML = `<div style="text-align:center;color:var(--text-muted);padding:40px;grid-column:1/-1;"><i class="fas fa-boxes" style="font-size:40px;display:block;margin-bottom:8px;opacity:0.5;"></i>ยังไม่มีตู้สินค้า<br><small>เพิ่มตู้ด้านบนเพื่อเริ่มจัดผังร้านของคุณ</small></div>`;
                     return;
                 }
                 grid.innerHTML = this.locations.map(cabinet => {
-                    const counted = this.sessionItems.filter(i => i.location && i.location.includes(String(
-                    cabinet.id))).length;
+                    const counted = this.sessionItems.filter(i => i.location && i.location.includes(String(cabinet.id))).length;
                     return `<div class="cabinet-block ${this.selectedCabinetId === cabinet.id ? 'selected' : ''}" data-cabinet="${cabinet.id}" onclick="app.selectCabinet(${cabinet.id})" ondblclick="app.selectScanLocation('cab_${cabinet.id}'); app.switchTab('scan')">
                             <div class="cabinet-icon"><i class="fas fa-archive"></i></div>
                             <div class="cabinet-name">${cabinet.name}</div>
@@ -2656,8 +1506,7 @@ stopScanner() {
                 this.locations.forEach(cabinet => {
                     html += `<option value="cab_${cabinet.id}">🗄️ ${cabinet.name}</option>`;
                     cabinet.shelves.forEach(shelf => {
-                        html +=
-                            `<option value="cab_${cabinet.id}_shelf_${shelf.id}">&nbsp;&nbsp;└ ชั้น ${shelf.number} (${cabinet.name})</option>`;
+                        html += `<option value="cab_${cabinet.id}_shelf_${shelf.id}">&nbsp;&nbsp;└ ชั้น ${shelf.number} (${cabinet.name})</option>`;
                     });
                 });
                 select.innerHTML = html;
@@ -2680,9 +1529,7 @@ stopScanner() {
                 this.selectScanLocation(document.getElementById('locationSelect').value);
             }
 
-            // -------------------------------------------------------
-            // FINISH COUNT
-            // -------------------------------------------------------
+            // ============================================ FINISH COUNT ============================================
             finishCount() {
                 if (this.sessionItems.length === 0) { this.showToast('⚠️ ยังไม่มีรายการนับ', 'warning'); return; }
                 if (navigator.onLine && this.offlineQueue.length > 0) this.syncOfflineQueue();
@@ -2691,9 +1538,7 @@ stopScanner() {
                 this.showToast('📊 สรุปรายงานเรียบร้อย', 'success');
             }
 
-            // -------------------------------------------------------
-            // REPORT
-            // -------------------------------------------------------
+            // ============================================ REPORT ============================================
             generateReport() {
                 const countedItems = this.sessionItems;
                 const allProducts = this.products;
@@ -2723,10 +1568,7 @@ stopScanner() {
                 document.getElementById('rptTotal').textContent = countedItems.length;
                 document.getElementById('rptDiff').textContent = countedItems.filter(i => i.difference !== 0).length;
                 const totalCostDiff = countedItems.reduce((s, i) => s + i.cost_diff, 0);
-                document.getElementById('rptCost').textContent = totalCostDiff.toLocaleString(undefined, {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2
-                });
+                document.getElementById('rptCost').textContent = totalCostDiff.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
                 const totalValue = countedItems.reduce((s, i) => s + (i.system_qty * i.cost), 0);
                 const pct = totalValue > 0 ? (totalCostDiff / totalValue * 100) : 0;
                 document.getElementById('rptPercent').textContent = pct.toFixed(2) + '%';
@@ -2737,23 +1579,12 @@ stopScanner() {
                 const sortBy = document.getElementById('sortBy').value;
                 const items = [...this.sessionItems];
                 switch (sortBy) {
-                    case 'name':
-                        items.sort((a, b) => a.name.localeCompare(b.name));
-                        break;
-                    case 'difference_desc':
-                        items.sort((a, b) => b.difference - a.difference);
-                        break;
-                    case 'difference_asc':
-                        items.sort((a, b) => a.difference - b.difference);
-                        break;
-                    case 'cost_diff_desc':
-                        items.sort((a, b) => b.cost_diff - a.cost_diff);
-                        break;
-                    case 'cost_diff_asc':
-                        items.sort((a, b) => a.cost_diff - b.cost_diff);
-                        break;
-                    default:
-                        items.sort((a, b) => b.difference - a.difference);
+                    case 'name': items.sort((a, b) => a.name.localeCompare(b.name)); break;
+                    case 'difference_desc': items.sort((a, b) => b.difference - a.difference); break;
+                    case 'difference_asc': items.sort((a, b) => a.difference - b.difference); break;
+                    case 'cost_diff_desc': items.sort((a, b) => b.cost_diff - a.cost_diff); break;
+                    case 'cost_diff_asc': items.sort((a, b) => a.cost_diff - b.cost_diff); break;
+                    default: items.sort((a, b) => b.difference - a.difference);
                 }
                 this.renderReport(items);
             }
@@ -2761,16 +1592,13 @@ stopScanner() {
             renderReport(items) {
                 const tbody = document.getElementById('reportBody');
                 if (items.length === 0) {
-                    tbody.innerHTML =
-                        `<tr><td colspan="9" style="text-align:center;padding:20px;color:var(--text-muted);"><i class="fas fa-inbox" style="font-size:24px;display:block;margin-bottom:8px;opacity:0.5;"></i>ยังไม่มีข้อมูลสรุปผล</td></tr>`;
+                    tbody.innerHTML = `<tr><td colspan="9" style="text-align:center;padding:20px;color:var(--text-muted);"><i class="fas fa-inbox" style="font-size:24px;display:block;margin-bottom:8px;opacity:0.5;"></i>ยังไม่มีข้อมูลสรุปผล</td></tr>`;
                     return;
                 }
                 tbody.innerHTML = items.map(item => {
-                    const diffClass = item.difference > 0 ? 'badge-green' : item.difference < 0 ? 'badge-red' :
-                        '';
+                    const diffClass = item.difference > 0 ? 'badge-green' : item.difference < 0 ? 'badge-red' : '';
                     const diffText = item.difference > 0 ? '+' + item.difference : item.difference;
-                    const pct = item.system_qty > 0 ? ((item.difference / item.system_qty) * 100).toFixed(1) +
-                        '%' : '-';
+                    const pct = item.system_qty > 0 ? ((item.difference / item.system_qty) * 100).toFixed(1) + '%' : '-';
                     return `<tr>
                             <td>${item.barcode || '-'}</td>
                             <td><strong>${item.name}</strong></td>
@@ -2785,9 +1613,7 @@ stopScanner() {
                 }).join('');
             }
 
-            // -------------------------------------------------------
-            // EXPORT
-            // -------------------------------------------------------
+            // ============================================ EXPORT ============================================
             exportData(format) {
                 if (this.sessionItems.length === 0) { this.showToast('⚠️ ไม่มีข้อมูลสำหรับส่งออก', 'warning'); return; }
                 const diffItems = this.sessionItems.filter(item => item.difference !== 0);
@@ -2796,17 +1622,10 @@ stopScanner() {
                 if (isDiffOnly && dataToExport.length === 0) { this.showToast('✅ ไม่มีรายการที่ขาด/เกิน', 'success'); return; }
                 const baseFormat = format.replace('-diff', '');
                 switch (baseFormat) {
-                    case 'csv':
-                        this.exportCSV(dataToExport);
-                        break;
-                    case 'xlsx':
-                        this.exportXLSX(dataToExport);
-                        break;
-                    case 'pdf':
-                        this.exportPDF(dataToExport);
-                        break;
-                    default:
-                        this.showToast('⚠️ รูปแบบไม่รองรับ', 'warning');
+                    case 'csv': this.exportCSV(dataToExport); break;
+                    case 'xlsx': this.exportXLSX(dataToExport); break;
+                    case 'pdf': this.exportPDF(dataToExport); break;
+                    default: this.showToast('⚠️ รูปแบบไม่รองรับ', 'warning');
                 }
             }
 
@@ -2814,25 +1633,18 @@ stopScanner() {
                 const header = 'บาร์โค้ด,ชื่อสินค้า,Lot,จำนวนระบบ,จำนวนนับ,ผลต่าง,ทุน,มูลค่าต่าง,%ต่าง\n';
                 let csv = '\uFEFF' + header;
                 items.forEach(item => {
-                    const pct = item.system_qty > 0 ? ((item.difference / item.system_qty) * 100).toFixed(1) :
-                        0;
-                    csv +=
-                        `${item.barcode || '-'},${item.name},${item.lot || '-'},${item.system_qty},${item.counted_qty},${item.difference},${item.cost},${item.cost_diff},${pct}\n`;
+                    const pct = item.system_qty > 0 ? ((item.difference / item.system_qty) * 100).toFixed(1) : 0;
+                    csv += `${item.barcode || '-'},${item.name},${item.lot || '-'},${item.system_qty},${item.counted_qty},${item.difference},${item.cost},${item.cost_diff},${pct}\n`;
                 });
                 const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
                 this.download(blob, `stock_count_${items.length}_items_${Date.now()}.csv`);
             }
 
             exportXLSX(items) {
-                const data = [
-                    ['บาร์โค้ด', 'ชื่อ', 'Lot', 'ระบบ', 'นับ', 'ต่าง', 'ทุน', 'มูลค่าต่าง', '%']
-                ];
+                const data = [['บาร์โค้ด', 'ชื่อ', 'Lot', 'ระบบ', 'นับ', 'ต่าง', 'ทุน', 'มูลค่าต่าง', '%']];
                 items.forEach(item => {
-                    const pct = item.system_qty > 0 ? ((item.difference / item.system_qty) * 100).toFixed(1) :
-                        0;
-                    data.push([item.barcode || '-', item.name, item.lot || '-', item.system_qty, item
-                        .counted_qty, item.difference, item.cost, item.cost_diff, pct
-                    ]);
+                    const pct = item.system_qty > 0 ? ((item.difference / item.system_qty) * 100).toFixed(1) : 0;
+                    data.push([item.barcode || '-', item.name, item.lot || '-', item.system_qty, item.counted_qty, item.difference, item.cost, item.cost_diff, pct]);
                 });
                 const ws = XLSX.utils.aoa_to_sheet(data);
                 const wb = XLSX.utils.book_new();
@@ -2851,9 +1663,7 @@ stopScanner() {
                     item.system_qty, item.counted_qty, item.difference, item.cost_diff.toFixed(2)
                 ]);
                 doc.autoTable({
-                    head: [
-                        ['บาร์โค้ด', 'ชื่อ', 'Lot', 'ระบบ', 'นับ', 'ต่าง', 'มูลค่า']
-                    ],
+                    head: [['บาร์โค้ด', 'ชื่อ', 'Lot', 'ระบบ', 'นับ', 'ต่าง', 'มูลค่า']],
                     body: tableData,
                     startY: 30,
                     styles: { fontSize: 8 }
@@ -2866,8 +1676,7 @@ stopScanner() {
                 const data = this.products.filter(p => p.primaryBarcode || p.barcodes?.[0]);
                 let csv = '\uFEFFบาร์โค้ด,ชื่อสินค้า,Lot,ต้นทุน,จำนวนในระบบ\n';
                 data.forEach(p => {
-                    csv +=
-                        `${p.primaryBarcode || (p.barcodes || [])[0] || ''},${p.name},${p.lot || ''},${p.cost || 0},${p.stock || 0}\n`;
+                    csv += `${p.primaryBarcode || (p.barcodes || [])[0] || ''},${p.name},${p.lot || ''},${p.cost || 0},${p.stock || 0}\n`;
                 });
                 const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
                 this.download(blob, `barcode_master_${Date.now()}.csv`);
@@ -2885,9 +1694,7 @@ stopScanner() {
                 URL.revokeObjectURL(url);
             }
 
-            // -------------------------------------------------------
-            // CLEAR DATA
-            // -------------------------------------------------------
+            // ============================================ CLEAR DATA ============================================
             async clearAllData() {
                 if (!confirm('⚠️ คุณแน่ใจหรือไม่ว่าต้องการลบข้อมูลทั้งหมด?')) return;
                 if (!confirm('🚨 ยืนยันครั้งสุดท้าย: ข้อมูลทั้งหมดจะถูกลบถาวร!')) return;
@@ -2917,9 +1724,7 @@ stopScanner() {
                 }
             }
 
-            // -------------------------------------------------------
-            // INSTALL
-            // -------------------------------------------------------
+            // ============================================ INSTALL ============================================
             installApp() {
                 if (this.deferredPrompt) {
                     this.deferredPrompt.prompt();
@@ -2938,9 +1743,7 @@ stopScanner() {
             }
         }
 
-        // =======================================================
-        // SERVICE WORKER
-        // =======================================================
+        // ============================================ SERVICE WORKER ============================================
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/stockcount/sw.js')
                 .then(function(registration) {
@@ -2951,10 +1754,9 @@ stopScanner() {
                 });
         }
 
-        // =======================================================
-        // BOOT
-        // =======================================================
+        // ============================================ INIT ============================================
         const app = new StockApp();
+
         window.app = app;
         window.switchTab = (name) => app.switchTab(name);
         window.handleFile = (e) => app.handleFile(e);
@@ -2986,20 +1788,6 @@ stopScanner() {
 
         console.log('✅ PharmacyPro v2.0.0 พร้อมใช้งาน!');
         console.log('📖 เริ่มต้นใช้งาน: อัปโหลดไฟล์ Excel/CSV หรือเชื่อมต่อ Google Sheets');
-
-        // =======================================================
-        // ERUDA - Console on mobile
-        // =======================================================
-        document.addEventListener('DOMContentLoaded', function() {
-            if (window.eruda) {
-                window.eruda.init();
-                console.log('✅ Eruda เปิดใช้งานแล้ว!');
-            }
-        });
-    </script>
-
-    <!-- Eruda - Console on mobile -->
-    <script src="https://cdn.jsdelivr.net/npm/eruda">
     </script>
 </body>
 </html>
