@@ -24,7 +24,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     
     <!-- ✅ External Libraries - โหลดแบบ async เพื่อไม่ให้บล็อก UI -->
-    <script src="https://cdn.jsdelivr.net/npm/@zxing/library@0.20.0/umd/index.min.js" async></script>
+    <!-- ควรให้ ZXing โหลดก่อน eruda หรือใช้ defer แทน -->
+    <script src="https://cdn.jsdelivr.net/npm/@zxing/library@0.20.0/umd/index.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" async></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" async></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js" async></script>
@@ -1151,11 +1152,19 @@ class StockApp {
 
     async startScanner() {
         // ตรวจสอบ ZXing
-        if (typeof ZXing === 'undefined') {
-            this.showToast('⚠️ ไลบรารีสแกนโหลดไม่สำเร็จ กรุณารีเฟรช', 'error');
-            console.error('❌ ZXing is undefined!');
-            return;
-        }
+    // รอให้ ZXing โหลด (ถ้ายังไม่โหลด)
+    let attempts = 0;
+    while (typeof ZXing === 'undefined' && attempts < 30) {
+        await new Promise(r => setTimeout(r, 200));
+        attempts++;
+    }
+    if (typeof ZXing === 'undefined') {
+        this.showToast('⚠️ ไลบรารีสแกนโหลดไม่สำเร็จ กรุณารีเฟรช', 'error');
+        console.error('❌ ZXing is undefined after waiting!');
+        return;
+    }
+    // ... ที่เหลือเหมือนเดิม
+}
 
         try {
             const video = document.getElementById('video');
