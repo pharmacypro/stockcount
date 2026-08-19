@@ -6,9 +6,9 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="PharmacyPro">
+    <meta name="apple-mobile-web-app-title" content="ระบบนับสินค้าร้านยา">
     <meta name="theme-color" content="#4f46e5">
-    <title>PharmacyPro v2.0.4 - ระบบนับสินค้าร้านยา</title>
+    <title>ระบบนับสินค้าร้านยา v2.0.4</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,11 +22,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
-    
-    <!-- ✅ Html5-QRCode -->
     <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
-    
-    <!-- ✅ Eruda -->
     <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
 
     <style>
@@ -74,14 +70,14 @@
         ::-webkit-scrollbar-track { background:var(--bg-body); }
         ::-webkit-scrollbar-thumb { background:var(--primary-light); border-radius:3px; }
 
-        /* ===== HEADER ===== */
+        /* ===== HEADER - Ultra Smooth ===== */
         .header { background:var(--primary-gradient); color:#fff; padding:14px 20px; position:sticky; top:0; z-index:100; box-shadow:0 4px 30px rgba(79,70,229,0.3); }
         .header-top { display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap; }
         .logo { display:flex; align-items:center; gap:10px; text-decoration:none; color:#fff; flex-shrink:0; }
         .logo-icon { width:40px; height:40px; background:rgba(255,255,255,0.15); border-radius:var(--radius-md); display:flex; align-items:center; justify-content:center; font-size:18px; backdrop-filter:blur(4px); border:2px solid rgba(255,255,255,0.2); flex-shrink:0; }
         .logo-text { display:flex; flex-direction:column; line-height:1.1; }
         .logo-text .brand { font-family:'Outfit',sans-serif; font-size:15px; font-weight:800; letter-spacing:-0.3px; display:flex; flex-wrap:wrap; align-items:center; gap:4px; }
-        .logo-text .brand .main { display:block; }
+        .logo-text .brand .main { display:block; font-size:16px; }
         .logo-text .brand .version { font-size:9px; font-weight:600; opacity:0.7; background:rgba(255,255,255,0.15); padding:1px 6px; border-radius:10px; margin-left:2px; }
         .logo-text .tagline { font-size:9px; opacity:0.75; font-weight:400; display:block; }
         .header-actions { display:flex; align-items:center; gap:6px; flex-shrink:0; flex-wrap:wrap; }
@@ -247,13 +243,12 @@
         .branch-selector select { background:transparent; border:none; color:#fff; font-size:11px; font-weight:600; padding:2px 4px; }
         .branch-selector select option { color:#0f172a; }
 
-        /* ===== AUTO SYNC INDICATOR ===== */
         .auto-sync-badge { display:inline-flex; align-items:center; gap:4px; font-size:9px; background:var(--success-light); color:#065f46; padding:2px 8px; border-radius:10px; font-weight:600; }
         [data-theme="dark"] .auto-sync-badge { background:#064e3b; color:#6ee7b7; }
 
         @media (max-width:480px) {
             .logo-icon { width:34px; height:34px; font-size:15px; }
-            .logo-text .brand { font-size:13px; }
+            .logo-text .brand .main { font-size:14px; }
             .logo-text .brand .version { font-size:8px; }
             .logo-text .tagline { font-size:8px; }
             .tab-btn { font-size:9px; padding:6px 3px; }
@@ -285,10 +280,10 @@
             <div class="logo-icon"><i class="fas fa-cubes"></i></div>
             <div class="logo-text">
                 <span class="brand">
-                    <span class="main">PharmacyPro</span>
+                    <span class="main">ระบบนับสินค้า</span>
                     <span class="version">v2.0.4</span>
                 </span>
-                <span class="tagline"><i class="fas fa-circle" style="font-size:5px;color:#34d399;margin-right:3px;"></i>ระบบนับสินค้าร้านยา</span>
+                <span class="tagline"><i class="fas fa-circle" style="font-size:5px;color:#34d399;margin-right:3px;"></i>ระบบนับสินค้าในร้านยา</span>
             </div>
         </a>
         <div class="header-actions">
@@ -565,7 +560,7 @@ console.log('✅ Eruda เปิดใช้งานแล้ว!');
 // =============================================
 const CONFIG = {
     GOOGLE_SHEETS: { API_KEY: '', SPREADSHEET_ID: '', RANGES: { PRODUCTS: 'Products!A:F', REPORTS: 'Reports!A:G', HISTORY: 'History!A:E' } },
-    APP_NAME: 'PharmacyPro',
+    APP_NAME: 'ระบบนับสินค้าร้านยา',
     VERSION: '2.0.4',
     STORE_ID: localStorage.getItem('storeId') || 'default',
     EXPIRY_WARNING_DAYS: 90
@@ -617,7 +612,7 @@ class StockApp {
         this.initNetworkListener();
         this.updateStatus('พร้อมใช้งาน');
         this.startAutoSync();
-        console.log('✅ PharmacyPro v2.0.4 พร้อมใช้งาน!');
+        console.log('✅ ระบบนับสินค้าร้านยา v2.0.4 พร้อมใช้งาน!');
         if (this.products.length === 0) {
             this.updateStatus('📥 กรุณานำเข้าข้อมูลสินค้าก่อนใช้งาน');
             this.showToast('📥 กรุณานำเข้าข้อมูลสินค้าจาก Excel หรือ Google Sheets', 'info');
@@ -631,7 +626,7 @@ class StockApp {
         this.updateStatus('🏪 สาขา: ' + document.getElementById('branchSelect').selectedOptions[0].text);
     }
 
-    changeBranch(branchId) {
+    changeBranch() {
         const select = document.getElementById('branchSelect');
         this.branchId = select.value;
         localStorage.setItem('branchId', this.branchId);
@@ -649,7 +644,7 @@ class StockApp {
                 if (navigator.onLine && this.offlineQueue.length > 0) {
                     this.syncOfflineQueue();
                 }
-            }, 30000); // ทุก 30 วินาที
+            }, 30000);
             console.log('🔄 Auto-Sync เปิดใช้งานแล้ว');
         }
     }
@@ -726,11 +721,9 @@ class StockApp {
             if (product.expiry) {
                 const expiryDate = new Date(product.expiry);
                 if (expiryDate <= warningDate && expiryDate >= today) {
-                    // สินค้าใกล้หมดอายุ
                     this.showToast('⚠️ ' + product.name + ' หมดอายุใน ' + 
                         Math.ceil((expiryDate - today) / (1000 * 60 * 60 * 24)) + ' วัน', 'warning');
                 } else if (expiryDate < today) {
-                    // สินค้าหมดอายุแล้ว
                     this.showToast('🚫 ' + product.name + ' หมดอายุแล้ว!', 'error');
                 }
             }
@@ -793,7 +786,7 @@ class StockApp {
             }
             this.offlineQueue = [];
             localStorage.setItem('offlineQueue', JSON.stringify(this.offlineQueue));
-            this.showToast('✅ ซิงค์ข้อมูลสำเร็จ (' + this.offlineQueue.length + ' รายการ)', 'success');
+            this.showToast('✅ ซิงค์ข้อมูลสำเร็จ', 'success');
         } catch (e) {
             console.error('Sync error:', e);
         } finally {
@@ -1040,13 +1033,11 @@ class StockApp {
 
     async lookupProduct(barcode) {
         if (!barcode) return;
-        // ค้นหาจากบาร์โค้ด
         let product = this.products.find(p => p.barcodes && p.barcodes.includes(barcode));
         if (!product && barcode.startsWith('TEMP')) {
             product = this.products.find(p => p.primaryBarcode === barcode);
         }
         if (!product) {
-            // ค้นหาจากประวัติ
             const historyId = this.barcodeHistory[barcode];
             if (historyId) {
                 const histProduct = this.products.find(p => p.id === historyId);
@@ -1067,7 +1058,6 @@ class StockApp {
             }
         }
         if (!product) {
-            // ถ้าไม่เจอ ให้ค้นหาด้วยชื่อ
             const searchName = prompt('🔍 ไม่พบบาร์โค้ด: ' + barcode + '\nพิมพ์ชื่อสินค้าเพื่อค้นหา:');
             if (searchName) {
                 const matches = this.products.filter(p =>
@@ -1142,10 +1132,7 @@ class StockApp {
         document.getElementById('productBarcode').textContent = '🏷️ บาร์โค้ด: ' + (product.barcodes || []).join(', ');
         document.getElementById('productStock').textContent = '📊 ในระบบ: ' + (product.stock || 0) + ' ชิ้น | 💰 ต้นทุน: ' + (product.cost || 0).toFixed(2);
         document.getElementById('qtyInput').value = 1;
-        
-        // แสดงการแจ้งเตือนหมดอายุ
         this.showExpiryWarning(product);
-        
         if (product.lot) {
             document.getElementById('lotSelection').style.display = 'block';
             document.getElementById('lotList').innerHTML =
@@ -1913,7 +1900,7 @@ let app = null;
 document.addEventListener('DOMContentLoaded', function() {
     app = new StockApp();
     window.app = app;
-    console.log('✅ PharmacyPro v2.0.4 พร้อมใช้งาน!');
+    console.log('✅ ระบบนับสินค้าร้านยา v2.0.4 พร้อมใช้งาน!');
 });
 
 // ================================================================
@@ -1951,7 +1938,7 @@ function exportBarcodeMap() { if (app) app.exportBarcodeMap(); }
 function syncToGoogleSheets() { if (app) app.syncToGoogleSheets(app.sessionItems); }
 function clearAllData() { if (app) app.clearAllData(); }
 
-console.log('✅ PharmacyPro v2.0.4 พร้อมใช้งาน!');
+console.log('✅ ระบบนับสินค้าร้านยา v2.0.4 พร้อมใช้งาน!');
 console.log('📖 เริ่มต้นใช้งาน: อัปโหลดไฟล์ Excel/CSV หรือเชื่อมต่อ Google Sheets');
 </script>
 </body>
