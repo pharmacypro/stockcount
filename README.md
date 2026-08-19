@@ -1,86 +1,36 @@
-# 💊 PharmacyPro - ระบบนับสินค้าร้านยา
+# 🏥 PharmacyPro v2.0.4
 
-> ระบบนับสินค้าที่ทำงานได้ทั้งแบบ Offline และ Online สำหรับร้านขายยา
-
-[![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](https://github.com/PharmacyPro/stockcount)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+ระบบนับสินค้าในร้านยา รองรับการสแกนบาร์โค้ด จัดการสต็อก และสร้างรายงาน
 
 ---
 
-## 🌐 ใช้งานได้ที่
+## ✨ ฟังก์ชันหลัก
 
-👉 **[https://pharmacypro.github.io/stockcount](https://pharmacypro.github.io/stockcount)**
-
----
-
-## 📱 ฟีเจอร์หลัก
-
-- ✅ ทำงานได้ทั้ง Offline และ Online
-- ✅ สแกนบาร์โค้ดด้วยกล้องมือถือ
-- ✅ นำเข้าข้อมูลจาก Excel, CSV, Google Sheets
-- ✅ จัดผังร้านด้วยระบบตู้และชั้นวาง
-- ✅ รายงานผลต่างแบบ Real-time
-- ✅ ส่งออกข้อมูลเป็น PDF, Excel, CSV
-- ✅ ติดตั้งบนมือถือเหมือนแอป (PWA)
-- ✅ ฟรี 100%
+- 📷 **สแกนบาร์โค้ด** (EAN-13, CODE-128, QR Code) ด้วยกล้องมือถือ
+- 💡 **ไฟฉายช่วยส่อง** ในที่แสงน้อย
+- 🔍 **ซูมเข้า-ออก** สำหรับบาร์โค้ดขนาดเล็ก
+- 📥 **นำเข้าข้อมูล** จาก Excel, CSV หรือ Google Sheets
+- 🗺️ **ผังร้าน** จัดการตู้และชั้นวางสินค้า
+- 📊 **รายงานสรุป** และส่งออก CSV/Excel/PDF
+- 🔄 **Auto-Sync** ซิงค์ข้อมูลอัตโนมัติเมื่อมีอินเทอร์เน็ต
+- 🏪 **รองรับหลายสาขา**
+- ⏳ **แจ้งเตือนสินค้าหมดอายุ**
+- 🌙 **โหมดกลางคืน**
+- 📱 **ใช้งานบนมือถือได้**
 
 ---
 
-## 🚀 เริ่มต้นใช้งาน
+## 🚀 วิธีใช้งาน
 
-1. เปิดเบราว์เซอร์ไปที่: **[https://pharmacypro.github.io/stockcount](https://pharmacypro.github.io/stockcount)**
-2. กดปุ่ม **"ติดตั้งเลย"** เพื่อเพิ่มลงหน้าจอหลัก
-
----
-
-## 📖 วิธีใช้งาน
-
-### ขั้นตอนที่ 1: นำเข้าข้อมูลสินค้า
-
-1. ไปที่แท็บ **"นำเข้า"**
-2. อัปโหลดไฟล์ Excel/CSV หรือเชื่อมต่อ Google Sheets
-3. เลือกรูปแบบ POS → กดยืนยัน
-
-### ขั้นตอนที่ 2: เริ่มนับสต็อก
-
-1. ไปที่แท็บ **"นับสต็อก"**
-2. เปิดกล้องสแกนบาร์โค้ด
-3. ปรับจำนวน → กดยืนยัน
-
-### ขั้นตอนที่ 3: ดูรายงาน
-
-1. ไปที่แท็บ **"รายงาน"**
-2. ดาวน์โหลดเป็น CSV, Excel, PDF
+1. เปิดไฟล์ `index.html` บนเว็บเบราว์เซอร์ (ต้องใช้ HTTPS สำหรับกล้อง)
+2. อัปโหลดไฟล์สินค้า (Excel/CSV) หรือเชื่อมต่อ Google Sheets
+3. กดแท็บ "นับสต็อก" → เปิดกล้อง → สแกนบาร์โค้ด
+4. กด "สรุปผล" เพื่อดูรายงาน
 
 ---
 
-## 📁 โครงสร้างไฟล์
-stockcount/
-├── index.html
-├── manifest.json
-├── sw.js
-├── README.md
-└── LICENSE
+## ⚙️ การตั้งค่า Google Sheets (Optional)
 
-
----
-
-## 🛠️ เทคโนโลยีที่ใช้
-
-- HTML5 + CSS3 + JavaScript
-- IndexedDB (Offline)
-- Google Sheets API
-- ZXing (สแกนบาร์โค้ด)
-- SheetJS (Excel)
-- jsPDF (PDF)
-- PWA + Service Worker
-
----
-
-## 📄 สัญญาอนุญาต
-
-MIT License - ใช้ฟรี
-
----
-
-**⭐ กด Star ถ้าชอบ!**
+```javascript
+CONFIG.GOOGLE_SHEETS.API_KEY = 'YOUR_API_KEY'
+CONFIG.GOOGLE_SHEETS.SPREADSHEET_ID = 'YOUR_SPREADSHEET_ID'
