@@ -3,85 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="PharmacyPro">
-    <meta name="theme-color" content="#4f46e5">
-    <meta name="description" content="ระบบนับสินค้าในร้านยา ทำงานได้ทั้ง Offline และ Online">
-    <link rel="manifest" href="/stockcount/manifest.json">
-    <link rel="apple-touch-icon" sizes="180x180" href="/stockcount/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/stockcount/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/stockcount/favicon-16x16.png">
-    <title>PharmacyPro - ระบบนับสินค้าในร้านยา</title>
+    <title>PharmacyPro v2.0.1 - ระบบนับสินค้า</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    
-    <!-- ✅ External Libraries - โหลดแบบ async เพื่อไม่ให้บล็อก UI -->
-    <!-- ควรให้ ZXing โหลดก่อน eruda หรือใช้ defer แทน -->
-    <script src="https://cdn.jsdelivr.net/npm/@zxing/library@0.20.0/umd/index.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" async></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" async></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js" async></script>
-    
-    <!-- ✅ Eruda Debug Console สำหรับมือถือ -->
-    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
 
-    <!-- ============================================ CSS ============================================ -->
+    <!-- ✅ โหลดไลบรารีตามลำดับ ไม่ใช้ async -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@zxing/library@0.20.0/umd/index.min.js"></script>
+
     <style>
+        /* ===== CSS เดิมทั้งหมด (COPY มาจากไฟล์ของคุณ) ===== */
         :root {
-            --primary: #4f46e5;
-            --primary-dark: #4338ca;
-            --primary-light: #6366f1;
+            --primary: #4f46e5; --primary-dark: #4338ca; --primary-light: #6366f1;
             --primary-gradient: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-            --success: #10b981;
-            --success-light: #d1fae5;
-            --warning: #f59e0b;
-            --warning-light: #fef3c7;
-            --danger: #ef4444;
-            --danger-light: #fee2e2;
-            --bg-body: #f8fafc;
-            --bg-card: #ffffff;
-            --text-main: #0f172a;
-            --text-muted: #64748b;
-            --text-light: #94a3b8;
-            --border-color: #e2e8f0;
-            --radius-sm: 8px;
-            --radius-md: 12px;
-            --radius-lg: 20px;
-            --radius-xl: 28px;
+            --success: #10b981; --success-light: #d1fae5;
+            --warning: #f59e0b; --warning-light: #fef3c7;
+            --danger: #ef4444; --danger-light: #fee2e2;
+            --bg-body: #f8fafc; --bg-card: #ffffff;
+            --text-main: #0f172a; --text-muted: #64748b;
+            --text-light: #94a3b8; --border-color: #e2e8f0;
+            --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-xl: 28px;
             --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
             --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
             --shadow-lg: 0 20px 60px rgba(0,0,0,0.12);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
         [data-theme="dark"] {
-            --bg-body: #0f172a;
-            --bg-card: #1e293b;
-            --text-main: #f1f5f9;
-            --text-muted: #94a3b8;
-            --text-light: #64748b;
-            --border-color: #334155;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
-            --shadow-md: 0 4px 20px rgba(0,0,0,0.4);
-            --shadow-lg: 0 20px 60px rgba(0,0,0,0.5);
+            --bg-body: #0f172a; --bg-card: #1e293b;
+            --text-main: #f1f5f9; --text-muted: #94a3b8;
+            --text-light: #64748b; --border-color: #334155;
         }
-
         * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
         body { font-family:'Plus Jakarta Sans',sans-serif; background:var(--bg-body); color:var(--text-main); min-height:100vh; padding-bottom:100px; transition:var(--transition); }
-        
         ::-webkit-scrollbar { width:6px; height:6px; }
         ::-webkit-scrollbar-track { background:var(--bg-body); }
         ::-webkit-scrollbar-thumb { background:var(--primary-light); border-radius:3px; }
-
-        /* ===== HEADER ===== */
         .header { background:var(--primary-gradient); color:#fff; padding:14px 20px; position:sticky; top:0; z-index:100; box-shadow:0 4px 30px rgba(79,70,229,0.3); }
         .header-top { display:flex; justify-content:space-between; align-items:center; }
         .logo { display:flex; align-items:center; gap:12px; text-decoration:none; color:#fff; }
@@ -89,6 +52,7 @@
         .logo-text { display:flex; flex-direction:column; line-height:1.2; }
         .logo-text .brand { font-family:'Outfit',sans-serif; font-size:20px; font-weight:800; letter-spacing:-0.5px; }
         .logo-text .tagline { font-size:10px; opacity:0.75; font-weight:400; letter-spacing:0.3px; }
+        .logo-text .version-tag { font-size:9px; opacity:0.6; font-weight:400; margin-top:1px; }
         .header-actions { display:flex; align-items:center; gap:8px; }
         .network-badge { display:inline-flex; align-items:center; gap:6px; padding:4px 10px; border-radius:20px; font-size:10px; font-weight:700; background:rgba(255,255,255,0.15); cursor:pointer; backdrop-filter:blur(4px); border:1px solid rgba(255,255,255,0.1); }
         .network-dot { width:7px; height:7px; border-radius:50%; transition:var(--transition); }
@@ -97,29 +61,21 @@
         .network-badge.syncing .network-dot { background:var(--warning); animation:pulse-dot 1s infinite; }
         @keyframes pulse-dot { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
         .theme-toggle { background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.1); color:#fff; width:34px; height:34px; border-radius:50%; cursor:pointer; font-size:15px; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(4px); }
-        
         .status-bar { background:var(--warning-light); color:#92400e; padding:8px 16px; font-size:12px; font-weight:600; display:flex; align-items:center; gap:10px; border-bottom:2px solid #fcd34d; }
         [data-theme="dark"] .status-bar { background:#451a03; color:#fcd34d; border-bottom-color:#78350f; }
         .status-dot { width:8px; height:8px; border-radius:50%; background:var(--warning); animation:pulse-dot 1.5s infinite; flex-shrink:0; }
-
         .main-content { max-width:640px; margin:0 auto; padding:16px; }
-
-        /* ===== TAB NAVIGATION ===== */
         .tab-nav { display:flex; background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-lg); padding:4px; margin-bottom:20px; box-shadow:var(--shadow-sm); gap:4px; position:sticky; top:80px; z-index:50; backdrop-filter:blur(12px); }
         .tab-btn { flex:1; padding:10px 6px; border:none; background:transparent; border-radius:var(--radius-md); font-size:11px; font-weight:600; cursor:pointer; transition:var(--transition); color:var(--text-muted); text-align:center; position:relative; }
         .tab-btn i { font-size:16px; display:block; margin-bottom:2px; }
         .tab-btn.active { background:var(--primary-gradient); color:#fff; box-shadow:0 4px 15px rgba(79,70,229,0.35); }
         .tab-btn .badge-tab { position:absolute; top:-4px; right:-4px; background:var(--danger); color:#fff; font-size:9px; padding:2px 6px; border-radius:10px; font-weight:700; }
-
         .page { display:none; animation:fadeSlideIn 0.4s cubic-bezier(0.16,1,0.3,1); }
         .page.active { display:block; }
         @keyframes fadeSlideIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
-
         .card { background:var(--bg-card); border-radius:var(--radius-lg); padding:20px; margin-bottom:16px; box-shadow:var(--shadow-sm); border:1px solid var(--border-color); }
         .card-title { font-family:'Outfit',sans-serif; font-size:16px; font-weight:700; margin-bottom:14px; display:flex; align-items:center; gap:10px; color:var(--text-main); }
         .card-title i { color:var(--primary); width:24px; text-align:center; }
-
-        /* ===== BUTTONS ===== */
         .btn { padding:12px 20px; border:none; border-radius:var(--radius-md); font-size:14px; font-weight:600; cursor:pointer; transition:var(--transition); display:inline-flex; align-items:center; justify-content:center; gap:8px; box-shadow:var(--shadow-sm); font-family:'Plus Jakarta Sans',sans-serif; }
         .btn:active { transform:scale(0.96); }
         .btn:disabled { opacity:0.5; cursor:not-allowed; transform:none; }
@@ -132,14 +88,10 @@
         .btn-sm { padding:8px 14px; font-size:12px; border-radius:var(--radius-sm); }
         .btn-lg { padding:16px 28px; font-size:16px; border-radius:var(--radius-lg); }
         .btn-block { width:100%; }
-
         .input { width:100%; padding:12px 16px; border:2px solid var(--border-color); border-radius:var(--radius-md); font-size:14px; color:var(--text-main); background:var(--bg-body); transition:var(--transition); font-family:'Plus Jakarta Sans',sans-serif; }
         .input:focus { outline:none; border-color:var(--primary); box-shadow:0 0 0 4px rgba(79,70,229,0.1); }
         .input::placeholder { color:var(--text-light); }
-
         .input-group { display:flex; gap:8px; align-items:center; }
-
-        /* ===== SCANNER ===== */
         .scanner-wrapper { position:relative; border-radius:var(--radius-md); overflow:hidden; background:#0f172a; min-height:240px; box-shadow:inset 0 2px 20px rgba(0,0,0,0.4); }
         .scanner-wrapper video { width:100%; height:auto; max-height:320px; object-fit:cover; display:block; }
         .scanner-placeholder { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:240px; color:#94a3b8; text-align:center; padding:30px 20px; }
@@ -154,34 +106,28 @@
         .scanner-status.success { color:var(--success); }
         .scanner-status.error { color:var(--danger); }
         .scanner-status.idle { color:var(--text-muted); }
-
-        /* ===== PRODUCT DETAIL ===== */
         .product-detail { background:linear-gradient(135deg, var(--success-light) 0%, #f0fdf4 100%); border:2px solid #6ee7b7; border-radius:var(--radius-lg); padding:20px; margin-bottom:16px; display:none; animation:fadeSlideIn 0.3s ease; }
         [data-theme="dark"] .product-detail { background:linear-gradient(135deg, #064e3b 0%, #065f46 100%); border-color:#34d399; }
         .product-name { font-family:'Outfit',sans-serif; font-size:20px; font-weight:700; margin-bottom:4px; color:#065f46; }
         [data-theme="dark"] .product-name { color:#6ee7b7; }
         .product-info { font-size:13px; color:#047857; margin-bottom:2px; font-weight:500; }
         [data-theme="dark"] .product-info { color:#a7f3d0; }
-
         .qty-control { display:flex; align-items:center; gap:12px; margin:16px 0; }
         .qty-btn { width:48px; height:48px; border-radius:50%; border:2px solid var(--border-color); background:var(--bg-card); font-size:20px; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; color:var(--primary); transition:var(--transition); box-shadow:var(--shadow-sm); flex-shrink:0; }
         .qty-btn:active { transform:scale(0.92); }
         .qty-input { flex:1; height:48px; text-align:center; font-size:24px; font-weight:700; border:2px solid var(--border-color); border-radius:var(--radius-md); font-family:'Outfit',sans-serif; background:var(--bg-card); color:var(--text-main); min-width:60px; }
         .qty-input:focus { border-color:var(--primary); box-shadow:0 0 0 4px rgba(79,70,229,0.1); }
-
         .lot-item { display:flex; align-items:center; padding:12px 14px; border:2px solid var(--border-color); border-radius:var(--radius-md); margin-bottom:6px; cursor:pointer; gap:12px; background:var(--bg-card); transition:var(--transition); }
         .lot-item:hover { border-color:var(--primary-light); }
         .lot-item.selected { border-color:var(--primary); background:#eef2ff; box-shadow:0 0 0 3px rgba(79,70,229,0.15); }
         [data-theme="dark"] .lot-item.selected { background:#1e293b; }
         .lot-radio { width:20px; height:20px; border-radius:50%; border:2px solid var(--border-color); flex-shrink:0; transition:var(--transition); }
         .lot-item.selected .lot-radio { border-color:var(--primary); background:var(--primary); box-shadow:inset 0 0 0 4px #fff; }
-
         .progress-container { width:100%; height:8px; background:var(--border-color); border-radius:4px; margin-top:8px; overflow:hidden; }
         .progress-bar { height:100%; border-radius:4px; transition:width 0.6s cubic-bezier(0.4,0,0.2,1); background:var(--primary-gradient); width:0%; }
         .progress-bar.low { background:var(--danger); }
         .progress-bar.medium { background:var(--warning); }
         .progress-bar.high { background:var(--success); }
-
         .pharmacy-map { background:var(--bg-body); border-radius:var(--radius-md); padding:16px; min-height:200px; border:2px dashed var(--border-color); }
         .pharmacy-grid { display:grid; gap:12px; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); }
         .cabinet-block { background:var(--bg-card); border:2px solid var(--border-color); border-radius:var(--radius-md); padding:14px; cursor:pointer; transition:var(--transition); text-align:center; }
@@ -197,7 +143,6 @@
         .shelf-row.selected { background:var(--primary); color:#fff; }
         .shelf-count { background:rgba(0,0,0,0.06); padding:1px 8px; border-radius:10px; font-size:10px; }
         .shelf-row.selected .shelf-count { background:rgba(255,255,255,0.25); color:#fff; }
-
         .recent-item { display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--border-color); font-size:13px; gap:8px; }
         .recent-item:last-child { border-bottom:none; }
         .recent-item .name { font-weight:600; }
@@ -206,12 +151,10 @@
         .recent-item .qty-diff.positive { color:var(--success); background:var(--success-light); }
         .recent-item .qty-diff.negative { color:var(--danger); background:var(--danger-light); }
         .recent-item .qty-diff.zero { color:var(--text-muted); background:var(--bg-body); }
-
         .stats-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px; }
         .stat-card { background:var(--bg-card); padding:16px; border-radius:var(--radius-md); text-align:center; border:1px solid var(--border-color); }
         .stat-value { font-family:'Outfit',sans-serif; font-size:26px; font-weight:800; margin:4px 0; color:var(--primary); }
         .stat-label { font-size:11px; color:var(--text-muted); font-weight:600; text-transform:uppercase; letter-spacing:0.5px; }
-
         .table-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; border-radius:var(--radius-md); border:1px solid var(--border-color); }
         table { width:100%; border-collapse:collapse; font-size:12px; }
         th { background:var(--bg-body); padding:10px 8px; text-align:left; font-weight:600; white-space:nowrap; position:sticky; top:0; color:var(--text-main); border-bottom:2px solid var(--border-color); font-size:11px; text-transform:uppercase; letter-spacing:0.3px; }
@@ -225,7 +168,6 @@
         [data-theme="dark"] .badge-red { background:#7f1d1d; color:#fca5a5; }
         .uncounted-row { background:var(--danger-light); border-left:4px solid var(--danger); }
         [data-theme="dark"] .uncounted-row { background:#7f1d1d; }
-
         .modal-overlay { position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(15,23,42,0.6); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); z-index:200; display:none; align-items:flex-end; justify-content:center; animation:fadeIn 0.3s ease; }
         .modal-overlay.show { display:flex; }
         @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
@@ -233,7 +175,6 @@
         @keyframes slideUp { from { transform:translateY(100%); } to { transform:translateY(0); } }
         .modal-handle { width:40px; height:4px; background:var(--border-color); border-radius:2px; margin:0 auto 16px; }
         .modal-title { font-family:'Outfit',sans-serif; font-size:18px; font-weight:700; margin-bottom:16px; }
-
         .toast-container { position:fixed; top:20px; left:50%; transform:translateX(-50%); z-index:300; max-width:90%; width:400px; pointer-events:none; }
         .toast { background:var(--text-main); color:#fff; padding:12px 20px; border-radius:var(--radius-md); font-size:13px; font-weight:600; box-shadow:var(--shadow-lg); text-align:center; margin-bottom:8px; animation:toastIn 0.4s cubic-bezier(0.16,1,0.3,1); pointer-events:auto; }
         .toast.success { background:var(--success); }
@@ -241,7 +182,6 @@
         .toast.warning { background:var(--warning); color:#0f172a; }
         .toast.hide { opacity:0; transform:translateY(-20px) scale(0.95); }
         @keyframes toastIn { from { opacity:0; transform:translateY(-30px) scale(0.95); } to { opacity:1; transform:translateY(0) scale(1); } }
-
         .flex { display:flex; }
         .flex-between { display:flex; justify-content:space-between; align-items:center; }
         .gap-8 { gap:8px; }
@@ -250,7 +190,7 @@
         .mb-8 { margin-bottom:8px; }
         .mb-12 { margin-bottom:12px; }
         .text-muted { color:var(--text-muted); }
-
+        .version-display { position:fixed; bottom:5px; right:10px; font-size:9px; color:var(--text-light); opacity:0.5; z-index:999; background:var(--bg-card); padding:2px 8px; border-radius:10px; border:1px solid var(--border-color); }
         @media (max-width:480px) {
             .logo-icon { width:36px; height:36px; font-size:16px; }
             .logo-text .brand { font-size:17px; }
@@ -267,7 +207,7 @@
 </head>
 <body>
 
-<!-- ============================================ HEADER ============================================ -->
+<!-- HEADER -->
 <header class="header">
     <div class="header-top">
         <a href="#" class="logo" onclick="switchTab('import'); return false;">
@@ -275,6 +215,7 @@
             <div class="logo-text">
                 <span class="brand"><i class="fas fa-chart-simple" style="opacity:0.7;"></i> PharmacyPro</span>
                 <span class="tagline"><i class="fas fa-circle" style="font-size:6px;color:#34d399;margin-right:4px;"></i> ระบบนับสินค้าในร้านยา</span>
+                <span class="version-tag">v2.0.1</span>
             </div>
         </a>
         <div class="header-actions">
@@ -291,8 +232,9 @@
     <span id="statusText">กำลังเริ่มต้นระบบ...</span>
 </div>
 
+<!-- MAIN CONTENT -->
 <div class="main-content">
-    <!-- TAB NAVIGATION -->
+    <!-- TAB NAV -->
     <nav class="tab-nav">
         <button class="tab-btn active" onclick="switchTab('import')"><i class="fas fa-file-import"></i> นำเข้า</button>
         <button class="tab-btn" onclick="switchTab('layout')"><i class="fas fa-sitemap"></i> ผังร้าน</button>
@@ -300,7 +242,7 @@
         <button class="tab-btn" onclick="switchTab('report')"><i class="fas fa-chart-bar"></i> รายงาน</button>
     </nav>
 
-    <!-- ===================== PAGE: IMPORT ===================== -->
+    <!-- PAGE: IMPORT -->
     <div class="page active" id="page-import">
         <div class="card">
             <div class="card-title"><i class="fas fa-file-import"></i> นำเข้าข้อมูลสินค้า</div>
@@ -342,7 +284,7 @@
         </div>
     </div>
 
-    <!-- ===================== PAGE: LAYOUT ===================== -->
+    <!-- PAGE: LAYOUT -->
     <div class="page" id="page-layout">
         <div class="card">
             <div class="card-title"><i class="fas fa-sitemap"></i> แผนผังร้าน</div>
@@ -374,7 +316,7 @@
         </div>
     </div>
 
-    <!-- ===================== PAGE: SCAN ===================== -->
+    <!-- PAGE: SCAN -->
     <div class="page" id="page-scan">
         <div class="card" style="padding:12px;">
             <div class="input-group">
@@ -443,7 +385,7 @@
         </div>
     </div>
 
-    <!-- ===================== PAGE: REPORT ===================== -->
+    <!-- PAGE: REPORT -->
     <div class="page" id="page-report">
         <div class="card" style="background:linear-gradient(135deg,var(--success-light) 0%,#d1fae5 100%);border:2px solid #6ee7b7;">
             <div class="card-title" style="color:#065f46;"><i class="fas fa-chart-pie"></i> สรุปภาพรวมการนับสต็อก</div>
@@ -500,7 +442,7 @@
     </div>
 </div>
 
-<!-- ===== BARCODE MODAL ===== -->
+<!-- MODAL -->
 <div class="modal-overlay" id="barcodeModal">
     <div class="modal">
         <div class="modal-handle"></div>
@@ -512,21 +454,19 @@
 </div>
 <div class="toast-container" id="toastContainer"></div>
 
+<!-- VERSION DISPLAY -->
+<div class="version-display" id="versionDisplay">v2.0.1</div>
+
 <!-- ============================================ JAVASCRIPT ============================================ -->
 <script>
 // =============================================
-// ✅ เริ่มต้น Eruda ทันที
-// =============================================
-eruda.init();
-console.log('✅ Eruda เปิดใช้งานแล้ว!');
-
-// =============================================
 // ✅ CONFIG
 // =============================================
+const APP_VERSION = '2.0.1';
 const CONFIG = {
     GOOGLE_SHEETS: { API_KEY: '', SPREADSHEET_ID: '', RANGES: { PRODUCTS: 'Products!A:F', REPORTS: 'Reports!A:G', HISTORY: 'History!A:E' } },
     APP_NAME: 'PharmacyPro',
-    VERSION: '2.0.0',
+    VERSION: APP_VERSION,
     STORE_ID: localStorage.getItem('storeId') || 'default'
 };
 
@@ -555,25 +495,34 @@ class StockApp {
         this.pendingRows = [];
         this.currentPOS = null;
         this.customMapping = {};
+        this.isReady = false;
         this.init();
     }
 
-    // ===== INIT =====
     async init() {
-        await this.initDB();
-        await this.loadLocations();
-        await this.loadProducts();
-        this.loadTheme();
-        this.setupDragDrop();
-        this.updateLocationSelect();
-        this.renderMap();
-        this.updateProgress();
-        this.initNetworkListener();
-        this.updateStatus('พร้อมใช้งาน');
-        console.log('✅ PharmacyPro v2.0.0 เริ่มทำงานเรียบร้อย');
-        if (this.products.length === 0) {
-            this.updateStatus('📥 กรุณานำเข้าข้อมูลสินค้าก่อนใช้งาน');
-            this.showToast('📥 กรุณานำเข้าข้อมูลสินค้าจาก Excel หรือ Google Sheets', 'info');
+        try {
+            await this.initDB();
+            await this.loadLocations();
+            await this.loadProducts();
+            this.loadTheme();
+            this.setupDragDrop();
+            this.updateLocationSelect();
+            this.renderMap();
+            this.updateProgress();
+            this.initNetworkListener();
+            this.updateStatus('พร้อมใช้งาน v' + APP_VERSION);
+            console.log('✅ PharmacyPro v' + APP_VERSION + ' เริ่มทำงานเรียบร้อย');
+            this.isReady = true;
+            if (this.products.length === 0) {
+                this.updateStatus('📥 กรุณานำเข้าข้อมูลสินค้าก่อนใช้งาน');
+                this.showToast('📥 กรุณานำเข้าข้อมูลสินค้าจาก Excel หรือ Google Sheets', 'info');
+            }
+            // ตรวจสอบ ZXing
+            console.log('🔍 ZXing status:', typeof ZXing);
+        } catch (e) {
+            console.error('❌ Init error:', e);
+            this.updateStatus('⚠️ เกิดข้อผิดพลาดในการเริ่มต้น');
+            this.showToast('⚠️ กรุณารีเฟรชหน้าเว็บ', 'error');
         }
     }
 
@@ -638,7 +587,7 @@ class StockApp {
         await new Promise(r => { tx.oncomplete = r; });
     }
 
-    // ===== NETWORK & SYNC =====
+    // ===== NETWORK =====
     initNetworkListener() {
         window.addEventListener('online', () => this.updateNetworkStatus(true));
         window.addEventListener('offline', () => this.updateNetworkStatus(false));
@@ -1140,7 +1089,7 @@ class StockApp {
     }
 
     // ============================================================
-    // ✅ SCANNER - แก้ไขให้สมบูรณ์
+    // ✅ SCANNER
     // ============================================================
     async toggleScanner() {
         if (this.scanning) { 
@@ -1151,31 +1100,26 @@ class StockApp {
     }
 
     async startScanner() {
-        // ตรวจสอบ ZXing
-    // รอให้ ZXing โหลด (ถ้ายังไม่โหลด)
-    let attempts = 0;
-    while (typeof ZXing === 'undefined' && attempts < 30) {
-        await new Promise(r => setTimeout(r, 200));
-        attempts++;
-    }
-    if (typeof ZXing === 'undefined') {
-        this.showToast('⚠️ ไลบรารีสแกนโหลดไม่สำเร็จ กรุณารีเฟรช', 'error');
-        console.error('❌ ZXing is undefined after waiting!');
-        return;
-    }
-    // ... ที่เหลือเหมือนเดิม
-}
+        // ✅ รอ ZXing โหลด
+        let attempts = 0;
+        while (typeof ZXing === 'undefined' && attempts < 30) {
+            await new Promise(r => setTimeout(r, 200));
+            attempts++;
+        }
+        if (typeof ZXing === 'undefined') {
+            this.showToast('⚠️ ไลบรารีสแกนโหลดไม่สำเร็จ กรุณารีเฟรช', 'error');
+            console.error('❌ ZXing is undefined after waiting!');
+            return;
+        }
 
         try {
             const video = document.getElementById('video');
             
-            // หยุดกล้องเก่าถ้ามี
             if (video.srcObject) {
                 video.srcObject.getTracks().forEach(track => track.stop());
                 video.srcObject = null;
             }
 
-            // เปิดกล้องใหม่
             const stream = await navigator.mediaDevices.getUserMedia({
                 video: { 
                     facingMode: 'environment', 
@@ -1188,7 +1132,6 @@ class StockApp {
             await video.play();
             video.style.display = 'block';
 
-            // สร้าง CodeReader และเริ่มสแกน
             this.codeReader = new ZXing.BrowserMultiFormatReader();
             this.codeReader.decodeFromVideoElement(video, (result, err) => {
                 if (result && this.scanning) {
@@ -1201,7 +1144,6 @@ class StockApp {
                 }
             });
 
-            // อัปเดต UI
             document.getElementById('scannerPlaceholder').style.display = 'none';
             document.getElementById('scannerOverlay').style.display = 'block';
             document.getElementById('scannerStatus').innerHTML = '<i class="fas fa-circle" style="color:var(--success);font-size:10px;"></i> กล้องกำลังทำงาน...';
@@ -1729,127 +1671,50 @@ class StockApp {
 }
 
 // ================================================================
-// ✅ สร้าง INSTANCE และ EXPOSE ฟังก์ชัน GLOBAL
+// ✅ สร้าง INSTANCE
 // ================================================================
 let app = null;
 
-// รอให้ DOM โหลดเสร็จก่อนสร้าง App
 document.addEventListener('DOMContentLoaded', function() {
     app = new StockApp();
     window.app = app;
-    console.log('✅ App initialized and ready');
+    document.getElementById('versionDisplay').textContent = 'v' + APP_VERSION;
+    console.log('✅ App initialized and ready v' + APP_VERSION);
 });
 
 // ================================================================
-// ✅ GLOBAL FUNCTIONS (เรียกจาก HTML onclick)
+// ✅ GLOBAL FUNCTIONS
 // ================================================================
-function switchTab(name) {
-    if (app) app.switchTab(name);
-    else console.warn('⏳ App ยังไม่พร้อม');
-}
+function switchTab(name) { if (app && app.isReady) app.switchTab(name); else console.warn('⏳ App ยังไม่พร้อม'); }
+function toggleTheme() { if (app) app.toggleTheme(); }
+function forceSync() { if (app) app.forceSync(); }
+function handleFile(event) { if (app) app.handleFile(event); }
+function selectPOS(pos) { if (app) app.selectPOS(pos); }
+function confirmImport() { if (app) app.confirmImport(); }
+function confirmMapping() { if (app) app.confirmMapping(); }
+function importFromGoogleSheets() { if (app) app.importFromGoogleSheets(); }
+function addCabinet() { if (app) app.addCabinet(); }
+function addShelfToCabinet() { if (app) app.addShelfToCabinet(); }
+function toggleScanner() { if (app) app.toggleScanner(); }
+function manualBarcode() { if (app) app.manualBarcode(); }
+function submitManualBarcode() { if (app) app.submitManualBarcode(); }
+function closeBarcodeModal() { if (app) app.closeBarcodeModal(); }
+function toggleContinuousMode() { if (app) app.toggleContinuousMode(); }
+function changeQty(delta) { if (app) app.changeQty(delta); }
+function confirmItem() { if (app) app.confirmItem(); }
+function undoLast() { if (app) app.undoLast(); }
+function finishCount() { if (app) app.finishCount(); }
+function changeLocation() { if (app) app.changeLocation(); }
+function searchProduct(value) { if (app) app.searchProduct(value); }
+function sortReport() { if (app) app.sortReport(); }
+function exportData(format) { if (app) app.exportData(format); }
+function exportBarcodeMap() { if (app) app.exportBarcodeMap(); }
+function syncToGoogleSheets() { if (app) app.syncToGoogleSheets(app.sessionItems); }
+function clearAllData() { if (app) app.clearAllData(); }
 
-function toggleTheme() {
-    if (app) app.toggleTheme();
-}
-
-function forceSync() {
-    if (app) app.forceSync();
-}
-
-function handleFile(event) {
-    if (app) app.handleFile(event);
-}
-
-function selectPOS(pos) {
-    if (app) app.selectPOS(pos);
-}
-
-function confirmImport() {
-    if (app) app.confirmImport();
-}
-
-function confirmMapping() {
-    if (app) app.confirmMapping();
-}
-
-function importFromGoogleSheets() {
-    if (app) app.importFromGoogleSheets();
-}
-
-function addCabinet() {
-    if (app) app.addCabinet();
-}
-
-function addShelfToCabinet() {
-    if (app) app.addShelfToCabinet();
-}
-
-function toggleScanner() {
-    if (app) app.toggleScanner();
-}
-
-function manualBarcode() {
-    if (app) app.manualBarcode();
-}
-
-function submitManualBarcode() {
-    if (app) app.submitManualBarcode();
-}
-
-function closeBarcodeModal() {
-    if (app) app.closeBarcodeModal();
-}
-
-function toggleContinuousMode() {
-    if (app) app.toggleContinuousMode();
-}
-
-function changeQty(delta) {
-    if (app) app.changeQty(delta);
-}
-
-function confirmItem() {
-    if (app) app.confirmItem();
-}
-
-function undoLast() {
-    if (app) app.undoLast();
-}
-
-function finishCount() {
-    if (app) app.finishCount();
-}
-
-function changeLocation() {
-    if (app) app.changeLocation();
-}
-
-function searchProduct(value) {
-    if (app) app.searchProduct(value);
-}
-
-function sortReport() {
-    if (app) app.sortReport();
-}
-
-function exportData(format) {
-    if (app) app.exportData(format);
-}
-
-function exportBarcodeMap() {
-    if (app) app.exportBarcodeMap();
-}
-
-function syncToGoogleSheets() {
-    if (app) app.syncToGoogleSheets(app.sessionItems);
-}
-
-function clearAllData() {
-    if (app) app.clearAllData();
-}
-
-console.log('✅ PharmacyPro v2.0.0 พร้อมใช้งาน!');
+console.log('✅ PharmacyPro v' + APP_VERSION + ' พร้อมใช้งาน!');
 console.log('📖 เริ่มต้นใช้งาน: อัปโหลดไฟล์ Excel/CSV หรือเชื่อมต่อ Google Sheets');
+console.log('💡 ดูเวอร์ชันได้ที่มุมขวาล่างของหน้าจอ');
 </script>
 </body>
 </html>
