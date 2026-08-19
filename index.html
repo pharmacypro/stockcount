@@ -8,7 +8,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="PharmacyPro">
     <meta name="theme-color" content="#4f46e5">
-    <title>PharmacyPro v2.0.3 - ระบบนับสินค้าร้านยา</title>
+    <title>PharmacyPro v2.0.4 - ระบบนับสินค้าร้านยา</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,15 +18,15 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     
-    <!-- ✅ ไลบรารี - โหลดตามลำดับ ไม่ใช้ async -->
+    <!-- ✅ ไลบรารี -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
     
-    <!-- ✅ Html5-QRCode - ใช้แทน ZXing (สแกนบาร์โค้ดได้ดีกว่า) -->
+    <!-- ✅ Html5-QRCode -->
     <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
     
-    <!-- ✅ Eruda Debug Console -->
+    <!-- ✅ Eruda -->
     <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
 
     <style>
@@ -65,9 +65,6 @@
             --text-muted: #94a3b8;
             --text-light: #64748b;
             --border-color: #334155;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
-            --shadow-md: 0 4px 20px rgba(0,0,0,0.4);
-            --shadow-lg: 0 20px 60px rgba(0,0,0,0.5);
         }
 
         * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
@@ -79,160 +76,158 @@
 
         /* ===== HEADER ===== */
         .header { background:var(--primary-gradient); color:#fff; padding:14px 20px; position:sticky; top:0; z-index:100; box-shadow:0 4px 30px rgba(79,70,229,0.3); }
-        .header-top { display:flex; justify-content:space-between; align-items:center; }
-        .logo { display:flex; align-items:center; gap:12px; text-decoration:none; color:#fff; }
-        .logo-icon { width:42px; height:42px; background:rgba(255,255,255,0.15); border-radius:var(--radius-md); display:flex; align-items:center; justify-content:center; font-size:20px; backdrop-filter:blur(4px); border:2px solid rgba(255,255,255,0.2); flex-shrink:0; }
-        .logo-text .brand { font-family:'Outfit',sans-serif; font-size:20px; font-weight:800; letter-spacing:-0.5px; }
-        .logo-text .tagline { font-size:10px; opacity:0.75; font-weight:400; }
-        .logo-text .version { font-size:9px; opacity:0.5; margin-left:4px; }
-        .header-actions { display:flex; align-items:center; gap:8px; }
-        .network-badge { display:inline-flex; align-items:center; gap:6px; padding:4px 10px; border-radius:20px; font-size:10px; font-weight:700; background:rgba(255,255,255,0.15); cursor:pointer; border:1px solid rgba(255,255,255,0.1); backdrop-filter:blur(4px); }
-        .network-dot { width:7px; height:7px; border-radius:50%; transition:var(--transition); }
+        .header-top { display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap; }
+        .logo { display:flex; align-items:center; gap:10px; text-decoration:none; color:#fff; flex-shrink:0; }
+        .logo-icon { width:40px; height:40px; background:rgba(255,255,255,0.15); border-radius:var(--radius-md); display:flex; align-items:center; justify-content:center; font-size:18px; backdrop-filter:blur(4px); border:2px solid rgba(255,255,255,0.2); flex-shrink:0; }
+        .logo-text { display:flex; flex-direction:column; line-height:1.1; }
+        .logo-text .brand { font-family:'Outfit',sans-serif; font-size:15px; font-weight:800; letter-spacing:-0.3px; display:flex; flex-wrap:wrap; align-items:center; gap:4px; }
+        .logo-text .brand .main { display:block; }
+        .logo-text .brand .version { font-size:9px; font-weight:600; opacity:0.7; background:rgba(255,255,255,0.15); padding:1px 6px; border-radius:10px; margin-left:2px; }
+        .logo-text .tagline { font-size:9px; opacity:0.75; font-weight:400; display:block; }
+        .header-actions { display:flex; align-items:center; gap:6px; flex-shrink:0; flex-wrap:wrap; }
+        .network-badge { display:inline-flex; align-items:center; gap:4px; padding:3px 8px; border-radius:20px; font-size:9px; font-weight:700; background:rgba(255,255,255,0.15); cursor:pointer; border:1px solid rgba(255,255,255,0.1); backdrop-filter:blur(4px); white-space:nowrap; }
+        .network-dot { width:6px; height:6px; border-radius:50%; transition:var(--transition); }
         .network-badge.online .network-dot { background:var(--success); box-shadow:0 0 10px rgba(16,185,129,0.5); }
-        .network-badge.offline .network-dot { background:var(--danger); box-shadow:0 0 10px rgba(239,68,68,0.5); }
+        .network-badge.offline .network-dot { background:var(--danger); }
         .network-badge.syncing .network-dot { background:var(--warning); animation:pulse-dot 1s infinite; }
         @keyframes pulse-dot { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
-        .theme-toggle { background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.1); color:#fff; width:34px; height:34px; border-radius:50%; cursor:pointer; font-size:15px; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(4px); }
+        .theme-toggle { background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.1); color:#fff; width:30px; height:30px; border-radius:50%; cursor:pointer; font-size:13px; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(4px); flex-shrink:0; }
         
-        .status-bar { background:var(--warning-light); color:#92400e; padding:8px 16px; font-size:12px; font-weight:600; display:flex; align-items:center; gap:10px; border-bottom:2px solid #fcd34d; }
+        .status-bar { background:var(--warning-light); color:#92400e; padding:6px 14px; font-size:11px; font-weight:600; display:flex; align-items:center; gap:8px; border-bottom:2px solid #fcd34d; flex-wrap:wrap; }
         [data-theme="dark"] .status-bar { background:#451a03; color:#fcd34d; border-bottom-color:#78350f; }
-        .status-dot { width:8px; height:8px; border-radius:50%; background:var(--warning); animation:pulse-dot 1.5s infinite; flex-shrink:0; }
+        .status-dot { width:6px; height:6px; border-radius:50%; background:var(--warning); animation:pulse-dot 1.5s infinite; flex-shrink:0; }
+        .status-text { flex:1; }
 
-        .main-content { max-width:640px; margin:0 auto; padding:16px; }
+        .main-content { max-width:640px; margin:0 auto; padding:12px; }
 
         /* ===== TAB NAVIGATION ===== */
-        .tab-nav { display:flex; background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-lg); padding:4px; margin-bottom:20px; box-shadow:var(--shadow-sm); gap:4px; position:sticky; top:80px; z-index:50; backdrop-filter:blur(12px); }
-        .tab-btn { flex:1; padding:10px 6px; border:none; background:transparent; border-radius:var(--radius-md); font-size:11px; font-weight:600; cursor:pointer; transition:var(--transition); color:var(--text-muted); text-align:center; position:relative; }
-        .tab-btn i { font-size:16px; display:block; margin-bottom:2px; }
+        .tab-nav { display:flex; background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-lg); padding:3px; margin-bottom:14px; box-shadow:var(--shadow-sm); gap:3px; position:sticky; top:76px; z-index:50; backdrop-filter:blur(12px); }
+        .tab-btn { flex:1; padding:8px 4px; border:none; background:transparent; border-radius:var(--radius-md); font-size:10px; font-weight:600; cursor:pointer; transition:var(--transition); color:var(--text-muted); text-align:center; position:relative; }
+        .tab-btn i { font-size:14px; display:block; margin-bottom:1px; }
         .tab-btn.active { background:var(--primary-gradient); color:#fff; box-shadow:0 4px 15px rgba(79,70,229,0.35); }
-        .tab-btn .badge-tab { position:absolute; top:-4px; right:-4px; background:var(--danger); color:#fff; font-size:9px; padding:2px 6px; border-radius:10px; font-weight:700; }
+        .tab-btn .badge-tab { position:absolute; top:-4px; right:-4px; background:var(--danger); color:#fff; font-size:8px; padding:1px 5px; border-radius:10px; font-weight:700; }
 
         .page { display:none; animation:fadeSlideIn 0.4s cubic-bezier(0.16,1,0.3,1); }
         .page.active { display:block; }
-        @keyframes fadeSlideIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+        @keyframes fadeSlideIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
 
-        .card { background:var(--bg-card); border-radius:var(--radius-lg); padding:20px; margin-bottom:16px; box-shadow:var(--shadow-sm); border:1px solid var(--border-color); }
-        .card-title { font-family:'Outfit',sans-serif; font-size:16px; font-weight:700; margin-bottom:14px; display:flex; align-items:center; gap:10px; color:var(--text-main); }
-        .card-title i { color:var(--primary); width:24px; text-align:center; }
+        .card { background:var(--bg-card); border-radius:var(--radius-lg); padding:14px; margin-bottom:12px; box-shadow:var(--shadow-sm); border:1px solid var(--border-color); }
+        .card-title { font-family:'Outfit',sans-serif; font-size:14px; font-weight:700; margin-bottom:10px; display:flex; align-items:center; gap:8px; color:var(--text-main); }
+        .card-title i { color:var(--primary); width:20px; text-align:center; font-size:14px; }
 
         /* ===== BUTTONS ===== */
-        .btn { padding:12px 20px; border:none; border-radius:var(--radius-md); font-size:14px; font-weight:600; cursor:pointer; transition:var(--transition); display:inline-flex; align-items:center; justify-content:center; gap:8px; box-shadow:var(--shadow-sm); font-family:'Plus Jakarta Sans',sans-serif; }
+        .btn { padding:10px 16px; border:none; border-radius:var(--radius-md); font-size:12px; font-weight:600; cursor:pointer; transition:var(--transition); display:inline-flex; align-items:center; justify-content:center; gap:6px; box-shadow:var(--shadow-sm); font-family:'Plus Jakarta Sans',sans-serif; }
         .btn:active { transform:scale(0.96); }
-        .btn:disabled { opacity:0.5; cursor:not-allowed; transform:none; }
+        .btn:disabled { opacity:0.5; cursor:not-allowed; }
         .btn-primary { background:var(--primary-gradient); color:#fff; }
         .btn-success { background:var(--success); color:#fff; }
         .btn-danger { background:var(--danger); color:#fff; }
         .btn-outline { background:transparent; border:2px solid var(--primary); color:var(--primary); }
-        .btn-outline-danger { border-color:var(--danger); color:var(--danger); }
-        .btn-outline-success { border-color:var(--success); color:var(--success); }
-        .btn-sm { padding:8px 14px; font-size:12px; border-radius:var(--radius-sm); }
-        .btn-lg { padding:16px 28px; font-size:16px; border-radius:var(--radius-lg); }
+        .btn-sm { padding:6px 10px; font-size:10px; border-radius:var(--radius-sm); }
         .btn-block { width:100%; }
 
-        .input { width:100%; padding:12px 16px; border:2px solid var(--border-color); border-radius:var(--radius-md); font-size:14px; color:var(--text-main); background:var(--bg-body); transition:var(--transition); font-family:'Plus Jakarta Sans',sans-serif; }
-        .input:focus { outline:none; border-color:var(--primary); box-shadow:0 0 0 4px rgba(79,70,229,0.1); }
-        .input::placeholder { color:var(--text-light); }
-
-        .input-group { display:flex; gap:8px; align-items:center; }
+        .input { width:100%; padding:10px 14px; border:2px solid var(--border-color); border-radius:var(--radius-md); font-size:13px; color:var(--text-main); background:var(--bg-body); transition:var(--transition); font-family:'Plus Jakarta Sans',sans-serif; }
+        .input:focus { outline:none; border-color:var(--primary); box-shadow:0 0 0 3px rgba(79,70,229,0.1); }
+        .input-group { display:flex; gap:6px; align-items:center; flex-wrap:wrap; }
 
         /* ===== SCANNER ===== */
-        .scanner-wrapper { position:relative; border-radius:var(--radius-md); overflow:hidden; background:#0f172a; min-height:280px; box-shadow:inset 0 2px 20px rgba(0,0,0,0.4); }
-        .scanner-wrapper #reader { width:100%; min-height:280px; }
-        .scanner-wrapper video { width:100%; height:auto; max-height:400px; object-fit:cover; display:block; }
-        .scanner-placeholder { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:280px; color:#94a3b8; text-align:center; padding:30px 20px; position:absolute; top:0; left:0; right:0; bottom:0; z-index:2; pointer-events:none; }
-        .scanner-placeholder i { font-size:56px; margin-bottom:12px; color:#475569; }
-        .scanner-overlay { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:70%; height:80px; border:2px solid #34d399; border-radius:var(--radius-sm); pointer-events:none; display:none; z-index:3; box-shadow:0 0 0 9999px rgba(15,23,42,0.5); }
-        .scanner-overlay .corner { position:absolute; width:15px; height:15px; border-color:#34d399; border-style:solid; border-width:0; }
+        .scanner-wrapper { position:relative; border-radius:var(--radius-md); overflow:hidden; background:#0f172a; min-height:240px; box-shadow:inset 0 2px 20px rgba(0,0,0,0.4); }
+        .scanner-wrapper #reader { width:100%; min-height:240px; }
+        .scanner-wrapper #reader video { width:100%; height:auto; max-height:360px; object-fit:cover; display:block; }
+        .scanner-placeholder { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:240px; color:#94a3b8; text-align:center; padding:24px 16px; position:absolute; top:0; left:0; right:0; bottom:0; background:#0f172a; z-index:2; pointer-events:none; }
+        .scanner-placeholder i { font-size:44px; margin-bottom:8px; color:#475569; }
+        .scanner-placeholder p { font-size:13px; }
+        .scanner-placeholder small { font-size:11px; }
+        .scanner-overlay { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:65%; height:70px; border:2px solid #34d399; border-radius:var(--radius-sm); pointer-events:none; display:none; z-index:3; box-shadow:0 0 0 9999px rgba(15,23,42,0.5); }
+        .scanner-overlay .corner { position:absolute; width:12px; height:12px; border-color:#34d399; border-style:solid; border-width:0; }
         .scanner-overlay .corner-tl { top:-2px; left:-2px; border-top-width:3px; border-left-width:3px; border-radius:4px 0 0 0; }
         .scanner-overlay .corner-tr { top:-2px; right:-2px; border-top-width:3px; border-right-width:3px; border-radius:0 4px 0 0; }
         .scanner-overlay .corner-bl { bottom:-2px; left:-2px; border-bottom-width:3px; border-left-width:3px; border-radius:0 0 0 4px; }
         .scanner-overlay .corner-br { bottom:-2px; right:-2px; border-bottom-width:3px; border-right-width:3px; border-radius:0 0 4px 0; }
-        .scanner-status { text-align:center; padding:8px; font-size:13px; font-weight:500; margin-top:8px; }
+        .scanner-status { text-align:center; padding:6px; font-size:12px; font-weight:500; margin-top:6px; }
         .scanner-status.success { color:var(--success); }
         .scanner-status.error { color:var(--danger); }
         .scanner-status.idle { color:var(--text-muted); }
 
         /* ===== PRODUCT DETAIL ===== */
-        .product-detail { background:linear-gradient(135deg, var(--success-light) 0%, #f0fdf4 100%); border:2px solid #6ee7b7; border-radius:var(--radius-lg); padding:20px; margin-bottom:16px; display:none; animation:fadeSlideIn 0.3s ease; }
+        .product-detail { background:linear-gradient(135deg, var(--success-light) 0%, #f0fdf4 100%); border:2px solid #6ee7b7; border-radius:var(--radius-lg); padding:16px; margin-bottom:12px; display:none; animation:fadeSlideIn 0.3s ease; }
         [data-theme="dark"] .product-detail { background:linear-gradient(135deg, #064e3b 0%, #065f46 100%); border-color:#34d399; }
-        .product-name { font-family:'Outfit',sans-serif; font-size:20px; font-weight:700; margin-bottom:4px; color:#065f46; }
+        .product-name { font-family:'Outfit',sans-serif; font-size:17px; font-weight:700; margin-bottom:2px; color:#065f46; }
         [data-theme="dark"] .product-name { color:#6ee7b7; }
-        .product-info { font-size:13px; color:#047857; margin-bottom:2px; font-weight:500; }
+        .product-info { font-size:12px; color:#047857; margin-bottom:1px; font-weight:500; }
         [data-theme="dark"] .product-info { color:#a7f3d0; }
 
-        .qty-control { display:flex; align-items:center; gap:12px; margin:16px 0; }
-        .qty-btn { width:48px; height:48px; border-radius:50%; border:2px solid var(--border-color); background:var(--bg-card); font-size:20px; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; color:var(--primary); transition:var(--transition); box-shadow:var(--shadow-sm); flex-shrink:0; }
-        .qty-btn:active { transform:scale(0.92); }
-        .qty-input { flex:1; height:48px; text-align:center; font-size:24px; font-weight:700; border:2px solid var(--border-color); border-radius:var(--radius-md); font-family:'Outfit',sans-serif; background:var(--bg-card); color:var(--text-main); min-width:60px; }
-        .qty-input:focus { border-color:var(--primary); box-shadow:0 0 0 4px rgba(79,70,229,0.1); }
+        /* ===== EXPIRY WARNING ===== */
+        .expiry-warning { background:var(--danger-light); border:1px solid var(--danger); border-radius:var(--radius-sm); padding:8px 12px; margin:8px 0; display:flex; align-items:center; gap:8px; font-size:12px; font-weight:600; color:var(--danger); }
+        .expiry-warning i { font-size:16px; }
 
-        .lot-item { display:flex; align-items:center; padding:12px 14px; border:2px solid var(--border-color); border-radius:var(--radius-md); margin-bottom:6px; cursor:pointer; gap:12px; background:var(--bg-card); transition:var(--transition); }
+        .qty-control { display:flex; align-items:center; gap:10px; margin:12px 0; }
+        .qty-btn { width:40px; height:40px; border-radius:50%; border:2px solid var(--border-color); background:var(--bg-card); font-size:18px; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; color:var(--primary); transition:var(--transition); flex-shrink:0; }
+        .qty-btn:active { transform:scale(0.92); }
+        .qty-input { flex:1; height:40px; text-align:center; font-size:20px; font-weight:700; border:2px solid var(--border-color); border-radius:var(--radius-md); font-family:'Outfit',sans-serif; background:var(--bg-card); color:var(--text-main); min-width:50px; }
+
+        .lot-item { display:flex; align-items:center; padding:10px 12px; border:2px solid var(--border-color); border-radius:var(--radius-md); margin-bottom:4px; cursor:pointer; gap:10px; background:var(--bg-card); transition:var(--transition); }
         .lot-item:hover { border-color:var(--primary-light); }
         .lot-item.selected { border-color:var(--primary); background:#eef2ff; box-shadow:0 0 0 3px rgba(79,70,229,0.15); }
         [data-theme="dark"] .lot-item.selected { background:#1e293b; }
-        .lot-radio { width:20px; height:20px; border-radius:50%; border:2px solid var(--border-color); flex-shrink:0; transition:var(--transition); }
+        .lot-radio { width:16px; height:16px; border-radius:50%; border:2px solid var(--border-color); flex-shrink:0; transition:var(--transition); }
         .lot-item.selected .lot-radio { border-color:var(--primary); background:var(--primary); box-shadow:inset 0 0 0 4px #fff; }
 
-        .progress-container { width:100%; height:8px; background:var(--border-color); border-radius:4px; margin-top:8px; overflow:hidden; }
-        .progress-bar { height:100%; border-radius:4px; transition:width 0.6s cubic-bezier(0.4,0,0.2,1); background:var(--primary-gradient); width:0%; }
+        .progress-container { width:100%; height:6px; background:var(--border-color); border-radius:3px; margin-top:6px; overflow:hidden; }
+        .progress-bar { height:100%; border-radius:3px; transition:width 0.6s cubic-bezier(0.4,0,0.2,1); background:var(--primary-gradient); width:0%; }
         .progress-bar.low { background:var(--danger); }
         .progress-bar.medium { background:var(--warning); }
         .progress-bar.high { background:var(--success); }
 
-        .pharmacy-map { background:var(--bg-body); border-radius:var(--radius-md); padding:16px; min-height:200px; border:2px dashed var(--border-color); }
-        .pharmacy-grid { display:grid; gap:12px; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); }
-        .cabinet-block { background:var(--bg-card); border:2px solid var(--border-color); border-radius:var(--radius-md); padding:14px; cursor:pointer; transition:var(--transition); text-align:center; }
+        /* ===== MAP ===== */
+        .pharmacy-map { background:var(--bg-body); border-radius:var(--radius-md); padding:12px; min-height:160px; border:2px dashed var(--border-color); }
+        .pharmacy-grid { display:grid; gap:10px; grid-template-columns:repeat(auto-fill, minmax(120px, 1fr)); }
+        .cabinet-block { background:var(--bg-card); border:2px solid var(--border-color); border-radius:var(--radius-md); padding:12px; cursor:pointer; transition:var(--transition); text-align:center; }
         .cabinet-block:hover { border-color:var(--primary-light); box-shadow:var(--shadow-md); transform:translateY(-2px); }
-        .cabinet-block.selected { border-color:var(--primary); background:#eef2ff; box-shadow:0 0 0 3px rgba(79,70,229,0.2); }
+        .cabinet-block.selected { border-color:var(--primary); background:#eef2ff; }
         [data-theme="dark"] .cabinet-block.selected { background:#1e293b; }
-        .cabinet-icon { font-size:28px; margin-bottom:4px; }
-        .cabinet-name { font-weight:700; font-size:13px; font-family:'Outfit',sans-serif; }
-        .cabinet-shelves { display:flex; flex-direction:column; gap:4px; margin-top:8px; }
-        .shelf-row { background:var(--bg-body); padding:4px 10px; border-radius:6px; font-size:11px; cursor:pointer; transition:var(--transition); display:flex; justify-content:space-between; align-items:center; font-weight:500; color:var(--text-muted); }
+        .cabinet-icon { font-size:24px; margin-bottom:2px; }
+        .cabinet-name { font-weight:700; font-size:12px; font-family:'Outfit',sans-serif; }
+        .cabinet-shelves { display:flex; flex-direction:column; gap:3px; margin-top:6px; }
+        .shelf-row { background:var(--bg-body); padding:3px 8px; border-radius:4px; font-size:10px; cursor:pointer; transition:var(--transition); display:flex; justify-content:space-between; align-items:center; font-weight:500; color:var(--text-muted); }
         .shelf-row:hover { background:#e0e7ff; color:var(--text-main); }
         [data-theme="dark"] .shelf-row:hover { background:#334155; }
         .shelf-row.selected { background:var(--primary); color:#fff; }
-        .shelf-count { background:rgba(0,0,0,0.06); padding:1px 8px; border-radius:10px; font-size:10px; }
-        .shelf-row.selected .shelf-count { background:rgba(255,255,255,0.25); color:#fff; }
+        .shelf-count { background:rgba(0,0,0,0.06); padding:1px 6px; border-radius:8px; font-size:9px; }
 
-        .recent-item { display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--border-color); font-size:13px; gap:8px; }
+        .recent-item { display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid var(--border-color); font-size:12px; gap:6px; }
         .recent-item:last-child { border-bottom:none; }
-        .recent-item .name { font-weight:600; }
-        .recent-item .detail { font-size:11px; color:var(--text-muted); }
-        .recent-item .qty-diff { font-weight:700; padding:2px 10px; border-radius:12px; font-size:12px; }
+        .recent-item .name { font-weight:600; font-size:12px; }
+        .recent-item .detail { font-size:10px; color:var(--text-muted); }
+        .recent-item .qty-diff { font-weight:700; padding:2px 8px; border-radius:10px; font-size:11px; }
         .recent-item .qty-diff.positive { color:var(--success); background:var(--success-light); }
         .recent-item .qty-diff.negative { color:var(--danger); background:var(--danger-light); }
-        .recent-item .qty-diff.zero { color:var(--text-muted); background:var(--bg-body); }
 
-        .stats-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px; }
-        .stat-card { background:var(--bg-card); padding:16px; border-radius:var(--radius-md); text-align:center; border:1px solid var(--border-color); }
-        .stat-value { font-family:'Outfit',sans-serif; font-size:26px; font-weight:800; margin:4px 0; color:var(--primary); }
-        .stat-label { font-size:11px; color:var(--text-muted); font-weight:600; text-transform:uppercase; letter-spacing:0.5px; }
+        .stats-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px; }
+        .stat-card { background:var(--bg-card); padding:12px; border-radius:var(--radius-md); text-align:center; border:1px solid var(--border-color); }
+        .stat-value { font-family:'Outfit',sans-serif; font-size:22px; font-weight:800; margin:2px 0; color:var(--primary); }
+        .stat-label { font-size:10px; color:var(--text-muted); font-weight:600; text-transform:uppercase; letter-spacing:0.3px; }
 
         .table-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; border-radius:var(--radius-md); border:1px solid var(--border-color); }
-        table { width:100%; border-collapse:collapse; font-size:12px; }
-        th { background:var(--bg-body); padding:10px 8px; text-align:left; font-weight:600; white-space:nowrap; position:sticky; top:0; color:var(--text-main); border-bottom:2px solid var(--border-color); font-size:11px; text-transform:uppercase; letter-spacing:0.3px; }
-        td { padding:8px; border-top:1px solid var(--border-color); font-size:12px; }
-        .text-right { text-align:right; }
+        table { width:100%; border-collapse:collapse; font-size:11px; }
+        th { background:var(--bg-body); padding:8px 6px; text-align:left; font-weight:600; white-space:nowrap; border-bottom:2px solid var(--border-color); font-size:10px; text-transform:uppercase; letter-spacing:0.3px; }
+        td { padding:6px; border-top:1px solid var(--border-color); font-size:11px; }
         .text-center { text-align:center; }
-        .badge { display:inline-block; padding:3px 10px; border-radius:12px; font-size:11px; font-weight:700; }
+        .badge { display:inline-block; padding:2px 8px; border-radius:10px; font-size:10px; font-weight:700; }
         .badge-green { background:var(--success-light); color:#166534; }
-        [data-theme="dark"] .badge-green { background:#064e3b; color:#6ee7b7; }
         .badge-red { background:var(--danger-light); color:#991b1b; }
-        [data-theme="dark"] .badge-red { background:#7f1d1d; color:#fca5a5; }
         .uncounted-row { background:var(--danger-light); border-left:4px solid var(--danger); }
-        [data-theme="dark"] .uncounted-row { background:#7f1d1d; }
 
-        .modal-overlay { position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(15,23,42,0.6); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); z-index:200; display:none; align-items:flex-end; justify-content:center; animation:fadeIn 0.3s ease; }
+        .modal-overlay { position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(15,23,42,0.6); backdrop-filter:blur(8px); z-index:200; display:none; align-items:flex-end; justify-content:center; animation:fadeIn 0.3s ease; }
         .modal-overlay.show { display:flex; }
         @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-        .modal { background:var(--bg-card); border-radius:var(--radius-xl) var(--radius-xl) 0 0; padding:24px; width:100%; max-width:600px; max-height:80vh; overflow-y:auto; animation:slideUp 0.4s cubic-bezier(0.16,1,0.3,1); box-shadow:var(--shadow-lg); }
+        .modal { background:var(--bg-card); border-radius:var(--radius-xl) var(--radius-xl) 0 0; padding:20px; width:100%; max-width:600px; max-height:80vh; overflow-y:auto; animation:slideUp 0.4s cubic-bezier(0.16,1,0.3,1); }
         @keyframes slideUp { from { transform:translateY(100%); } to { transform:translateY(0); } }
-        .modal-handle { width:40px; height:4px; background:var(--border-color); border-radius:2px; margin:0 auto 16px; }
-        .modal-title { font-family:'Outfit',sans-serif; font-size:18px; font-weight:700; margin-bottom:16px; }
+        .modal-handle { width:36px; height:3px; background:var(--border-color); border-radius:2px; margin:0 auto 12px; }
+        .modal-title { font-family:'Outfit',sans-serif; font-size:17px; font-weight:700; margin-bottom:12px; }
 
-        .toast-container { position:fixed; top:20px; left:50%; transform:translateX(-50%); z-index:300; max-width:90%; width:400px; pointer-events:none; }
-        .toast { background:var(--text-main); color:#fff; padding:12px 20px; border-radius:var(--radius-md); font-size:13px; font-weight:600; box-shadow:var(--shadow-lg); text-align:center; margin-bottom:8px; animation:toastIn 0.4s cubic-bezier(0.16,1,0.3,1); pointer-events:auto; }
+        .toast-container { position:fixed; top:16px; left:50%; transform:translateX(-50%); z-index:300; max-width:90%; width:380px; pointer-events:none; }
+        .toast { background:var(--text-main); color:#fff; padding:10px 16px; border-radius:var(--radius-md); font-size:12px; font-weight:600; box-shadow:var(--shadow-lg); text-align:center; margin-bottom:6px; animation:toastIn 0.4s cubic-bezier(0.16,1,0.3,1); pointer-events:auto; }
         .toast.success { background:var(--success); }
         .toast.error { background:var(--danger); }
         .toast.warning { background:var(--warning); color:#0f172a; }
@@ -241,24 +236,43 @@
 
         .flex { display:flex; }
         .flex-between { display:flex; justify-content:space-between; align-items:center; }
-        .gap-8 { gap:8px; }
-        .mt-8 { margin-top:8px; }
-        .mt-12 { margin-top:12px; }
-        .mb-8 { margin-bottom:8px; }
-        .mb-12 { margin-bottom:12px; }
+        .gap-6 { gap:6px; }
+        .mt-6 { margin-top:6px; }
+        .mt-10 { margin-top:10px; }
+        .mb-6 { margin-bottom:6px; }
         .text-muted { color:var(--text-muted); }
 
+        /* ===== BRANCH SELECTOR ===== */
+        .branch-selector { display:flex; align-items:center; gap:6px; padding:6px 10px; background:rgba(255,255,255,0.1); border-radius:var(--radius-md); border:1px solid rgba(255,255,255,0.15); }
+        .branch-selector select { background:transparent; border:none; color:#fff; font-size:11px; font-weight:600; padding:2px 4px; }
+        .branch-selector select option { color:#0f172a; }
+
+        /* ===== AUTO SYNC INDICATOR ===== */
+        .auto-sync-badge { display:inline-flex; align-items:center; gap:4px; font-size:9px; background:var(--success-light); color:#065f46; padding:2px 8px; border-radius:10px; font-weight:600; }
+        [data-theme="dark"] .auto-sync-badge { background:#064e3b; color:#6ee7b7; }
+
         @media (max-width:480px) {
-            .logo-icon { width:36px; height:36px; font-size:16px; }
-            .logo-text .brand { font-size:17px; }
-            .tab-btn { font-size:10px; padding:8px 4px; }
-            .tab-btn i { font-size:14px; }
-            .stats-grid { grid-template-columns:1fr 1fr; gap:8px; }
-            .stat-value { font-size:20px; }
-            .card { padding:14px; }
-            .pharmacy-grid { grid-template-columns:repeat(auto-fill, minmax(110px, 1fr)); }
-            .qty-btn { width:40px; height:40px; font-size:16px; }
-            .qty-input { font-size:20px; height:40px; }
+            .logo-icon { width:34px; height:34px; font-size:15px; }
+            .logo-text .brand { font-size:13px; }
+            .logo-text .brand .version { font-size:8px; }
+            .logo-text .tagline { font-size:8px; }
+            .tab-btn { font-size:9px; padding:6px 3px; }
+            .tab-btn i { font-size:12px; }
+            .stats-grid { grid-template-columns:1fr 1fr; gap:6px; }
+            .stat-value { font-size:18px; }
+            .card { padding:10px; }
+            .pharmacy-grid { grid-template-columns:repeat(auto-fill, minmax(100px, 1fr)); }
+            .qty-btn { width:36px; height:36px; font-size:16px; }
+            .qty-input { font-size:18px; height:36px; }
+            .header-top { gap:4px; }
+            .header-actions { gap:4px; }
+            .network-badge { font-size:8px; padding:2px 6px; }
+            .theme-toggle { width:28px; height:28px; font-size:12px; }
+            .scanner-wrapper { min-height:200px; }
+            .scanner-wrapper #reader { min-height:200px; }
+            .scanner-placeholder { min-height:200px; }
+            .scanner-placeholder i { font-size:36px; }
+            .scanner-overlay { height:60px; width:60%; }
         }
     </style>
 </head>
@@ -270,11 +284,23 @@
         <a href="#" class="logo" onclick="switchTab('import'); return false;">
             <div class="logo-icon"><i class="fas fa-cubes"></i></div>
             <div class="logo-text">
-                <span class="brand">PharmacyPro <span class="version">v2.0.3</span></span>
-                <span class="tagline"><i class="fas fa-circle" style="font-size:6px;color:#34d399;margin-right:4px;"></i> ระบบนับสินค้าร้านยา</span>
+                <span class="brand">
+                    <span class="main">PharmacyPro</span>
+                    <span class="version">v2.0.4</span>
+                </span>
+                <span class="tagline"><i class="fas fa-circle" style="font-size:5px;color:#34d399;margin-right:3px;"></i>ระบบนับสินค้าร้านยา</span>
             </div>
         </a>
         <div class="header-actions">
+            <div class="branch-selector" title="เลือกสาขา">
+                <i class="fas fa-store" style="font-size:11px;opacity:0.7;"></i>
+                <select id="branchSelect" onchange="changeBranch()">
+                    <option value="default">🏪 สาขาหลัก</option>
+                    <option value="branch1">สาขา 1</option>
+                    <option value="branch2">สาขา 2</option>
+                    <option value="branch3">สาขา 3</option>
+                </select>
+            </div>
             <button class="theme-toggle" onclick="toggleTheme()" title="เปลี่ยนธีม"><i class="fas fa-moon" id="themeIcon"></i></button>
             <div class="network-badge online" id="networkIndicator" onclick="forceSync()">
                 <span class="network-dot"></span>
@@ -285,7 +311,8 @@
 </header>
 <div class="status-bar" id="statusBar">
     <span class="status-dot"></span>
-    <span id="statusText">กำลังเริ่มต้นระบบ...</span>
+    <span class="status-text" id="statusText">กำลังเริ่มต้นระบบ...</span>
+    <span class="auto-sync-badge" id="autoSyncBadge"><i class="fas fa-sync-alt fa-fw"></i> Auto-Sync</span>
 </div>
 
 <div class="main-content">
@@ -297,36 +324,36 @@
         <button class="tab-btn" onclick="switchTab('report')"><i class="fas fa-chart-bar"></i> รายงาน</button>
     </nav>
 
-    <!-- ===================== PAGE: IMPORT ===================== -->
+    <!-- ===== PAGE: IMPORT ===== -->
     <div class="page active" id="page-import">
         <div class="card">
             <div class="card-title"><i class="fas fa-file-import"></i> นำเข้าข้อมูลสินค้า</div>
-            <div id="dropZone" onclick="document.getElementById('fileInput').click()" style="border:2px dashed var(--border-color);border-radius:var(--radius-md);padding:36px 20px;text-align:center;cursor:pointer;background:var(--bg-body);margin-bottom:12px;">
-                <i class="fas fa-cloud-upload-alt" style="font-size:40px;color:var(--primary);display:block;margin-bottom:8px;"></i>
-                <p style="font-weight:600;font-size:15px;color:var(--text-main);">อัปโหลดไฟล์ Excel / CSV</p>
-                <p style="font-size:12px;color:var(--text-muted);">.xlsx, .xls, .csv</p>
+            <div id="dropZone" onclick="document.getElementById('fileInput').click()" style="border:2px dashed var(--border-color);border-radius:var(--radius-md);padding:28px 16px;text-align:center;cursor:pointer;background:var(--bg-body);margin-bottom:10px;">
+                <i class="fas fa-cloud-upload-alt" style="font-size:32px;color:var(--primary);display:block;margin-bottom:6px;"></i>
+                <p style="font-weight:600;font-size:14px;color:var(--text-main);">อัปโหลดไฟล์ Excel / CSV</p>
+                <p style="font-size:11px;color:var(--text-muted);">.xlsx, .xls, .csv</p>
             </div>
             <input type="file" id="fileInput" accept=".xlsx,.xls,.csv" style="display:none" onchange="handleFile(event)">
-            <div style="background:var(--bg-body);border-radius:var(--radius-md);padding:16px;margin-top:12px;">
-                <p style="font-weight:600;font-size:14px;margin-bottom:8px;"><i class="fab fa-google" style="color:#4285F4;"></i> หรือใช้ Google Sheets</p>
-                <div style="display:flex;gap:8px;flex-wrap:wrap;">
-                    <input type="text" class="input" id="googleSheetsUrl" placeholder="ใส่ URL หรือ Spreadsheet ID" style="flex:1;min-width:150px;">
-                    <button class="btn btn-primary" onclick="importFromGoogleSheets()" style="flex-shrink:0;"><i class="fas fa-google"></i> นำเข้า</button>
+            <div style="background:var(--bg-body);border-radius:var(--radius-md);padding:12px;margin-top:8px;">
+                <p style="font-weight:600;font-size:13px;margin-bottom:6px;"><i class="fab fa-google" style="color:#4285F4;"></i> หรือใช้ Google Sheets</p>
+                <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                    <input type="text" class="input" id="googleSheetsUrl" placeholder="ใส่ URL หรือ Spreadsheet ID" style="flex:1;min-width:120px;font-size:12px;padding:8px 12px;">
+                    <button class="btn btn-primary" onclick="importFromGoogleSheets()" style="flex-shrink:0;font-size:12px;padding:8px 14px;"><i class="fas fa-google"></i> นำเข้า</button>
                 </div>
             </div>
         </div>
         <div class="card" id="posCard" style="display:none;">
             <div class="card-title"><i class="fas fa-store"></i> เลือกประเภทระบบ POS</div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-                <div class="lot-item" onclick="selectPOS('aricare')" data-pos="aricare"><div class="lot-radio"></div><div><strong>AriCare</strong><div style="font-size:11px;color:var(--text-muted);">Lot / ต้นทุน / หมดอายุ</div></div></div>
-                <div class="lot-item" onclick="selectPOS('generic')" data-pos="generic"><div class="lot-radio"></div><div><strong>ระบบอื่นๆ</strong><div style="font-size:11px;color:var(--text-muted);">ข้อมูลทั่วไป</div></div></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+                <div class="lot-item" onclick="selectPOS('aricare')" data-pos="aricare"><div class="lot-radio"></div><div><strong>AriCare</strong><div style="font-size:10px;color:var(--text-muted);">Lot / ต้นทุน / หมดอายุ</div></div></div>
+                <div class="lot-item" onclick="selectPOS('generic')" data-pos="generic"><div class="lot-radio"></div><div><strong>ระบบอื่นๆ</strong><div style="font-size:10px;color:var(--text-muted);">ข้อมูลทั่วไป</div></div></div>
             </div>
-            <button class="btn btn-primary btn-lg btn-block" onclick="confirmImport()" style="margin-top:12px;"><i class="fas fa-check"></i> ยืนยันการนำเข้า</button>
+            <button class="btn btn-primary btn-block" onclick="confirmImport()" style="margin-top:10px;font-size:13px;padding:10px;"><i class="fas fa-check"></i> ยืนยันการนำเข้า</button>
         </div>
         <div class="card" id="mappingCard" style="display:none;">
             <div class="card-title"><i class="fas fa-cog"></i> กำหนดคอลัมน์เอง</div>
             <div id="mappingFields"></div>
-            <button class="btn btn-primary btn-block" onclick="confirmMapping()" style="margin-top:12px;"><i class="fas fa-check"></i> ตกลง</button>
+            <button class="btn btn-primary btn-block" onclick="confirmMapping()" style="margin-top:10px;font-size:13px;padding:10px;"><i class="fas fa-check"></i> ตกลง</button>
         </div>
         <div class="card" id="previewCard" style="display:none;">
             <div class="card-title"><i class="fas fa-eye"></i> ข้อมูลตัวอย่าง</div>
@@ -334,60 +361,57 @@
         </div>
         <div class="card" style="border:2px solid var(--danger);background:var(--danger-light);">
             <div class="card-title" style="color:var(--danger);"><i class="fas fa-exclamation-triangle"></i> จัดการข้อมูลระบบ</div>
-            <button class="btn btn-danger btn-block" onclick="clearAllData()"><i class="fas fa-trash"></i> ล้างข้อมูลทั้งหมด</button>
-            <p style="font-size:11px;color:var(--text-muted);margin-top:8px;"><i class="fas fa-info-circle"></i> คำเตือน: การลบข้อมูลจะไม่สามารถกู้คืนได้</p>
+            <button class="btn btn-danger btn-block" onclick="clearAllData()" style="font-size:13px;padding:10px;"><i class="fas fa-trash"></i> ล้างข้อมูลทั้งหมด</button>
+            <p style="font-size:10px;color:var(--text-muted);margin-top:6px;"><i class="fas fa-info-circle"></i> คำเตือน: การลบข้อมูลจะไม่สามารถกู้คืนได้</p>
         </div>
     </div>
 
-    <!-- ===================== PAGE: LAYOUT ===================== -->
+    <!-- ===== PAGE: LAYOUT ===== -->
     <div class="page" id="page-layout">
         <div class="card">
             <div class="card-title"><i class="fas fa-sitemap"></i> แผนผังร้าน</div>
-            <div class="input-group" style="margin-bottom:14px;">
-                <input type="text" class="input" id="newCabinetName" placeholder="ชื่อตู้ใหม่ เช่น ตู้ A, ชั้นโชว์หน้าร้าน">
-                <button class="btn btn-primary" onclick="addCabinet()" style="flex-shrink:0;"><i class="fas fa-plus"></i> เพิ่ม</button>
+            <div class="input-group" style="margin-bottom:10px;">
+                <input type="text" class="input" id="newCabinetName" placeholder="ชื่อตู้ใหม่" style="font-size:12px;padding:8px 12px;">
+                <button class="btn btn-primary" onclick="addCabinet()" style="flex-shrink:0;font-size:12px;padding:8px 14px;"><i class="fas fa-plus"></i> เพิ่ม</button>
             </div>
             <div class="pharmacy-map" id="pharmacyMap">
                 <div class="pharmacy-grid" id="cabinetGrid">
-                    <div style="text-align:center;color:var(--text-muted);padding:40px;grid-column:1/-1;">
-                        <i class="fas fa-boxes" style="font-size:40px;display:block;margin-bottom:8px;opacity:0.5;"></i>
-                        ยังไม่มีตู้สินค้า<br><small>เพิ่มตู้ด้านบนเพื่อเริ่มจัดผังร้านของคุณ</small>
+                    <div style="text-align:center;color:var(--text-muted);padding:30px;grid-column:1/-1;font-size:13px;">
+                        <i class="fas fa-boxes" style="font-size:32px;display:block;margin-bottom:6px;opacity:0.5;"></i>
+                        ยังไม่มีตู้สินค้า<br><small>เพิ่มตู้ด้านบนเพื่อเริ่มจัดผังร้าน</small>
                     </div>
                 </div>
-            </div>
-            <div class="map-legend" style="display:flex;gap:16px;margin-top:14px;font-size:11px;color:var(--text-muted);flex-wrap:wrap;">
-                <span class="legend-item"><span class="legend-dot" style="width:12px;height:12px;border-radius:4px;display:inline-block;background:var(--border-color);"></span> ว่าง</span>
-                <span class="legend-item"><span class="legend-dot" style="width:12px;height:12px;border-radius:4px;display:inline-block;background:#c7d2fe;"></span> กำลังนับ</span>
-                <span class="legend-item"><span class="legend-dot" style="width:12px;height:12px;border-radius:4px;display:inline-block;background:#6ee7b7;"></span> นับเสร็จแล้ว</span>
             </div>
         </div>
         <div class="card" id="shelfCard" style="display:none;">
             <div class="card-title" id="shelfCardTitle"><i class="fas fa-layer-group"></i> จัดการชั้นในตู้</div>
-            <div class="input-group" style="margin-bottom:12px;">
-                <input type="number" class="input" id="newShelfNumber" placeholder="เลขชั้น" min="1" style="width:100px;">
-                <button class="btn btn-primary" onclick="addShelfToCabinet()" style="flex:1;"><i class="fas fa-plus"></i> เพิ่มชั้นวาง</button>
+            <div class="input-group" style="margin-bottom:10px;">
+                <input type="number" class="input" id="newShelfNumber" placeholder="เลขชั้น" min="1" style="width:80px;font-size:12px;padding:8px 12px;">
+                <button class="btn btn-primary" onclick="addShelfToCabinet()" style="flex:1;font-size:12px;padding:8px 14px;"><i class="fas fa-plus"></i> เพิ่มชั้นวาง</button>
             </div>
             <div id="shelfList"></div>
         </div>
     </div>
 
-    <!-- ===================== PAGE: SCAN ===================== -->
+    <!-- ===== PAGE: SCAN ===== -->
     <div class="page" id="page-scan">
-        <div class="card" style="padding:12px;">
+        <div class="card" style="padding:10px;">
             <div class="input-group">
-                <span style="font-weight:600;font-size:13px;flex-shrink:0;"><i class="fas fa-map-pin"></i> ตำแหน่ง:</span>
-                <select class="input" id="locationSelect" onchange="changeLocation()"><option value="all">🌐 ทั้งร้าน</option></select>
+                <span style="font-weight:600;font-size:12px;flex-shrink:0;"><i class="fas fa-map-pin"></i> ตำแหน่ง:</span>
+                <select class="input" id="locationSelect" onchange="changeLocation()" style="font-size:12px;padding:6px 10px;flex:1;">
+                    <option value="all">🌐 ทั้งร้าน</option>
+                </select>
             </div>
         </div>
-        <div class="card" style="padding:14px;background:var(--bg-body);">
-            <div class="flex-between"><span style="font-size:13px;font-weight:600;"><i class="fas fa-chart-line"></i> ความคืบหน้าการนับ</span><span id="progressText" style="font-size:13px;font-weight:700;color:var(--primary);">0 / 0 (0%)</span></div>
+        <div class="card" style="padding:10px;background:var(--bg-body);">
+            <div class="flex-between"><span style="font-size:12px;font-weight:600;"><i class="fas fa-chart-line"></i> ความคืบหน้า</span><span id="progressText" style="font-size:12px;font-weight:700;color:var(--primary);">0 / 0 (0%)</span></div>
             <div class="progress-container"><div class="progress-bar" id="progressBar" style="width:0%;"></div></div>
         </div>
         
         <!-- ===== SCANNER ===== -->
-        <div class="card" style="padding:12px;">
+        <div class="card" style="padding:10px;">
             <div class="scanner-wrapper" id="scannerWrapper">
-                <div id="reader" style="width:100%;min-height:280px;"></div>
+                <div id="reader" style="width:100%;min-height:240px;"></div>
                 <div class="scanner-placeholder" id="scannerPlaceholder">
                     <i class="fas fa-camera"></i>
                     <p>กล้องสแกนยังไม่เปิดใช้งาน</p>
@@ -400,27 +424,27 @@
                     <span class="corner corner-br"></span>
                 </div>
             </div>
-            <div class="scanner-status idle" id="scannerStatus"><i class="fas fa-circle" style="font-size:10px;"></i> กล้องปิดอยู่</div>
-            <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;">
-                <button class="btn btn-primary" onclick="toggleScanner()" id="btnToggleScanner" style="flex:1;"><i class="fas fa-camera"></i> เปิดกล้อง</button>
-                <button class="btn btn-outline btn-sm" onclick="toggleFlash()" id="btnFlash" title="เปิด/ปิดไฟฉาย"><i class="fas fa-bolt"></i> ไฟฉาย</button>
-                <button class="btn btn-outline btn-sm" onclick="manualBarcode()"><i class="fas fa-keyboard"></i> ใส่รหัส</button>
-                <button class="btn btn-sm" onclick="toggleContinuousMode()" id="btnContinuous" style="flex:1;background:var(--text-muted);color:#fff;"><i class="fas fa-infinity"></i> ต่อเนื่อง: ปิด</button>
+            <div class="scanner-status idle" id="scannerStatus"><i class="fas fa-circle" style="font-size:9px;"></i> กล้องปิดอยู่</div>
+            <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;">
+                <button class="btn btn-primary" onclick="toggleScanner()" id="btnToggleScanner" style="flex:1;font-size:12px;padding:8px 12px;"><i class="fas fa-camera"></i> เปิดกล้อง</button>
+                <button class="btn btn-outline btn-sm" onclick="toggleFlash()" id="btnFlash" title="เปิด/ปิดไฟฉาย" style="font-size:11px;padding:6px 10px;"><i class="fas fa-bolt"></i> ไฟฉาย</button>
+                <button class="btn btn-outline btn-sm" onclick="manualBarcode()" style="font-size:11px;padding:6px 10px;"><i class="fas fa-keyboard"></i> ใส่รหัส</button>
+                <button class="btn btn-sm" onclick="toggleContinuousMode()" id="btnContinuous" style="flex:1;font-size:11px;padding:6px 10px;background:var(--text-muted);color:#fff;"><i class="fas fa-infinity"></i> ต่อเนื่อง: ปิด</button>
             </div>
-            <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
-                <button class="btn btn-outline btn-sm" onclick="zoomIn()" style="flex:1;"><i class="fas fa-search-plus"></i> ซูมเข้า</button>
-                <button class="btn btn-outline btn-sm" onclick="zoomOut()" style="flex:1;"><i class="fas fa-search-minus"></i> ซูมออก</button>
-                <button class="btn btn-outline btn-sm" onclick="resetZoom()" style="flex:1;"><i class="fas fa-home"></i> คืนค่า</button>
+            <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;">
+                <button class="btn btn-outline btn-sm" onclick="zoomIn()" style="flex:1;font-size:11px;padding:6px 10px;"><i class="fas fa-search-plus"></i> ซูมเข้า</button>
+                <button class="btn btn-outline btn-sm" onclick="zoomOut()" style="flex:1;font-size:11px;padding:6px 10px;"><i class="fas fa-search-minus"></i> ซูมออก</button>
+                <button class="btn btn-outline btn-sm" onclick="resetZoom()" style="flex:1;font-size:11px;padding:6px 10px;"><i class="fas fa-home"></i> คืนค่า</button>
             </div>
         </div>
 
         <!-- ===== SEARCH ===== -->
-        <div class="card" style="padding:12px;background:var(--success-light);border:2px solid #6ee7b7;">
-            <div style="font-size:13px;font-weight:600;margin-bottom:8px;color:#065f46;"><i class="fas fa-search"></i> ค้นหาสินค้าด้วยชื่อ</div>
+        <div class="card" style="padding:10px;background:var(--success-light);border:2px solid #6ee7b7;">
+            <div style="font-size:12px;font-weight:600;margin-bottom:6px;color:#065f46;"><i class="fas fa-search"></i> ค้นหาสินค้าด้วยชื่อ</div>
             <div class="input-group">
-                <input type="text" class="input" id="searchProduct" placeholder="พิมพ์ชื่อสินค้าหรือตัวยา..." oninput="searchProduct(this.value)" style="flex:1;background:var(--bg-card);">
+                <input type="text" class="input" id="searchProduct" placeholder="พิมพ์ชื่อสินค้า..." oninput="searchProduct(this.value)" style="flex:1;font-size:12px;padding:8px 12px;background:var(--bg-card);">
             </div>
-            <div id="searchResults" style="display:none;margin-top:8px;max-height:200px;overflow-y:auto;"></div>
+            <div id="searchResults" style="display:none;margin-top:6px;max-height:160px;overflow-y:auto;"></div>
         </div>
 
         <!-- ===== PRODUCT DETAIL ===== -->
@@ -428,72 +452,76 @@
             <div class="product-name" id="productName">-</div>
             <div class="product-info" id="productBarcode">-</div>
             <div class="product-info" id="productStock">-</div>
-            <div id="lotSelection" style="display:none;margin-top:12px;">
-                <label style="font-weight:600;font-size:13px;color:#065f46;"><i class="fas fa-tag"></i> เลือก Lot สินค้า:</label>
-                <div id="lotList" style="margin-top:6px;"></div>
+            <div id="expiryWarning" style="display:none;" class="expiry-warning">
+                <i class="fas fa-clock"></i>
+                <span id="expiryWarningText">สินค้าหมดอายุใน 90 วัน!</span>
+            </div>
+            <div id="lotSelection" style="display:none;margin-top:8px;">
+                <label style="font-weight:600;font-size:12px;color:#065f46;"><i class="fas fa-tag"></i> เลือก Lot สินค้า:</label>
+                <div id="lotList" style="margin-top:4px;"></div>
             </div>
             <div class="qty-control">
                 <button class="qty-btn" onclick="changeQty(-1)"><i class="fas fa-minus"></i></button>
                 <input type="number" class="qty-input" id="qtyInput" value="1" min="0" inputmode="numeric">
                 <button class="qty-btn" onclick="changeQty(1)"><i class="fas fa-plus"></i></button>
             </div>
-            <button class="btn btn-success btn-lg btn-block" onclick="confirmItem()"><i class="fas fa-check-circle"></i> ยืนยันการนับจำนวน</button>
+            <button class="btn btn-success btn-block" onclick="confirmItem()" style="font-size:14px;padding:12px;"><i class="fas fa-check-circle"></i> ยืนยันการนับ</button>
         </div>
 
         <!-- ===== RECENT ===== -->
         <div class="card">
             <div class="flex-between">
-                <span class="card-title" style="margin:0;"><i class="fas fa-list"></i> รายการนับล่าสุด</span>
-                <span id="scanCount" style="background:var(--primary);color:#fff;padding:2px 12px;border-radius:20px;font-size:12px;font-weight:700;">0</span>
+                <span class="card-title" style="margin:0;font-size:13px;"><i class="fas fa-list"></i> รายการนับล่าสุด</span>
+                <span id="scanCount" style="background:var(--primary);color:#fff;padding:2px 10px;border-radius:16px;font-size:11px;font-weight:700;">0</span>
             </div>
-            <div id="recentScans"><p style="text-align:center;color:var(--text-muted);padding:20px;"><i class="fas fa-inbox" style="font-size:24px;display:block;margin-bottom:8px;opacity:0.5;"></i>ยังไม่มีประวัติการสแกนในรอบนี้</p></div>
-            <div style="display:flex;gap:8px;margin-top:14px;">
-                <button class="btn btn-outline btn-sm" onclick="undoLast()" style="flex:1;"><i class="fas fa-undo"></i> ยกเลิกล่าสุด</button>
-                <button class="btn btn-primary btn-sm" onclick="finishCount()" style="flex:1;"><i class="fas fa-flag-checkered"></i> สรุปผลลัพธ์</button>
+            <div id="recentScans"><p style="text-align:center;color:var(--text-muted);padding:16px;font-size:12px;"><i class="fas fa-inbox" style="font-size:20px;display:block;margin-bottom:6px;opacity:0.5;"></i>ยังไม่มีประวัติการสแกน</p></div>
+            <div style="display:flex;gap:6px;margin-top:10px;">
+                <button class="btn btn-outline btn-sm" onclick="undoLast()" style="flex:1;font-size:11px;padding:6px 10px;"><i class="fas fa-undo"></i> ยกเลิกล่าสุด</button>
+                <button class="btn btn-primary btn-sm" onclick="finishCount()" style="flex:1;font-size:11px;padding:6px 10px;"><i class="fas fa-flag-checkered"></i> สรุปผล</button>
             </div>
         </div>
     </div>
 
-    <!-- ===================== PAGE: REPORT ===================== -->
+    <!-- ===== PAGE: REPORT ===== -->
     <div class="page" id="page-report">
-        <div class="card" style="background:linear-gradient(135deg,var(--success-light) 0%,#d1fae5 100%);border:2px solid #6ee7b7;">
-            <div class="card-title" style="color:#065f46;"><i class="fas fa-chart-pie"></i> สรุปภาพรวมการนับสต็อก</div>
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;text-align:center;">
-                <div><div style="font-size:11px;color:#047857;font-weight:600;">สินค้าทั้งหมด</div><div style="font-size:24px;font-weight:800;color:#065f46;font-family:'Outfit',sans-serif;" id="rptTotalItems">0</div></div>
-                <div><div style="font-size:11px;color:#047857;font-weight:600;">นับแล้ว</div><div style="font-size:24px;font-weight:800;color:#059669;font-family:'Outfit',sans-serif;" id="rptCounted">0</div></div>
-                <div><div style="font-size:11px;color:#047857;font-weight:600;">ยังไม่นับ</div><div style="font-size:24px;font-weight:800;color:#dc2626;font-family:'Outfit',sans-serif;" id="rptUncounted">0</div></div>
+        <div class="card" style="background:linear-gradient(135deg,var(--success-light) 0%,#d1fae5 100%);border:2px solid #6ee7b7;padding:14px;">
+            <div class="card-title" style="color:#065f46;font-size:14px;margin-bottom:8px;"><i class="fas fa-chart-pie"></i> สรุปภาพรวม</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;text-align:center;">
+                <div><div style="font-size:10px;color:#047857;font-weight:600;">สินค้าทั้งหมด</div><div style="font-size:20px;font-weight:800;color:#065f46;font-family:'Outfit',sans-serif;" id="rptTotalItems">0</div></div>
+                <div><div style="font-size:10px;color:#047857;font-weight:600;">นับแล้ว</div><div style="font-size:20px;font-weight:800;color:#059669;font-family:'Outfit',sans-serif;" id="rptCounted">0</div></div>
+                <div><div style="font-size:10px;color:#047857;font-weight:600;">ยังไม่นับ</div><div style="font-size:20px;font-weight:800;color:#dc2626;font-family:'Outfit',sans-serif;" id="rptUncounted">0</div></div>
             </div>
         </div>
         <div class="stats-grid">
             <div class="stat-card"><div class="stat-label"><i class="fas fa-clipboard-list"></i> รายการที่นับ</div><div class="stat-value" id="rptTotal">0</div></div>
             <div class="stat-card"><div class="stat-label"><i class="fas fa-exclamation-triangle"></i> รายการผลต่าง</div><div class="stat-value" id="rptDiff" style="color:var(--danger);">0</div></div>
             <div class="stat-card"><div class="stat-label"><i class="fas fa-coins"></i> ผลต่างต้นทุน</div><div class="stat-value" id="rptCost" style="color:var(--warning);">0</div></div>
-            <div class="stat-card"><div class="stat-label"><i class="fas fa-percent"></i> % ผลต่างสต็อก</div><div class="stat-value" id="rptPercent" style="color:var(--primary);">0%</div></div>
+            <div class="stat-card"><div class="stat-label"><i class="fas fa-percent"></i> % ผลต่าง</div><div class="stat-value" id="rptPercent" style="color:var(--primary);">0%</div></div>
         </div>
-        <div class="card" id="uncountedCard" style="display:none;border:2px solid var(--danger);">
-            <div class="card-title" style="color:var(--danger);"><i class="fas fa-exclamation-circle"></i> สินค้าที่ยังไม่ได้นับ</div>
+        <div class="card" id="uncountedCard" style="display:none;border:2px solid var(--danger);padding:12px;">
+            <div class="card-title" style="color:var(--danger);font-size:13px;"><i class="fas fa-exclamation-circle"></i> สินค้าที่ยังไม่ได้นับ</div>
             <div class="table-wrap">
                 <table>
                     <thead><tr><th>ชื่อสินค้า</th><th>Lot</th><th>ระบบ</th><th>ทุน/หน่วย</th><th>มูลค่ารวม</th><th>หมดอายุ</th></tr></thead>
-                    <tbody id="uncountedBody"><tr><td colspan="6" style="text-align:center;padding:20px;color:var(--text-muted);"><i class="fas fa-check-circle" style="color:var(--success);font-size:20px;display:block;margin-bottom:8px;"></i>นับครบทุกชิ้นแล้ว!</td></tr></tbody>
+                    <tbody id="uncountedBody"><tr><td colspan="6" style="text-align:center;padding:16px;color:var(--text-muted);font-size:12px;"><i class="fas fa-check-circle" style="color:var(--success);font-size:18px;display:block;margin-bottom:6px;"></i>นับครบทุกชิ้นแล้ว!</td></tr></tbody>
                 </table>
             </div>
         </div>
-        <div class="card">
-            <div class="flex-between" style="flex-wrap:wrap;gap:8px;">
-                <span class="card-title" style="margin:0;"><i class="fas fa-table"></i> รายละเอียดรายการนับ</span>
+        <div class="card" style="padding:12px;">
+            <div class="flex-between" style="flex-wrap:wrap;gap:6px;">
+                <span class="card-title" style="margin:0;font-size:13px;"><i class="fas fa-table"></i> รายละเอียดการนับ</span>
                 <div style="display:flex;gap:4px;flex-wrap:wrap;">
-                    <button class="btn btn-outline btn-sm" onclick="exportData('csv')"><i class="fas fa-file-csv"></i> CSV</button>
-                    <button class="btn btn-outline btn-sm" onclick="exportData('xlsx')"><i class="fas fa-file-excel"></i> Excel</button>
-                    <button class="btn btn-outline btn-sm" onclick="exportData('pdf')"><i class="fas fa-file-pdf"></i> PDF</button>
-                    <button class="btn btn-outline-danger btn-sm" onclick="exportData('csv-diff')"><i class="fas fa-file-csv"></i> ขาด/เกิน</button>
-                    <button class="btn btn-outline-success btn-sm" onclick="exportBarcodeMap()"><i class="fas fa-barcode"></i> Master</button>
-                    <button class="btn btn-success btn-sm" onclick="syncToGoogleSheets()"><i class="fab fa-google"></i> Sync</button>
+                    <button class="btn btn-outline btn-sm" onclick="exportData('csv')" style="font-size:10px;padding:4px 8px;"><i class="fas fa-file-csv"></i> CSV</button>
+                    <button class="btn btn-outline btn-sm" onclick="exportData('xlsx')" style="font-size:10px;padding:4px 8px;"><i class="fas fa-file-excel"></i> Excel</button>
+                    <button class="btn btn-outline btn-sm" onclick="exportData('pdf')" style="font-size:10px;padding:4px 8px;"><i class="fas fa-file-pdf"></i> PDF</button>
+                    <button class="btn btn-outline-danger btn-sm" onclick="exportData('csv-diff')" style="font-size:10px;padding:4px 8px;"><i class="fas fa-file-csv"></i> ขาด/เกิน</button>
+                    <button class="btn btn-outline-success btn-sm" onclick="exportBarcodeMap()" style="font-size:10px;padding:4px 8px;"><i class="fas fa-barcode"></i> Master</button>
+                    <button class="btn btn-success btn-sm" onclick="syncToGoogleSheets()" style="font-size:10px;padding:4px 8px;"><i class="fab fa-google"></i> Sync</button>
                 </div>
             </div>
-            <div style="display:flex;gap:8px;align-items:center;margin:14px 0;flex-wrap:wrap;">
-                <label style="font-weight:600;font-size:12px;"><i class="fas fa-sort"></i> เรียงลำดับ:</label>
-                <select class="input" id="sortBy" onchange="sortReport()" style="width:auto;padding:6px 12px;min-width:160px;">
+            <div style="display:flex;gap:6px;align-items:center;margin:10px 0;flex-wrap:wrap;">
+                <label style="font-weight:600;font-size:11px;"><i class="fas fa-sort"></i> เรียง:</label>
+                <select class="input" id="sortBy" onchange="sortReport()" style="width:auto;padding:4px 10px;min-width:140px;font-size:11px;">
                     <option value="name">ตามชื่อสินค้า</option>
                     <option value="difference_desc" selected>ผลต่างมากไปน้อย</option>
                     <option value="difference_asc">ผลต่างน้อยไปมาก</option>
@@ -504,7 +532,7 @@
             <div class="table-wrap">
                 <table>
                     <thead><tr><th>บาร์โค้ด</th><th>ชื่อสินค้า</th><th>Lot</th><th>ระบบ</th><th>นับ</th><th>ต่าง</th><th>ทุน</th><th>มูลค่าต่าง</th><th>%</th></tr></thead>
-                    <tbody id="reportBody"><tr><td colspan="9" style="text-align:center;padding:20px;color:var(--text-muted);"><i class="fas fa-inbox" style="font-size:24px;display:block;margin-bottom:8px;opacity:0.5;"></i>ยังไม่มีข้อมูลสรุปผล</td></tr></tbody>
+                    <tbody id="reportBody"><tr><td colspan="9" style="text-align:center;padding:16px;color:var(--text-muted);font-size:12px;"><i class="fas fa-inbox" style="font-size:20px;display:block;margin-bottom:6px;opacity:0.5;"></i>ยังไม่มีข้อมูลสรุปผล</td></tr></tbody>
                 </table>
             </div>
         </div>
@@ -516,9 +544,9 @@
     <div class="modal">
         <div class="modal-handle"></div>
         <div class="modal-title"><i class="fas fa-keyboard"></i> ใส่บาร์โค้ดด้วยตนเอง</div>
-        <input type="text" class="input" id="manualBarcodeInput" placeholder="ป้อนเลขบาร์โค้ด..." style="margin-bottom:12px;" autofocus>
-        <button class="btn btn-primary btn-block" onclick="submitManualBarcode()"><i class="fas fa-search"></i> ค้นหาข้อมูล</button>
-        <button class="btn btn-outline btn-block" onclick="closeBarcodeModal()" style="margin-top:8px;"><i class="fas fa-times"></i> ปิดหน้าต่าง</button>
+        <input type="text" class="input" id="manualBarcodeInput" placeholder="ป้อนเลขบาร์โค้ด..." style="margin-bottom:10px;font-size:14px;padding:10px 14px;" autofocus>
+        <button class="btn btn-primary btn-block" onclick="submitManualBarcode()" style="font-size:14px;padding:12px;"><i class="fas fa-search"></i> ค้นหาข้อมูล</button>
+        <button class="btn btn-outline btn-block" onclick="closeBarcodeModal()" style="margin-top:8px;font-size:14px;padding:12px;"><i class="fas fa-times"></i> ปิด</button>
     </div>
 </div>
 
@@ -538,8 +566,9 @@ console.log('✅ Eruda เปิดใช้งานแล้ว!');
 const CONFIG = {
     GOOGLE_SHEETS: { API_KEY: '', SPREADSHEET_ID: '', RANGES: { PRODUCTS: 'Products!A:F', REPORTS: 'Reports!A:G', HISTORY: 'History!A:E' } },
     APP_NAME: 'PharmacyPro',
-    VERSION: '2.0.3',
-    STORE_ID: localStorage.getItem('storeId') || 'default'
+    VERSION: '2.0.4',
+    STORE_ID: localStorage.getItem('storeId') || 'default',
+    EXPIRY_WARNING_DAYS: 90
 };
 
 // =============================================
@@ -569,6 +598,8 @@ class StockApp {
         this.pendingRows = [];
         this.currentPOS = null;
         this.customMapping = {};
+        this.autoSyncEnabled = true;
+        this.branchId = localStorage.getItem('branchId') || 'default';
         this.init();
     }
 
@@ -578,23 +609,55 @@ class StockApp {
         await this.loadLocations();
         await this.loadProducts();
         this.loadTheme();
+        this.loadBranch();
         this.setupDragDrop();
         this.updateLocationSelect();
         this.renderMap();
         this.updateProgress();
         this.initNetworkListener();
         this.updateStatus('พร้อมใช้งาน');
-        console.log('✅ PharmacyPro v2.0.3 พร้อมใช้งาน!');
+        this.startAutoSync();
+        console.log('✅ PharmacyPro v2.0.4 พร้อมใช้งาน!');
         if (this.products.length === 0) {
             this.updateStatus('📥 กรุณานำเข้าข้อมูลสินค้าก่อนใช้งาน');
             this.showToast('📥 กรุณานำเข้าข้อมูลสินค้าจาก Excel หรือ Google Sheets', 'info');
         }
     }
 
+    // ===== BRANCH =====
+    loadBranch() {
+        document.getElementById('branchSelect').value = this.branchId;
+        CONFIG.STORE_ID = this.branchId;
+        this.updateStatus('🏪 สาขา: ' + document.getElementById('branchSelect').selectedOptions[0].text);
+    }
+
+    changeBranch(branchId) {
+        const select = document.getElementById('branchSelect');
+        this.branchId = select.value;
+        localStorage.setItem('branchId', this.branchId);
+        CONFIG.STORE_ID = this.branchId;
+        this.barcodeHistory = JSON.parse(localStorage.getItem('barcodeHistory_' + CONFIG.STORE_ID) || '{}');
+        this.loadProducts();
+        this.updateStatus('🏪 เปลี่ยนสาขา: ' + select.selectedOptions[0].text);
+        this.showToast('🏪 เปลี่ยนเป็น ' + select.selectedOptions[0].text, 'success');
+    }
+
+    // ===== AUTO SYNC =====
+    startAutoSync() {
+        if (this.autoSyncEnabled) {
+            setInterval(() => {
+                if (navigator.onLine && this.offlineQueue.length > 0) {
+                    this.syncOfflineQueue();
+                }
+            }, 30000); // ทุก 30 วินาที
+            console.log('🔄 Auto-Sync เปิดใช้งานแล้ว');
+        }
+    }
+
     // ===== INDEXEDDB =====
     initDB() {
         return new Promise((resolve) => {
-            const request = indexedDB.open('StockCountDB', 3);
+            const request = indexedDB.open('StockCountDB_' + this.branchId, 3);
             request.onupgradeneeded = (e) => {
                 const db = e.target.result;
                 if (!db.objectStoreNames.contains('products')) {
@@ -624,6 +687,7 @@ class StockApp {
             const req = store.getAll();
             this.products = await new Promise(r => { req.onsuccess = () => r(req.result || []); req.onerror = () => r([]); });
             this.updateProgress();
+            this.checkExpiryWarnings();
         } catch (e) { this.products = []; console.error('Load products error:', e); }
     }
 
@@ -652,6 +716,50 @@ class StockApp {
         await new Promise(r => { tx.oncomplete = r; });
     }
 
+    // ===== EXPIRY WARNING =====
+    checkExpiryWarnings() {
+        const today = new Date();
+        const warningDate = new Date();
+        warningDate.setDate(today.getDate() + CONFIG.EXPIRY_WARNING_DAYS);
+        
+        this.products.forEach(product => {
+            if (product.expiry) {
+                const expiryDate = new Date(product.expiry);
+                if (expiryDate <= warningDate && expiryDate >= today) {
+                    // สินค้าใกล้หมดอายุ
+                    this.showToast('⚠️ ' + product.name + ' หมดอายุใน ' + 
+                        Math.ceil((expiryDate - today) / (1000 * 60 * 60 * 24)) + ' วัน', 'warning');
+                } else if (expiryDate < today) {
+                    // สินค้าหมดอายุแล้ว
+                    this.showToast('🚫 ' + product.name + ' หมดอายุแล้ว!', 'error');
+                }
+            }
+        });
+    }
+
+    showExpiryWarning(product) {
+        if (product.expiry) {
+            const expiryDate = new Date(product.expiry);
+            const today = new Date();
+            const diffDays = Math.ceil((expiryDate - today) / (1000 * 60 * 60 * 24));
+            
+            const warning = document.getElementById('expiryWarning');
+            const text = document.getElementById('expiryWarningText');
+            
+            if (diffDays < 0) {
+                warning.style.display = 'flex';
+                text.textContent = '🚫 สินค้าหมดอายุแล้ว! (หมดอายุเมื่อ ' + product.expiry + ')';
+            } else if (diffDays <= CONFIG.EXPIRY_WARNING_DAYS) {
+                warning.style.display = 'flex';
+                text.textContent = '⚠️ สินค้าหมดอายุใน ' + diffDays + ' วัน (หมดอายุ ' + product.expiry + ')';
+            } else {
+                warning.style.display = 'none';
+            }
+        } else {
+            document.getElementById('expiryWarning').style.display = 'none';
+        }
+    }
+
     // ===== NETWORK & SYNC =====
     initNetworkListener() {
         window.addEventListener('online', () => this.updateNetworkStatus(true));
@@ -678,18 +786,16 @@ class StockApp {
         const indicator = document.getElementById('networkIndicator');
         indicator.className = 'network-badge syncing';
         document.getElementById('networkText').textContent = 'Syncing...';
-        this.showToast('🔄 กำลังซิงค์ ' + this.offlineQueue.length + ' รายการ...', 'info');
         try {
-            await new Promise(r => setTimeout(r, 1500));
+            await new Promise(r => setTimeout(r, 1000));
             if (CONFIG.GOOGLE_SHEETS.API_KEY && CONFIG.GOOGLE_SHEETS.SPREADSHEET_ID) {
                 await this.syncToGoogleSheets(this.offlineQueue);
             }
             this.offlineQueue = [];
             localStorage.setItem('offlineQueue', JSON.stringify(this.offlineQueue));
-            this.showToast('✅ ซิงค์ข้อมูลสำเร็จ', 'success');
+            this.showToast('✅ ซิงค์ข้อมูลสำเร็จ (' + this.offlineQueue.length + ' รายการ)', 'success');
         } catch (e) {
             console.error('Sync error:', e);
-            this.showToast('❌ ซิงค์ข้อมูลไม่สำเร็จ', 'error');
         } finally {
             this.updateNetworkStatus(navigator.onLine);
         }
@@ -746,12 +852,11 @@ class StockApp {
         setTimeout(() => {
             toast.classList.add('hide');
             setTimeout(() => toast.remove(), 300);
-        }, 3000);
+        }, 3500);
     }
 
     updateStatus(msg) {
         document.getElementById('statusText').textContent = msg;
-        document.getElementById('statusBar').className = 'status-bar';
     }
 
     switchTab(name) {
@@ -773,12 +878,11 @@ class StockApp {
     }
 
     // ============================================================
-    // ✅ SCANNER - ใช้ Html5-QRCode
+    // ✅ SCANNER
     // ============================================================
     async startScanner() {
         if (typeof Html5Qrcode === 'undefined') {
-            this.showToast('⚠️ ไลบรารีสแกนโหลดไม่สำเร็จ กรุณารีเฟรช', 'error');
-            console.error('❌ Html5Qrcode is undefined!');
+            this.showToast('⚠️ ไลบรารีสแกนโหลดไม่สำเร็จ', 'error');
             return;
         }
 
@@ -789,23 +893,20 @@ class StockApp {
 
         try {
             if (this.html5Scanner) {
-                try {
-                    await this.html5Scanner.stop();
-                    this.html5Scanner.clear();
-                } catch(e) {}
+                try { await this.html5Scanner.stop(); this.html5Scanner.clear(); } catch(e) {}
                 this.html5Scanner = null;
             }
 
             document.getElementById('scannerPlaceholder').style.display = 'none';
             document.getElementById('scannerOverlay').style.display = 'block';
-            document.getElementById('scannerStatus').innerHTML = '<i class="fas fa-circle" style="color:var(--success);font-size:10px;"></i> กำลังเปิดกล้อง...';
+            document.getElementById('scannerStatus').innerHTML = '<i class="fas fa-circle" style="color:var(--success);font-size:9px;"></i> กำลังเปิดกล้อง...';
             document.getElementById('scannerStatus').className = 'scanner-status success';
             document.getElementById('btnToggleScanner').innerHTML = '<i class="fas fa-stop"></i> ปิดกล้อง';
 
             this.html5Scanner = new Html5Qrcode("reader");
 
             const config = {
-                fps: 20,
+                fps: 25,
                 qrbox: { width: 280, height: 180 },
                 aspectRatio: 1.0,
                 formatsToSupport: [
@@ -850,7 +951,7 @@ class StockApp {
             console.error('Scanner error:', err);
             document.getElementById('scannerStatus').innerHTML = '<i class="fas fa-exclamation-circle"></i> ' + err.message;
             document.getElementById('scannerStatus').className = 'scanner-status error';
-            this.showToast('❌ เปิดกล้องไม่สำเร็จ: ' + err.message, 'error');
+            this.showToast('❌ เปิดกล้องไม่สำเร็จ', 'error');
             this.stopScanner();
         }
     }
@@ -858,15 +959,12 @@ class StockApp {
     async stopScanner() {
         this.scanning = false;
         if (this.html5Scanner) {
-            try {
-                await this.html5Scanner.stop();
-                this.html5Scanner.clear();
-            } catch(e) {}
+            try { await this.html5Scanner.stop(); this.html5Scanner.clear(); } catch(e) {}
             this.html5Scanner = null;
         }
         document.getElementById('scannerPlaceholder').style.display = 'flex';
         document.getElementById('scannerOverlay').style.display = 'none';
-        document.getElementById('scannerStatus').innerHTML = '<i class="fas fa-circle" style="font-size:10px;"></i> กล้องปิดอยู่';
+        document.getElementById('scannerStatus').innerHTML = '<i class="fas fa-circle" style="font-size:9px;"></i> กล้องปิดอยู่';
         document.getElementById('scannerStatus').className = 'scanner-status idle';
         document.getElementById('btnToggleScanner').innerHTML = '<i class="fas fa-camera"></i> เปิดกล้อง';
         if (this.flashOn) {
@@ -925,9 +1023,7 @@ class StockApp {
                     this.showToast('⚠️ กล้องนี้ไม่รองรับการซูม', 'warning');
                 }
             }
-        } catch (err) {
-            console.error('Zoom error:', err);
-        }
+        } catch (err) { console.error('Zoom error:', err); }
     }
 
     zoomIn() { this.setZoom(this.currentZoom + 0.5); }
@@ -944,11 +1040,13 @@ class StockApp {
 
     async lookupProduct(barcode) {
         if (!barcode) return;
+        // ค้นหาจากบาร์โค้ด
         let product = this.products.find(p => p.barcodes && p.barcodes.includes(barcode));
         if (!product && barcode.startsWith('TEMP')) {
             product = this.products.find(p => p.primaryBarcode === barcode);
         }
         if (!product) {
+            // ค้นหาจากประวัติ
             const historyId = this.barcodeHistory[barcode];
             if (historyId) {
                 const histProduct = this.products.find(p => p.id === historyId);
@@ -969,6 +1067,7 @@ class StockApp {
             }
         }
         if (!product) {
+            // ถ้าไม่เจอ ให้ค้นหาด้วยชื่อ
             const searchName = prompt('🔍 ไม่พบบาร์โค้ด: ' + barcode + '\nพิมพ์ชื่อสินค้าเพื่อค้นหา:');
             if (searchName) {
                 const matches = this.products.filter(p =>
@@ -1043,6 +1142,10 @@ class StockApp {
         document.getElementById('productBarcode').textContent = '🏷️ บาร์โค้ด: ' + (product.barcodes || []).join(', ');
         document.getElementById('productStock').textContent = '📊 ในระบบ: ' + (product.stock || 0) + ' ชิ้น | 💰 ต้นทุน: ' + (product.cost || 0).toFixed(2);
         document.getElementById('qtyInput').value = 1;
+        
+        // แสดงการแจ้งเตือนหมดอายุ
+        this.showExpiryWarning(product);
+        
         if (product.lot) {
             document.getElementById('lotSelection').style.display = 'block';
             document.getElementById('lotList').innerHTML =
@@ -1050,7 +1153,7 @@ class StockApp {
                     <div class="lot-radio"></div>
                     <div>
                         <strong>Lot: ${product.lot}</strong>
-                        <div style="font-size:11px;color:var(--text-muted);">
+                        <div style="font-size:10px;color:var(--text-muted);">
                             💰 ทุน: ${(product.cost || 0).toFixed(2)}
                             ${product.expiry ? ' | ⏳ หมดอายุ: ' + product.expiry : ''}
                         </div>
@@ -1203,7 +1306,7 @@ class StockApp {
         const container = document.getElementById('recentScans');
         document.getElementById('scanCount').textContent = this.sessionItems.length;
         if (this.sessionItems.length === 0) {
-            container.innerHTML = `<p style="text-align:center;color:var(--text-muted);padding:20px;"><i class="fas fa-inbox" style="font-size:24px;display:block;margin-bottom:8px;opacity:0.5;"></i>ยังไม่มีประวัติการสแกนในรอบนี้</p>`;
+            container.innerHTML = `<p style="text-align:center;color:var(--text-muted);padding:16px;font-size:12px;"><i class="fas fa-inbox" style="font-size:20px;display:block;margin-bottom:6px;opacity:0.5;"></i>ยังไม่มีประวัติการสแกน</p>`;
             return;
         }
         container.innerHTML = this.sessionItems.slice(-20).reverse().map(item => {
@@ -1289,13 +1392,13 @@ class StockApp {
     renderShelfList(cabinet) {
         const list = document.getElementById('shelfList');
         if (cabinet.shelves.length === 0) {
-            list.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:15px;">ยังไม่มีชั้นในตู้นี้</p>';
+            list.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:12px;font-size:12px;">ยังไม่มีชั้นในตู้นี้</p>';
             return;
         }
         list.innerHTML = cabinet.shelves.sort((a, b) => a.number - b.number).map(s =>
-            `<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--bg-body);border-radius:8px;margin-bottom:6px;border:1px solid var(--border-color);">
-                <span style="font-weight:600;">ชั้นที่ ${s.number}</span>
-                <button class="btn btn-danger btn-sm" onclick="app.deleteShelf(${cabinet.id}, ${s.id})"><i class="fas fa-trash"></i> ลบ</button>
+            `<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 10px;background:var(--bg-body);border-radius:6px;margin-bottom:4px;border:1px solid var(--border-color);">
+                <span style="font-weight:600;font-size:12px;">ชั้นที่ ${s.number}</span>
+                <button class="btn btn-danger btn-sm" onclick="app.deleteShelf(${cabinet.id}, ${s.id})" style="font-size:10px;padding:4px 8px;"><i class="fas fa-trash"></i> ลบ</button>
             </div>`
         ).join('');
     }
@@ -1303,7 +1406,7 @@ class StockApp {
     renderMap() {
         const grid = document.getElementById('cabinetGrid');
         if (this.locations.length === 0) {
-            grid.innerHTML = `<div style="text-align:center;color:var(--text-muted);padding:40px;grid-column:1/-1;"><i class="fas fa-boxes" style="font-size:40px;display:block;margin-bottom:8px;opacity:0.5;"></i>ยังไม่มีตู้สินค้า<br><small>เพิ่มตู้ด้านบนเพื่อเริ่มจัดผังร้านของคุณ</small></div>`;
+            grid.innerHTML = `<div style="text-align:center;color:var(--text-muted);padding:30px;grid-column:1/-1;font-size:13px;"><i class="fas fa-boxes" style="font-size:32px;display:block;margin-bottom:6px;opacity:0.5;"></i>ยังไม่มีตู้สินค้า<br><small>เพิ่มตู้ด้านบนเพื่อเริ่มจัดผังร้าน</small></div>`;
             return;
         }
         grid.innerHTML = this.locations.map(cabinet => {
@@ -1311,19 +1414,19 @@ class StockApp {
             return `<div class="cabinet-block ${this.selectedCabinetId === cabinet.id ? 'selected' : ''}" data-cabinet="${cabinet.id}" onclick="app.selectCabinet(${cabinet.id})" ondblclick="app.selectScanLocation('cab_${cabinet.id}'); app.switchTab('scan')">
                     <div class="cabinet-icon"><i class="fas fa-archive"></i></div>
                     <div class="cabinet-name">${cabinet.name}</div>
-                    <div style="font-size:11px;color:var(--text-muted);">${cabinet.shelves.length} ชั้นวาง</div>
-                    ${counted > 0 ? `<div style="font-size:10px;color:var(--success);margin-top:4px;font-weight:600;"><i class="fas fa-check-circle"></i> นับแล้ว ${counted}</div>` : ''}
+                    <div style="font-size:10px;color:var(--text-muted);">${cabinet.shelves.length} ชั้นวาง</div>
+                    ${counted > 0 ? `<div style="font-size:9px;color:var(--success);margin-top:3px;font-weight:600;"><i class="fas fa-check-circle"></i> นับแล้ว ${counted}</div>` : ''}
                     <div class="cabinet-shelves">
-                        ${cabinet.shelves.sort((a,b) => a.number - b.number).slice(0,4).map(s => {
+                        ${cabinet.shelves.sort((a,b) => a.number - b.number).slice(0,3).map(s => {
                             const countedOnShelf = this.sessionItems.filter(i => i.location === 'cab_' + cabinet.id + '_shelf_' + s.id).length;
                             return `<div class="shelf-row ${countedOnShelf > 0 ? 'selected' : ''}" onclick="event.stopPropagation(); app.selectScanLocation('cab_${cabinet.id}_shelf_${s.id}'); app.switchTab('scan');">
                                     <span>ชั้น ${s.number}</span>
                                     ${countedOnShelf > 0 ? '<span class="shelf-count"><i class="fas fa-check"></i></span>' : '<span class="shelf-count">-</span>'}
                                 </div>`;
                         }).join('')}
-                        ${cabinet.shelves.length > 4 ? `<div style="font-size:10px;color:var(--text-muted);text-align:center;margin-top:2px;">+ อีก ${cabinet.shelves.length - 4} ชั้น</div>` : ''}
+                        ${cabinet.shelves.length > 3 ? `<div style="font-size:9px;color:var(--text-muted);text-align:center;margin-top:2px;">+ อีก ${cabinet.shelves.length - 3} ชั้น</div>` : ''}
                     </div>
-                    <button class="btn btn-danger btn-sm" onclick="event.stopPropagation(); app.deleteCabinet(${cabinet.id})" style="margin-top:10px;width:100%;font-size:10px;padding:4px;"><i class="fas fa-trash"></i> ลบตู้</button>
+                    <button class="btn btn-danger btn-sm" onclick="event.stopPropagation(); app.deleteCabinet(${cabinet.id})" style="margin-top:8px;width:100%;font-size:9px;padding:3px;"><i class="fas fa-trash"></i> ลบตู้</button>
                 </div>`;
         }).join('');
     }
@@ -1349,8 +1452,6 @@ class StockApp {
             const cabinetId = parseInt(parts[0]);
             document.querySelector('[data-cabinet="' + cabinetId + '"]')?.classList.add('selected');
         }
-        const label = document.getElementById('locationSelect').selectedOptions[0]?.text || 'ตำแหน่งที่เลือก';
-        this.showToast('📍 ' + label, 'info');
     }
 
     changeLocation() {
@@ -1368,17 +1469,15 @@ class StockApp {
         ).slice(0, 15);
         if (results.length === 0) {
             container.style.display = 'block';
-            container.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:12px;">❌ ไม่พบสินค้า</p>';
+            container.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:10px;font-size:12px;">❌ ไม่พบสินค้า</p>';
             return;
         }
         container.style.display = 'block';
         container.innerHTML = results.map(p =>
-            `<div class="lot-item" onclick="app.selectProductFromSearch('${p.id}')">
+            `<div class="lot-item" onclick="app.selectProductFromSearch('${p.id}')" style="padding:8px 12px;font-size:12px;">
                 <div>
                     <strong>${p.name}</strong>
-                    <div style="font-size:11px;color:var(--text-muted);">
-                        📦 จำนวน: ${p.stock} | 💰 ทุน: ${p.cost}
-                    </div>
+                    <div style="font-size:10px;color:var(--text-muted);">📦 จำนวน: ${p.stock} | 💰 ทุน: ${p.cost}</div>
                 </div>
             </div>`
         ).join('');
@@ -1460,7 +1559,7 @@ class StockApp {
             });
             html += '</tbody></table>';
             if (this.pendingRows.length > 5) {
-                html += '<p style="text-align:center;font-size:12px;color:var(--text-muted);padding:8px;">... และอีก ' +
+                html += '<p style="text-align:center;font-size:11px;color:var(--text-muted);padding:6px;">... และอีก ' +
                     (this.pendingRows.length - 5) + ' รายการ</p>';
             }
             table.innerHTML = html;
@@ -1484,9 +1583,9 @@ class StockApp {
         const fields = ['barcode', 'name', 'stock', 'lot', 'cost', 'expiry'];
         const labels = { barcode: '🏷️ บาร์โค้ด', name: '📦 ชื่อสินค้า', stock: '🔢 จำนวน', lot: '🔖 Lot', cost: '💰 ต้นทุน', expiry: '⏳ วันหมดอายุ' };
         div.innerHTML = fields.map(f =>
-            '<div style="margin-bottom:8px;">' +
-            '<label style="font-size:12px;font-weight:600;">' + labels[f] + '</label>' +
-            '<select class="input" id="map_' + f + '">' +
+            '<div style="margin-bottom:6px;">' +
+            '<label style="font-size:11px;font-weight:600;">' + labels[f] + '</label>' +
+            '<select class="input" id="map_' + f + '" style="font-size:12px;padding:6px 10px;">' +
             '<option value="">-- ไม่ใช้งาน --</option>' +
             this.pendingHeaders.map(h => '<option value="' + h + '">' + h + '</option>').join('') +
             '</select>' +
@@ -1669,7 +1768,7 @@ class StockApp {
     renderReport(items) {
         const tbody = document.getElementById('reportBody');
         if (items.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="9" style="text-align:center;padding:20px;color:var(--text-muted);"><i class="fas fa-inbox" style="font-size:24px;display:block;margin-bottom:8px;opacity:0.5;"></i>ยังไม่มีข้อมูลสรุปผล</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="9" style="text-align:center;padding:16px;color:var(--text-muted);font-size:12px;"><i class="fas fa-inbox" style="font-size:20px;display:block;margin-bottom:6px;opacity:0.5;"></i>ยังไม่มีข้อมูลสรุปผล</td></tr>`;
             return;
         }
         tbody.innerHTML = items.map(item => {
@@ -1814,7 +1913,7 @@ let app = null;
 document.addEventListener('DOMContentLoaded', function() {
     app = new StockApp();
     window.app = app;
-    console.log('✅ PharmacyPro v2.0.3 พร้อมใช้งาน!');
+    console.log('✅ PharmacyPro v2.0.4 พร้อมใช้งาน!');
 });
 
 // ================================================================
@@ -1822,6 +1921,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // ================================================================
 function switchTab(name) { if (app) app.switchTab(name); }
 function toggleTheme() { if (app) app.toggleTheme(); }
+function changeBranch() { if (app) app.changeBranch(); }
 function forceSync() { if (app) app.forceSync(); }
 function handleFile(event) { if (app) app.handleFile(event); }
 function selectPOS(pos) { if (app) app.selectPOS(pos); }
@@ -1851,7 +1951,7 @@ function exportBarcodeMap() { if (app) app.exportBarcodeMap(); }
 function syncToGoogleSheets() { if (app) app.syncToGoogleSheets(app.sessionItems); }
 function clearAllData() { if (app) app.clearAllData(); }
 
-console.log('✅ PharmacyPro v2.0.3 พร้อมใช้งาน!');
+console.log('✅ PharmacyPro v2.0.4 พร้อมใช้งาน!');
 console.log('📖 เริ่มต้นใช้งาน: อัปโหลดไฟล์ Excel/CSV หรือเชื่อมต่อ Google Sheets');
 </script>
 </body>
