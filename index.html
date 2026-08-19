@@ -1225,9 +1225,25 @@ async function startCamera() {
     }
 }
                     });
-                    video.srcObject = stream;
-                    await video.play();
-                    video.style.display = 'block';
+                    // 1. เช็คก่อนว่ากำลังเปิดกล้องค้างอยู่หรือไม่ ถ้ามีให้เคลียร์ทิ้งไปก่อน (ป้องกัน Warning สีเหลือง)
+if (video.srcObject) {
+    video.srcObject.getTracks().forEach(track => track.stop());
+    video.srcObject = null;
+}
+
+// 2. ขอเปิดกล้องใหม่
+const stream = await navigator.mediaDevices.getUserMedia({
+    video: { facingMode: 'environment', width: { ideal: 640 }, height: { ideal: 480 } } // ใช้ค่า config เดิมของคุณ
+});
+
+// 3. โยนสตรีมเข้า video
+video.srcObject = stream;
+
+// 4. รอให้กล้องพร้อมแล้วค่อยสั่ง play (ป้องกัน AbortError สีแดง และกล้องกระพริบ)
+await video.play();
+
+// 5. แสดงผลกล้อง
+video.style.display = 'block';
 
                     // ✅ สร้าง CodeReader
                     this.codeReader = new ZXing.BrowserMultiFormatReader();
@@ -1820,12 +1836,7 @@ async function startCamera() {
         console.log('✅ PharmacyPro v2.0.0 พร้อมใช้งาน!');
         console.log('📖 เริ่มต้นใช้งาน: อัปโหลดไฟล์ Excel/CSV หรือเชื่อมต่อ Google Sheets');
         <!-- เพิ่มตรงนี้ เพื่อโหลดตัวถอดรหัสบาร์โค้ด -->
-<script src="https://unpkg.com/@zxing/browser@0.1.4/dist/index.js"></script>
-<script src="https://unpkg.com/@zxing/library@0.20.0/dist/index.js"></script>
 
-<!-- ตามด้วยโค้ด JavaScript ของคุณ (โค้ดที่คุณแก้ไขในขั้นตอนที่ 1) -->
-<script>
-    // ... (วางโค้ด JavaScript ที่แก้ไขแล้วในขั้นตอนที่ 1 ไว้ตรงนี้) ...
 </script>
 </body>
 </html>
