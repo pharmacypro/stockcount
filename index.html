@@ -8,7 +8,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="ระบบนับสินค้าร้านยา">
     <meta name="theme-color" content="#4f46e5">
-    <title>ระบบนับสินค้าร้านยา v2.0.7</title>
+    <title>ระบบนับสินค้าร้านยา v2.0.8</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,7 +38,7 @@
 
     <style>
         /* ============================================================
-           CSS - สไตล์ทั้งหมด
+           CSS - สไตล์ทั้งหมด (ปรับให้เหมาะกับมือถือ)
            ============================================================ */
         :root {
             --primary: #4f46e5;
@@ -88,29 +88,28 @@
         ::-webkit-scrollbar-track { background:var(--bg-body); }
         ::-webkit-scrollbar-thumb { background:var(--primary-light); border-radius:3px; }
 
-        /* ===== HEADER ===== */
         .header { background:var(--primary-gradient); color:#fff; padding:12px 16px; position:sticky; top:0; z-index:100; box-shadow:0 4px 30px rgba(79,70,229,0.3); }
         .header-top { display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap; }
         .logo { display:flex; align-items:center; gap:10px; text-decoration:none; color:#fff; flex-shrink:0; }
         .logo-icon { width:38px; height:38px; background:rgba(255,255,255,0.15); border-radius:var(--radius-md); display:flex; align-items:center; justify-content:center; font-size:17px; backdrop-filter:blur(4px); border:2px solid rgba(255,255,255,0.2); flex-shrink:0; }
-        .logo-text { display:flex; flex-direction:column; line-height:1.1; }
-        .logo-text .brand { font-family:'Outfit',sans-serif; font-size:14px; font-weight:800; letter-spacing:-0.3px; display:flex; flex-wrap:wrap; align-items:center; gap:4px; }
-        .logo-text .brand .main { display:block; font-size:15px; }
-        .logo-text .brand .version { font-size:8px; font-weight:600; opacity:0.7; background:rgba(255,255,255,0.15); padding:1px 6px; border-radius:10px; margin-left:2px; }
-        .logo-text .tagline { font-size:8px; opacity:0.75; font-weight:400; display:block; }
+        .logo-text .brand { font-family:'Outfit',sans-serif; font-size:14px; font-weight:800; display:flex; align-items:center; gap:4px; flex-wrap:wrap; }
+        .logo-text .brand .main { font-size:15px; }
+        .logo-text .brand .version { font-size:8px; font-weight:600; opacity:0.7; background:rgba(255,255,255,0.15); padding:1px 6px; border-radius:10px; }
+        .logo-text .tagline { font-size:8px; opacity:0.75; display:block; }
         .header-actions { display:flex; align-items:center; gap:5px; flex-shrink:0; flex-wrap:wrap; }
-        .network-badge { display:inline-flex; align-items:center; gap:4px; padding:3px 8px; border-radius:20px; font-size:8px; font-weight:700; background:rgba(255,255,255,0.15); cursor:pointer; border:1px solid rgba(255,255,255,0.1); backdrop-filter:blur(4px); white-space:nowrap; }
-        .network-dot { width:6px; height:6px; border-radius:50%; transition:var(--transition); }
+        .network-badge { display:inline-flex; align-items:center; gap:4px; padding:3px 8px; border-radius:20px; font-size:8px; font-weight:700; background:rgba(255,255,255,0.15); cursor:pointer; border:1px solid rgba(255,255,255,0.1); }
+        .network-dot { width:6px; height:6px; border-radius:50%; }
         .network-badge.online .network-dot { background:var(--success); box-shadow:0 0 10px rgba(16,185,129,0.5); }
         .network-badge.offline .network-dot { background:var(--danger); }
-        .network-badge.syncing .network-dot { background:var(--warning); animation:pulse-dot 1s infinite; }
-        @keyframes pulse-dot { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
-        .theme-toggle { background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.1); color:#fff; width:28px; height:28px; border-radius:50%; cursor:pointer; font-size:12px; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(4px); flex-shrink:0; }
-        
+        .theme-toggle { background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.1); color:#fff; width:28px; height:28px; border-radius:50%; cursor:pointer; font-size:12px; display:flex; align-items:center; justify-content:center; }
+
         .status-bar { background:var(--warning-light); color:#92400e; padding:5px 12px; font-size:10px; font-weight:600; display:flex; align-items:center; gap:6px; border-bottom:2px solid #fcd34d; flex-wrap:wrap; }
         [data-theme="dark"] .status-bar { background:#451a03; color:#fcd34d; border-bottom-color:#78350f; }
-        .status-dot { width:5px; height:5px; border-radius:50%; background:var(--warning); animation:pulse-dot 1.5s infinite; flex-shrink:0; }
+        .status-dot { width:5px; height:5px; border-radius:50%; background:var(--warning); animation:pulse-dot 1.5s infinite; }
+        @keyframes pulse-dot { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
         .status-text { flex:1; font-size:10px; }
+        .auto-sync-badge { display:inline-flex; align-items:center; gap:3px; font-size:8px; background:var(--success-light); color:#065f46; padding:2px 6px; border-radius:8px; font-weight:600; }
+        [data-theme="dark"] .auto-sync-badge { background:#064e3b; color:#6ee7b7; }
 
         .main-content { max-width:640px; margin:0 auto; padding:10px; }
 
@@ -130,10 +129,8 @@
         .card-title { font-family:'Outfit',sans-serif; font-size:13px; font-weight:700; margin-bottom:8px; display:flex; align-items:center; gap:6px; color:var(--text-main); }
         .card-title i { color:var(--primary); width:18px; text-align:center; font-size:13px; }
 
-        /* ===== BUTTONS ===== */
         .btn { padding:8px 14px; border:none; border-radius:var(--radius-md); font-size:11px; font-weight:600; cursor:pointer; transition:var(--transition); display:inline-flex; align-items:center; justify-content:center; gap:5px; box-shadow:var(--shadow-sm); font-family:'Plus Jakarta Sans',sans-serif; }
         .btn:active { transform:scale(0.96); }
-        .btn:disabled { opacity:0.5; cursor:not-allowed; }
         .btn-primary { background:var(--primary-gradient); color:#fff; }
         .btn-success { background:var(--success); color:#fff; }
         .btn-danger { background:var(--danger); color:#fff; }
@@ -148,7 +145,6 @@
         .filter-group { display:flex; gap:4px; flex-wrap:wrap; margin:8px 0; }
         .filter-btn { padding:4px 10px; border:2px solid var(--border-color); border-radius:var(--radius-sm); background:transparent; font-size:10px; font-weight:600; cursor:pointer; transition:var(--transition); color:var(--text-muted); }
         .filter-btn.active { border-color:var(--primary); background:var(--primary); color:#fff; }
-        .filter-btn:hover { border-color:var(--primary-light); }
 
         /* ===== SCANNER ===== */
         .scanner-wrapper { position:relative; border-radius:var(--radius-md); overflow:hidden; background:#0f172a; min-height:200px; box-shadow:inset 0 2px 20px rgba(0,0,0,0.4); }
@@ -169,8 +165,7 @@
         .scanner-status.error { color:var(--danger); }
         .scanner-status.idle { color:var(--text-muted); }
 
-        /* ===== PRODUCT DETAIL ===== */
-        .product-detail { background:linear-gradient(135deg, var(--success-light) 0%, #f0fdf4 100%); border:2px solid #6ee7b7; border-radius:var(--radius-lg); padding:14px; margin-bottom:10px; display:none; animation:fadeSlideIn 0.3s ease; }
+        .product-detail { background:linear-gradient(135deg, var(--success-light) 0%, #f0fdf4 100%); border:2px solid #6ee7b7; border-radius:var(--radius-lg); padding:14px; margin-bottom:10px; display:none; }
         [data-theme="dark"] .product-detail { background:linear-gradient(135deg, #064e3b 0%, #065f46 100%); border-color:#34d399; }
         .product-name { font-family:'Outfit',sans-serif; font-size:16px; font-weight:700; margin-bottom:2px; color:#065f46; }
         [data-theme="dark"] .product-name { color:#6ee7b7; }
@@ -233,7 +228,6 @@
         td { padding:5px; border-top:1px solid var(--border-color); font-size:10px; }
         .text-center { text-align:center; }
         .text-right { text-align:right; }
-        .text-left { text-align:left; }
         .badge { display:inline-block; padding:2px 6px; border-radius:8px; font-size:9px; font-weight:700; }
         .badge-green { background:var(--success-light); color:#166534; }
         .badge-red { background:var(--danger-light); color:#991b1b; }
@@ -241,9 +235,8 @@
         .badge-warning { background:var(--warning-light); color:#92400e; }
         .uncounted-row { background:var(--danger-light); border-left:4px solid var(--danger); }
 
-        .modal-overlay { position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(15,23,42,0.6); backdrop-filter:blur(8px); z-index:200; display:none; align-items:flex-end; justify-content:center; animation:fadeIn 0.3s ease; }
+        .modal-overlay { position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(15,23,42,0.6); backdrop-filter:blur(8px); z-index:200; display:none; align-items:flex-end; justify-content:center; }
         .modal-overlay.show { display:flex; }
-        @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
         .modal { background:var(--bg-card); border-radius:var(--radius-xl) var(--radius-xl) 0 0; padding:18px; width:100%; max-width:600px; max-height:80vh; overflow-y:auto; animation:slideUp 0.4s cubic-bezier(0.16,1,0.3,1); }
         @keyframes slideUp { from { transform:translateY(100%); } to { transform:translateY(0); } }
         .modal-handle { width:32px; height:3px; background:var(--border-color); border-radius:2px; margin:0 auto 10px; }
@@ -261,7 +254,6 @@
         .flex { display:flex; }
         .flex-between { display:flex; justify-content:space-between; align-items:center; }
         .gap-4 { gap:4px; }
-        .gap-6 { gap:6px; }
         .mt-6 { margin-top:6px; }
         .mt-10 { margin-top:10px; }
         .mb-6 { margin-bottom:6px; }
@@ -274,9 +266,6 @@
         .branch-selector { display:flex; align-items:center; gap:4px; padding:4px 8px; background:rgba(255,255,255,0.1); border-radius:var(--radius-md); border:1px solid rgba(255,255,255,0.15); }
         .branch-selector select { background:transparent; border:none; color:#fff; font-size:10px; font-weight:600; padding:2px 4px; }
         .branch-selector select option { color:#0f172a; }
-
-        .auto-sync-badge { display:inline-flex; align-items:center; gap:3px; font-size:8px; background:var(--success-light); color:#065f46; padding:2px 6px; border-radius:8px; font-weight:600; }
-        [data-theme="dark"] .auto-sync-badge { background:#064e3b; color:#6ee7b7; }
 
         .summary-grid-4 { display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:8px; }
         .summary-grid-4 .stat-card { padding:8px; }
@@ -291,13 +280,15 @@
         .supplier-header { background:var(--bg-body); padding:8px 12px; font-weight:700; font-size:12px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-color); }
         .supplier-body { padding:6px 12px; }
 
-        /* ===== SEARCH RESULT LIST ===== */
         .search-result-item { display:flex; align-items:center; padding:8px 12px; border-bottom:1px solid var(--border-color); cursor:pointer; transition:var(--transition); gap:10px; }
         .search-result-item:hover { background:var(--bg-body); }
         .search-result-item:last-child { border-bottom:none; }
         .search-result-item .info { flex:1; }
         .search-result-item .info .name { font-weight:600; font-size:13px; }
         .search-result-item .info .detail { font-size:10px; color:var(--text-muted); }
+
+        .search-highlight { background:var(--warning-light); color:#92400e; padding:0 2px; border-radius:2px; }
+        [data-theme="dark"] .search-highlight { background:#78350f; color:#fcd34d; }
 
         @media (max-width:480px) {
             .logo-icon { width:32px; height:32px; font-size:14px; }
@@ -314,10 +305,6 @@
             .pharmacy-grid { grid-template-columns:repeat(auto-fill, minmax(80px, 1fr)); }
             .qty-btn { width:32px; height:32px; font-size:14px; }
             .qty-input { font-size:16px; height:32px; }
-            .header-top { gap:3px; }
-            .header-actions { gap:3px; }
-            .network-badge { font-size:7px; padding:2px 5px; }
-            .theme-toggle { width:24px; height:24px; font-size:10px; }
             .scanner-wrapper { min-height:180px; }
             .scanner-wrapper #reader { min-height:180px; }
             .scanner-placeholder { min-height:180px; }
@@ -337,7 +324,7 @@
             <div class="logo-text">
                 <span class="brand">
                     <span class="main">ระบบนับสินค้า</span>
-                    <span class="version">v2.0.7</span>
+                    <span class="version">v2.0.8</span>
                 </span>
                 <span class="tagline"><i class="fas fa-circle" style="font-size:4px;color:#34d399;margin-right:3px;"></i>ระบบนับสินค้าในร้านยา</span>
             </div>
@@ -386,7 +373,7 @@
                 <i class="fas fa-cloud-upload-alt" style="font-size:28px;color:var(--primary);display:block;margin-bottom:5px;"></i>
                 <p style="font-weight:600;font-size:13px;color:var(--text-main);">อัปโหลดไฟล์ Excel / CSV</p>
                 <p style="font-size:10px;color:var(--text-muted);">.xlsx, .xls, .csv</p>
-                <p style="font-size:9px;color:var(--text-muted);margin-top:3px;">รองรับ: บาร์โค้ด, ชื่อสินค้า, จำนวน, Lot, ต้นทุน, ราคา 1-5, Max, Min, ผู้จัดจำหน่าย, หมดอายุ</p>
+                <p style="font-size:9px;color:var(--text-muted);margin-top:3px;">รองรับ: รหัสสินค้า, ชื่อสินค้า, Lot, ต้นทุนต่อหน่วย, จำนวนคงเหลือ, หน่วยนับ, ราคาขาย 1-5, Stock Max/Min, ผู้จัดจำหน่าย</p>
             </div>
             <input type="file" id="fileInput" accept=".xlsx,.xls,.csv" style="display:none" onchange="handleFile(event)">
             <div style="background:var(--bg-body);border-radius:var(--radius-md);padding:10px;margin-top:6px;">
@@ -485,20 +472,13 @@
                 <button class="btn btn-outline btn-sm" onclick="manualBarcode()" style="font-size:10px;padding:4px 8px;"><i class="fas fa-keyboard"></i> ใส่รหัส</button>
                 <button class="btn btn-sm" onclick="toggleContinuousMode()" id="btnContinuous" style="flex:1;font-size:10px;padding:4px 8px;background:var(--text-muted);color:#fff;"><i class="fas fa-infinity"></i> ต่อเนื่อง: ปิด</button>
             </div>
-            <!-- ซ่อนปุ่มซูมและไฟฉาย (ถ้าอุปกรณ์ไม่รองรับจะซ่อนให้) -->
-            <div style="display:flex;gap:5px;margin-top:5px;flex-wrap:wrap;" id="advancedControls">
-                <button class="btn btn-outline btn-sm" onclick="zoomIn()" id="btnZoomIn" style="display:none;font-size:10px;padding:4px 8px;"><i class="fas fa-search-plus"></i> ซูมเข้า</button>
-                <button class="btn btn-outline btn-sm" onclick="zoomOut()" id="btnZoomOut" style="display:none;font-size:10px;padding:4px 8px;"><i class="fas fa-search-minus"></i> ซูมออก</button>
-                <button class="btn btn-outline btn-sm" onclick="resetZoom()" id="btnZoomReset" style="display:none;font-size:10px;padding:4px 8px;"><i class="fas fa-home"></i> คืนค่า</button>
-                <button class="btn btn-outline btn-sm" onclick="toggleFlash()" id="btnFlash" style="display:none;font-size:10px;padding:4px 8px;"><i class="fas fa-bolt"></i> ไฟฉาย</button>
-            </div>
         </div>
 
         <!-- ===== SEARCH ===== -->
         <div class="card" style="padding:8px;background:var(--success-light);border:2px solid #6ee7b7;">
             <div style="font-size:11px;font-weight:600;margin-bottom:5px;color:#065f46;"><i class="fas fa-search"></i> ค้นหาสินค้าด้วยชื่อ</div>
             <div class="input-group">
-                <input type="text" class="input" id="searchProduct" placeholder="พิมพ์ชื่อสินค้า..." oninput="searchProduct(this.value)" style="flex:1;font-size:11px;padding:6px 10px;background:var(--bg-card);">
+                <input type="text" class="input" id="searchProduct" placeholder="พิมพ์ชื่อสินค้า (พิมพ์บางส่วนก็เจอ)" oninput="searchProduct(this.value)" style="flex:1;font-size:11px;padding:6px 10px;background:var(--bg-card);">
             </div>
             <div id="searchResults" style="display:none;margin-top:5px;max-height:200px;overflow-y:auto;"></div>
         </div>
@@ -732,7 +712,7 @@ console.log('✅ Eruda เปิดใช้งานแล้ว!');
 const CONFIG = {
     GOOGLE_SHEETS: { API_KEY: '', SPREADSHEET_ID: '', RANGES: { PRODUCTS: 'Products!A:L', REPORTS: 'Reports!A:H', HISTORY: 'History!A:F' } },
     APP_NAME: 'ระบบนับสินค้าร้านยา',
-    VERSION: '2.0.7',
+    VERSION: '2.0.8',
     STORE_ID: localStorage.getItem('storeId') || 'default',
     EXPIRY_WARNING_DAYS: 90
 };
@@ -767,8 +747,7 @@ class StockApp {
         this.autoSyncEnabled = true;
         this.branchId = localStorage.getItem('branchId') || 'default';
         this.expiryFilter = 30;
-        // เก็บรายการสินค้าที่ค้นพบ
-        this.searchResults = [];
+        this.pendingBarcode = null;
         this.init();
     }
 
@@ -786,9 +765,7 @@ class StockApp {
         this.initNetworkListener();
         this.updateStatus('พร้อมใช้งาน');
         this.startAutoSync();
-        // ตรวจสอบการรองรับซูม/ไฟฉาย
-        this.checkDeviceCapabilities();
-        console.log('✅ ระบบนับสินค้าร้านยา v2.0.7 พร้อมใช้งาน!');
+        console.log('✅ ระบบนับสินค้าร้านยา v2.0.8 พร้อมใช้งาน!');
         if (this.products.length === 0) {
             this.updateStatus('📥 กรุณานำเข้าข้อมูลสินค้าก่อนใช้งาน');
             this.showToast('📥 กรุณานำเข้าข้อมูลสินค้าจาก Excel หรือ Google Sheets', 'info');
@@ -796,16 +773,6 @@ class StockApp {
         this.updateOrderTab();
         this.updateExpiryTab();
         this.updateProfitTab();
-    }
-
-    // ===== CHECK DEVICE CAPABILITIES =====
-    async checkDeviceCapabilities() {
-        // ตรวจสอบว่ากล้องรองรับ zoom หรือไม่ (จะตรวจสอบตอนเปิดกล้อง)
-        // ซ่อนปุ่มซูมและไฟฉายไว้ก่อน จะแสดงเมื่อเปิดกล้องและตรวจสอบได้
-        document.getElementById('btnZoomIn').style.display = 'none';
-        document.getElementById('btnZoomOut').style.display = 'none';
-        document.getElementById('btnZoomReset').style.display = 'none';
-        document.getElementById('btnFlash').style.display = 'none';
     }
 
     // ===== BRANCH =====
@@ -905,8 +872,8 @@ class StockApp {
     checkExpiryWarnings() {
         const today = new Date();
         this.products.forEach(product => {
-            if (product.expiry) {
-                const expiryDate = new Date(product.expiry);
+            if (product.expiryDate) {
+                const expiryDate = new Date(product.expiryDate);
                 const diffDays = Math.ceil((expiryDate - today) / (1000 * 60 * 60 * 24));
                 if (diffDays <= 90 && diffDays >= 0) {
                     this.showToast('⚠️ ' + product.name + ' หมดอายุใน ' + diffDays + ' วัน', 'warning');
@@ -918,8 +885,8 @@ class StockApp {
     }
 
     showExpiryWarning(product) {
-        if (product.expiry) {
-            const expiryDate = new Date(product.expiry);
+        if (product.expiryDate) {
+            const expiryDate = new Date(product.expiryDate);
             const today = new Date();
             const diffDays = Math.ceil((expiryDate - today) / (1000 * 60 * 60 * 24));
             
@@ -928,10 +895,10 @@ class StockApp {
             
             if (diffDays < 0) {
                 warning.style.display = 'flex';
-                text.textContent = '🚫 สินค้าหมดอายุแล้ว! (หมดอายุเมื่อ ' + this.formatDate(product.expiry) + ')';
+                text.textContent = '🚫 สินค้าหมดอายุแล้ว! (หมดอายุเมื่อ ' + this.formatDate(product.expiryDate) + ')';
             } else if (diffDays <= CONFIG.EXPIRY_WARNING_DAYS) {
                 warning.style.display = 'flex';
-                text.textContent = '⚠️ สินค้าหมดอายุใน ' + diffDays + ' วัน (หมดอายุ ' + this.formatDate(product.expiry) + ')';
+                text.textContent = '⚠️ สินค้าหมดอายุใน ' + diffDays + ' วัน (หมดอายุ ' + this.formatDate(product.expiryDate) + ')';
             } else {
                 warning.style.display = 'none';
             }
@@ -940,27 +907,38 @@ class StockApp {
         }
     }
 
-    // ===== FORMAT DATE =====
+    // ===== FORMAT DATE - แสดงเป็น DD/MM/YYYY (ค.ศ.) =====
     formatDate(dateStr) {
         if (!dateStr) return '-';
         try {
-            // ถ้าเป็นวันที่จาก Excel (ตัวเลข)
+            // ถ้าเป็นวันที่จาก Excel (ตัวเลข serial number)
             if (typeof dateStr === 'number' && dateStr > 1000) {
-                // Excel date serial number
                 const d = new Date((dateStr - 25569) * 86400 * 1000);
                 if (!isNaN(d.getTime())) {
                     const day = String(d.getDate()).padStart(2, '0');
                     const month = String(d.getMonth() + 1).padStart(2, '0');
-                    const year = d.getFullYear() + 543;
+                    const year = d.getFullYear();
                     return `${day}/${month}/${year}`;
                 }
             }
+            // ถ้าเป็น string ที่เป็น date
             const d = new Date(dateStr);
             if (isNaN(d.getTime())) return dateStr;
             const day = String(d.getDate()).padStart(2, '0');
             const month = String(d.getMonth() + 1).padStart(2, '0');
-            const year = d.getFullYear() + 543;
+            const year = d.getFullYear();
             return `${day}/${month}/${year}`;
+        } catch(e) { return dateStr; }
+    }
+
+    // ===== FORMAT DATE FOR DISPLAY (มีชื่อเดือน) =====
+    formatDateMonth(dateStr) {
+        if (!dateStr) return '-';
+        try {
+            const d = new Date(dateStr);
+            if (isNaN(d.getTime())) return dateStr;
+            const monthNames = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
+            return monthNames[d.getMonth()] + ' ' + d.getFullYear();
         } catch(e) { return dateStr; }
     }
 
@@ -1137,7 +1115,7 @@ class StockApp {
                 config,
                 (decodedText) => {
                     const now = Date.now();
-                    if (now - this.lastScan > 2000) {
+                    if (now - this.lastScan > 1500) {
                         this.lastScan = now;
                         if (navigator.vibrate) navigator.vibrate(200);
                         this.onScan(decodedText);
@@ -1155,36 +1133,12 @@ class StockApp {
             this.scanning = true;
             this.showToast('📷 กล้องพร้อมสแกนบาร์โค้ดแล้ว', 'success');
 
-            // ตรวจสอบการรองรับซูมและไฟฉาย
-            await this.checkScannerCapabilities();
-
         } catch (err) {
             console.error('Scanner error:', err);
             document.getElementById('scannerStatus').innerHTML = '<i class="fas fa-exclamation-circle"></i> ' + err.message;
             document.getElementById('scannerStatus').className = 'scanner-status error';
             this.showToast('❌ เปิดกล้องไม่สำเร็จ', 'error');
             this.stopScanner();
-        }
-    }
-
-    async checkScannerCapabilities() {
-        try {
-            const track = await this.html5Scanner.getVideoTrack();
-            if (track) {
-                const capabilities = track.getCapabilities();
-                // ตรวจสอบ zoom
-                if (capabilities.zoom) {
-                    document.getElementById('btnZoomIn').style.display = 'inline-flex';
-                    document.getElementById('btnZoomOut').style.display = 'inline-flex';
-                    document.getElementById('btnZoomReset').style.display = 'inline-flex';
-                }
-                // ตรวจสอบ torch (ไฟฉาย)
-                if (capabilities.torch) {
-                    document.getElementById('btnFlash').style.display = 'inline-flex';
-                }
-            }
-        } catch (e) {
-            console.log('ไม่สามารถตรวจสอบความสามารถกล้องได้:', e);
         }
     }
 
@@ -1199,15 +1153,6 @@ class StockApp {
         document.getElementById('scannerStatus').innerHTML = '<i class="fas fa-circle" style="font-size:8px;"></i> กล้องปิดอยู่';
         document.getElementById('scannerStatus').className = 'scanner-status idle';
         document.getElementById('btnToggleScanner').innerHTML = '<i class="fas fa-camera"></i> เปิดกล้อง';
-        if (this.flashOn) {
-            this.flashOn = false;
-            document.getElementById('btnFlash').style.background = '';
-        }
-        // ซ่อนปุ่มซูม/ไฟฉาย
-        document.getElementById('btnZoomIn').style.display = 'none';
-        document.getElementById('btnZoomOut').style.display = 'none';
-        document.getElementById('btnZoomReset').style.display = 'none';
-        document.getElementById('btnFlash').style.display = 'none';
     }
 
     async toggleScanner() {
@@ -1219,57 +1164,7 @@ class StockApp {
     }
 
     // ============================================================
-    // ✅ FLASH
-    // ============================================================
-    async toggleFlash() {
-        if (!this.scanning || !this.html5Scanner) {
-            this.showToast('⚠️ กรุณาเปิดกล้องก่อน', 'warning');
-            return;
-        }
-        try {
-            this.flashOn = !this.flashOn;
-            await this.html5Scanner.toggleTorch(this.flashOn);
-            document.getElementById('btnFlash').style.background = this.flashOn ? 'var(--warning)' : '';
-            this.showToast(this.flashOn ? '💡 เปิดไฟฉาย' : '💡 ปิดไฟฉาย', 'info');
-        } catch (err) {
-            console.error('Flash error:', err);
-            this.showToast('⚠️ อุปกรณ์นี้ไม่รองรับไฟฉาย', 'warning');
-            this.flashOn = false;
-            document.getElementById('btnFlash').style.background = '';
-        }
-    }
-
-    // ============================================================
-    // ✅ ZOOM
-    // ============================================================
-    async setZoom(zoomLevel) {
-        if (!this.scanning || !this.html5Scanner) {
-            this.showToast('⚠️ กรุณาเปิดกล้องก่อน', 'warning');
-            return;
-        }
-        try {
-            const track = await this.html5Scanner.getVideoTrack();
-            if (track) {
-                const capabilities = track.getCapabilities();
-                if (capabilities.zoom) {
-                    const min = capabilities.zoom.min || 1;
-                    const max = capabilities.zoom.max || 4;
-                    this.currentZoom = Math.min(max, Math.max(min, zoomLevel));
-                    await track.applyConstraints({ advanced: [{ zoom: this.currentZoom }] });
-                    this.showToast(`🔍 ซูม ${this.currentZoom.toFixed(1)}x`, 'info');
-                } else {
-                    this.showToast('⚠️ กล้องนี้ไม่รองรับการซูม', 'warning');
-                }
-            }
-        } catch (err) { console.error('Zoom error:', err); }
-    }
-
-    zoomIn() { this.setZoom(this.currentZoom + 0.5); }
-    zoomOut() { this.setZoom(this.currentZoom - 0.5); }
-    resetZoom() { this.setZoom(1.0); }
-
-    // ============================================================
-    // ✅ BARCODE HANDLING - ปรับปรุงการค้นหา
+    // ✅ BARCODE HANDLING - ระบบค้นหาและผูกบาร์โค้ด
     // ============================================================
     onScan(barcode) {
         this.currentBarcode = barcode;
@@ -1279,68 +1174,62 @@ class StockApp {
     async lookupProduct(barcode) {
         if (!barcode) return;
         
-        // ค้นหาจากบาร์โค้ด (ทั้ง barcodes และ primaryBarcode)
+        // 1. ค้นหาจากบาร์โค้ดในระบบ (ทั้ง barcodes และ primaryBarcode)
         let product = this.products.find(p => {
             if (p.barcodes && p.barcodes.includes(barcode)) return true;
             if (p.primaryBarcode === barcode) return true;
             return false;
         });
         
-        // ถ้าไม่เจอ แต่เป็น TEMP barcode
-        if (!product && barcode.startsWith('TEMP')) {
-            product = this.products.find(p => p.primaryBarcode === barcode);
+        // 2. ถ้าเจอ → แสดงสินค้าเลย
+        if (product) {
+            this.currentProduct = product;
+            this.showProduct(product);
+            return;
         }
         
-        // ถ้าไม่เจอ ให้ค้นหาจากประวัติ
-        if (!product) {
-            const historyId = this.barcodeHistory[barcode];
-            if (historyId) {
-                const histProduct = this.products.find(p => p.id === historyId);
-                if (histProduct) {
-                    if (confirm(`⚠️ บาร์โค้ดนี้เคยใช้กับ "${histProduct.name}"\nต้องการใช้กับสินค้านี้หรือไม่?`)) {
-                        product = histProduct;
-                        if (!product.barcodes) product.barcodes = [product.primaryBarcode];
-                        if (!product.barcodes.includes(barcode)) {
-                            product.barcodes.push(barcode);
-                            await this.saveProduct(product);
-                            this.showToast('✅ เพิ่มบาร์โค้ดใหม่สำเร็จ', 'success');
-                        }
-                        this.currentProduct = product;
-                        this.showProduct(product);
-                        return;
+        // 3. ถ้าไม่เจอ → เช็คประวัติการผูกบาร์โค้ด
+        const historyId = this.barcodeHistory[barcode];
+        if (historyId) {
+            const histProduct = this.products.find(p => p.id === historyId);
+            if (histProduct) {
+                if (confirm(`⚠️ บาร์โค้ดนี้เคยใช้กับ "${histProduct.name}"\nต้องการใช้กับสินค้านี้หรือไม่?`)) {
+                    product = histProduct;
+                    if (!product.barcodes) product.barcodes = [product.primaryBarcode];
+                    if (!product.barcodes.includes(barcode)) {
+                        product.barcodes.push(barcode);
+                        await this.saveProduct(product);
+                        this.barcodeHistory[barcode] = product.id;
+                        localStorage.setItem('barcodeHistory_' + CONFIG.STORE_ID, JSON.stringify(this.barcodeHistory));
+                        this.showToast('✅ ผูกบาร์โค้ดใหม่สำเร็จ', 'success');
                     }
+                    this.currentProduct = product;
+                    this.showProduct(product);
+                    return;
                 }
             }
         }
         
-        // ถ้าไม่เจอ ให้เปิดหน้าต่างค้นหาด้วยชื่อ
-        if (!product) {
-            this.showSearchDialog(barcode);
-            return;
-        }
-        
-        this.currentProduct = product;
-        this.showProduct(product);
+        // 4. ถ้าไม่เจอ → ให้ค้นหาด้วยชื่อ (เก็บ pending barcode ไว้)
+        this.pendingBarcode = barcode;
+        this.showSearchDialog(barcode);
     }
 
-    // ===== SEARCH DIALOG - ค้นหาสินค้าด้วยชื่อ =====
+    // ===== SEARCH DIALOG - แสดงหน้าต่างค้นหา =====
     showSearchDialog(barcode) {
-        // แสดงช่องค้นหาและให้โฟกัส
         const searchInput = document.getElementById('searchProduct');
         searchInput.value = '';
         searchInput.focus();
-        searchInput.placeholder = '🔍 พิมพ์ชื่อสินค้าที่ต้องการ...';
+        searchInput.placeholder = '🔍 พิมพ์ชื่อสินค้า... (พิมพ์บางส่วนก็เจอ)';
         
-        // แสดงข้อความแจ้ง
         this.showToast('🔍 ไม่พบบาร์โค้ด: ' + barcode + ' กรุณาค้นหาด้วยชื่อสินค้า', 'warning');
         
-        // เก็บ barcode ไว้สำหรับผูกภายหลัง
-        this.pendingBarcode = barcode;
-        
-        // เมื่อเลือกสินค้าจากการค้นหา จะใช้ฟังก์ชัน selectProductFromSearchWithBarcode
+        // เปิดแท็บค้นหาให้เห็น
+        document.getElementById('searchResults').style.display = 'block';
+        document.getElementById('searchResults').innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:10px;font-size:12px;">⌨️ พิมพ์ชื่อสินค้าเพื่อค้นหา</p>';
     }
 
-    // ===== SEARCH PRODUCT - แก้ไขให้ค้นหาแบบ contains =====
+    // ===== SEARCH PRODUCT - ค้นหาแบบ contains =====
     searchProduct(query) {
         const container = document.getElementById('searchResults');
         if (!query || query.length < 1) { 
@@ -1350,7 +1239,7 @@ class StockApp {
         
         // ค้นหาแบบ contains (ไม่ต้องตรงทั้งหมด)
         const results = this.products.filter(p =>
-            p.name.toLowerCase().includes(query.toLowerCase()) && (p.stock || 0) > 0
+            p.name.toLowerCase().includes(query.toLowerCase())
         ).slice(0, 20);
         
         if (results.length === 0) {
@@ -1369,20 +1258,23 @@ class StockApp {
                 const before = name.substring(0, index);
                 const match = name.substring(index, index + query.length);
                 const after = name.substring(index + query.length);
-                displayName = before + '<strong style="color:var(--primary);">' + match + '</strong>' + after;
+                displayName = before + '<span class="search-highlight">' + match + '</span>' + after;
             }
-            return `<div class="search-result-item" onclick="app.selectProductFromSearchWithBarcode('${p.id}')">
+            return `<div class="search-result-item" onclick="app.selectProductFromSearch('${p.id}')">
                         <div class="info">
                             <div class="name">${displayName}</div>
-                            <div class="detail">📦 ${p.stock || 0} ชิ้น | 💰 ${(p.sellPrice1 || p.cost || 0).toFixed(2)} บาท | 🏷️ ${p.primaryBarcode || '-'}</div>
+                            <div class="detail">
+                                🏷️ ${p.primaryBarcode || '-'} | 📦 ${p.stock || 0} ชิ้น | 💰 ${(p.sellPrice1 || p.costPerUnit || 0).toFixed(2)} บาท
+                                ${p.lot ? ' | 🔖 Lot: ' + p.lot : ''}
+                            </div>
                         </div>
                         <span class="badge badge-info">เลือก</span>
                     </div>`;
         }).join('');
     }
 
-    // ===== SELECT PRODUCT FROM SEARCH WITH BARCODE =====
-    async selectProductFromSearchWithBarcode(productId) {
+    // ===== SELECT PRODUCT FROM SEARCH - เลือกสินค้าและผูกบาร์โค้ด =====
+    async selectProductFromSearch(productId) {
         const product = this.products.find(p => p.id === productId);
         if (!product) {
             this.showToast('⚠️ ไม่พบสินค้า', 'error');
@@ -1398,7 +1290,8 @@ class StockApp {
                 await this.saveProduct(product);
                 this.barcodeHistory[this.pendingBarcode] = product.id;
                 localStorage.setItem('barcodeHistory_' + CONFIG.STORE_ID, JSON.stringify(this.barcodeHistory));
-                this.showToast('✅ ผูกบาร์โค้ด ' + this.pendingBarcode + ' กับ ' + product.name + ' สำเร็จ', 'success');
+                this.showToast('✅ ผูกบาร์โค้ด ' + this.pendingBarcode + ' กับ ' + product.name + ' สำเร็จ!', 'success');
+                console.log('✅ บันทึกบาร์โค้ด:', this.pendingBarcode, '→', product.name);
             }
             this.pendingBarcode = null;
         }
@@ -1411,20 +1304,16 @@ class StockApp {
         document.getElementById('searchProduct').value = '';
     }
 
-    // ===== SELECT PRODUCT FROM SEARCH (แบบปกติ) =====
-    selectProductFromSearch(productId) {
-        this.selectProductFromSearchWithBarcode(productId);
-    }
-
+    // ===== SHOW PRODUCT =====
     showProduct(product) {
         const detail = document.getElementById('productDetail');
         detail.style.display = 'block';
         document.getElementById('productName').textContent = '📦 ' + product.name;
         document.getElementById('productBarcode').textContent = '🏷️ บาร์โค้ด: ' + (product.barcodes || []).join(', ');
-        document.getElementById('productStock').textContent = '📊 ในระบบ: ' + (product.stock || 0) + ' ชิ้น | 💰 ต้นทุน: ' + (product.cost || 0).toFixed(2);
+        document.getElementById('productStock').textContent = '📊 ในระบบ: ' + (product.stock || 0) + ' ชิ้น | 💰 ทุนต่อหน่วย: ' + (product.costPerUnit || 0).toFixed(2);
         
         const sellPrice = product.sellPrice1 || 0;
-        const profit = sellPrice - (product.cost || 0);
+        const profit = sellPrice - (product.costPerUnit || 0);
         document.getElementById('productSellPrice').textContent = '💰 ราคาขาย: ' + sellPrice.toFixed(2) + ' บาท';
         document.getElementById('productSellPrice').style.display = sellPrice > 0 ? 'block' : 'none';
         document.getElementById('productProfit').textContent = '📈 กำไรต่อหน่วย: ' + profit.toFixed(2) + ' บาท';
@@ -1441,8 +1330,8 @@ class StockApp {
                     <div>
                         <strong>Lot: ${product.lot}</strong>
                         <div style="font-size:9px;color:var(--text-muted);">
-                            💰 ทุน: ${(product.cost || 0).toFixed(2)} | ขาย: ${(product.sellPrice1 || 0).toFixed(2)}
-                            ${product.expiry ? ' | ⏳ หมดอายุ: ' + this.formatDate(product.expiry) : ''}
+                            💰 ทุน: ${(product.costPerUnit || 0).toFixed(2)} | ขาย: ${(product.sellPrice1 || 0).toFixed(2)}
+                            ${product.expiryDate ? ' | ⏳ หมดอายุ: ' + this.formatDate(product.expiryDate) : ''}
                         </div>
                     </div>
                 </div>`;
@@ -1517,10 +1406,10 @@ class StockApp {
         }
         const product = this.currentProduct;
         const diff = qty - (product.stock || 0);
-        const costDiff = diff * (product.cost || 0);
+        const costDiff = diff * (product.costPerUnit || 0);
         const sellPrice = product.sellPrice1 || 0;
         const sellDiff = diff * sellPrice;
-        const profitLoss = diff * (sellPrice - (product.cost || 0));
+        const profitLoss = diff * (sellPrice - (product.costPerUnit || 0));
         
         const item = {
             id: Date.now() + Math.random() * 1000,
@@ -1530,12 +1419,12 @@ class StockApp {
             system_qty: product.stock || 0,
             counted_qty: qty,
             difference: diff,
-            cost: product.cost || 0,
+            cost: product.costPerUnit || 0,
             sellPrice: sellPrice,
             cost_diff: costDiff,
             sell_diff: sellDiff,
             profit_loss: profitLoss,
-            expiry: product.expiry || '',
+            expiry: product.expiryDate || '',
             location: this.currentLocation,
             timestamp: new Date().toISOString()
         };
@@ -1753,7 +1642,7 @@ class StockApp {
     }
 
     // ============================================================
-    // ✅ FILE IMPORT
+    // ✅ FILE IMPORT - แก้ไขให้ใช้โครงสร้างใหม่
     // ============================================================
     setupDragDrop() {
         const zone = document.getElementById('dropZone');
@@ -1839,13 +1728,14 @@ class StockApp {
 
     showMapping() {
         const div = document.getElementById('mappingFields');
-        const fields = ['barcode', 'name', 'stock', 'lot', 'cost', 'sellPrice1', 'sellPrice2', 'sellPrice3', 'sellPrice4', 'sellPrice5', 'stockMax', 'stockMin', 'supplier', 'avgCost', 'unit', 'expiry'];
-        const labels = { 
-            barcode: '🏷️ บาร์โค้ด', 
-            name: '📦 ชื่อสินค้า', 
-            stock: '🔢 จำนวน', 
-            lot: '🔖 Lot', 
-            cost: '💰 ต้นทุน', 
+        const fields = ['code', 'name', 'lot', 'costPerUnit', 'stock', 'unit', 'sellPrice1', 'sellPrice2', 'sellPrice3', 'sellPrice4', 'sellPrice5', 'stockMax', 'stockMin', 'supplier', 'mfgDate', 'expiryDate'];
+        const labels = {
+            code: '🏷️ รหัสสินค้า',
+            name: '📦 ชื่อสินค้า',
+            lot: '🔖 Lot',
+            costPerUnit: '💰 ทุนต่อหน่วย',
+            stock: '🔢 จำนวนคงเหลือ',
+            unit: '📦 หน่วยนับ',
             sellPrice1: '💵 ราคาขาย 1',
             sellPrice2: '💵 ราคาขาย 2',
             sellPrice3: '💵 ราคาขาย 3',
@@ -1854,9 +1744,8 @@ class StockApp {
             stockMax: '📈 สต็อกสูงสุด',
             stockMin: '📉 สต็อกต่ำสุด',
             supplier: '🏢 ผู้จัดจำหน่าย',
-            avgCost: '💰 ราคาทุนเฉลี่ย',
-            unit: '📦 หน่วยนับ',
-            expiry: '⏳ วันหมดอายุ'
+            mfgDate: '📅 วันที่ผลิต',
+            expiryDate: '⏳ วันหมดอายุ'
         };
         div.innerHTML = fields.map(f =>
             '<div style="margin-bottom:5px;">' +
@@ -1871,7 +1760,7 @@ class StockApp {
 
     confirmMapping() {
         const mapping = {};
-        ['barcode', 'name', 'stock', 'lot', 'cost', 'sellPrice1', 'sellPrice2', 'sellPrice3', 'sellPrice4', 'sellPrice5', 'stockMax', 'stockMin', 'supplier', 'avgCost', 'unit', 'expiry'].forEach(f => {
+        ['code', 'name', 'lot', 'costPerUnit', 'stock', 'unit', 'sellPrice1', 'sellPrice2', 'sellPrice3', 'sellPrice4', 'sellPrice5', 'stockMax', 'stockMin', 'supplier', 'mfgDate', 'expiryDate'].forEach(f => {
             mapping[f] = document.getElementById('map_' + f).value;
         });
         this.customMapping = mapping;
@@ -1879,6 +1768,7 @@ class StockApp {
         this.confirmImport();
     }
 
+    // ===== CONFIRM IMPORT - ใช้โครงสร้างข้อมูลใหม่ =====
     async confirmImport() {
         if (!this.currentPOS) { this.showToast('⚠️ กรุณาเลือกระบบ POS ก่อน', 'warning'); return; }
         if (!this.pendingRows || this.pendingRows.length === 0) { this.showToast('⚠️ ไม่มีข้อมูลที่จะนำเข้า', 'warning'); return; }
@@ -1893,17 +1783,18 @@ class StockApp {
             const tx = this.db.transaction('products', 'readwrite');
             const store = tx.objectStore('products');
             let count = 0;
+
             for (const row of this.pendingRows) {
                 let product;
                 if (this.currentPOS === 'arin care') {
+                    // Arincare format: [code, name, stock, lot, cost, sellPrice1-5, stockMax, stockMin, supplier, mfgDate, expiryDate]
                     product = {
                         id: Date.now() + count + Math.random() * 1000,
-                        barcodes: [String(row[0] || this.genTempBarcode(row[1]))],
-                        primaryBarcode: String(row[0] || this.genTempBarcode(row[1])),
+                        code: String(row[0] || ''),
                         name: String(row[1] || ''),
                         stock: parseFloat(row[2]) || 0,
                         lot: String(row[3] || ''),
-                        cost: parseFloat(row[4] || row[5]) || 0,
+                        costPerUnit: parseFloat(row[4] || row[5]) || 0,
                         sellPrice1: parseFloat(row[5] || row[6]) || 0,
                         sellPrice2: parseFloat(row[6] || row[7]) || 0,
                         sellPrice3: parseFloat(row[7] || row[8]) || 0,
@@ -1912,23 +1803,24 @@ class StockApp {
                         stockMax: Math.round(parseFloat(row[10] || row[11]) || 0),
                         stockMin: Math.round(parseFloat(row[11] || row[12]) || 0),
                         supplier: String(row[12] || row[13] || ''),
-                        avgCost: parseFloat(row[13] || row[14]) || 0,
-                        unit: String(row[14] || row[15] || ''),
-                        expiry: String(row[15] || row[16] || ''),
+                        mfgDate: String(row[13] || row[14] || ''),
+                        expiryDate: String(row[14] || row[15] || ''),
+                        unit: String(row[15] || row[16] || ''),
+                        barcodes: [],
+                        primaryBarcode: String(row[0] || ''),
                         createdAt: new Date().toISOString()
                     };
                 } else {
                     const m = this.customMapping || {};
                     const idx = (h) => this.pendingHeaders.indexOf(m[h]);
-                    const barcode = m.barcode ? String(row[idx('barcode')]) : this.genTempBarcode(row[idx('name')]);
+                    const code = m.code ? String(row[idx('code')]) : '';
                     product = {
                         id: Date.now() + count + Math.random() * 1000,
-                        barcodes: [barcode],
-                        primaryBarcode: barcode,
+                        code: code,
                         name: String(m.name ? row[idx('name')] : ''),
                         stock: parseFloat(m.stock ? row[idx('stock')] : 0) || 0,
                         lot: String(m.lot ? row[idx('lot')] : ''),
-                        cost: parseFloat(m.cost ? row[idx('cost')] : 0) || 0,
+                        costPerUnit: parseFloat(m.costPerUnit ? row[idx('costPerUnit')] : 0) || 0,
                         sellPrice1: parseFloat(m.sellPrice1 ? row[idx('sellPrice1')] : 0) || 0,
                         sellPrice2: parseFloat(m.sellPrice2 ? row[idx('sellPrice2')] : 0) || 0,
                         sellPrice3: parseFloat(m.sellPrice3 ? row[idx('sellPrice3')] : 0) || 0,
@@ -1937,9 +1829,11 @@ class StockApp {
                         stockMax: Math.round(parseFloat(m.stockMax ? row[idx('stockMax')] : 0) || 0),
                         stockMin: Math.round(parseFloat(m.stockMin ? row[idx('stockMin')] : 0) || 0),
                         supplier: String(m.supplier ? row[idx('supplier')] : ''),
-                        avgCost: parseFloat(m.avgCost ? row[idx('avgCost')] : 0) || 0,
+                        mfgDate: String(m.mfgDate ? row[idx('mfgDate')] : ''),
+                        expiryDate: String(m.expiryDate ? row[idx('expiryDate')] : ''),
                         unit: String(m.unit ? row[idx('unit')] : ''),
-                        expiry: String(m.expiry ? row[idx('expiry')] : ''),
+                        barcodes: [],
+                        primaryBarcode: code,
                         createdAt: new Date().toISOString()
                     };
                 }
@@ -2046,10 +1940,10 @@ class StockApp {
                     <td><strong>${p.name}</strong></td>
                     <td>${p.lot || '-'}</td>
                     <td class="text-center">${p.stock || 0}</td>
-                    <td class="text-right">${(p.cost || 0).toFixed(2)}</td>
+                    <td class="text-right">${(p.costPerUnit || 0).toFixed(2)}</td>
                     <td class="text-right">${(p.sellPrice1 || 0).toFixed(2)}</td>
-                    <td class="text-right">${((p.stock || 0) * (p.cost || 0)).toFixed(2)}</td>
-                    <td style="color:${p.expiry && new Date(p.expiry) < new Date(Date.now() + 90 * 86400000) ? 'var(--danger)' : 'var(--text-muted)'}">${p.expiry || '-'}</td>
+                    <td class="text-right">${((p.stock || 0) * (p.costPerUnit || 0)).toFixed(2)}</td>
+                    <td style="color:${p.expiryDate && new Date(p.expiryDate) < new Date(Date.now() + 90 * 86400000) ? 'var(--danger)' : 'var(--text-muted)'}">${this.formatDate(p.expiryDate)}</td>
                 </tr>
             `).join('');
         } else { uncountedCard.style.display = 'none'; }
@@ -2081,18 +1975,15 @@ class StockApp {
             const diffClass = item.difference > 0 ? 'badge-green' : item.difference < 0 ? 'badge-red' : '';
             const diffText = item.difference > 0 ? '+' + item.difference : item.difference;
             const pct = item.system_qty > 0 ? ((item.difference / item.system_qty) * 100).toFixed(1) + '%' : '-';
-            const product = this.products.find(p => p.primaryBarcode === item.barcode);
-            const productName = product ? product.name : item.name;
-            const sellPrice = item.sellPrice || 0;
             return `<tr>
                     <td>${item.barcode || '-'}</td>
-                    <td><strong>${productName}</strong></td>
+                    <td><strong>${item.name}</strong></td>
                     <td>${item.lot || '-'}</td>
                     <td class="text-center">${item.system_qty}</td>
                     <td class="text-center">${item.counted_qty}</td>
                     <td class="text-center"><span class="badge ${diffClass}">${diffText}</span></td>
                     <td class="text-right">${item.cost.toFixed(2)}</td>
-                    <td class="text-right">${sellPrice.toFixed(2)}</td>
+                    <td class="text-right">${item.sellPrice.toFixed(2)}</td>
                     <td class="text-right" style="color:${item.cost_diff < 0 ? 'var(--danger)' : 'var(--success)'};font-weight:600;">${item.cost_diff.toFixed(2)}</td>
                     <td class="text-center">${pct}</td>
                 </tr>`;
@@ -2115,7 +2006,7 @@ class StockApp {
         document.getElementById('ordNeedOrder').textContent = needOrder.length;
         const totalValue = needOrder.reduce((sum, p) => {
             const orderQty = this.calculateOrderQty(p);
-            return sum + (orderQty * (p.sellPrice1 || p.cost || 0));
+            return sum + (orderQty * (p.sellPrice1 || p.costPerUnit || 0));
         }, 0);
         document.getElementById('ordTotalValue').textContent = totalValue.toFixed(2);
 
@@ -2130,7 +2021,7 @@ class StockApp {
                             <div>
                                 <div class="name">${p.name}</div>
                                 <div class="detail">
-                                    🏷️ รหัส: ${p.primaryBarcode || '-'} | 📊 คงเหลือ: ${p.stock || 0} | 📈 Max: ${Math.round(p.stockMax || 0)} | 📉 Min: ${Math.round(p.stockMin || 0)} 
+                                    🏷️ รหัส: ${p.code || p.primaryBarcode || '-'} | 📊 คงเหลือ: ${p.stock || 0} | 📈 Max: ${Math.round(p.stockMax || 0)} | 📉 Min: ${Math.round(p.stockMin || 0)} 
                                     | 🏢 ${supplier} | ควรสั่ง: ${orderQty}
                                 </div>
                             </div>
@@ -2174,7 +2065,7 @@ class StockApp {
             const totalQty = items.reduce((sum, p) => sum + this.calculateOrderQty(p), 0);
             const totalValue = items.reduce((sum, p) => {
                 const qty = this.calculateOrderQty(p);
-                return sum + (qty * (p.sellPrice1 || p.cost || 0));
+                return sum + (qty * (p.sellPrice1 || p.costPerUnit || 0));
             }, 0);
             html += `<div class="supplier-group">
                         <div class="supplier-header">
@@ -2211,16 +2102,16 @@ class StockApp {
     updateExpiryTab() {
         const today = new Date();
         const filterDays = this.expiryFilter;
-        const products = this.products.filter(p => p.expiry);
+        const products = this.products.filter(p => p.expiryDate);
         
         let filteredProducts = products.filter(p => {
-            const expiryDate = new Date(p.expiry);
+            const expiryDate = new Date(p.expiryDate);
             const diffDays = Math.ceil((expiryDate - today) / (1000 * 60 * 60 * 24));
             if (filterDays === 0) return diffDays < 0;
             return diffDays >= 0 && diffDays <= filterDays;
         });
 
-        filteredProducts.sort((a, b) => new Date(a.expiry) - new Date(b.expiry));
+        filteredProducts.sort((a, b) => new Date(a.expiryDate) - new Date(b.expiryDate));
 
         const alert = document.getElementById('expiryAlert');
         const title = document.getElementById('expiryAlertTitle');
@@ -2229,7 +2120,7 @@ class StockApp {
             title.textContent = filterDays === 0 ? '🚫 สินค้าหมดอายุแล้ว' : `⚠️ สินค้าหมดอายุใน ${filterDays} วัน`;
             document.getElementById('expTotalItems').textContent = products.length;
             document.getElementById('expNearExpiry').textContent = filteredProducts.length;
-            const totalValue = filteredProducts.reduce((sum, p) => sum + ((p.stock || 0) * (p.sellPrice1 || p.cost || 0)), 0);
+            const totalValue = filteredProducts.reduce((sum, p) => sum + ((p.stock || 0) * (p.sellPrice1 || p.costPerUnit || 0)), 0);
             document.getElementById('expTotalValue').textContent = totalValue.toFixed(2);
         } else {
             alert.style.display = 'none';
@@ -2240,7 +2131,7 @@ class StockApp {
             list.innerHTML = '<p style="text-align:center;color:var(--success);padding:20px;font-size:12px;"><i class="fas fa-check-circle" style="font-size:20px;display:block;margin-bottom:6px;"></i>ไม่มีสินค้าหมดอายุ</p>';
         } else {
             list.innerHTML = filteredProducts.map(p => {
-                const diffDays = Math.ceil((new Date(p.expiry) - today) / (1000 * 60 * 60 * 24));
+                const diffDays = Math.ceil((new Date(p.expiryDate) - today) / (1000 * 60 * 60 * 24));
                 const status = diffDays < 0 ? 'badge-red' : 'badge-warning';
                 const statusText = diffDays < 0 ? 'หมดอายุแล้ว' : `หมดอายุใน ${diffDays} วัน`;
                 const supplier = p.supplier || '-';
@@ -2248,8 +2139,8 @@ class StockApp {
                             <div>
                                 <div class="name">${p.name}</div>
                                 <div class="detail">
-                                    🏷️ รหัส: ${p.primaryBarcode || '-'} | 📦 ${p.stock || 0} ชิ้น | ⏳ ${this.formatDate(p.expiry)} 
-                                    | 🏢 ${supplier} | 💰 ${(p.sellPrice1 || p.cost || 0).toFixed(2)}
+                                    🏷️ รหัส: ${p.code || p.primaryBarcode || '-'} | 📦 ${p.stock || 0} ชิ้น | ⏳ ${this.formatDate(p.expiryDate)} 
+                                    | 🏢 ${supplier} | 💰 ${(p.sellPrice1 || p.costPerUnit || 0).toFixed(2)}
                                 </div>
                             </div>
                             <span class="badge ${status}">${statusText}</span>
@@ -2269,8 +2160,8 @@ class StockApp {
 
         const monthly = {};
         products.forEach(p => {
-            if (!p.expiry) return;
-            const date = new Date(p.expiry);
+            if (!p.expiryDate) return;
+            const date = new Date(p.expiryDate);
             if (isNaN(date.getTime())) return;
             const monthKey = date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0');
             if (!monthly[monthKey]) {
@@ -2278,7 +2169,7 @@ class StockApp {
             }
             monthly[monthKey].items.push(p);
             monthly[monthKey].totalQty += p.stock || 0;
-            monthly[monthKey].totalValue += ((p.stock || 0) * (p.sellPrice1 || p.cost || 0));
+            monthly[monthKey].totalValue += ((p.stock || 0) * (p.sellPrice1 || p.costPerUnit || 0));
         });
 
         const sortedMonths = Object.keys(monthly).sort();
@@ -2288,11 +2179,10 @@ class StockApp {
         }
 
         let html = '<div class="table-wrap"><table><thead><tr><th>เดือนที่หมดอายุ</th><th>จำนวนรายการ</th><th>จำนวนชิ้น</th><th>มูลค่ารวม</th></tr></thead><tbody>';
-        const monthNames = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
         sortedMonths.forEach(month => {
             const data = monthly[month];
             const parts = month.split('-');
-            const displayMonth = monthNames[parseInt(parts[1]) - 1] + ' ' + (parseInt(parts[0]) + 543);
+            const displayMonth = this.formatDateMonth(parts[0] + '-' + parts[1] + '-01');
             html += `<tr>
                         <td><strong>${displayMonth}</strong></td>
                         <td class="text-center">${data.items.length}</td>
@@ -2365,16 +2255,16 @@ class StockApp {
         });
         if (needOrder.length === 0) { this.showToast('⚠️ ไม่มีรายการที่ต้องสั่งซื้อ', 'warning'); return; }
         const data = needOrder.map(p => ({
-            barcode: p.primaryBarcode || '',
+            code: p.code || p.primaryBarcode || '',
             name: p.name,
             supplier: p.supplier || '',
             currentStock: p.stock || 0,
             stockMax: p.stockMax || 0,
             stockMin: p.stockMin || 0,
             orderQty: this.calculateOrderQty(p),
-            cost: p.cost || 0,
+            cost: p.costPerUnit || 0,
             sellPrice: p.sellPrice1 || 0,
-            totalValue: this.calculateOrderQty(p) * (p.sellPrice1 || p.cost || 0)
+            totalValue: this.calculateOrderQty(p) * (p.sellPrice1 || p.costPerUnit || 0)
         }));
         this.exportGeneric(data, format, 'order');
     }
@@ -2382,22 +2272,22 @@ class StockApp {
     exportExpiry(format) {
         const today = new Date();
         const filterDays = this.expiryFilter;
-        const products = this.products.filter(p => p.expiry);
+        const products = this.products.filter(p => p.expiryDate);
         let filtered = products.filter(p => {
-            const diffDays = Math.ceil((new Date(p.expiry) - today) / (1000 * 60 * 60 * 24));
+            const diffDays = Math.ceil((new Date(p.expiryDate) - today) / (1000 * 60 * 60 * 24));
             if (filterDays === 0) return diffDays < 0;
             return diffDays >= 0 && diffDays <= filterDays;
         });
         if (filtered.length === 0) { this.showToast('⚠️ ไม่มีสินค้าหมดอายุ', 'warning'); return; }
         const data = filtered.map(p => ({
-            barcode: p.primaryBarcode || '',
+            code: p.code || p.primaryBarcode || '',
             name: p.name,
             supplier: p.supplier || '',
             stock: p.stock || 0,
-            expiry: p.expiry || '',
-            cost: p.cost || 0,
+            expiryDate: this.formatDate(p.expiryDate),
+            cost: p.costPerUnit || 0,
             sellPrice: p.sellPrice1 || 0,
-            totalValue: (p.stock || 0) * (p.sellPrice1 || p.cost || 0)
+            totalValue: (p.stock || 0) * (p.sellPrice1 || p.costPerUnit || 0)
         }));
         this.exportGeneric(data, format, 'expiry');
     }
@@ -2475,24 +2365,20 @@ class StockApp {
         const dataToExport = isDiffOnly ? diffItems : this.sessionItems;
         if (isDiffOnly && dataToExport.length === 0) { this.showToast('✅ ไม่มีรายการที่ขาด/เกิน', 'success'); return; }
         const baseFormat = format.replace('-diff', '');
-        const items = dataToExport.map(item => {
-            const product = this.products.find(p => p.primaryBarcode === item.barcode);
-            const productName = product ? product.name : item.name;
-            return {
-                barcode: item.barcode || '-',
-                name: productName,
-                lot: item.lot || '-',
-                system_qty: item.system_qty,
-                counted_qty: item.counted_qty,
-                difference: item.difference,
-                cost: item.cost,
-                sellPrice: item.sellPrice || 0,
-                cost_diff: item.cost_diff,
-                sell_diff: item.sell_diff || 0,
-                profit_loss: item.profit_loss || 0,
-                percent: item.system_qty > 0 ? ((item.difference / item.system_qty) * 100).toFixed(1) : 0
-            };
-        });
+        const items = dataToExport.map(item => ({
+            barcode: item.barcode || '-',
+            name: item.name,
+            lot: item.lot || '-',
+            system_qty: item.system_qty,
+            counted_qty: item.counted_qty,
+            difference: item.difference,
+            cost: item.cost,
+            sellPrice: item.sellPrice || 0,
+            cost_diff: item.cost_diff,
+            sell_diff: item.sell_diff || 0,
+            profit_loss: item.profit_loss || 0,
+            percent: item.system_qty > 0 ? ((item.difference / item.system_qty) * 100).toFixed(1) : 0
+        }));
         const headers = ['บาร์โค้ด', 'ชื่อสินค้า', 'Lot', 'ระบบ', 'นับ', 'ต่าง', 'ทุน', 'ขาย', 'มูลค่าต่าง(ทุน)', 'มูลค่าต่าง(ขาย)', 'กำไรหายไป', '%'];
         const rows = items.map(item => [
             item.barcode, item.name, item.lot, item.system_qty, item.counted_qty,
@@ -2509,9 +2395,9 @@ class StockApp {
 
     exportBarcodeMap() {
         const data = this.products.filter(p => p.primaryBarcode || p.barcodes?.[0]);
-        let csv = '\uFEFFบาร์โค้ด,ชื่อสินค้า,Lot,ต้นทุน,ราคาขาย,จำนวนในระบบ,ผู้จัดจำหน่าย,หมดอายุ\n';
+        let csv = '\uFEFFรหัสสินค้า,ชื่อสินค้า,Lot,ต้นทุนต่อหน่วย,ราคาขาย,จำนวนคงเหลือ,ผู้จัดจำหน่าย,วันหมดอายุ\n';
         data.forEach(p => {
-            csv += `${p.primaryBarcode || (p.barcodes || [])[0] || ''},${p.name},${p.lot || ''},${p.cost || 0},${p.sellPrice1 || 0},${p.stock || 0},${p.supplier || ''},${p.expiry || ''}\n`;
+            csv += `${p.primaryBarcode || (p.barcodes || [])[0] || ''},${p.name},${p.lot || ''},${p.costPerUnit || 0},${p.sellPrice1 || 0},${p.stock || 0},${p.supplier || ''},${p.expiryDate || ''}\n`;
         });
         const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
         this.download(blob, `barcode_master_${Date.now()}.csv`);
@@ -2570,7 +2456,7 @@ let app = null;
 document.addEventListener('DOMContentLoaded', function() {
     app = new StockApp();
     window.app = app;
-    console.log('✅ ระบบนับสินค้าร้านยา v2.0.7 พร้อมใช้งาน!');
+    console.log('✅ ระบบนับสินค้าร้านยา v2.0.8 พร้อมใช้งาน!');
 });
 
 // ================================================================
@@ -2588,10 +2474,6 @@ function importFromGoogleSheets() { if (app) app.importFromGoogleSheets(); }
 function addCabinet() { if (app) app.addCabinet(); }
 function addShelfToCabinet() { if (app) app.addShelfToCabinet(); }
 function toggleScanner() { if (app) app.toggleScanner(); }
-function toggleFlash() { if (app) app.toggleFlash(); }
-function zoomIn() { if (app) app.zoomIn(); }
-function zoomOut() { if (app) app.zoomOut(); }
-function resetZoom() { if (app) app.resetZoom(); }
 function manualBarcode() { if (app) app.manualBarcode(); }
 function submitManualBarcode() { if (app) app.submitManualBarcode(); }
 function closeBarcodeModal() { if (app) app.closeBarcodeModal(); }
@@ -2612,11 +2494,10 @@ function exportOrder(format) { if (app) app.exportOrder(format); }
 function exportExpiry(format) { if (app) app.exportExpiry(format); }
 function exportProfit(format) { if (app) app.exportProfit(format); }
 function selectProductFromSearch(productId) { if (app) app.selectProductFromSearch(productId); }
-function selectProductFromSearchWithBarcode(productId) { if (app) app.selectProductFromSearchWithBarcode(productId); }
 
-console.log('✅ ระบบนับสินค้าร้านยา v2.0.7 พร้อมใช้งาน!');
+console.log('✅ ระบบนับสินค้าร้านยา v2.0.8 พร้อมใช้งาน!');
 console.log('📖 เริ่มต้นใช้งาน: อัปโหลดไฟล์ Excel/CSV หรือเชื่อมต่อ Google Sheets');
-console.log('✨ ฟังก์ชันใหม่: ค้นหาสินค้าด้วยชื่อแบบพิมพ์บางส่วน, ปรับปรุงการสแกน');
+console.log('✨ v2.0.8: ปรับปรุงโครงสร้างข้อมูล, ค้นหาสินค้าแบบ contains, ผูกบาร์โค้ดอัตโนมัติ');
 </script>
 </body>
 </html>
