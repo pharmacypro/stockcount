@@ -8,7 +8,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="ระบบนับสินค้าร้านยา">
     <meta name="theme-color" content="#4f46e5">
-    <title>ระบบนับสินค้าร้านยา v2.0.9</title>
+    <title>ระบบนับสินค้าร้านยา v2.0.10</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -110,7 +110,7 @@
 
         .main-content { max-width:640px; margin:0 auto; padding:10px; }
 
-        /* ===== TAB NAVIGATION - ลำดับใหม่: นำเข้า → นับสต็อก → ผังร้าน → รายงาน ===== */
+        /* ===== TAB NAVIGATION ===== */
         .tab-nav { display:flex; background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-lg); padding:3px; margin-bottom:12px; box-shadow:var(--shadow-sm); gap:2px; position:sticky; top:70px; z-index:50; backdrop-filter:blur(12px); flex-wrap:wrap; }
         .tab-btn { flex:1; min-width:38px; padding:5px 2px; border:none; background:transparent; border-radius:var(--radius-md); font-size:8px; font-weight:600; cursor:pointer; transition:var(--transition); color:var(--text-muted); text-align:center; position:relative; }
         .tab-btn i { font-size:11px; display:block; margin-bottom:1px; }
@@ -244,14 +244,23 @@
         .branch-selector select option { color:#0f172a; }
 
         .search-result-item { display:flex; align-items:center; padding:8px 12px; border-bottom:1px solid var(--border-color); cursor:pointer; transition:var(--transition); gap:10px; }
-        .search-result-item:hover { background:var(--bg-body); }
+        .search-result-item:hover { background:var(--bg-body); border-radius:8px; }
         .search-result-item:last-child { border-bottom:none; }
         .search-result-item .info { flex:1; }
         .search-result-item .info .name { font-weight:600; font-size:13px; }
         .search-result-item .info .detail { font-size:10px; color:var(--text-muted); }
+        .search-result-item .badge-select { background:var(--primary); color:#fff; padding:4px 12px; border-radius:12px; font-size:10px; font-weight:600; transition:all 0.2s; }
+        .search-result-item:hover .badge-select { transform:scale(1.05); }
+        .search-result-item .badge-pair { background:var(--warning); color:#fff; padding:4px 12px; border-radius:12px; font-size:10px; font-weight:600; animation:pulse-badge 1.5s infinite; }
+        @keyframes pulse-badge { 0%,100% { opacity:1; } 50% { opacity:0.6; } }
 
         .search-highlight { background:var(--warning-light); color:#92400e; padding:0 2px; border-radius:2px; }
         [data-theme="dark"] .search-highlight { background:#78350f; color:#fcd34d; }
+
+        .pending-barcode-bar { display:none; align-items:center; gap:8px; background:var(--warning-light); padding:4px 10px; border-radius:var(--radius-sm); font-size:10px; color:#92400e; margin-bottom:5px; flex-wrap:wrap; }
+        [data-theme="dark"] .pending-barcode-bar { background:#451a03; color:#fcd34d; }
+        .pending-barcode-bar .barcode-text { font-weight:700; font-family:monospace; font-size:12px; }
+        .pending-barcode-bar .btn-clear { background:var(--danger); color:#fff; border:none; border-radius:4px; padding:2px 8px; font-size:9px; cursor:pointer; }
 
         .stats-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:10px; }
         .stat-card { background:var(--bg-card); padding:10px; border-radius:var(--radius-md); text-align:center; border:1px solid var(--border-color); }
@@ -297,6 +306,8 @@
             .stats-grid { grid-template-columns:1fr 1fr; gap:5px; }
             .stat-value { font-size:16px; }
             .summary-grid-4 .stat-value { font-size:14px; }
+            .search-result-item .info .name { font-size:12px; }
+            .search-result-item .info .detail { font-size:9px; }
         }
     </style>
 </head>
@@ -310,7 +321,7 @@
             <div class="logo-text">
                 <span class="brand">
                     <span class="main">ระบบนับสินค้า</span>
-                    <span class="version">v2.0.9</span>
+                    <span class="version">v2.0.10</span>
                 </span>
                 <span class="tagline"><i class="fas fa-circle" style="font-size:4px;color:#34d399;margin-right:3px;"></i>ระบบนับสินค้าในร้านยา</span>
             </div>
@@ -340,7 +351,7 @@
 </div>
 
 <div class="main-content">
-    <!-- TAB NAVIGATION - ลำดับใหม่: นำเข้า → นับสต็อก → ผังร้าน → รายงาน -->
+    <!-- TAB NAVIGATION -->
     <nav class="tab-nav">
         <button class="tab-btn active" onclick="switchTab('import')"><i class="fas fa-file-import"></i><span class="tab-label">นำเข้า</span></button>
         <button class="tab-btn" onclick="switchTab('scan')"><i class="fas fa-camera"></i><span class="tab-label">นับสต็อก</span><span class="badge-tab" id="scanBadge" style="display:none;">0</span></button>
@@ -368,7 +379,6 @@
             </div>
         </div>
 
-        <!-- ✅ แทนที่ POS Card ด้วย Mapping Card ที่แสดงเลย -->
         <div class="card" id="mappingCard" style="display:none;">
             <div class="card-title"><i class="fas fa-cog"></i> กำหนดคอลัมน์</div>
             <div class="mapping-grid" id="mappingFields"></div>
@@ -426,13 +436,19 @@
             </div>
         </div>
 
-        <!-- SEARCH - ค้นหาแบบ Contains -->
+        <!-- SEARCH - แก้ไขแล้ว -->
         <div class="card" style="padding:8px;background:var(--success-light);border:2px solid #6ee7b7;">
-            <div style="font-size:11px;font-weight:600;margin-bottom:5px;color:#065f46;"><i class="fas fa-search"></i> ค้นหาสินค้าด้วยชื่อ</div>
+            <div style="font-size:11px;font-weight:600;margin-bottom:5px;color:#065f46;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px;">
+                <span><i class="fas fa-search"></i> ค้นหาสินค้าด้วยชื่อ</span>
+                <span id="pendingBarcodeDisplay" style="display:none;font-size:9px;color:var(--text-muted);background:var(--warning-light);padding:2px 8px;border-radius:8px;">
+                    📎 รอจับคู่: <span id="pendingBarcodeText" style="font-weight:700;font-family:monospace;"></span>
+                    <button onclick="clearPendingBarcode()" style="background:var(--danger);color:#fff;border:none;border-radius:4px;padding:1px 6px;font-size:9px;cursor:pointer;margin-left:4px;">✕</button>
+                </span>
+            </div>
             <div class="input-group">
                 <input type="text" class="input" id="searchProduct" placeholder="พิมพ์ชื่อสินค้า (พิมพ์บางส่วนก็เจอ)" oninput="searchProduct(this.value)" style="flex:1;font-size:11px;padding:6px 10px;background:var(--bg-card);">
             </div>
-            <div id="searchResults" style="display:none;margin-top:5px;max-height:200px;overflow-y:auto;"></div>
+            <div id="searchResults" style="display:none;margin-top:5px;max-height:250px;overflow-y:auto;background:var(--bg-card);border-radius:var(--radius-md);border:1px solid var(--border-color);"></div>
         </div>
 
         <!-- PRODUCT DETAIL -->
@@ -590,7 +606,7 @@ console.log('✅ Eruda เปิดใช้งานแล้ว!');
 const CONFIG = {
     GOOGLE_SHEETS: { API_KEY: '', SPREADSHEET_ID: '', RANGES: { PRODUCTS: 'Products!A:L', REPORTS: 'Reports!A:H', HISTORY: 'History!A:F' } },
     APP_NAME: 'ระบบนับสินค้าร้านยา',
-    VERSION: '2.0.9',
+    VERSION: '2.0.10',
     STORE_ID: localStorage.getItem('storeId') || 'default',
     EXPIRY_WARNING_DAYS: 90
 };
@@ -643,7 +659,7 @@ class StockApp {
         this.initNetworkListener();
         this.updateStatus('พร้อมใช้งาน');
         this.startAutoSync();
-        console.log('✅ ระบบนับสินค้าร้านยา v2.0.9 พร้อมใช้งาน!');
+        console.log('✅ ระบบนับสินค้าร้านยา v2.0.10 พร้อมใช้งาน!');
         if (this.products.length === 0) {
             this.updateStatus('📥 กรุณานำเข้าข้อมูลสินค้าก่อนใช้งาน');
             this.showToast('📥 กรุณานำเข้าข้อมูลสินค้าจาก Excel หรือ Google Sheets', 'info');
@@ -713,6 +729,7 @@ class StockApp {
             const store = tx.objectStore('products');
             const req = store.getAll();
             this.products = await new Promise(r => { req.onsuccess = () => r(req.result || []); req.onerror = () => r([]); });
+            console.log('📦 โหลดสินค้าทั้งหมด:', this.products.length, 'รายการ');
             this.updateProgress();
             this.checkExpiryWarnings();
         } catch (e) { this.products = []; console.error('Load products error:', e); }
@@ -782,7 +799,7 @@ class StockApp {
         }
     }
 
-    // ===== FORMAT DATE - แสดงเป็น DD/MM/YYYY (ค.ศ.) =====
+    // ===== FORMAT DATE =====
     formatDate(dateStr) {
         if (!dateStr) return '-';
         try {
@@ -1023,17 +1040,38 @@ class StockApp {
     }
 
     // ============================================================
-    // ✅ BARCODE HANDLING - ระบบค้นหาและผูกบาร์โค้ด
+    // ✅ BARCODE HANDLING - แก้ไขให้สมบูรณ์
     // ============================================================
     onScan(barcode) {
+        console.log('📷 สแกนบาร์โค้ด:', barcode);
         this.currentBarcode = barcode;
+        this.pendingBarcode = barcode;
+        
+        // แสดง pending barcode
+        this.updatePendingDisplay();
+        
         this.lookupProduct(barcode);
+    }
+
+    updatePendingDisplay() {
+        const display = document.getElementById('pendingBarcodeDisplay');
+        const text = document.getElementById('pendingBarcodeText');
+        if (this.pendingBarcode) {
+            display.style.display = 'inline-flex';
+            text.textContent = this.pendingBarcode;
+            document.getElementById('searchProduct').placeholder = `🔍 บาร์โค้ด: ${this.pendingBarcode} - เลือกสินค้าเพื่อจับคู่...`;
+        } else {
+            display.style.display = 'none';
+            document.getElementById('searchProduct').placeholder = '🔍 พิมพ์ชื่อสินค้า... (พิมพ์บางส่วนก็เจอ)';
+        }
     }
 
     async lookupProduct(barcode) {
         if (!barcode) return;
         
-        // 1. ค้นหาจากบาร์โค้ดในระบบ (ทั้ง barcodes และ primaryBarcode)
+        console.log('🔍 กำลังค้นหาบาร์โค้ด:', barcode);
+        
+        // 1. ค้นหาจากบาร์โค้ดในระบบ
         let product = this.products.find(p => {
             if (p.barcodes && p.barcodes.includes(barcode)) return true;
             if (p.primaryBarcode === barcode) return true;
@@ -1042,16 +1080,21 @@ class StockApp {
         
         // 2. ถ้าเจอ → แสดงสินค้าเลย
         if (product) {
+            console.log('✅ พบสินค้า:', product.name);
             this.currentProduct = product;
+            this.pendingBarcode = null;
+            this.updatePendingDisplay();
             this.showProduct(product);
+            this.showToast(`📦 ${product.name} (มี ${product.stock || 0} ชิ้นในระบบ)`, 'success');
             return;
         }
         
-        // 3. ถ้าไม่เจอ → เช็คประวัติการผูกบาร์โค้ด
+        // 3. ถ้าไม่เจอ → เช็คประวัติ
         const historyId = this.barcodeHistory[barcode];
         if (historyId) {
             const histProduct = this.products.find(p => p.id === historyId);
             if (histProduct) {
+                console.log('📜 พบในประวัติ:', histProduct.name);
                 if (confirm(`⚠️ บาร์โค้ดนี้เคยใช้กับ "${histProduct.name}"\nต้องการใช้กับสินค้านี้หรือไม่?`)) {
                     product = histProduct;
                     if (!product.barcodes) product.barcodes = [product.primaryBarcode];
@@ -1063,14 +1106,16 @@ class StockApp {
                         this.showToast('✅ ผูกบาร์โค้ดใหม่สำเร็จ', 'success');
                     }
                     this.currentProduct = product;
+                    this.pendingBarcode = null;
+                    this.updatePendingDisplay();
                     this.showProduct(product);
                     return;
                 }
             }
         }
         
-        // 4. ถ้าไม่เจอ → ให้ค้นหาด้วยชื่อ (เก็บ pending barcode ไว้)
-        this.pendingBarcode = barcode;
+        // 4. ถ้าไม่เจอ → ให้ค้นหาด้วยชื่อ
+        console.log('❌ ไม่พบบาร์โค้ด:', barcode, 'ให้ค้นหาด้วยชื่อ');
         this.showSearchDialog(barcode);
     }
 
@@ -1079,15 +1124,21 @@ class StockApp {
         const searchInput = document.getElementById('searchProduct');
         searchInput.value = '';
         searchInput.focus();
-        searchInput.placeholder = '🔍 พิมพ์ชื่อสินค้า... (พิมพ์บางส่วนก็เจอ)';
+        searchInput.placeholder = `🔍 บาร์โค้ด: ${barcode} - พิมพ์ชื่อสินค้าเพื่อจับคู่...`;
         
-        this.showToast('🔍 ไม่พบบาร์โค้ด: ' + barcode + ' กรุณาค้นหาด้วยชื่อสินค้า', 'warning');
+        this.showToast(`🔍 ไม่พบบาร์โค้ด: ${barcode} กรุณาค้นหาด้วยชื่อสินค้า`, 'warning');
         
         document.getElementById('searchResults').style.display = 'block';
-        document.getElementById('searchResults').innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:10px;font-size:12px;">⌨️ พิมพ์ชื่อสินค้าเพื่อค้นหา</p>';
+        document.getElementById('searchResults').innerHTML = `
+            <div style="padding:10px;text-align:center;color:var(--text-muted);font-size:12px;">
+                <i class="fas fa-search" style="font-size:20px;display:block;margin-bottom:5px;"></i>
+                ⌨️ พิมพ์ชื่อสินค้าเพื่อค้นหาและจับคู่<br>
+                <small>📎 บาร์โค้ด: <strong style="color:var(--primary);font-family:monospace;">${barcode}</strong></small>
+            </div>
+        `;
     }
 
-    // ===== SEARCH PRODUCT - ค้นหาแบบ contains =====
+    // ===== SEARCH PRODUCT - ค้นหาแบบ Contains =====
     searchProduct(query) {
         const container = document.getElementById('searchResults');
         if (!query || query.length < 1) { 
@@ -1101,9 +1152,11 @@ class StockApp {
         
         if (results.length === 0) {
             container.style.display = 'block';
-            container.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:10px;font-size:12px;">❌ ไม่พบสินค้า</p>';
+            container.innerHTML = `<p style="color:var(--text-muted);text-align:center;padding:14px;font-size:12px;">❌ ไม่พบสินค้า " ${query} "</p>`;
             return;
         }
+        
+        const hasPending = !!this.pendingBarcode;
         
         container.style.display = 'block';
         container.innerHTML = results.map(p => {
@@ -1116,45 +1169,92 @@ class StockApp {
                 const after = name.substring(index + query.length);
                 displayName = before + '<span class="search-highlight">' + match + '</span>' + after;
             }
-            return `<div class="search-result-item" onclick="app.selectProductFromSearch('${p.id}')">
+            
+            const hasBarcode = p.barcodes && p.barcodes.length > 0 && p.barcodes[0];
+            const barcodeDisplay = hasBarcode ? `🏷️ ${p.barcodes.join(', ')}` : '⚠️ ยังไม่มีบาร์โค้ด';
+            
+            return `<div class="search-result-item" onclick="window.selectProductFromSearch('${p.id}')">
                         <div class="info">
                             <div class="name">${displayName}</div>
                             <div class="detail">
-                                🏷️ ${p.primaryBarcode || '-'} | 📦 ${p.stock || 0} ชิ้น | 💰 ${(p.sellPrice1 || p.costPerUnit || 0).toFixed(2)} บาท
+                                ${barcodeDisplay} | 📦 ${p.stock || 0} ชิ้น | 💰 ${(p.sellPrice1 || p.costPerUnit || 0).toFixed(2)} บาท
                                 ${p.lot ? ' | 🔖 Lot: ' + p.lot : ''}
                             </div>
                         </div>
-                        <span class="badge badge-info">เลือก</span>
+                        <span class="${hasPending ? 'badge-pair' : 'badge-select'}">
+                            ${hasPending ? '📎 จับคู่' : '✅ เลือก'}
+                        </span>
                     </div>`;
         }).join('');
     }
 
-    // ===== SELECT PRODUCT FROM SEARCH =====
+    // ===== SELECT PRODUCT FROM SEARCH - แก้ไขให้สมบูรณ์ =====
     async selectProductFromSearch(productId) {
+        console.log('🖱️ เลือกสินค้า ID:', productId);
+        
         const product = this.products.find(p => p.id === productId);
         if (!product) {
             this.showToast('⚠️ ไม่พบสินค้า', 'error');
             return;
         }
         
+        console.log('📦 สินค้าที่เลือก:', product.name);
+        
+        // ✅ ถ้ามี pending barcode (สแกนไว้แล้ว)
         if (this.pendingBarcode) {
-            if (!product.barcodes) product.barcodes = [product.primaryBarcode];
+            // ตรวจสอบว่าบาร์โค้ดนี้มีในระบบแล้วหรือยัง
+            const existingProduct = this.products.find(p => 
+                p.barcodes && p.barcodes.includes(this.pendingBarcode)
+            );
+            
+            if (existingProduct && existingProduct.id !== product.id) {
+                if (!confirm(`⚠️ บาร์โค้ด ${this.pendingBarcode} ถูกใช้กับ "${existingProduct.name}" แล้ว\nต้องการเปลี่ยนมาใช้กับ "${product.name}" หรือไม่?`)) {
+                    return;
+                }
+            }
+            
+            // ผูกบาร์โค้ดกับสินค้า
+            if (!product.barcodes) product.barcodes = [product.primaryBarcode].filter(Boolean);
             if (!product.barcodes.includes(this.pendingBarcode)) {
                 product.barcodes.push(this.pendingBarcode);
+                if (!product.primaryBarcode) {
+                    product.primaryBarcode = this.pendingBarcode;
+                }
                 await this.saveProduct(product);
+                
                 this.barcodeHistory[this.pendingBarcode] = product.id;
                 localStorage.setItem('barcodeHistory_' + CONFIG.STORE_ID, JSON.stringify(this.barcodeHistory));
-                this.showToast('✅ ผูกบาร์โค้ด ' + this.pendingBarcode + ' กับ ' + product.name + ' สำเร็จ!', 'success');
+                
+                this.showToast(`✅ ผูกบาร์โค้ด ${this.pendingBarcode} กับ "${product.name}" สำเร็จ!`, 'success');
                 console.log('✅ บันทึกบาร์โค้ด:', this.pendingBarcode, '→', product.name);
+            } else {
+                this.showToast(`ℹ️ บาร์โค้ดนี้มีอยู่แล้วในระบบ`, 'info');
             }
+            
             this.pendingBarcode = null;
+            this.updatePendingDisplay();
         }
         
+        // ✅ แสดงสินค้าให้เลือกนับ
         this.currentProduct = product;
         this.showProduct(product);
         
+        // ✅ ซ่อนผลการค้นหา
         document.getElementById('searchResults').style.display = 'none';
         document.getElementById('searchProduct').value = '';
+        
+        // ✅ เลื่อนไปยังส่วนรายละเอียดสินค้า
+        document.getElementById('productDetail').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    // ===== CLEAR PENDING BARCODE =====
+    clearPendingBarcode() {
+        this.pendingBarcode = null;
+        this.updatePendingDisplay();
+        document.getElementById('searchResults').style.display = 'none';
+        document.getElementById('searchProduct').value = '';
+        document.getElementById('searchProduct').placeholder = '🔍 พิมพ์ชื่อสินค้า... (พิมพ์บางส่วนก็เจอ)';
+        this.showToast('ยกเลิกการจับคู่บาร์โค้ด', 'info');
     }
 
     // ===== SHOW PRODUCT =====
@@ -1162,7 +1262,11 @@ class StockApp {
         const detail = document.getElementById('productDetail');
         detail.style.display = 'block';
         document.getElementById('productName').textContent = '📦 ' + product.name;
-        document.getElementById('productBarcode').textContent = '🏷️ บาร์โค้ด: ' + (product.barcodes || []).join(', ');
+        
+        const barcodeDisplay = product.barcodes && product.barcodes.length > 0 
+            ? product.barcodes.join(', ') 
+            : (product.primaryBarcode || '-');
+        document.getElementById('productBarcode').textContent = '🏷️ บาร์โค้ด: ' + barcodeDisplay;
         document.getElementById('productStock').textContent = '📊 ในระบบ: ' + (product.stock || 0) + ' ชิ้น | 💰 ทุนต่อหน่วย: ' + (product.costPerUnit || 0).toFixed(2);
         
         const sellPrice = product.sellPrice1 || 0;
@@ -1491,7 +1595,7 @@ class StockApp {
     }
 
     // ============================================================
-    // ✅ FILE IMPORT - แก้ไข: ไม่มี POS, แสดง Mapping โดยตรง
+    // ✅ FILE IMPORT
     // ============================================================
     setupDragDrop() {
         const zone = document.getElementById('dropZone');
@@ -1533,7 +1637,6 @@ class StockApp {
             this.pendingHeaders = data[0].map(h => String(h).trim());
             this.pendingRows = data.slice(1);
             
-            // ✅ แสดง Mapping โดยตรง ไม่ต้องเลือก POS
             document.getElementById('mappingCard').style.display = 'block';
             document.getElementById('previewCard').style.display = 'block';
             this.showMapping();
@@ -1566,7 +1669,6 @@ class StockApp {
         }
     }
 
-    // ===== SHOW MAPPING - 11 คอลัมน์ตามที่วางแผน =====
     showMapping() {
         const div = document.getElementById('mappingFields');
         const fields = [
@@ -1594,7 +1696,6 @@ class StockApp {
         `).join('');
     }
 
-    // ===== CONFIRM MAPPING - พร้อมแปลงหน่วยอัตโนมัติ =====
     async confirmMapping() {
         if (!this.pendingRows || this.pendingRows.length === 0) { 
             this.showToast('⚠️ ไม่มีข้อมูลที่จะนำเข้า', 'warning'); 
@@ -1606,7 +1707,6 @@ class StockApp {
             mapping[f] = document.getElementById('map_' + f).value;
         });
 
-        // ตรวจสอบว่ามีชื่อสินค้าอย่างน้อย
         if (!mapping.name) {
             this.showToast('⚠️ กรุณาเลือกคอลัมน์ "ชื่อสินค้า"', 'warning');
             return;
@@ -1636,7 +1736,6 @@ class StockApp {
                 const rawStock = idx('stock') >= 0 ? parseFloat(row[idx('stock')]) || 0 : 0;
                 const unit = idx('unit') >= 0 ? String(row[idx('unit')] || '').trim() : '';
                 
-                // ✅ แปลงหน่วยอัตโนมัติ (หน่วยใหญ่ → หน่วยเล็กสุด)
                 let convertedStock = rawStock;
                 const unitLower = unit.toLowerCase();
                 
@@ -1646,12 +1745,6 @@ class StockApp {
                 } else if (unitLower.includes('ลัง') || unitLower === 'ลัง') {
                     convertedStock = rawStock * 12;
                     convertedCount++;
-                } else if (unitLower.includes('กล่อง')) {
-                    convertedStock = rawStock * 1;
-                } else if (unitLower.includes('แพ็ค')) {
-                    convertedStock = rawStock * 1;
-                } else if (unitLower.includes('แผง')) {
-                    convertedStock = rawStock * 1;
                 } else {
                     convertedStock = rawStock;
                 }
@@ -1673,7 +1766,6 @@ class StockApp {
                     createdAt: new Date().toISOString()
                 };
 
-                // ถ้ามีบาร์โค้ด ให้ใส่ใน barcodes ด้วย
                 if (product.primaryBarcode) {
                     product.barcodes = [product.primaryBarcode];
                 }
@@ -1697,10 +1789,6 @@ class StockApp {
             const msg = `✅ นำเข้าสำเร็จ ${count} รายการ${convertedCount > 0 ? ` (แปลงหน่วย ${convertedCount} รายการ)` : ''}`;
             this.updateStatus(msg);
             this.showToast(msg, 'success');
-            
-            if (convertedCount > 0) {
-                this.showToast(`🔄 แปลงหน่วยอัตโนมัติ ${convertedCount} รายการ (เช่น โหล → ชิ้น)`, 'info');
-            }
 
         } catch (err) {
             console.error('Import error:', err);
@@ -1708,7 +1796,6 @@ class StockApp {
         }
     }
 
-    // ===== IMPORT FROM GOOGLE SHEETS =====
     async importFromGoogleSheets() {
         const url = document.getElementById('googleSheetsUrl').value.trim();
         if (!url) { this.showToast('⚠️ กรุณาใส่ Google Sheets URL', 'warning'); return; }
@@ -1948,7 +2035,7 @@ let app = null;
 document.addEventListener('DOMContentLoaded', function() {
     app = new StockApp();
     window.app = app;
-    console.log('✅ ระบบนับสินค้าร้านยา v2.0.9 พร้อมใช้งาน!');
+    console.log('✅ ระบบนับสินค้าร้านยา v2.0.10 พร้อมใช้งาน!');
 });
 
 // ================================================================
@@ -1977,11 +2064,19 @@ function searchProduct(value) { if (app) app.searchProduct(value); }
 function sortReport() { if (app) app.sortReport(); }
 function exportData(format) { if (app) app.exportData(format); }
 function clearAllData() { if (app) app.clearAllData(); }
-function selectProductFromSearch(productId) { if (app) app.selectProductFromSearch(productId); }
 
-console.log('✅ ระบบนับสินค้าร้านยา v2.0.9 พร้อมใช้งาน!');
+// ✅ Global functions for barcode pairing
+window.selectProductFromSearch = function(productId) {
+    if (app) app.selectProductFromSearch(productId);
+};
+
+window.clearPendingBarcode = function() {
+    if (app) app.clearPendingBarcode();
+};
+
+console.log('✅ ระบบนับสินค้าร้านยา v2.0.10 พร้อมใช้งาน!');
 console.log('📖 เริ่มต้นใช้งาน: อัปโหลดไฟล์ Excel/CSV หรือเชื่อมต่อ Google Sheets');
-console.log('✨ v2.0.9: ปรับปรุงตามแผน - ไม่มี POS, Mapping 11 คอลัมน์, แปลงหน่วยอัตโนมัติ, ค้นหาแบบ Contains, ผูกบาร์โค้ด');
+console.log('✨ v2.0.10: แก้ไขการเลือกสินค้า, จับคู่บาร์โค้ด, ค้นหาแบบ Contains, แสดงสถานะ');
 </script>
 </body>
 </html>
