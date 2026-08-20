@@ -8,20 +8,27 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="ระบบนับสินค้าร้านยา">
     <meta name="theme-color" content="#4f46e5">
-    <title>ระบบนับสินค้าร้านยา v2.0.11</title>
+    <title>ระบบนับสินค้าร้านยา v2.0.12</title>
 
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     
+    <!-- ไลบรารี -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
     <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
 
-    <link rel="manifest" href="manifest.json">
+    <!-- ✅ Manifest ฉบับสมบูรณ์ -->
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIuC4reC4s+C5gOC4oeC4o+C4suC4oeC4o+C4suC4h+C4o+C4s+C4oCDguJnguYHguIfguJrguK3guJnguK3guJnguYHguJkiLAogICJzaG9ydF9uYW1lIjogIuC4reC4s+C5gOC4oeC4oyIsCiAgImRlc2NyaXB0aW9uIjogIuC4reC4s+C5gOC4oeC4o+C4suC4oeC4o+C4suC4h+C4o+C4s+C4oCDguJnguYHguIfguJrguK3guJnguK3guJnguYHguJkiLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgIm9yaWVudGF0aW9uIjogInBvcnRyYWl0IiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjNGY0NmU1IiwKICAidGhlbWVfY29sb3IiOiAiIzRmNDZlNSIsCiAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogImZhdmljb24uaWNvIiwKICAgICAgInNpemVzIjogIjY0eDY0IiwKICAgICAgInR5cGUiOiAiaW1hZ2UveC1pY29uIgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICJhcHBsZS10b3VjaC1pY29uLnBuZyIsCiAgICAgICJzaXplcyI6ICIxODB4MTgwIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICJhbmRyb2lkLWNocm9tZS0xOTJ4MTkyLnBuZyIsCiAgICAgICJzaXplcyI6ICIxOTJ4MTkyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICJhbmRyb2lkLWNocm9tZS01MTJ4NTEyLnBuZyIsCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfQogIF0KfQ==">
+
+    <!-- ไอคอนแอป -->
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
@@ -205,6 +212,8 @@
         .badge-info { background:var(--info-light); color:#1e40af; }
         .badge-warning { background:var(--warning-light); color:#92400e; }
         .badge-purple { background:#e0e7ff; color:#3730a3; }
+        .badge-new { background:#fef3c7; color:#92400e; }
+        .badge-exists { background:#d1fae5; color:#065f46; }
 
         .modal-overlay { position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(15,23,42,0.6); backdrop-filter:blur(8px); z-index:200; display:none; align-items:flex-end; justify-content:center; }
         .modal-overlay.show { display:flex; }
@@ -247,7 +256,6 @@
         .search-result-item .badge-select { background:var(--primary); color:#fff; padding:4px 12px; border-radius:12px; font-size:10px; font-weight:600; transition:all 0.2s; }
         .search-result-item:hover .badge-select { transform:scale(1.05); }
         .search-result-item .badge-pair { background:var(--warning); color:#fff; padding:4px 12px; border-radius:12px; font-size:10px; font-weight:600; animation:pulse-badge 1.5s infinite; }
-        @keyframes pulse-badge { 0%,100% { opacity:1; } 50% { opacity:0.6; } }
 
         .search-highlight { background:var(--warning-light); color:#92400e; padding:0 2px; border-radius:2px; }
         [data-theme="dark"] .search-highlight { background:#78350f; color:#fcd34d; }
@@ -289,6 +297,8 @@
         .collapse-body { padding:6px 10px; display:none; border:1px solid var(--border-color); border-top:none; border-radius:0 0 var(--radius-sm) var(--radius-sm); }
         .collapse-body.open { display:block; }
 
+        @keyframes pulse-badge { 0%,100% { opacity:1; } 50% { opacity:0.6; } }
+
         @media (max-width:480px) {
             .logo-icon { width:32px; height:32px; font-size:14px; }
             .logo-text .brand .main { font-size:13px; }
@@ -324,7 +334,7 @@
             <div class="logo-text">
                 <span class="brand">
                     <span class="main">ระบบนับสินค้า</span>
-                    <span class="version">v2.0.11</span>
+                    <span class="version">v2.0.12</span>
                 </span>
                 <span class="tagline"><i class="fas fa-circle" style="font-size:4px;color:#34d399;margin-right:3px;"></i>ระบบนับสินค้าในร้านยา</span>
             </div>
@@ -366,6 +376,9 @@
     <div class="page active" id="page-import">
         <div class="card">
             <div class="card-title"><i class="fas fa-file-import"></i> นำเข้าข้อมูลสินค้า</div>
+            <div style="font-size:9px;color:var(--text-muted);margin-bottom:6px;padding:4px 8px;background:var(--bg-body);border-radius:var(--radius-sm);">
+                <i class="fas fa-info-circle"></i> โหมด <strong>Append</strong> (เพิ่มข้อมูลต่อท้าย ไม่ลบของเดิม)
+            </div>
             <div id="dropZone" onclick="document.getElementById('fileInput').click()" style="border:2px dashed var(--border-color);border-radius:var(--radius-md);padding:24px 14px;text-align:center;cursor:pointer;background:var(--bg-body);margin-bottom:8px;">
                 <i class="fas fa-cloud-upload-alt" style="font-size:28px;color:var(--primary);display:block;margin-bottom:5px;"></i>
                 <p style="font-weight:600;font-size:13px;color:var(--text-main);">อัปโหลดไฟล์ Excel / CSV</p>
@@ -385,7 +398,7 @@
         <div class="card" id="mappingCard" style="display:none;">
             <div class="card-title"><i class="fas fa-cog"></i> กำหนดคอลัมน์</div>
             <div class="mapping-grid" id="mappingFields"></div>
-            <button class="btn btn-primary btn-block" onclick="confirmMapping()" style="margin-top:8px;font-size:12px;padding:10px;"><i class="fas fa-check"></i> ยืนยันและนำเข้าข้อมูล</button>
+            <button class="btn btn-primary btn-block" onclick="confirmMapping()" style="margin-top:8px;font-size:12px;padding:10px;"><i class="fas fa-check"></i> ยืนยันและนำเข้าข้อมูล (Append)</button>
         </div>
 
         <div class="card" id="previewCard" style="display:none;">
@@ -403,11 +416,14 @@
     <!-- ===== PAGE: SCAN ===== -->
     <div class="page" id="page-scan">
         <div class="card" style="padding:8px;">
-            <div class="input-group">
-                <span style="font-weight:600;font-size:11px;flex-shrink:0;"><i class="fas fa-map-pin"></i> ตำแหน่ง:</span>
-                <select class="input" id="locationSelect" onchange="changeLocation()" style="font-size:11px;padding:5px 8px;flex:1;">
-                    <option value="all">🌐 ทั้งร้าน</option>
-                </select>
+            <div class="flex-between" style="flex-wrap:wrap;gap:4px;">
+                <div class="input-group" style="flex:1;min-width:120px;">
+                    <span style="font-weight:600;font-size:11px;flex-shrink:0;"><i class="fas fa-map-pin"></i> ตำแหน่ง:</span>
+                    <select class="input" id="locationSelect" onchange="changeLocation()" style="font-size:11px;padding:5px 8px;flex:1;">
+                        <option value="all">🌐 ทั้งร้าน</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary btn-sm" onclick="showAddProductModal()" style="font-size:10px;padding:4px 10px;"><i class="fas fa-plus"></i> เพิ่มสินค้า</button>
             </div>
         </div>
         <div class="card" style="padding:8px;background:var(--bg-body);">
@@ -565,7 +581,7 @@
             </div>
         </div>
 
-        <!-- รายละเอียดการนับ -->
+        <!-- รายละเอียดการนับ (มีสถานะบาร์โค้ด) -->
         <div class="card" style="padding:10px;">
             <div class="flex-between" style="flex-wrap:wrap;gap:5px;">
                 <span class="card-title" style="margin:0;font-size:12px;"><i class="fas fa-table"></i> รายละเอียดการนับ</span>
@@ -573,6 +589,7 @@
                     <button class="btn btn-outline btn-sm" onclick="exportData('csv')" style="font-size:9px;padding:3px 6px;"><i class="fas fa-file-csv"></i> CSV</button>
                     <button class="btn btn-outline btn-sm" onclick="exportData('xlsx')" style="font-size:9px;padding:3px 6px;"><i class="fas fa-file-excel"></i> Excel</button>
                     <button class="btn btn-outline btn-sm" onclick="exportData('pdf')" style="font-size:9px;padding:3px 6px;"><i class="fas fa-file-pdf"></i> PDF</button>
+                    <button class="btn btn-outline-success btn-sm" onclick="exportBarcodeMaster()" style="font-size:9px;padding:3px 6px;"><i class="fas fa-barcode"></i> Master</button>
                 </div>
             </div>
             <div style="display:flex;gap:5px;align-items:center;margin:8px 0;flex-wrap:wrap;">
@@ -589,13 +606,13 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>ชื่อสินค้า</th><th>Lot</th><th>ตำแหน่ง</th>
+                            <th>บาร์โค้ด</th><th>ชื่อสินค้า</th><th>Lot</th><th>ตำแหน่ง</th>
                             <th>ระบบ</th><th>นับ</th><th>ต่าง</th>
                             <th>ทุน</th><th>ขาย</th>
-                            <th>มูลค่าต่าง(ทุน)</th><th>มูลค่าต่าง(ขาย)</th>
+                            <th>ต่าง(ทุน)</th><th>ต่าง(ขาย)</th><th>สถานะ</th>
                         </tr>
                     </thead>
-                    <tbody id="reportBody"><tr><td colspan="10" style="text-align:center;padding:14px;color:var(--text-muted);font-size:11px;"><i class="fas fa-inbox" style="font-size:18px;display:block;margin-bottom:5px;opacity:0.5;"></i>ยังไม่มีข้อมูลสรุปผล</td></tr></tbody>
+                    <tbody id="reportBody"><tr><td colspan="12" style="text-align:center;padding:14px;color:var(--text-muted);font-size:11px;"><i class="fas fa-inbox" style="font-size:18px;display:block;margin-bottom:5px;opacity:0.5;"></i>ยังไม่มีข้อมูลสรุปผล</td></tr></tbody>
                 </table>
             </div>
         </div>
@@ -619,6 +636,27 @@
     </div>
 </div>
 
+<!-- ===== ADD PRODUCT MODAL ===== -->
+<div class="modal-overlay" id="addProductModal">
+    <div class="modal">
+        <div class="modal-handle"></div>
+        <div class="modal-title"><i class="fas fa-plus-circle"></i> เพิ่มสินค้าใหม่</div>
+        <div style="margin-bottom:6px;padding:6px 10px;background:var(--warning-light);border-radius:var(--radius-sm);font-size:10px;color:#92400e;">
+            <i class="fas fa-info-circle"></i> ราคาทุนจะถูกตั้งเป็น 0 โดยอัตโนมัติ (ไม่ต้องกรอก)
+        </div>
+        <input type="text" class="input" id="newProductBarcode" placeholder="📱 บาร์โค้ด (ถ้ามี)" style="margin-bottom:6px;font-size:12px;padding:6px 10px;">
+        <input type="text" class="input" id="newProductName" placeholder="📦 ชื่อสินค้า *" style="margin-bottom:6px;font-size:12px;padding:6px 10px;">
+        <input type="text" class="input" id="newProductLot" placeholder="🔖 เลขที่ผลิต (Lot)" style="margin-bottom:6px;font-size:12px;padding:6px 10px;">
+        <input type="number" class="input" id="newProductSellPrice" placeholder="💰 ราคาขายต่อหน่วย" style="margin-bottom:6px;font-size:12px;padding:6px 10px;" step="0.01">
+        <input type="text" class="input" id="newProductUnit" placeholder="📦 หน่วยนับ (เช่น ชิ้น, ขวด)" style="margin-bottom:6px;font-size:12px;padding:6px 10px;">
+        <input type="date" class="input" id="newProductExpiry" placeholder="⏳ วันหมดอายุ" style="margin-bottom:6px;font-size:12px;padding:6px 10px;">
+        <div class="flex" style="gap:5px;margin-top:4px;">
+            <button class="btn btn-success btn-block" onclick="confirmAddProduct()" style="font-size:13px;padding:10px;"><i class="fas fa-save"></i> บันทึกสินค้า</button>
+            <button class="btn btn-outline btn-block" onclick="closeAddProductModal()" style="font-size:13px;padding:10px;"><i class="fas fa-times"></i> ยกเลิก</button>
+        </div>
+    </div>
+</div>
+
 <div class="toast-container" id="toastContainer"></div>
 
 <!-- ============================================ JAVASCRIPT ============================================ -->
@@ -629,7 +667,7 @@ console.log('✅ Eruda เปิดใช้งานแล้ว!');
 const CONFIG = {
     GOOGLE_SHEETS: { API_KEY: '', SPREADSHEET_ID: '', RANGES: { PRODUCTS: 'Products!A:L', REPORTS: 'Reports!A:H', HISTORY: 'History!A:F' } },
     APP_NAME: 'ระบบนับสินค้าร้านยา',
-    VERSION: '2.0.11',
+    VERSION: '2.0.12',
     STORE_ID: localStorage.getItem('storeId') || 'default',
     EXPIRY_WARNING_DAYS: 90
 };
@@ -659,6 +697,7 @@ class StockApp {
         this.branchId = localStorage.getItem('branchId') || 'default';
         this.expiryFilter = 30;
         this.pendingBarcode = null;
+        this.newlyPairedBarcodes = []; // เก็บบาร์โค้ดที่ถูกผูกใหม่
         this.unitConversionMap = {
             'โหล': 12, 'ลัง': 12, 'กล่อง': 1, 'แพ็ค': 1, 'แผง': 1, 'ชิ้น': 1, 'ขวด': 1, 'แผ่น': 1, 'หลอด': 1, 'ซอง': 1
         };
@@ -678,7 +717,7 @@ class StockApp {
         this.initNetworkListener();
         this.updateStatus('พร้อมใช้งาน');
         this.startAutoSync();
-        console.log('✅ ระบบนับสินค้าร้านยา v2.0.11 พร้อมใช้งาน!');
+        console.log('✅ ระบบนับสินค้าร้านยา v2.0.12 พร้อมใช้งาน!');
         if (this.products.length === 0) {
             this.updateStatus('📥 กรุณานำเข้าข้อมูลสินค้าก่อนใช้งาน');
             this.showToast('📥 กรุณานำเข้าข้อมูลสินค้าจาก Excel หรือ Google Sheets', 'info');
@@ -774,6 +813,109 @@ class StockApp {
         store.clear();
         this.locations.forEach(l => store.add(l));
         await new Promise(r => { tx.oncomplete = r; });
+    }
+
+    // ===== ADD PRODUCT (ใหม่) =====
+    showAddProductModal() {
+        document.getElementById('addProductModal').style.display = 'flex';
+        document.getElementById('newProductBarcode').value = this.pendingBarcode || '';
+        document.getElementById('newProductName').value = '';
+        document.getElementById('newProductLot').value = '';
+        document.getElementById('newProductSellPrice').value = '';
+        document.getElementById('newProductUnit').value = '';
+        document.getElementById('newProductExpiry').value = '';
+        setTimeout(() => document.getElementById('newProductName').focus(), 300);
+    }
+
+    closeAddProductModal() {
+        document.getElementById('addProductModal').style.display = 'none';
+    }
+
+    async confirmAddProduct() {
+        const name = document.getElementById('newProductName').value.trim();
+        if (!name) {
+            this.showToast('⚠️ กรุณาใส่ชื่อสินค้า', 'warning');
+            return;
+        }
+
+        const barcode = document.getElementById('newProductBarcode').value.trim() || null;
+        const lot = document.getElementById('newProductLot').value.trim() || '';
+        const sellPrice = parseFloat(document.getElementById('newProductSellPrice').value) || 0;
+        const unit = document.getElementById('newProductUnit').value.trim() || 'ชิ้น';
+        const expiry = document.getElementById('newProductExpiry').value || '';
+
+        // ตรวจสอบว่าบาร์โค้ดซ้ำไหม
+        if (barcode) {
+            const existing = this.products.find(p => 
+                p.barcodes && p.barcodes.includes(barcode) || p.primaryBarcode === barcode
+            );
+            if (existing) {
+                if (!confirm(`⚠️ บาร์โค้ด ${barcode} ถูกใช้กับ "${existing.name}" แล้ว\nต้องการเพิ่มสินค้าใหม่โดยไม่ใช้บาร์โค้ดนี้ หรือยกเลิก?`)) {
+                    return;
+                }
+            }
+        }
+
+        // สร้างรหัสสินค้าใหม่
+        const newId = 'PCO' + String(Date.now()).padStart(10, '0');
+
+        const product = {
+            id: newId,
+            code: newId,
+            name: name,
+            lot: lot,
+            stock: 0, // เริ่มต้น 0
+            costPerUnit: 0, // ✅ ราคาทุน = 0 ตามที่คุณต้องการ
+            sellPrice1: sellPrice,
+            unit: unit,
+            expiryDate: expiry,
+            supplier: 'เพิ่มใหม่',
+            barcodes: barcode ? [barcode] : [],
+            primaryBarcode: barcode || '',
+            createdAt: new Date().toISOString(),
+            isNew: true
+        };
+
+        await this.saveProduct(product);
+        this.products.push(product);
+
+        if (barcode) {
+            this.barcodeHistory[barcode] = product.id;
+            localStorage.setItem('barcodeHistory_' + CONFIG.STORE_ID, JSON.stringify(this.barcodeHistory));
+            this.newlyPairedBarcodes.push({ barcode, productId: product.id, productName: name, timestamp: new Date().toISOString() });
+            this.showToast(`✅ เพิ่มสินค้า "${name}" และผูกบาร์โค้ด ${barcode} สำเร็จ!`, 'success');
+        } else {
+            this.showToast(`✅ เพิ่มสินค้า "${name}" สำเร็จ!`, 'success');
+        }
+
+        this.closeAddProductModal();
+        this.updateProgress();
+        
+        // เลือกสินค้าที่เพิ่มใหม่ให้ใช้งานต่อได้ทันที
+        this.currentProduct = product;
+        this.showProduct(product);
+        this.pendingBarcode = null;
+        this.updatePendingDisplay();
+    }
+
+    // ===== EXPORT BARCODE MASTER =====
+    exportBarcodeMaster() {
+        const data = this.products.filter(p => p.primaryBarcode || (p.barcodes && p.barcodes.length > 0));
+        if (data.length === 0) {
+            this.showToast('⚠️ ไม่มีข้อมูลบาร์โค้ด', 'warning');
+            return;
+        }
+
+        let csv = '\uFEFFรหัสสินค้า,ชื่อสินค้า,Lot,บาร์โค้ดหลัก,บาร์โค้ดทั้งหมด,ราคาทุน,ราคาขาย,หน่วยนับ,ผู้จัดจำหน่าย,หมดอายุ,สถานะ\n';
+        data.forEach(p => {
+            const barcodes = p.barcodes && p.barcodes.length > 0 ? p.barcodes.join('; ') : '';
+            const status = p.isNew ? '🆕 เพิ่มใหม่' : '✅ มีในระบบ';
+            csv += `${p.id},${p.name},${p.lot || ''},${p.primaryBarcode || ''},${barcodes},${p.costPerUnit || 0},${p.sellPrice1 || 0},${p.unit || ''},${p.supplier || ''},${p.expiryDate || ''},${status}\n`;
+        });
+
+        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+        this.download(blob, `barcode_master_${Date.now()}.csv`);
+        this.showToast('✅ ส่งออก Master Barcode สำเร็จ (' + data.length + ' รายการ)', 'success');
     }
 
     checkExpiryWarnings() {
@@ -1063,11 +1205,13 @@ class StockApp {
     async lookupProduct(barcode) {
         if (!barcode) return;
         console.log('🔍 กำลังค้นหาบาร์โค้ด:', barcode);
+        
         let product = this.products.find(p => {
             if (p.barcodes && p.barcodes.includes(barcode)) return true;
             if (p.primaryBarcode === barcode) return true;
             return false;
         });
+        
         if (product) {
             console.log('✅ พบสินค้า:', product.name);
             this.currentProduct = product;
@@ -1077,6 +1221,7 @@ class StockApp {
             this.showToast(`📦 ${product.name} (มี ${product.stock || 0} ชิ้นในระบบ)`, 'success');
             return;
         }
+        
         const historyId = this.barcodeHistory[barcode];
         if (historyId) {
             const histProduct = this.products.find(p => p.id === historyId);
@@ -1090,6 +1235,7 @@ class StockApp {
                         await this.saveProduct(product);
                         this.barcodeHistory[barcode] = product.id;
                         localStorage.setItem('barcodeHistory_' + CONFIG.STORE_ID, JSON.stringify(this.barcodeHistory));
+                        this.newlyPairedBarcodes.push({ barcode, productId: product.id, productName: product.name, timestamp: new Date().toISOString() });
                         this.showToast('✅ ผูกบาร์โค้ดใหม่สำเร็จ', 'success');
                     }
                     this.currentProduct = product;
@@ -1100,22 +1246,29 @@ class StockApp {
                 }
             }
         }
-        console.log('❌ ไม่พบบาร์โค้ด:', barcode, 'ให้ค้นหาด้วยชื่อ');
-        this.showSearchDialog(barcode);
+        
+        console.log('❌ ไม่พบบาร์โค้ด:', barcode, 'ให้เลือกเพิ่มสินค้าหรือค้นหาด้วยชื่อ');
+        this.showSearchOrAddDialog(barcode);
     }
 
-    showSearchDialog(barcode) {
+    showSearchOrAddDialog(barcode) {
         const searchInput = document.getElementById('searchProduct');
         searchInput.value = '';
         searchInput.focus();
         searchInput.placeholder = `🔍 บาร์โค้ด: ${barcode} - พิมพ์ชื่อสินค้าเพื่อจับคู่...`;
-        this.showToast(`🔍 ไม่พบบาร์โค้ด: ${barcode} กรุณาค้นหาด้วยชื่อสินค้า`, 'warning');
+        
+        this.showToast(`🔍 ไม่พบบาร์โค้ด: ${barcode}`, 'warning');
+        
         document.getElementById('searchResults').style.display = 'block';
         document.getElementById('searchResults').innerHTML = `
-            <div style="padding:10px;text-align:center;color:var(--text-muted);font-size:12px;">
-                <i class="fas fa-search" style="font-size:20px;display:block;margin-bottom:5px;"></i>
+            <div style="padding:12px;text-align:center;font-size:12px;">
+                <i class="fas fa-search" style="font-size:20px;display:block;margin-bottom:5px;color:var(--warning);"></i>
                 ⌨️ พิมพ์ชื่อสินค้าเพื่อค้นหาและจับคู่<br>
                 <small>📎 บาร์โค้ด: <strong style="color:var(--primary);font-family:monospace;">${barcode}</strong></small>
+                <hr style="margin:8px 0;border-color:var(--border-color);">
+                <button class="btn btn-primary btn-sm" onclick="app.showAddProductModal()" style="font-size:11px;padding:6px 12px;">
+                    <i class="fas fa-plus"></i> หรือเพิ่มสินค้าใหม่
+                </button>
             </div>
         `;
     }
@@ -1126,14 +1279,24 @@ class StockApp {
             container.style.display = 'none'; 
             return; 
         }
+        
         const results = this.products.filter(p =>
             p.name.toLowerCase().includes(query.toLowerCase())
         ).slice(0, 20);
+        
         if (results.length === 0) {
             container.style.display = 'block';
-            container.innerHTML = `<p style="color:var(--text-muted);text-align:center;padding:14px;font-size:12px;">❌ ไม่พบสินค้า "${query}"</p>`;
+            container.innerHTML = `
+                <div style="padding:12px;text-align:center;font-size:12px;">
+                    <p style="color:var(--text-muted);">❌ ไม่พบสินค้า "${query}"</p>
+                    <button class="btn btn-primary btn-sm" onclick="app.showAddProductModal()" style="font-size:11px;padding:6px 12px;margin-top:5px;">
+                        <i class="fas fa-plus"></i> เพิ่มสินค้าใหม่
+                    </button>
+                </div>
+            `;
             return;
         }
+        
         const hasPending = !!this.pendingBarcode;
         container.style.display = 'block';
         container.innerHTML = results.map(p => {
@@ -1190,6 +1353,7 @@ class StockApp {
                 await this.saveProduct(product);
                 this.barcodeHistory[this.pendingBarcode] = product.id;
                 localStorage.setItem('barcodeHistory_' + CONFIG.STORE_ID, JSON.stringify(this.barcodeHistory));
+                this.newlyPairedBarcodes.push({ barcode: this.pendingBarcode, productId: product.id, productName: product.name, timestamp: new Date().toISOString() });
                 this.showToast(`✅ ผูกบาร์โค้ด ${this.pendingBarcode} กับ "${product.name}" สำเร็จ!`, 'success');
                 console.log('✅ บันทึกบาร์โค้ด:', this.pendingBarcode, '→', product.name);
             } else {
@@ -1314,6 +1478,10 @@ class StockApp {
         const sellDiff = diff * sellPrice;
         const profitLoss = diff * (sellPrice - (product.costPerUnit || 0));
         
+        // ตรวจสอบว่าบาร์โค้ดนี้เพิ่งถูกผูกใหม่หรือไม่
+        const isNewlyPaired = this.newlyPairedBarcodes.some(b => b.barcode === this.currentBarcode);
+        const barcodeStatus = isNewlyPaired ? '🆕 ผูกใหม่' : (product.primaryBarcode ? '✅ มีในระบบ' : '⚠️ ไม่มีบาร์โค้ด');
+        
         const item = {
             id: Date.now() + Math.random() * 1000,
             barcode: product.primaryBarcode || (product.barcodes || [])[0] || '',
@@ -1329,7 +1497,9 @@ class StockApp {
             profit_loss: profitLoss,
             expiry: product.expiryDate || '',
             location: this.currentLocation,
-            timestamp: new Date().toISOString()
+            timestamp: new Date().toISOString(),
+            barcodeStatus: barcodeStatus,
+            isNewlyPaired: isNewlyPaired
         };
         this.sessionItems.push(item);
         this.offlineQueue.push(item);
@@ -1542,7 +1712,7 @@ class StockApp {
         this.selectScanLocation(document.getElementById('locationSelect').value);
     }
 
-    // ===== FILE IMPORT =====
+    // ===== FILE IMPORT (APPEND MODE) =====
     setupDragDrop() {
         const zone = document.getElementById('dropZone');
         zone.addEventListener('dragover', (e) => { e.preventDefault(); zone.style.borderColor = 'var(--primary)'; zone.style.background = '#eef2ff'; });
@@ -1586,7 +1756,7 @@ class StockApp {
             document.getElementById('previewCard').style.display = 'block';
             this.showMapping();
             this.showPreview();
-            this.showToast('📋 กรุณากำหนดคอลัมน์ให้ตรงกับข้อมูล', 'info');
+            this.showToast('📋 กรุณากำหนดคอลัมน์ให้ตรงกับข้อมูล (Append Mode)', 'info');
         } catch (err) {
             console.error('File read error:', err);
             this.showToast('❌ อ่านไฟล์ไม่สำเร็จ', 'error');
@@ -1653,18 +1823,14 @@ class StockApp {
             this.showToast('⚠️ กรุณาเลือกคอลัมน์ "ชื่อสินค้า"', 'warning');
             return;
         }
-        this.showToast('📥 กำลังนำเข้าข้อมูล...', 'info');
+        this.showToast('📥 กำลังนำเข้าข้อมูล (Append Mode)...', 'info');
         try {
-            const clearTx = this.db.transaction('products', 'readwrite');
-            await new Promise((resolve, reject) => {
-                const req = clearTx.objectStore('products').clear();
-                req.onsuccess = resolve;
-                req.onerror = reject;
-            });
+            // ✅ APPEND MODE: ไม่ลบข้อมูลเดิม
             const tx = this.db.transaction('products', 'readwrite');
             const store = tx.objectStore('products');
             let count = 0;
             let convertedCount = 0;
+            
             for (const row of this.pendingRows) {
                 const idx = (key) => {
                     const col = mapping[key];
@@ -1683,39 +1849,72 @@ class StockApp {
                 } else {
                     convertedStock = rawStock;
                 }
-                const product = {
-                    id: Date.now() + count + Math.random() * 1000,
-                    code: idx('code') >= 0 ? String(row[idx('code')] || '').trim() : '',
-                    name: idx('name') >= 0 ? String(row[idx('name')] || '').trim() : '',
-                    lot: idx('lot') >= 0 ? String(row[idx('lot')] || '').trim() : '',
-                    mfgDate: idx('mfgDate') >= 0 ? String(row[idx('mfgDate')] || '').trim() : '',
-                    expiryDate: idx('expiryDate') >= 0 ? String(row[idx('expiryDate')] || '').trim() : '',
-                    sellPrice1: idx('sellPrice') >= 0 ? parseFloat(row[idx('sellPrice')]) || 0 : 0,
-                    costPerUnit: idx('costPerUnit') >= 0 ? parseFloat(row[idx('costPerUnit')]) || 0 : 0,
-                    stock: convertedStock,
-                    originalUnit: unit,
-                    supplier: idx('supplier') >= 0 ? String(row[idx('supplier')] || '').trim() : '',
-                    primaryBarcode: idx('barcode') >= 0 ? String(row[idx('barcode')] || '').trim() : '',
-                    barcodes: [],
-                    createdAt: new Date().toISOString()
-                };
-                if (product.primaryBarcode) {
-                    product.barcodes = [product.primaryBarcode];
+                
+                const code = idx('code') >= 0 ? String(row[idx('code')] || '').trim() : '';
+                const barcode = idx('barcode') >= 0 ? String(row[idx('barcode')] || '').trim() : '';
+                const name = idx('name') >= 0 ? String(row[idx('name')] || '').trim() : '';
+                
+                // ตรวจสอบว่าสินค้านี้มีอยู่แล้วหรือไม่ (เช็คจาก code)
+                let existingProduct = null;
+                if (code) {
+                    existingProduct = this.products.find(p => p.code === code || p.id === code);
                 }
-                if (product.name) {
+                
+                if (existingProduct) {
+                    // ✅ อัปเดตข้อมูลสินค้าที่มีอยู่
+                    if (barcode && !existingProduct.barcodes.includes(barcode)) {
+                        existingProduct.barcodes.push(barcode);
+                    }
+                    if (barcode && !existingProduct.primaryBarcode) {
+                        existingProduct.primaryBarcode = barcode;
+                    }
+                    existingProduct.stock = convertedStock;
+                    existingProduct.name = name || existingProduct.name;
+                    existingProduct.lot = idx('lot') >= 0 ? String(row[idx('lot')] || '').trim() : existingProduct.lot;
+                    existingProduct.costPerUnit = idx('costPerUnit') >= 0 ? parseFloat(row[idx('costPerUnit')]) || 0 : existingProduct.costPerUnit;
+                    existingProduct.sellPrice1 = idx('sellPrice') >= 0 ? parseFloat(row[idx('sellPrice')]) || 0 : existingProduct.sellPrice1;
+                    existingProduct.expiryDate = idx('expiryDate') >= 0 ? String(row[idx('expiryDate')] || '').trim() : existingProduct.expiryDate;
+                    existingProduct.supplier = idx('supplier') >= 0 ? String(row[idx('supplier')] || '').trim() : existingProduct.supplier;
+                    existingProduct.unit = unit || existingProduct.unit;
+                    await new Promise(r => {
+                        const req = store.put(existingProduct);
+                        req.onsuccess = () => { count++; r(); };
+                        req.onerror = () => r();
+                    });
+                } else {
+                    // ✅ เพิ่มสินค้าใหม่
+                    const product = {
+                        id: code || ('PCO' + String(Date.now() + count).padStart(10, '0')),
+                        code: code,
+                        name: name,
+                        lot: idx('lot') >= 0 ? String(row[idx('lot')] || '').trim() : '',
+                        mfgDate: idx('mfgDate') >= 0 ? String(row[idx('mfgDate')] || '').trim() : '',
+                        expiryDate: idx('expiryDate') >= 0 ? String(row[idx('expiryDate')] || '').trim() : '',
+                        sellPrice1: idx('sellPrice') >= 0 ? parseFloat(row[idx('sellPrice')]) || 0 : 0,
+                        costPerUnit: idx('costPerUnit') >= 0 ? parseFloat(row[idx('costPerUnit')]) || 0 : 0,
+                        stock: convertedStock,
+                        originalUnit: unit,
+                        supplier: idx('supplier') >= 0 ? String(row[idx('supplier')] || '').trim() : '',
+                        primaryBarcode: barcode,
+                        barcodes: barcode ? [barcode] : [],
+                        unit: unit,
+                        createdAt: new Date().toISOString()
+                    };
                     await new Promise(r => {
                         const req = store.put(product);
                         req.onsuccess = () => { count++; r(); };
                         req.onerror = () => r();
                     });
+                    this.products.push(product);
                 }
             }
+            
             document.getElementById('mappingCard').style.display = 'none';
             this.lastImportDate = new Date().toISOString();
             localStorage.setItem('lastImportDate_' + CONFIG.STORE_ID, this.lastImportDate);
             await this.loadProducts();
             this.updateProgress();
-            const msg = `✅ นำเข้าสำเร็จ ${count} รายการ${convertedCount > 0 ? ` (แปลงหน่วย ${convertedCount} รายการ)` : ''}`;
+            const msg = `✅ นำเข้าสำเร็จ ${count} รายการ${convertedCount > 0 ? ` (แปลงหน่วย ${convertedCount} รายการ)` : ''} (Append Mode)`;
             this.updateStatus(msg);
             this.showToast(msg, 'success');
         } catch (err) {
@@ -1752,7 +1951,7 @@ class StockApp {
         }
     }
 
-    // ===== REPORT - แก้ไขให้มีทุกฟังก์ชัน =====
+    // ===== REPORT =====
     finishCount() {
         if (this.sessionItems.length === 0) { this.showToast('⚠️ ยังไม่มีรายการนับ', 'warning'); return; }
         if (navigator.onLine && this.offlineQueue.length > 0) this.syncOfflineQueue();
@@ -1782,7 +1981,6 @@ class StockApp {
         const totalSellDiff = countedItems.reduce((s, i) => s + i.sell_diff, 0);
         document.getElementById('rptSellDiff').textContent = totalSellDiff.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         
-        // สินค้าที่ยังไม่ได้นับ
         const uncountedCard = document.getElementById('uncountedCard');
         if (uncountedItems.length > 0) {
             uncountedCard.style.display = 'block';
@@ -1800,7 +1998,6 @@ class StockApp {
             `).join('');
         } else { uncountedCard.style.display = 'none'; }
         
-        // สินค้าที่เกิน/ขาด
         const overItems = countedItems.filter(i => i.difference > 0);
         const shortItems = countedItems.filter(i => i.difference < 0);
         const diffCard = document.getElementById('diffCard');
@@ -1836,7 +2033,6 @@ class StockApp {
             return;
         }
         
-        // จัดกลุ่มตาม location
         const locationMap = {};
         const locationNames = {};
         this.locations.forEach(cab => {
@@ -1910,10 +2106,9 @@ class StockApp {
     renderReport(items) {
         const tbody = document.getElementById('reportBody');
         if (items.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="10" style="text-align:center;padding:14px;color:var(--text-muted);font-size:11px;"><i class="fas fa-inbox" style="font-size:18px;display:block;margin-bottom:5px;opacity:0.5;"></i>ยังไม่มีข้อมูลสรุปผล</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="12" style="text-align:center;padding:14px;color:var(--text-muted);font-size:11px;"><i class="fas fa-inbox" style="font-size:18px;display:block;margin-bottom:5px;opacity:0.5;"></i>ยังไม่มีข้อมูลสรุปผล</td></tr>`;
             return;
         }
-        // get location name
         const getLocationName = (loc) => {
             if (!loc || loc === 'all') return 'ทั้งร้าน';
             const parts = loc.replace('cab_', '').split('_shelf_');
@@ -1928,7 +2123,9 @@ class StockApp {
             const diffClass = item.difference > 0 ? 'badge-green' : item.difference < 0 ? 'badge-red' : '';
             const diffText = item.difference > 0 ? '+' + item.difference : item.difference;
             const locationName = getLocationName(item.location);
+            const barcodeStatus = item.isNewlyPaired ? '🆕 ผูกใหม่' : (item.barcode ? '✅ มีในระบบ' : '⚠️ ไม่มี');
             return `<tr>
+                    <td>${item.barcode || '-'}</td>
                     <td><strong>${item.name}</strong></td>
                     <td>${item.lot || '-'}</td>
                     <td><span class="location-badge">${locationName}</span></td>
@@ -1939,6 +2136,7 @@ class StockApp {
                     <td class="text-right">${item.sellPrice.toFixed(2)}</td>
                     <td class="text-right" style="color:${item.cost_diff < 0 ? 'var(--danger)' : 'var(--success)'};font-weight:600;">${item.cost_diff.toFixed(2)}</td>
                     <td class="text-right" style="color:${item.sell_diff < 0 ? 'var(--danger)' : 'var(--success)'};font-weight:600;">${item.sell_diff.toFixed(2)}</td>
+                    <td><span class="badge ${item.isNewlyPaired ? 'badge-new' : 'badge-exists'}">${barcodeStatus}</span></td>
                 </tr>`;
         }).join('');
     }
@@ -1947,6 +2145,7 @@ class StockApp {
     exportData(format) {
         if (this.sessionItems.length === 0) { this.showToast('⚠️ ไม่มีข้อมูลสำหรับส่งออก', 'warning'); return; }
         const items = this.sessionItems.map(item => ({
+            barcode: item.barcode || '-',
             name: item.name,
             lot: item.lot || '-',
             location: this.getLocationName(item.location),
@@ -1957,13 +2156,14 @@ class StockApp {
             sellPrice: item.sellPrice || 0,
             cost_diff: item.cost_diff,
             sell_diff: item.sell_diff || 0,
-            profit_loss: item.profit_loss || 0
+            profit_loss: item.profit_loss || 0,
+            barcode_status: item.isNewlyPaired ? '🆕 ผูกใหม่' : (item.barcode ? '✅ มีในระบบ' : '⚠️ ไม่มี')
         }));
-        const headers = ['ชื่อสินค้า', 'Lot', 'ตำแหน่ง', 'ระบบ', 'นับ', 'ต่าง', 'ทุน', 'ขาย', 'มูลค่าต่าง(ทุน)', 'มูลค่าต่าง(ขาย)', 'กำไรหายไป'];
+        const headers = ['บาร์โค้ด', 'ชื่อสินค้า', 'Lot', 'ตำแหน่ง', 'ระบบ', 'นับ', 'ต่าง', 'ทุน', 'ขาย', 'ต่าง(ทุน)', 'ต่าง(ขาย)', 'กำไรหายไป', 'สถานะบาร์โค้ด'];
         const rows = items.map(item => [
-            item.name, item.lot, item.location, item.system_qty, item.counted_qty,
+            item.barcode, item.name, item.lot, item.location, item.system_qty, item.counted_qty,
             item.difference, item.cost, item.sellPrice, item.cost_diff, item.sell_diff,
-            item.profit_loss
+            item.profit_loss, item.barcode_status
         ]);
         switch (format) {
             case 'csv': this.exportGenericCSV(headers, rows, 'report'); break;
@@ -2004,13 +2204,13 @@ class StockApp {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF('landscape');
         doc.setFontSize(14);
-        doc.text('รายงานการนับสต็อก', 14, 20);
+        doc.text('รายงานการนับสต็อก - v2.0.12', 14, 20);
         const tableData = rows.map(row => row.map(v => v !== undefined ? String(v) : ''));
         doc.autoTable({
             head: [headers.map(h => String(h))],
             body: tableData,
             startY: 30,
-            styles: { fontSize: 7 }
+            styles: { fontSize: 6 }
         });
         doc.save(`${type}_${Date.now()}.pdf`);
         this.showToast('✅ ดาวน์โหลด PDF สำเร็จ', 'success');
@@ -2063,7 +2263,7 @@ let app = null;
 document.addEventListener('DOMContentLoaded', function() {
     app = new StockApp();
     window.app = app;
-    console.log('✅ ระบบนับสินค้าร้านยา v2.0.11 พร้อมใช้งาน!');
+    console.log('✅ ระบบนับสินค้าร้านยา v2.0.12 พร้อมใช้งาน!');
 });
 
 // ===== GLOBAL FUNCTIONS =====
@@ -2089,7 +2289,11 @@ function changeLocation() { if (app) app.changeLocation(); }
 function searchProduct(value) { if (app) app.searchProduct(value); }
 function sortReport() { if (app) app.sortReport(); }
 function exportData(format) { if (app) app.exportData(format); }
+function exportBarcodeMaster() { if (app) app.exportBarcodeMaster(); }
 function clearAllData() { if (app) app.clearAllData(); }
+function showAddProductModal() { if (app) app.showAddProductModal(); }
+function closeAddProductModal() { if (app) app.closeAddProductModal(); }
+function confirmAddProduct() { if (app) app.confirmAddProduct(); }
 
 window.selectProductFromSearch = function(productId) {
     if (app) app.selectProductFromSearch(productId);
@@ -2098,8 +2302,8 @@ window.clearPendingBarcode = function() {
     if (app) app.clearPendingBarcode();
 };
 
-console.log('✅ ระบบนับสินค้าร้านยา v2.0.11 พร้อมใช้งาน!');
-console.log('✨ v2.0.11: เพิ่มผลต่างราคาขาย, สินค้าเกิน/ขาด, สรุปตามตู้/ชั้น, ตำแหน่งสินค้า');
+console.log('✅ ระบบนับสินค้าร้านยา v2.0.12 พร้อมใช้งาน!');
+console.log('✨ v2.0.12: เพิ่มสินค้าตอนสแกนไม่เจอ, Append Excel, ปุ่มเพิ่มสินค้า, สถานะบาร์โค้ดในรายงาน, Master Barcode Export');
 </script>
 </body>
-    </html>
+            </html>
