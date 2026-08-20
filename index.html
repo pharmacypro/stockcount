@@ -8,7 +8,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="ระบบนับสินค้าร้านยา">
     <meta name="theme-color" content="#4f46e5">
-    <title>ระบบนับสินค้าร้านยา v2.0.6</title>
+    <title>ระบบนับสินค้าร้านยา v2.0.7</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,7 +38,7 @@
 
     <style>
         /* ============================================================
-           CSS - สไตล์ทั้งหมด (Ultra Smooth)
+           CSS - สไตล์ทั้งหมด
            ============================================================ */
         :root {
             --primary: #4f46e5;
@@ -116,11 +116,11 @@
 
         /* ===== TAB NAVIGATION ===== */
         .tab-nav { display:flex; background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-lg); padding:3px; margin-bottom:12px; box-shadow:var(--shadow-sm); gap:2px; position:sticky; top:70px; z-index:50; backdrop-filter:blur(12px); flex-wrap:wrap; }
-        .tab-btn { flex:1; min-width:45px; padding:6px 3px; border:none; background:transparent; border-radius:var(--radius-md); font-size:9px; font-weight:600; cursor:pointer; transition:var(--transition); color:var(--text-muted); text-align:center; position:relative; }
-        .tab-btn i { font-size:12px; display:block; margin-bottom:1px; }
+        .tab-btn { flex:1; min-width:38px; padding:5px 2px; border:none; background:transparent; border-radius:var(--radius-md); font-size:8px; font-weight:600; cursor:pointer; transition:var(--transition); color:var(--text-muted); text-align:center; position:relative; }
+        .tab-btn i { font-size:11px; display:block; margin-bottom:1px; }
         .tab-btn.active { background:var(--primary-gradient); color:#fff; box-shadow:0 4px 15px rgba(79,70,229,0.35); }
         .tab-btn .badge-tab { position:absolute; top:-3px; right:-3px; background:var(--danger); color:#fff; font-size:7px; padding:1px 4px; border-radius:10px; font-weight:700; }
-        .tab-btn .tab-label { font-size:8px; }
+        .tab-btn .tab-label { font-size:7px; }
 
         .page { display:none; animation:fadeSlideIn 0.4s cubic-bezier(0.16,1,0.3,1); }
         .page.active { display:block; }
@@ -291,14 +291,22 @@
         .supplier-header { background:var(--bg-body); padding:8px 12px; font-weight:700; font-size:12px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-color); }
         .supplier-body { padding:6px 12px; }
 
+        /* ===== SEARCH RESULT LIST ===== */
+        .search-result-item { display:flex; align-items:center; padding:8px 12px; border-bottom:1px solid var(--border-color); cursor:pointer; transition:var(--transition); gap:10px; }
+        .search-result-item:hover { background:var(--bg-body); }
+        .search-result-item:last-child { border-bottom:none; }
+        .search-result-item .info { flex:1; }
+        .search-result-item .info .name { font-weight:600; font-size:13px; }
+        .search-result-item .info .detail { font-size:10px; color:var(--text-muted); }
+
         @media (max-width:480px) {
             .logo-icon { width:32px; height:32px; font-size:14px; }
             .logo-text .brand .main { font-size:13px; }
             .logo-text .brand .version { font-size:7px; }
             .logo-text .tagline { font-size:7px; }
-            .tab-btn { min-width:38px; padding:4px 2px; }
+            .tab-btn { min-width:32px; padding:4px 2px; }
             .tab-btn i { font-size:10px; }
-            .tab-btn .tab-label { font-size:7px; }
+            .tab-btn .tab-label { font-size:6px; }
             .stats-grid { grid-template-columns:1fr 1fr; gap:5px; }
             .stat-value { font-size:16px; }
             .summary-grid-4 .stat-value { font-size:14px; }
@@ -329,7 +337,7 @@
             <div class="logo-text">
                 <span class="brand">
                     <span class="main">ระบบนับสินค้า</span>
-                    <span class="version">v2.0.6</span>
+                    <span class="version">v2.0.7</span>
                 </span>
                 <span class="tagline"><i class="fas fa-circle" style="font-size:4px;color:#34d399;margin-right:3px;"></i>ระบบนับสินค้าในร้านยา</span>
             </div>
@@ -368,10 +376,9 @@
         <button class="tab-btn" onclick="switchTab('order')"><i class="fas fa-shopping-cart"></i><span class="tab-label">สั่งซื้อ</span></button>
         <button class="tab-btn" onclick="switchTab('expiry')"><i class="fas fa-clock"></i><span class="tab-label">หมดอายุ</span></button>
         <button class="tab-btn" onclick="switchTab('profit')"><i class="fas fa-coins"></i><span class="tab-label">กำไร</span></button>
-        <button class="tab-btn" onclick="switchTab('price')"><i class="fas fa-tags"></i><span class="tab-label">ราคา</span></button>
     </nav>
 
-    <!-- ===================== PAGE: IMPORT ===================== -->
+    <!-- ===== PAGE: IMPORT ===== -->
     <div class="page active" id="page-import">
         <div class="card">
             <div class="card-title"><i class="fas fa-file-import"></i> นำเข้าข้อมูลสินค้า</div>
@@ -414,7 +421,7 @@
         </div>
     </div>
 
-    <!-- ===================== PAGE: LAYOUT ===================== -->
+    <!-- ===== PAGE: LAYOUT ===== -->
     <div class="page" id="page-layout">
         <div class="card">
             <div class="card-title"><i class="fas fa-sitemap"></i> แผนผังร้าน</div>
@@ -441,7 +448,7 @@
         </div>
     </div>
 
-    <!-- ===================== PAGE: SCAN ===================== -->
+    <!-- ===== PAGE: SCAN ===== -->
     <div class="page" id="page-scan">
         <div class="card" style="padding:8px;">
             <div class="input-group">
@@ -475,14 +482,15 @@
             <div class="scanner-status idle" id="scannerStatus"><i class="fas fa-circle" style="font-size:8px;"></i> กล้องปิดอยู่</div>
             <div style="display:flex;gap:5px;margin-top:6px;flex-wrap:wrap;">
                 <button class="btn btn-primary" onclick="toggleScanner()" id="btnToggleScanner" style="flex:1;font-size:11px;padding:6px 10px;"><i class="fas fa-camera"></i> เปิดกล้อง</button>
-                <button class="btn btn-outline btn-sm" onclick="toggleFlash()" id="btnFlash" title="เปิด/ปิดไฟฉาย" style="font-size:10px;padding:4px 8px;"><i class="fas fa-bolt"></i> ไฟฉาย</button>
                 <button class="btn btn-outline btn-sm" onclick="manualBarcode()" style="font-size:10px;padding:4px 8px;"><i class="fas fa-keyboard"></i> ใส่รหัส</button>
                 <button class="btn btn-sm" onclick="toggleContinuousMode()" id="btnContinuous" style="flex:1;font-size:10px;padding:4px 8px;background:var(--text-muted);color:#fff;"><i class="fas fa-infinity"></i> ต่อเนื่อง: ปิด</button>
             </div>
-            <div style="display:flex;gap:5px;margin-top:5px;flex-wrap:wrap;">
-                <button class="btn btn-outline btn-sm" onclick="zoomIn()" style="flex:1;font-size:10px;padding:4px 8px;"><i class="fas fa-search-plus"></i> ซูมเข้า</button>
-                <button class="btn btn-outline btn-sm" onclick="zoomOut()" style="flex:1;font-size:10px;padding:4px 8px;"><i class="fas fa-search-minus"></i> ซูมออก</button>
-                <button class="btn btn-outline btn-sm" onclick="resetZoom()" style="flex:1;font-size:10px;padding:4px 8px;"><i class="fas fa-home"></i> คืนค่า</button>
+            <!-- ซ่อนปุ่มซูมและไฟฉาย (ถ้าอุปกรณ์ไม่รองรับจะซ่อนให้) -->
+            <div style="display:flex;gap:5px;margin-top:5px;flex-wrap:wrap;" id="advancedControls">
+                <button class="btn btn-outline btn-sm" onclick="zoomIn()" id="btnZoomIn" style="display:none;font-size:10px;padding:4px 8px;"><i class="fas fa-search-plus"></i> ซูมเข้า</button>
+                <button class="btn btn-outline btn-sm" onclick="zoomOut()" id="btnZoomOut" style="display:none;font-size:10px;padding:4px 8px;"><i class="fas fa-search-minus"></i> ซูมออก</button>
+                <button class="btn btn-outline btn-sm" onclick="resetZoom()" id="btnZoomReset" style="display:none;font-size:10px;padding:4px 8px;"><i class="fas fa-home"></i> คืนค่า</button>
+                <button class="btn btn-outline btn-sm" onclick="toggleFlash()" id="btnFlash" style="display:none;font-size:10px;padding:4px 8px;"><i class="fas fa-bolt"></i> ไฟฉาย</button>
             </div>
         </div>
 
@@ -492,7 +500,7 @@
             <div class="input-group">
                 <input type="text" class="input" id="searchProduct" placeholder="พิมพ์ชื่อสินค้า..." oninput="searchProduct(this.value)" style="flex:1;font-size:11px;padding:6px 10px;background:var(--bg-card);">
             </div>
-            <div id="searchResults" style="display:none;margin-top:5px;max-height:140px;overflow-y:auto;"></div>
+            <div id="searchResults" style="display:none;margin-top:5px;max-height:200px;overflow-y:auto;"></div>
         </div>
 
         <!-- ===== PRODUCT DETAIL ===== -->
@@ -532,9 +540,8 @@
         </div>
     </div>
 
-    <!-- ===================== PAGE: REPORT ===================== -->
+    <!-- ===== PAGE: REPORT ===== -->
     <div class="page" id="page-report">
-        <!-- สรุปภาพรวม -->
         <div class="card" style="background:linear-gradient(135deg,var(--success-light) 0%,#d1fae5 100%);border:2px solid #6ee7b7;padding:12px;">
             <div class="card-title" style="color:#065f46;font-size:13px;margin-bottom:6px;"><i class="fas fa-chart-pie"></i> สรุปภาพรวมการนับสต็อก</div>
             <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center;">
@@ -544,7 +551,6 @@
             </div>
         </div>
 
-        <!-- สถิติพื้นฐาน -->
         <div class="summary-grid-4">
             <div class="stat-card"><div class="stat-label"><i class="fas fa-clipboard-list"></i> รายการที่นับ</div><div class="stat-value" id="rptTotal">0</div></div>
             <div class="stat-card"><div class="stat-label"><i class="fas fa-exclamation-triangle"></i> รายการผลต่าง</div><div class="stat-value" id="rptDiff" style="color:var(--danger);">0</div></div>
@@ -552,7 +558,6 @@
             <div class="stat-card"><div class="stat-label"><i class="fas fa-percent"></i> % ผลต่าง</div><div class="stat-value" id="rptPercent" style="color:var(--primary);">0%</div></div>
         </div>
 
-        <!-- สินค้าที่ยังไม่ได้นับ -->
         <div class="card" id="uncountedCard" style="display:none;border:2px solid var(--danger);padding:10px;">
             <div class="card-title" style="color:var(--danger);font-size:12px;"><i class="fas fa-exclamation-circle"></i> สินค้าที่ยังไม่ได้นับ</div>
             <div class="table-wrap">
@@ -563,7 +568,6 @@
             </div>
         </div>
 
-        <!-- ตารางรายละเอียด -->
         <div class="card" style="padding:10px;">
             <div class="flex-between" style="flex-wrap:wrap;gap:5px;">
                 <span class="card-title" style="margin:0;font-size:12px;"><i class="fas fa-table"></i> รายละเอียดการนับ</span>
@@ -602,7 +606,7 @@
         </div>
     </div>
 
-    <!-- ===================== PAGE: ORDER (แนะนำการสั่งซื้อ) ===================== -->
+    <!-- ===== PAGE: ORDER ===== -->
     <div class="page" id="page-order">
         <div class="card" style="background:linear-gradient(135deg,var(--warning-light) 0%,#fef3c7 100%);border:2px solid #f59e0b;padding:12px;">
             <div class="card-title" style="color:#92400e;font-size:13px;margin-bottom:6px;"><i class="fas fa-shopping-cart"></i> แนะนำการสั่งซื้อสินค้า</div>
@@ -631,7 +635,7 @@
         </div>
     </div>
 
-    <!-- ===================== PAGE: EXPIRY (หมดอายุ) ===================== -->
+    <!-- ===== PAGE: EXPIRY ===== -->
     <div class="page" id="page-expiry">
         <div class="card" style="padding:10px;">
             <div class="card-title" style="font-size:12px;"><i class="fas fa-clock"></i> แจ้งเตือนสินค้าหมดอายุ</div>
@@ -667,14 +671,13 @@
             <div id="expiryList"><p style="text-align:center;color:var(--text-muted);padding:20px;font-size:12px;"><i class="fas fa-check-circle" style="color:var(--success);font-size:20px;display:block;margin-bottom:6px;"></i>ไม่มีสินค้าหมดอายุ</p></div>
         </div>
 
-        <!-- Expiry Report รายเดือน -->
         <div class="card" style="padding:10px;">
             <div class="card-title" style="font-size:12px;"><i class="fas fa-calendar-alt"></i> รายงานสินค้าหมดอายุแยกตามเดือน</div>
             <div id="expiryMonthly"><p style="text-align:center;color:var(--text-muted);padding:14px;font-size:11px;">ยังไม่มีข้อมูล</p></div>
         </div>
     </div>
 
-    <!-- ===================== PAGE: PROFIT/LOSS (กำไร/ขาดทุน) ===================== -->
+    <!-- ===== PAGE: PROFIT ===== -->
     <div class="page" id="page-profit">
         <div class="card" style="background:linear-gradient(135deg,var(--info-light) 0%,#dbeafe 100%);border:2px solid #3b82f6;padding:12px;">
             <div class="card-title" style="color:#1e40af;font-size:13px;margin-bottom:6px;"><i class="fas fa-coins"></i> รายงานกำไร/ขาดทุน</div>
@@ -698,32 +701,6 @@
                 </div>
             </div>
             <div id="profitList"><p style="text-align:center;color:var(--text-muted);padding:20px;font-size:12px;"><i class="fas fa-inbox" style="font-size:20px;display:block;margin-bottom:6px;opacity:0.5;"></i>ยังไม่มีข้อมูลการนับสต็อก</p></div>
-        </div>
-    </div>
-
-    <!-- ===================== PAGE: PRICE LEVELS (ราคาหลายระดับ) ===================== -->
-    <div class="page" id="page-price">
-        <div class="card" style="background:linear-gradient(135deg,var(--warning-light) 0%,#fef3c7 100%);border:2px solid #f59e0b;padding:12px;">
-            <div class="card-title" style="color:#92400e;font-size:13px;margin-bottom:6px;"><i class="fas fa-tags"></i> ราคาหลายระดับ</div>
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr;gap:6px;text-align:center;">
-                <div><div style="font-size:8px;color:#92400e;font-weight:600;">ราคา 1</div><div style="font-size:14px;font-weight:800;color:#92400e;font-family:'Outfit',sans-serif;" id="priceTotal1">0</div></div>
-                <div><div style="font-size:8px;color:#92400e;font-weight:600;">ราคา 2</div><div style="font-size:14px;font-weight:800;color:#92400e;font-family:'Outfit',sans-serif;" id="priceTotal2">0</div></div>
-                <div><div style="font-size:8px;color:#92400e;font-weight:600;">ราคา 3</div><div style="font-size:14px;font-weight:800;color:#92400e;font-family:'Outfit',sans-serif;" id="priceTotal3">0</div></div>
-                <div><div style="font-size:8px;color:#92400e;font-weight:600;">ราคา 4</div><div style="font-size:14px;font-weight:800;color:#92400e;font-family:'Outfit',sans-serif;" id="priceTotal4">0</div></div>
-                <div><div style="font-size:8px;color:#92400e;font-weight:600;">ราคา 5</div><div style="font-size:14px;font-weight:800;color:#92400e;font-family:'Outfit',sans-serif;" id="priceTotal5">0</div></div>
-            </div>
-        </div>
-
-        <div class="card" style="padding:10px;">
-            <div class="flex-between" style="flex-wrap:wrap;gap:5px;">
-                <span class="card-title" style="margin:0;font-size:12px;"><i class="fas fa-list"></i> รายละเอียดราคาสินค้า</span>
-                <div style="display:flex;gap:3px;flex-wrap:wrap;">
-                    <button class="btn btn-outline btn-sm" onclick="exportPrice('csv')" style="font-size:9px;padding:3px 6px;"><i class="fas fa-file-csv"></i> CSV</button>
-                    <button class="btn btn-outline btn-sm" onclick="exportPrice('xlsx')" style="font-size:9px;padding:3px 6px;"><i class="fas fa-file-excel"></i> Excel</button>
-                    <button class="btn btn-outline btn-sm" onclick="exportPrice('pdf')" style="font-size:9px;padding:3px 6px;"><i class="fas fa-file-pdf"></i> PDF</button>
-                </div>
-            </div>
-            <div id="priceList"><p style="text-align:center;color:var(--text-muted);padding:20px;font-size:12px;"><i class="fas fa-inbox" style="font-size:20px;display:block;margin-bottom:6px;opacity:0.5;"></i>ยังไม่มีข้อมูลสินค้า<br><small>กรุณานำเข้าข้อมูลสินค้าก่อน</small></p></div>
         </div>
     </div>
 </div>
@@ -755,7 +732,7 @@ console.log('✅ Eruda เปิดใช้งานแล้ว!');
 const CONFIG = {
     GOOGLE_SHEETS: { API_KEY: '', SPREADSHEET_ID: '', RANGES: { PRODUCTS: 'Products!A:L', REPORTS: 'Reports!A:H', HISTORY: 'History!A:F' } },
     APP_NAME: 'ระบบนับสินค้าร้านยา',
-    VERSION: '2.0.6',
+    VERSION: '2.0.7',
     STORE_ID: localStorage.getItem('storeId') || 'default',
     EXPIRY_WARNING_DAYS: 90
 };
@@ -790,6 +767,8 @@ class StockApp {
         this.autoSyncEnabled = true;
         this.branchId = localStorage.getItem('branchId') || 'default';
         this.expiryFilter = 30;
+        // เก็บรายการสินค้าที่ค้นพบ
+        this.searchResults = [];
         this.init();
     }
 
@@ -807,16 +786,26 @@ class StockApp {
         this.initNetworkListener();
         this.updateStatus('พร้อมใช้งาน');
         this.startAutoSync();
-        console.log('✅ ระบบนับสินค้าร้านยา v2.0.6 พร้อมใช้งาน!');
+        // ตรวจสอบการรองรับซูม/ไฟฉาย
+        this.checkDeviceCapabilities();
+        console.log('✅ ระบบนับสินค้าร้านยา v2.0.7 พร้อมใช้งาน!');
         if (this.products.length === 0) {
             this.updateStatus('📥 กรุณานำเข้าข้อมูลสินค้าก่อนใช้งาน');
             this.showToast('📥 กรุณานำเข้าข้อมูลสินค้าจาก Excel หรือ Google Sheets', 'info');
         }
-        // อัปเดตแท็บใหม่
         this.updateOrderTab();
         this.updateExpiryTab();
         this.updateProfitTab();
-        this.updatePriceTab();
+    }
+
+    // ===== CHECK DEVICE CAPABILITIES =====
+    async checkDeviceCapabilities() {
+        // ตรวจสอบว่ากล้องรองรับ zoom หรือไม่ (จะตรวจสอบตอนเปิดกล้อง)
+        // ซ่อนปุ่มซูมและไฟฉายไว้ก่อน จะแสดงเมื่อเปิดกล้องและตรวจสอบได้
+        document.getElementById('btnZoomIn').style.display = 'none';
+        document.getElementById('btnZoomOut').style.display = 'none';
+        document.getElementById('btnZoomReset').style.display = 'none';
+        document.getElementById('btnFlash').style.display = 'none';
     }
 
     // ===== BRANCH =====
@@ -939,16 +928,40 @@ class StockApp {
             
             if (diffDays < 0) {
                 warning.style.display = 'flex';
-                text.textContent = '🚫 สินค้าหมดอายุแล้ว! (หมดอายุเมื่อ ' + product.expiry + ')';
+                text.textContent = '🚫 สินค้าหมดอายุแล้ว! (หมดอายุเมื่อ ' + this.formatDate(product.expiry) + ')';
             } else if (diffDays <= CONFIG.EXPIRY_WARNING_DAYS) {
                 warning.style.display = 'flex';
-                text.textContent = '⚠️ สินค้าหมดอายุใน ' + diffDays + ' วัน (หมดอายุ ' + product.expiry + ')';
+                text.textContent = '⚠️ สินค้าหมดอายุใน ' + diffDays + ' วัน (หมดอายุ ' + this.formatDate(product.expiry) + ')';
             } else {
                 warning.style.display = 'none';
             }
         } else {
             document.getElementById('expiryWarning').style.display = 'none';
         }
+    }
+
+    // ===== FORMAT DATE =====
+    formatDate(dateStr) {
+        if (!dateStr) return '-';
+        try {
+            // ถ้าเป็นวันที่จาก Excel (ตัวเลข)
+            if (typeof dateStr === 'number' && dateStr > 1000) {
+                // Excel date serial number
+                const d = new Date((dateStr - 25569) * 86400 * 1000);
+                if (!isNaN(d.getTime())) {
+                    const day = String(d.getDate()).padStart(2, '0');
+                    const month = String(d.getMonth() + 1).padStart(2, '0');
+                    const year = d.getFullYear() + 543;
+                    return `${day}/${month}/${year}`;
+                }
+            }
+            const d = new Date(dateStr);
+            if (isNaN(d.getTime())) return dateStr;
+            const day = String(d.getDate()).padStart(2, '0');
+            const month = String(d.getMonth() + 1).padStart(2, '0');
+            const year = d.getFullYear() + 543;
+            return `${day}/${month}/${year}`;
+        } catch(e) { return dateStr; }
     }
 
     // ===== NETWORK & SYNC =====
@@ -1054,7 +1067,7 @@ class StockApp {
     switchTab(name) {
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-        const map = { import: 0, layout: 1, scan: 2, report: 3, order: 4, expiry: 5, profit: 6, price: 7 };
+        const map = { import: 0, layout: 1, scan: 2, report: 3, order: 4, expiry: 5, profit: 6 };
         const tabs = document.querySelectorAll('.tab-btn');
         if (tabs[map[name]]) tabs[map[name]].classList.add('active');
         const page = document.getElementById('page-' + name);
@@ -1064,7 +1077,6 @@ class StockApp {
         if (name === 'order') this.updateOrderTab();
         if (name === 'expiry') this.updateExpiryTab();
         if (name === 'profit') this.updateProfitTab();
-        if (name === 'price') this.updatePriceTab();
     }
 
     updateScanBadge() {
@@ -1143,12 +1155,36 @@ class StockApp {
             this.scanning = true;
             this.showToast('📷 กล้องพร้อมสแกนบาร์โค้ดแล้ว', 'success');
 
+            // ตรวจสอบการรองรับซูมและไฟฉาย
+            await this.checkScannerCapabilities();
+
         } catch (err) {
             console.error('Scanner error:', err);
             document.getElementById('scannerStatus').innerHTML = '<i class="fas fa-exclamation-circle"></i> ' + err.message;
             document.getElementById('scannerStatus').className = 'scanner-status error';
             this.showToast('❌ เปิดกล้องไม่สำเร็จ', 'error');
             this.stopScanner();
+        }
+    }
+
+    async checkScannerCapabilities() {
+        try {
+            const track = await this.html5Scanner.getVideoTrack();
+            if (track) {
+                const capabilities = track.getCapabilities();
+                // ตรวจสอบ zoom
+                if (capabilities.zoom) {
+                    document.getElementById('btnZoomIn').style.display = 'inline-flex';
+                    document.getElementById('btnZoomOut').style.display = 'inline-flex';
+                    document.getElementById('btnZoomReset').style.display = 'inline-flex';
+                }
+                // ตรวจสอบ torch (ไฟฉาย)
+                if (capabilities.torch) {
+                    document.getElementById('btnFlash').style.display = 'inline-flex';
+                }
+            }
+        } catch (e) {
+            console.log('ไม่สามารถตรวจสอบความสามารถกล้องได้:', e);
         }
     }
 
@@ -1167,6 +1203,11 @@ class StockApp {
             this.flashOn = false;
             document.getElementById('btnFlash').style.background = '';
         }
+        // ซ่อนปุ่มซูม/ไฟฉาย
+        document.getElementById('btnZoomIn').style.display = 'none';
+        document.getElementById('btnZoomOut').style.display = 'none';
+        document.getElementById('btnZoomReset').style.display = 'none';
+        document.getElementById('btnFlash').style.display = 'none';
     }
 
     async toggleScanner() {
@@ -1191,6 +1232,7 @@ class StockApp {
             document.getElementById('btnFlash').style.background = this.flashOn ? 'var(--warning)' : '';
             this.showToast(this.flashOn ? '💡 เปิดไฟฉาย' : '💡 ปิดไฟฉาย', 'info');
         } catch (err) {
+            console.error('Flash error:', err);
             this.showToast('⚠️ อุปกรณ์นี้ไม่รองรับไฟฉาย', 'warning');
             this.flashOn = false;
             document.getElementById('btnFlash').style.background = '';
@@ -1227,7 +1269,7 @@ class StockApp {
     resetZoom() { this.setZoom(1.0); }
 
     // ============================================================
-    // ✅ BARCODE HANDLING
+    // ✅ BARCODE HANDLING - ปรับปรุงการค้นหา
     // ============================================================
     onScan(barcode) {
         this.currentBarcode = barcode;
@@ -1236,10 +1278,20 @@ class StockApp {
 
     async lookupProduct(barcode) {
         if (!barcode) return;
-        let product = this.products.find(p => p.barcodes && p.barcodes.includes(barcode));
+        
+        // ค้นหาจากบาร์โค้ด (ทั้ง barcodes และ primaryBarcode)
+        let product = this.products.find(p => {
+            if (p.barcodes && p.barcodes.includes(barcode)) return true;
+            if (p.primaryBarcode === barcode) return true;
+            return false;
+        });
+        
+        // ถ้าไม่เจอ แต่เป็น TEMP barcode
         if (!product && barcode.startsWith('TEMP')) {
             product = this.products.find(p => p.primaryBarcode === barcode);
         }
+        
+        // ถ้าไม่เจอ ให้ค้นหาจากประวัติ
         if (!product) {
             const historyId = this.barcodeHistory[barcode];
             if (historyId) {
@@ -1260,82 +1312,108 @@ class StockApp {
                 }
             }
         }
+        
+        // ถ้าไม่เจอ ให้เปิดหน้าต่างค้นหาด้วยชื่อ
         if (!product) {
-            const searchName = prompt('🔍 ไม่พบบาร์โค้ด: ' + barcode + '\nพิมพ์ชื่อสินค้าเพื่อค้นหา:');
-            if (searchName) {
-                const matches = this.products.filter(p =>
-                    p.name.toLowerCase().includes(searchName.toLowerCase()) && (p.stock || 0) > 0
-                );
-                if (matches.length === 1) {
-                    product = matches[0];
-                    if (!product.barcodes) product.barcodes = [product.primaryBarcode];
-                    if (!product.barcodes.includes(barcode)) {
-                        product.barcodes.push(barcode);
-                        await this.saveProduct(product);
-                        this.showToast('✅ ผูกบาร์โค้ดสำเร็จ', 'success');
-                    }
-                    this.currentProduct = product;
-                    this.showProduct(product);
-                    return;
-                } else if (matches.length > 1) {
-                    const choice = prompt('พบ ' + matches.length + ' รายการ:\n' + 
-                        matches.map((p, i) => (i+1) + '. ' + p.name).join('\n') + 
-                        '\n\nเลือกหมายเลข:');
-                    if (choice && matches[parseInt(choice)-1]) {
-                        product = matches[parseInt(choice)-1];
-                        if (!product.barcodes) product.barcodes = [product.primaryBarcode];
-                        if (!product.barcodes.includes(barcode)) {
-                            product.barcodes.push(barcode);
-                            await this.saveProduct(product);
-                            this.showToast('✅ ผูกบาร์โค้ดสำเร็จ', 'success');
-                        }
-                        this.currentProduct = product;
-                        this.showProduct(product);
-                        return;
-                    }
-                } else {
-                    if (confirm('ไม่พบสินค้าชื่อ "' + searchName + '" ต้องการเพิ่มเป็นสินค้าใหม่หรือไม่?')) {
-                        const name = prompt('กรอกชื่อสินค้าใหม่:');
-                        if (name && name.trim()) {
-                            product = {
-                                id: Date.now() + Math.random() * 1000,
-                                barcodes: [barcode],
-                                primaryBarcode: barcode,
-                                name: name.trim(),
-                                stock: 0,
-                                lot: '',
-                                cost: 0,
-                                sellPrice1: 0,
-                                sellPrice2: 0,
-                                sellPrice3: 0,
-                                sellPrice4: 0,
-                                sellPrice5: 0,
-                                stockMax: 0,
-                                stockMin: 0,
-                                supplier: '',
-                                avgCost: 0,
-                                unit: '',
-                                expiry: '',
-                                createdAt: new Date().toISOString()
-                            };
-                            await this.saveProduct(product);
-                            this.products.push(product);
-                            this.barcodeHistory[barcode] = product.id;
-                            localStorage.setItem('barcodeHistory_' + CONFIG.STORE_ID, JSON.stringify(this.barcodeHistory));
-                            this.showToast('✅ เพิ่มสินค้าใหม่สำเร็จ', 'success');
-                            this.currentProduct = product;
-                            this.showProduct(product);
-                            this.updateProgress();
-                            return;
-                        }
-                    }
-                }
-            }
-            this.showToast('⚠️ ไม่พบสินค้าในระบบ', 'warning');
+            this.showSearchDialog(barcode);
             return;
         }
+        
         this.currentProduct = product;
         this.showProduct(product);
+    }
+
+    // ===== SEARCH DIALOG - ค้นหาสินค้าด้วยชื่อ =====
+    showSearchDialog(barcode) {
+        // แสดงช่องค้นหาและให้โฟกัส
+        const searchInput = document.getElementById('searchProduct');
+        searchInput.value = '';
+        searchInput.focus();
+        searchInput.placeholder = '🔍 พิมพ์ชื่อสินค้าที่ต้องการ...';
+        
+        // แสดงข้อความแจ้ง
+        this.showToast('🔍 ไม่พบบาร์โค้ด: ' + barcode + ' กรุณาค้นหาด้วยชื่อสินค้า', 'warning');
+        
+        // เก็บ barcode ไว้สำหรับผูกภายหลัง
+        this.pendingBarcode = barcode;
+        
+        // เมื่อเลือกสินค้าจากการค้นหา จะใช้ฟังก์ชัน selectProductFromSearchWithBarcode
+    }
+
+    // ===== SEARCH PRODUCT - แก้ไขให้ค้นหาแบบ contains =====
+    searchProduct(query) {
+        const container = document.getElementById('searchResults');
+        if (!query || query.length < 1) { 
+            container.style.display = 'none'; 
+            return; 
+        }
+        
+        // ค้นหาแบบ contains (ไม่ต้องตรงทั้งหมด)
+        const results = this.products.filter(p =>
+            p.name.toLowerCase().includes(query.toLowerCase()) && (p.stock || 0) > 0
+        ).slice(0, 20);
+        
+        if (results.length === 0) {
+            container.style.display = 'block';
+            container.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:10px;font-size:12px;">❌ ไม่พบสินค้า</p>';
+            return;
+        }
+        
+        container.style.display = 'block';
+        container.innerHTML = results.map(p => {
+            // เน้นข้อความที่ค้นหา
+            const name = p.name;
+            const index = name.toLowerCase().indexOf(query.toLowerCase());
+            let displayName = name;
+            if (index !== -1) {
+                const before = name.substring(0, index);
+                const match = name.substring(index, index + query.length);
+                const after = name.substring(index + query.length);
+                displayName = before + '<strong style="color:var(--primary);">' + match + '</strong>' + after;
+            }
+            return `<div class="search-result-item" onclick="app.selectProductFromSearchWithBarcode('${p.id}')">
+                        <div class="info">
+                            <div class="name">${displayName}</div>
+                            <div class="detail">📦 ${p.stock || 0} ชิ้น | 💰 ${(p.sellPrice1 || p.cost || 0).toFixed(2)} บาท | 🏷️ ${p.primaryBarcode || '-'}</div>
+                        </div>
+                        <span class="badge badge-info">เลือก</span>
+                    </div>`;
+        }).join('');
+    }
+
+    // ===== SELECT PRODUCT FROM SEARCH WITH BARCODE =====
+    async selectProductFromSearchWithBarcode(productId) {
+        const product = this.products.find(p => p.id === productId);
+        if (!product) {
+            this.showToast('⚠️ ไม่พบสินค้า', 'error');
+            return;
+        }
+        
+        // ถ้ามี pending barcode (จากกรณีสแกนแล้วไม่เจอ)
+        if (this.pendingBarcode) {
+            // ผูกบาร์โค้ดกับสินค้า
+            if (!product.barcodes) product.barcodes = [product.primaryBarcode];
+            if (!product.barcodes.includes(this.pendingBarcode)) {
+                product.barcodes.push(this.pendingBarcode);
+                await this.saveProduct(product);
+                this.barcodeHistory[this.pendingBarcode] = product.id;
+                localStorage.setItem('barcodeHistory_' + CONFIG.STORE_ID, JSON.stringify(this.barcodeHistory));
+                this.showToast('✅ ผูกบาร์โค้ด ' + this.pendingBarcode + ' กับ ' + product.name + ' สำเร็จ', 'success');
+            }
+            this.pendingBarcode = null;
+        }
+        
+        this.currentProduct = product;
+        this.showProduct(product);
+        
+        // ซ่อนผลการค้นหา
+        document.getElementById('searchResults').style.display = 'none';
+        document.getElementById('searchProduct').value = '';
+    }
+
+    // ===== SELECT PRODUCT FROM SEARCH (แบบปกติ) =====
+    selectProductFromSearch(productId) {
+        this.selectProductFromSearchWithBarcode(productId);
     }
 
     showProduct(product) {
@@ -1364,7 +1442,7 @@ class StockApp {
                         <strong>Lot: ${product.lot}</strong>
                         <div style="font-size:9px;color:var(--text-muted);">
                             💰 ทุน: ${(product.cost || 0).toFixed(2)} | ขาย: ${(product.sellPrice1 || 0).toFixed(2)}
-                            ${product.expiry ? ' | ⏳ หมดอายุ: ' + product.expiry : ''}
+                            ${product.expiry ? ' | ⏳ หมดอายุ: ' + this.formatDate(product.expiry) : ''}
                         </div>
                     </div>
                 </div>`;
@@ -1675,41 +1753,6 @@ class StockApp {
     }
 
     // ============================================================
-    // ✅ SEARCH
-    // ============================================================
-    searchProduct(query) {
-        const container = document.getElementById('searchResults');
-        if (!query || query.length < 2) { container.style.display = 'none'; return; }
-        const results = this.products.filter(p =>
-            p.name.toLowerCase().includes(query.toLowerCase()) && (p.stock || 0) > 0
-        ).slice(0, 15);
-        if (results.length === 0) {
-            container.style.display = 'block';
-            container.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:8px;font-size:11px;">❌ ไม่พบสินค้า</p>';
-            return;
-        }
-        container.style.display = 'block';
-        container.innerHTML = results.map(p =>
-            `<div class="lot-item" onclick="app.selectProductFromSearch('${p.id}')" style="padding:6px 10px;font-size:11px;">
-                <div>
-                    <strong>${p.name}</strong>
-                    <div style="font-size:9px;color:var(--text-muted);">📦 จำนวน: ${p.stock} | 💰 ทุน: ${p.cost} | ขาย: ${p.sellPrice1 || 0}</div>
-                </div>
-            </div>`
-        ).join('');
-    }
-
-    selectProductFromSearch(productId) {
-        const product = this.products.find(p => p.id === productId);
-        if (product) {
-            this.currentProduct = product;
-            this.showProduct(product);
-            document.getElementById('searchResults').style.display = 'none';
-            document.getElementById('searchProduct').value = '';
-        }
-    }
-
-    // ============================================================
     // ✅ FILE IMPORT
     // ============================================================
     setupDragDrop() {
@@ -1866,8 +1909,8 @@ class StockApp {
                         sellPrice3: parseFloat(row[7] || row[8]) || 0,
                         sellPrice4: parseFloat(row[8] || row[9]) || 0,
                         sellPrice5: parseFloat(row[9] || row[10]) || 0,
-                        stockMax: parseFloat(row[10] || row[11]) || 0,
-                        stockMin: parseFloat(row[11] || row[12]) || 0,
+                        stockMax: Math.round(parseFloat(row[10] || row[11]) || 0),
+                        stockMin: Math.round(parseFloat(row[11] || row[12]) || 0),
                         supplier: String(row[12] || row[13] || ''),
                         avgCost: parseFloat(row[13] || row[14]) || 0,
                         unit: String(row[14] || row[15] || ''),
@@ -1891,8 +1934,8 @@ class StockApp {
                         sellPrice3: parseFloat(m.sellPrice3 ? row[idx('sellPrice3')] : 0) || 0,
                         sellPrice4: parseFloat(m.sellPrice4 ? row[idx('sellPrice4')] : 0) || 0,
                         sellPrice5: parseFloat(m.sellPrice5 ? row[idx('sellPrice5')] : 0) || 0,
-                        stockMax: parseFloat(m.stockMax ? row[idx('stockMax')] : 0) || 0,
-                        stockMin: parseFloat(m.stockMin ? row[idx('stockMin')] : 0) || 0,
+                        stockMax: Math.round(parseFloat(m.stockMax ? row[idx('stockMax')] : 0) || 0),
+                        stockMin: Math.round(parseFloat(m.stockMin ? row[idx('stockMin')] : 0) || 0),
                         supplier: String(m.supplier ? row[idx('supplier')] : ''),
                         avgCost: parseFloat(m.avgCost ? row[idx('avgCost')] : 0) || 0,
                         unit: String(m.unit ? row[idx('unit')] : ''),
@@ -1915,11 +1958,9 @@ class StockApp {
             this.updateProgress();
             this.updateStatus('✅ นำเข้าสำเร็จ ' + count + ' รายการ');
             this.showToast('✅ นำเข้าข้อมูล ' + count + ' รายการสำเร็จ', 'success');
-            // อัปเดตแท็บใหม่
             this.updateOrderTab();
             this.updateExpiryTab();
             this.updateProfitTab();
-            this.updatePriceTab();
         } catch (err) {
             console.error('Import error:', err);
             this.showToast('❌ นำเข้าข้อมูลไม่สำเร็จ', 'error');
@@ -2059,7 +2100,7 @@ class StockApp {
     }
 
     // ============================================================
-    // ✅ ORDER TAB (แนะนำการสั่งซื้อ)
+    // ✅ ORDER TAB
     // ============================================================
     updateOrderTab() {
         const productsWithMaxMin = this.products.filter(p => p.stockMax > 0 || p.stockMin > 0);
@@ -2078,20 +2119,18 @@ class StockApp {
         }, 0);
         document.getElementById('ordTotalValue').textContent = totalValue.toFixed(2);
 
-        // รายการที่ต้องสั่งซื้อ
         const list = document.getElementById('orderList');
         if (needOrder.length === 0) {
             list.innerHTML = '<p style="text-align:center;color:var(--success);padding:20px;font-size:12px;"><i class="fas fa-check-circle" style="font-size:20px;display:block;margin-bottom:6px;"></i>ไม่ต้องสั่งซื้อสินค้าเพิ่ม</p>';
         } else {
             list.innerHTML = needOrder.map(p => {
                 const orderQty = this.calculateOrderQty(p);
-                const product = this.products.find(pp => pp.id === p.id);
-                const supplier = product ? product.supplier || '-' : '-';
+                const supplier = p.supplier || '-';
                 return `<div class="order-item">
                             <div>
-                                <div class="name">${p.name} (${p.primaryBarcode || '-'})</div>
+                                <div class="name">${p.name}</div>
                                 <div class="detail">
-                                    📊 คงเหลือ: ${p.stock || 0} | 📈 Max: ${p.stockMax || 'ไม่กำหนด'} | 📉 Min: ${p.stockMin || 'ไม่กำหนด'} 
+                                    🏷️ รหัส: ${p.primaryBarcode || '-'} | 📊 คงเหลือ: ${p.stock || 0} | 📈 Max: ${Math.round(p.stockMax || 0)} | 📉 Min: ${Math.round(p.stockMin || 0)} 
                                     | 🏢 ${supplier} | ควรสั่ง: ${orderQty}
                                 </div>
                             </div>
@@ -2100,7 +2139,6 @@ class StockApp {
             }).join('');
         }
 
-        // สรุปตามผู้จัดจำหน่าย
         this.renderSupplierSummary(needOrder);
     }
 
@@ -2124,8 +2162,7 @@ class StockApp {
 
         const supplierMap = {};
         needOrder.forEach(p => {
-            const product = this.products.find(pp => pp.id === p.id);
-            const supplier = product ? product.supplier || 'ไม่ระบุ' : 'ไม่ระบุ';
+            const supplier = p.supplier || 'ไม่ระบุ';
             if (!supplierMap[supplier]) {
                 supplierMap[supplier] = [];
             }
@@ -2162,7 +2199,7 @@ class StockApp {
     }
 
     // ============================================================
-    // ✅ EXPIRY TAB (หมดอายุ)
+    // ✅ EXPIRY TAB
     // ============================================================
     setExpiryFilter(days) {
         this.expiryFilter = days;
@@ -2183,7 +2220,6 @@ class StockApp {
             return diffDays >= 0 && diffDays <= filterDays;
         });
 
-        // Sort by expiry date
         filteredProducts.sort((a, b) => new Date(a.expiry) - new Date(b.expiry));
 
         const alert = document.getElementById('expiryAlert');
@@ -2199,7 +2235,6 @@ class StockApp {
             alert.style.display = 'none';
         }
 
-        // รายการ
         const list = document.getElementById('expiryList');
         if (filteredProducts.length === 0) {
             list.innerHTML = '<p style="text-align:center;color:var(--success);padding:20px;font-size:12px;"><i class="fas fa-check-circle" style="font-size:20px;display:block;margin-bottom:6px;"></i>ไม่มีสินค้าหมดอายุ</p>';
@@ -2213,7 +2248,7 @@ class StockApp {
                             <div>
                                 <div class="name">${p.name}</div>
                                 <div class="detail">
-                                    🏷️ ${p.primaryBarcode || '-'} | 📦 ${p.stock || 0} ชิ้น | ⏳ ${p.expiry} 
+                                    🏷️ รหัส: ${p.primaryBarcode || '-'} | 📦 ${p.stock || 0} ชิ้น | ⏳ ${this.formatDate(p.expiry)} 
                                     | 🏢 ${supplier} | 💰 ${(p.sellPrice1 || p.cost || 0).toFixed(2)}
                                 </div>
                             </div>
@@ -2222,7 +2257,6 @@ class StockApp {
             }).join('');
         }
 
-        // Expiry Report รายเดือน
         this.renderExpiryMonthly(products, today);
     }
 
@@ -2235,7 +2269,9 @@ class StockApp {
 
         const monthly = {};
         products.forEach(p => {
+            if (!p.expiry) return;
             const date = new Date(p.expiry);
+            if (isNaN(date.getTime())) return;
             const monthKey = date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0');
             if (!monthly[monthKey]) {
                 monthly[monthKey] = { items: [], totalValue: 0, totalQty: 0 };
@@ -2251,15 +2287,15 @@ class StockApp {
             return;
         }
 
-        let html = '<div class="table-wrap"><table><thead><tr><th>เดือน</th><th>รายการ</th><th>จำนวน</th><th>มูลค่า</th></tr></thead><tbody>';
+        let html = '<div class="table-wrap"><table><thead><tr><th>เดือนที่หมดอายุ</th><th>จำนวนรายการ</th><th>จำนวนชิ้น</th><th>มูลค่ารวม</th></tr></thead><tbody>';
+        const monthNames = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
         sortedMonths.forEach(month => {
             const data = monthly[month];
-            const monthNames = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
             const parts = month.split('-');
-            const displayMonth = monthNames[parseInt(parts[1]) - 1] + ' ' + parts[0];
+            const displayMonth = monthNames[parseInt(parts[1]) - 1] + ' ' + (parseInt(parts[0]) + 543);
             html += `<tr>
                         <td><strong>${displayMonth}</strong></td>
-                        <td>${data.items.length}</td>
+                        <td class="text-center">${data.items.length}</td>
                         <td class="text-center">${data.totalQty}</td>
                         <td class="text-right">${data.totalValue.toFixed(2)}</td>
                     </tr>`;
@@ -2269,7 +2305,7 @@ class StockApp {
     }
 
     // ============================================================
-    // ✅ PROFIT/LOSS TAB (กำไร/ขาดทุน)
+    // ✅ PROFIT/LOSS TAB
     // ============================================================
     updateProfitTab() {
         const items = this.sessionItems;
@@ -2298,7 +2334,6 @@ class StockApp {
         document.getElementById('profSellDiff').textContent = totalSellDiff.toFixed(2);
         document.getElementById('profLostProfit').textContent = totalLostProfit.toFixed(2);
 
-        // รายละเอียด
         const list = document.getElementById('profitList');
         list.innerHTML = items.map(i => {
             const profitPerUnit = i.sellPrice - i.cost;
@@ -2318,60 +2353,8 @@ class StockApp {
     }
 
     // ============================================================
-    // ✅ PRICE LEVELS TAB (ราคาหลายระดับ)
-    // ============================================================
-    updatePriceTab() {
-        const products = this.products;
-        if (products.length === 0) {
-            document.getElementById('priceTotal1').textContent = '0';
-            document.getElementById('priceTotal2').textContent = '0';
-            document.getElementById('priceTotal3').textContent = '0';
-            document.getElementById('priceTotal4').textContent = '0';
-            document.getElementById('priceTotal5').textContent = '0';
-            document.getElementById('priceList').innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:20px;font-size:12px;"><i class="fas fa-inbox" style="font-size:20px;display:block;margin-bottom:6px;opacity:0.5;"></i>ยังไม่มีข้อมูลสินค้า<br><small>กรุณานำเข้าข้อมูลสินค้าก่อน</small></p>';
-            return;
-        }
-
-        const total1 = products.reduce((sum, p) => sum + ((p.stock || 0) * (p.sellPrice1 || 0)), 0);
-        const total2 = products.reduce((sum, p) => sum + ((p.stock || 0) * (p.sellPrice2 || 0)), 0);
-        const total3 = products.reduce((sum, p) => sum + ((p.stock || 0) * (p.sellPrice3 || 0)), 0);
-        const total4 = products.reduce((sum, p) => sum + ((p.stock || 0) * (p.sellPrice4 || 0)), 0);
-        const total5 = products.reduce((sum, p) => sum + ((p.stock || 0) * (p.sellPrice5 || 0)), 0);
-
-        document.getElementById('priceTotal1').textContent = total1.toFixed(0);
-        document.getElementById('priceTotal2').textContent = total2.toFixed(0);
-        document.getElementById('priceTotal3').textContent = total3.toFixed(0);
-        document.getElementById('priceTotal4').textContent = total4.toFixed(0);
-        document.getElementById('priceTotal5').textContent = total5.toFixed(0);
-
-        // รายละเอียด
-        const list = document.getElementById('priceList');
-        const filtered = products.filter(p => p.stock > 0 && (p.sellPrice1 || p.sellPrice2 || p.sellPrice3 || p.sellPrice4 || p.sellPrice5));
-        if (filtered.length === 0) {
-            list.innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:20px;font-size:12px;">ไม่มีข้อมูลราคา</p>';
-            return;
-        }
-        list.innerHTML = filtered.slice(0, 50).map(p => `
-                    <div class="order-item">
-                        <div>
-                            <div class="name">${p.name}</div>
-                            <div class="detail">
-                                ราคา 1: ${(p.sellPrice1 || 0).toFixed(2)} | 
-                                ราคา 2: ${(p.sellPrice2 || 0).toFixed(2)} | 
-                                ราคา 3: ${(p.sellPrice3 || 0).toFixed(2)} | 
-                                ราคา 4: ${(p.sellPrice4 || 0).toFixed(2)} | 
-                                ราคา 5: ${(p.sellPrice5 || 0).toFixed(2)}
-                            </div>
-                        </div>
-                        <span class="badge badge-info">${p.stock || 0}</span>
-                    </div>
-                `).join('');
-    }
-
-    // ============================================================
     // ✅ EXPORT FUNCTIONS
     // ============================================================
-    // Order Export
     exportOrder(format) {
         const products = this.products.filter(p => p.stockMax > 0 || p.stockMin > 0);
         const needOrder = products.filter(p => {
@@ -2396,7 +2379,6 @@ class StockApp {
         this.exportGeneric(data, format, 'order');
     }
 
-    // Expiry Export
     exportExpiry(format) {
         const today = new Date();
         const filterDays = this.expiryFilter;
@@ -2420,7 +2402,6 @@ class StockApp {
         this.exportGeneric(data, format, 'expiry');
     }
 
-    // Profit Export
     exportProfit(format) {
         const items = this.sessionItems;
         if (items.length === 0) { this.showToast('⚠️ ไม่มีข้อมูล', 'warning'); return; }
@@ -2438,23 +2419,6 @@ class StockApp {
             profit_loss: i.profit_loss
         }));
         this.exportGeneric(data, format, 'profit');
-    }
-
-    // Price Export
-    exportPrice(format) {
-        const products = this.products.filter(p => p.stock > 0 && (p.sellPrice1 || p.sellPrice2 || p.sellPrice3 || p.sellPrice4 || p.sellPrice5));
-        if (products.length === 0) { this.showToast('⚠️ ไม่มีข้อมูลราคา', 'warning'); return; }
-        const data = products.map(p => ({
-            barcode: p.primaryBarcode || '',
-            name: p.name,
-            stock: p.stock || 0,
-            sellPrice1: p.sellPrice1 || 0,
-            sellPrice2: p.sellPrice2 || 0,
-            sellPrice3: p.sellPrice3 || 0,
-            sellPrice4: p.sellPrice4 || 0,
-            sellPrice5: p.sellPrice5 || 0
-        }));
-        this.exportGeneric(data, format, 'price');
     }
 
     exportGeneric(data, format, type) {
@@ -2491,7 +2455,7 @@ class StockApp {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF('landscape');
         doc.setFontSize(14);
-        const typeNames = { order: 'แนะนำการสั่งซื้อ', expiry: 'สินค้าหมดอายุ', profit: 'กำไร/ขาดทุน', price: 'ราคาหลายระดับ' };
+        const typeNames = { order: 'แนะนำการสั่งซื้อ', expiry: 'สินค้าหมดอายุ', profit: 'กำไร/ขาดทุน' };
         doc.text('รายงาน ' + (typeNames[type] || type), 14, 20);
         const tableData = rows.map(row => row.map(v => v !== undefined ? String(v) : ''));
         doc.autoTable({
@@ -2606,7 +2570,7 @@ let app = null;
 document.addEventListener('DOMContentLoaded', function() {
     app = new StockApp();
     window.app = app;
-    console.log('✅ ระบบนับสินค้าร้านยา v2.0.6 พร้อมใช้งาน!');
+    console.log('✅ ระบบนับสินค้าร้านยา v2.0.7 พร้อมใช้งาน!');
 });
 
 // ================================================================
@@ -2647,11 +2611,12 @@ function setExpiryFilter(days) { if (app) app.setExpiryFilter(days); }
 function exportOrder(format) { if (app) app.exportOrder(format); }
 function exportExpiry(format) { if (app) app.exportExpiry(format); }
 function exportProfit(format) { if (app) app.exportProfit(format); }
-function exportPrice(format) { if (app) app.exportPrice(format); }
+function selectProductFromSearch(productId) { if (app) app.selectProductFromSearch(productId); }
+function selectProductFromSearchWithBarcode(productId) { if (app) app.selectProductFromSearchWithBarcode(productId); }
 
-console.log('✅ ระบบนับสินค้าร้านยา v2.0.6 พร้อมใช้งาน!');
+console.log('✅ ระบบนับสินค้าร้านยา v2.0.7 พร้อมใช้งาน!');
 console.log('📖 เริ่มต้นใช้งาน: อัปโหลดไฟล์ Excel/CSV หรือเชื่อมต่อ Google Sheets');
-console.log('✨ ฟังก์ชันใหม่: แนะนำสั่งซื้อ, หมดอายุ, กำไร/ขาดทุน, ราคาหลายระดับ');
+console.log('✨ ฟังก์ชันใหม่: ค้นหาสินค้าด้วยชื่อแบบพิมพ์บางส่วน, ปรับปรุงการสแกน');
 </script>
 </body>
 </html>
