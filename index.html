@@ -8,17 +8,13 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="ระบบนับสินค้าร้านยา">
     <meta name="theme-color" content="#4f46e5">
-    <title>ระบบนับสินค้าร้านยา v2.0.10</title>
+    <title>ระบบนับสินค้าร้านยา v2.0.11</title>
 
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     
-    <!-- ไลบรารี -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
@@ -34,9 +30,6 @@
     <link rel="shortcut icon" href="favicon.ico">
 
     <style>
-        /* ============================================================
-           CSS - สไตล์ทั้งหมด (ปรับให้เหมาะกับมือถือ)
-           ============================================================ */
         :root {
             --primary: #4f46e5;
             --primary-dark: #4338ca;
@@ -110,7 +103,6 @@
 
         .main-content { max-width:640px; margin:0 auto; padding:10px; }
 
-        /* ===== TAB NAVIGATION ===== */
         .tab-nav { display:flex; background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-lg); padding:3px; margin-bottom:12px; box-shadow:var(--shadow-sm); gap:2px; position:sticky; top:70px; z-index:50; backdrop-filter:blur(12px); flex-wrap:wrap; }
         .tab-btn { flex:1; min-width:38px; padding:5px 2px; border:none; background:transparent; border-radius:var(--radius-md); font-size:8px; font-weight:600; cursor:pointer; transition:var(--transition); color:var(--text-muted); text-align:center; position:relative; }
         .tab-btn i { font-size:11px; display:block; margin-bottom:1px; }
@@ -132,6 +124,8 @@
         .btn-success { background:var(--success); color:#fff; }
         .btn-danger { background:var(--danger); color:#fff; }
         .btn-outline { background:transparent; border:2px solid var(--primary); color:var(--primary); }
+        .btn-outline-success { background:transparent; border:2px solid var(--success); color:var(--success); }
+        .btn-outline-danger { background:transparent; border:2px solid var(--danger); color:var(--danger); }
         .btn-sm { padding:4px 8px; font-size:9px; border-radius:var(--radius-sm); }
         .btn-block { width:100%; }
 
@@ -144,7 +138,6 @@
         .mapping-grid .mapping-item label { font-size:10px; font-weight:600; color:var(--text-muted); }
         .mapping-grid .mapping-item select { padding:6px 8px; border:2px solid var(--border-color); border-radius:var(--radius-sm); font-size:11px; background:var(--bg-body); color:var(--text-main); }
 
-        /* ===== SCANNER ===== */
         .scanner-wrapper { position:relative; border-radius:var(--radius-md); overflow:hidden; background:#0f172a; min-height:200px; box-shadow:inset 0 2px 20px rgba(0,0,0,0.4); }
         .scanner-wrapper #reader { width:100%; min-height:200px; }
         .scanner-wrapper #reader video { width:100%; height:auto; max-height:320px; object-fit:cover; display:block; }
@@ -205,11 +198,13 @@
         td { padding:5px; border-top:1px solid var(--border-color); font-size:10px; }
         .text-center { text-align:center; }
         .text-right { text-align:right; }
+        .text-left { text-align:left; }
         .badge { display:inline-block; padding:2px 6px; border-radius:8px; font-size:9px; font-weight:700; }
         .badge-green { background:var(--success-light); color:#166534; }
         .badge-red { background:var(--danger-light); color:#991b1b; }
         .badge-info { background:var(--info-light); color:#1e40af; }
         .badge-warning { background:var(--warning-light); color:#92400e; }
+        .badge-purple { background:#e0e7ff; color:#3730a3; }
 
         .modal-overlay { position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(15,23,42,0.6); backdrop-filter:blur(8px); z-index:200; display:none; align-items:flex-end; justify-content:center; }
         .modal-overlay.show { display:flex; }
@@ -286,6 +281,14 @@
         .shelf-row.selected { background:var(--primary); color:#fff; }
         .shelf-count { background:rgba(0,0,0,0.06); padding:1px 5px; border-radius:8px; font-size:8px; }
 
+        .location-badge { display:inline-block; background:var(--info-light); color:#1e40af; padding:1px 8px; border-radius:10px; font-size:8px; font-weight:600; }
+        [data-theme="dark"] .location-badge { background:#1e293b; color:#60a5fa; }
+
+        .collapse-header { cursor:pointer; padding:8px 10px; background:var(--bg-body); border-radius:var(--radius-sm); display:flex; justify-content:space-between; align-items:center; font-weight:600; font-size:11px; border:1px solid var(--border-color); }
+        .collapse-header:hover { background:var(--border-color); }
+        .collapse-body { padding:6px 10px; display:none; border:1px solid var(--border-color); border-top:none; border-radius:0 0 var(--radius-sm) var(--radius-sm); }
+        .collapse-body.open { display:block; }
+
         @media (max-width:480px) {
             .logo-icon { width:32px; height:32px; font-size:14px; }
             .logo-text .brand .main { font-size:13px; }
@@ -321,7 +324,7 @@
             <div class="logo-text">
                 <span class="brand">
                     <span class="main">ระบบนับสินค้า</span>
-                    <span class="version">v2.0.10</span>
+                    <span class="version">v2.0.11</span>
                 </span>
                 <span class="tagline"><i class="fas fa-circle" style="font-size:4px;color:#34d399;margin-right:3px;"></i>ระบบนับสินค้าในร้านยา</span>
             </div>
@@ -436,7 +439,7 @@
             </div>
         </div>
 
-        <!-- SEARCH - แก้ไขแล้ว -->
+        <!-- SEARCH -->
         <div class="card" style="padding:8px;background:var(--success-light);border:2px solid #6ee7b7;">
             <div style="font-size:11px;font-weight:600;margin-bottom:5px;color:#065f46;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px;">
                 <span><i class="fas fa-search"></i> ค้นหาสินค้าด้วยชื่อ</span>
@@ -492,9 +495,10 @@
     <div class="page" id="page-layout">
         <div class="card">
             <div class="card-title"><i class="fas fa-sitemap"></i> แผนผังร้าน</div>
+            <p style="font-size:9px;color:var(--text-muted);margin-bottom:8px;"><i class="fas fa-info-circle"></i> สร้างตู้และชั้นวางสินค้าเพื่อใช้ในการนับสต็อก</p>
             <div class="input-group" style="margin-bottom:8px;">
                 <input type="text" class="input" id="newCabinetName" placeholder="ชื่อตู้ใหม่" style="font-size:11px;padding:6px 10px;">
-                <button class="btn btn-primary" onclick="addCabinet()" style="flex-shrink:0;font-size:11px;padding:6px 12px;"><i class="fas fa-plus"></i> เพิ่ม</button>
+                <button class="btn btn-primary" onclick="addCabinet()" style="flex-shrink:0;font-size:11px;padding:6px 12px;"><i class="fas fa-plus"></i> เพิ่มตู้</button>
             </div>
             <div class="pharmacy-map" id="pharmacyMap">
                 <div class="pharmacy-grid" id="cabinetGrid">
@@ -517,6 +521,7 @@
 
     <!-- ===== PAGE: REPORT ===== -->
     <div class="page" id="page-report">
+        <!-- สรุปภาพรวม -->
         <div class="card" style="background:linear-gradient(135deg,var(--success-light) 0%,#d1fae5 100%);border:2px solid #6ee7b7;padding:12px;">
             <div class="card-title" style="color:#065f46;font-size:13px;margin-bottom:6px;"><i class="fas fa-chart-pie"></i> สรุปภาพรวมการนับสต็อก</div>
             <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center;">
@@ -526,23 +531,41 @@
             </div>
         </div>
 
+        <!-- Stats -->
         <div class="summary-grid-4">
             <div class="stat-card"><div class="stat-label"><i class="fas fa-clipboard-list"></i> รายการที่นับ</div><div class="stat-value" id="rptTotal">0</div></div>
             <div class="stat-card"><div class="stat-label"><i class="fas fa-exclamation-triangle"></i> รายการผลต่าง</div><div class="stat-value" id="rptDiff" style="color:var(--danger);">0</div></div>
             <div class="stat-card"><div class="stat-label"><i class="fas fa-coins"></i> ผลต่างต้นทุน</div><div class="stat-value" id="rptCost" style="color:var(--warning);">0</div></div>
-            <div class="stat-card"><div class="stat-label"><i class="fas fa-percent"></i> % ผลต่าง</div><div class="stat-value" id="rptPercent" style="color:var(--primary);">0%</div></div>
+            <div class="stat-card"><div class="stat-label"><i class="fas fa-money-bill-wave"></i> ผลต่างขาย</div><div class="stat-value" id="rptSellDiff" style="color:var(--danger);">0</div></div>
         </div>
 
+        <!-- สินค้าที่ยังไม่ได้นับ -->
         <div class="card" id="uncountedCard" style="display:none;border:2px solid var(--danger);padding:10px;">
             <div class="card-title" style="color:var(--danger);font-size:12px;"><i class="fas fa-exclamation-circle"></i> สินค้าที่ยังไม่ได้นับ</div>
             <div class="table-wrap">
                 <table>
-                    <thead><tr><th>ชื่อสินค้า</th><th>Lot</th><th>ระบบ</th><th>ทุน/หน่วย</th><th>ขาย/หน่วย</th><th>มูลค่ารวม</th><th>หมดอายุ</th></tr></thead>
+                    <thead><tr><th>ชื่อสินค้า</th><th>Lot</th><th>จำนวน</th><th>ทุน/หน่วย</th><th>ขาย/หน่วย</th><th>มูลค่ารวม</th><th>หมดอายุ</th></tr></thead>
                     <tbody id="uncountedBody"><tr><td colspan="7" style="text-align:center;padding:14px;color:var(--text-muted);font-size:11px;"><i class="fas fa-check-circle" style="color:var(--success);font-size:16px;display:block;margin-bottom:5px;"></i>นับครบทุกชิ้นแล้ว!</td></tr></tbody>
                 </table>
             </div>
         </div>
 
+        <!-- สินค้าที่เกิน/ขาด -->
+        <div class="card" id="diffCard" style="display:none;padding:10px;">
+            <div class="card-title" style="font-size:12px;"><i class="fas fa-balance-scale"></i> สรุปสินค้าที่เกิน/ขาด</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                <div style="border:2px solid var(--success);border-radius:var(--radius-md);padding:8px;background:var(--success-light);">
+                    <div style="font-weight:700;font-size:11px;color:#065f46;"><i class="fas fa-arrow-up"></i> เกิน (Over)</div>
+                    <div id="overItems" style="font-size:10px;color:#065f46;">-</div>
+                </div>
+                <div style="border:2px solid var(--danger);border-radius:var(--radius-md);padding:8px;background:var(--danger-light);">
+                    <div style="font-weight:700;font-size:11px;color:#991b1b;"><i class="fas fa-arrow-down"></i> ขาด (Short)</div>
+                    <div id="shortItems" style="font-size:10px;color:#991b1b;">-</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- รายละเอียดการนับ -->
         <div class="card" style="padding:10px;">
             <div class="flex-between" style="flex-wrap:wrap;gap:5px;">
                 <span class="card-title" style="margin:0;font-size:12px;"><i class="fas fa-table"></i> รายละเอียดการนับ</span>
@@ -566,15 +589,21 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>บาร์โค้ด</th><th>ชื่อสินค้า</th><th>Lot</th>
+                            <th>ชื่อสินค้า</th><th>Lot</th><th>ตำแหน่ง</th>
                             <th>ระบบ</th><th>นับ</th><th>ต่าง</th>
                             <th>ทุน</th><th>ขาย</th>
-                            <th>มูลค่าต่าง</th><th>%</th>
+                            <th>มูลค่าต่าง(ทุน)</th><th>มูลค่าต่าง(ขาย)</th>
                         </tr>
                     </thead>
                     <tbody id="reportBody"><tr><td colspan="10" style="text-align:center;padding:14px;color:var(--text-muted);font-size:11px;"><i class="fas fa-inbox" style="font-size:18px;display:block;margin-bottom:5px;opacity:0.5;"></i>ยังไม่มีข้อมูลสรุปผล</td></tr></tbody>
                 </table>
             </div>
+        </div>
+
+        <!-- สรุปตามตู้/ชั้น -->
+        <div class="card" style="padding:10px;" id="locationSummaryCard">
+            <div class="card-title" style="font-size:12px;"><i class="fas fa-map-pin"></i> สรุปตามตู้ / ชั้นวาง</div>
+            <div id="locationSummary"><p style="text-align:center;color:var(--text-muted);padding:14px;font-size:11px;">ยังไม่มีข้อมูลตำแหน่ง</p></div>
         </div>
     </div>
 </div>
@@ -594,26 +623,17 @@
 
 <!-- ============================================ JAVASCRIPT ============================================ -->
 <script>
-// =============================================
-// ✅ เริ่มต้น Eruda
-// =============================================
 eruda.init();
 console.log('✅ Eruda เปิดใช้งานแล้ว!');
 
-// =============================================
-// ✅ CONFIG
-// =============================================
 const CONFIG = {
     GOOGLE_SHEETS: { API_KEY: '', SPREADSHEET_ID: '', RANGES: { PRODUCTS: 'Products!A:L', REPORTS: 'Reports!A:H', HISTORY: 'History!A:F' } },
     APP_NAME: 'ระบบนับสินค้าร้านยา',
-    VERSION: '2.0.10',
+    VERSION: '2.0.11',
     STORE_ID: localStorage.getItem('storeId') || 'default',
     EXPIRY_WARNING_DAYS: 90
 };
 
-// =============================================
-// ✅ MAIN APP CLASS
-// =============================================
 class StockApp {
     constructor() {
         this.db = null;
@@ -645,7 +665,6 @@ class StockApp {
         this.init();
     }
 
-    // ===== INIT =====
     async init() {
         await this.initDB();
         await this.loadLocations();
@@ -659,14 +678,13 @@ class StockApp {
         this.initNetworkListener();
         this.updateStatus('พร้อมใช้งาน');
         this.startAutoSync();
-        console.log('✅ ระบบนับสินค้าร้านยา v2.0.10 พร้อมใช้งาน!');
+        console.log('✅ ระบบนับสินค้าร้านยา v2.0.11 พร้อมใช้งาน!');
         if (this.products.length === 0) {
             this.updateStatus('📥 กรุณานำเข้าข้อมูลสินค้าก่อนใช้งาน');
             this.showToast('📥 กรุณานำเข้าข้อมูลสินค้าจาก Excel หรือ Google Sheets', 'info');
         }
     }
 
-    // ===== BRANCH =====
     loadBranch() {
         document.getElementById('branchSelect').value = this.branchId;
         CONFIG.STORE_ID = this.branchId;
@@ -684,7 +702,6 @@ class StockApp {
         this.showToast('🏪 เปลี่ยนเป็น ' + select.selectedOptions[0].text, 'success');
     }
 
-    // ===== AUTO SYNC =====
     startAutoSync() {
         if (this.autoSyncEnabled) {
             setInterval(() => {
@@ -696,7 +713,6 @@ class StockApp {
         }
     }
 
-    // ===== INDEXEDDB =====
     initDB() {
         return new Promise((resolve) => {
             const request = indexedDB.open('StockCountDB_' + this.branchId, 5);
@@ -760,7 +776,6 @@ class StockApp {
         await new Promise(r => { tx.oncomplete = r; });
     }
 
-    // ===== EXPIRY WARNING =====
     checkExpiryWarnings() {
         const today = new Date();
         this.products.forEach(product => {
@@ -781,10 +796,8 @@ class StockApp {
             const expiryDate = new Date(product.expiryDate);
             const today = new Date();
             const diffDays = Math.ceil((expiryDate - today) / (1000 * 60 * 60 * 24));
-            
             const warning = document.getElementById('expiryWarning');
             const text = document.getElementById('expiryWarningText');
-            
             if (diffDays < 0) {
                 warning.style.display = 'flex';
                 text.textContent = '🚫 สินค้าหมดอายุแล้ว! (หมดอายุเมื่อ ' + this.formatDate(product.expiryDate) + ')';
@@ -799,7 +812,6 @@ class StockApp {
         }
     }
 
-    // ===== FORMAT DATE =====
     formatDate(dateStr) {
         if (!dateStr) return '-';
         try {
@@ -821,7 +833,6 @@ class StockApp {
         } catch(e) { return dateStr; }
     }
 
-    // ===== NETWORK & SYNC =====
     initNetworkListener() {
         window.addEventListener('online', () => this.updateNetworkStatus(true));
         window.addEventListener('offline', () => this.updateNetworkStatus(false));
@@ -884,7 +895,6 @@ class StockApp {
         else this.showToast('⚠️ อยู่นอกระบบ กรุณาเชื่อมต่ออินเทอร์เน็ต', 'warning');
     }
 
-    // ===== THEME =====
     loadTheme() {
         if (this.isDarkMode) {
             document.documentElement.setAttribute('data-theme', 'dark');
@@ -904,7 +914,6 @@ class StockApp {
         }
     }
 
-    // ===== UI =====
     showToast(message, type = 'info') {
         const container = document.getElementById('toastContainer');
         const toast = document.createElement('div');
@@ -930,7 +939,7 @@ class StockApp {
         const page = document.getElementById('page-' + name);
         if (page) page.classList.add('active');
         if (name === 'scan') this.updateScanBadge();
-        if (name === 'report' && this.sessionItems.length > 0) this.generateReport();
+        if (name === 'report') this.generateReport();
     }
 
     updateScanBadge() {
@@ -939,34 +948,27 @@ class StockApp {
         if (count > 0) { badge.style.display = 'inline'; badge.textContent = count; } else { badge.style.display = 'none'; }
     }
 
-    // ============================================================
-    // ✅ SCANNER
-    // ============================================================
+    // ===== SCANNER =====
     async startScanner() {
         if (typeof Html5Qrcode === 'undefined') {
             this.showToast('⚠️ ไลบรารีสแกนโหลดไม่สำเร็จ', 'error');
             return;
         }
-
         if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
             this.showToast('⚠️ เบราว์เซอร์นี้ไม่รองรับกล้อง', 'error');
             return;
         }
-
         try {
             if (this.html5Scanner) {
                 try { await this.html5Scanner.stop(); this.html5Scanner.clear(); } catch(e) {}
                 this.html5Scanner = null;
             }
-
             document.getElementById('scannerPlaceholder').style.display = 'none';
             document.getElementById('scannerOverlay').style.display = 'block';
             document.getElementById('scannerStatus').innerHTML = '<i class="fas fa-circle" style="color:var(--success);font-size:8px;"></i> กำลังเปิดกล้อง...';
             document.getElementById('scannerStatus').className = 'scanner-status success';
             document.getElementById('btnToggleScanner').innerHTML = '<i class="fas fa-stop"></i> ปิดกล้อง';
-
             this.html5Scanner = new Html5Qrcode("reader");
-
             const config = {
                 fps: 25,
                 qrbox: { width: 240, height: 160 },
@@ -985,7 +987,6 @@ class StockApp {
                     Html5QrcodeSupportedFormats.AZTEC
                 ]
             };
-
             await this.html5Scanner.start(
                 { facingMode: "environment" },
                 config,
@@ -1005,10 +1006,8 @@ class StockApp {
                 },
                 (error) => {}
             );
-
             this.scanning = true;
             this.showToast('📷 กล้องพร้อมสแกนบาร์โค้ดแล้ว', 'success');
-
         } catch (err) {
             console.error('Scanner error:', err);
             document.getElementById('scannerStatus').innerHTML = '<i class="fas fa-exclamation-circle"></i> ' + err.message;
@@ -1039,17 +1038,12 @@ class StockApp {
         }
     }
 
-    // ============================================================
-    // ✅ BARCODE HANDLING - แก้ไขให้สมบูรณ์
-    // ============================================================
+    // ===== BARCODE HANDLING =====
     onScan(barcode) {
         console.log('📷 สแกนบาร์โค้ด:', barcode);
         this.currentBarcode = barcode;
         this.pendingBarcode = barcode;
-        
-        // แสดง pending barcode
         this.updatePendingDisplay();
-        
         this.lookupProduct(barcode);
     }
 
@@ -1068,17 +1062,12 @@ class StockApp {
 
     async lookupProduct(barcode) {
         if (!barcode) return;
-        
         console.log('🔍 กำลังค้นหาบาร์โค้ด:', barcode);
-        
-        // 1. ค้นหาจากบาร์โค้ดในระบบ
         let product = this.products.find(p => {
             if (p.barcodes && p.barcodes.includes(barcode)) return true;
             if (p.primaryBarcode === barcode) return true;
             return false;
         });
-        
-        // 2. ถ้าเจอ → แสดงสินค้าเลย
         if (product) {
             console.log('✅ พบสินค้า:', product.name);
             this.currentProduct = product;
@@ -1088,8 +1077,6 @@ class StockApp {
             this.showToast(`📦 ${product.name} (มี ${product.stock || 0} ชิ้นในระบบ)`, 'success');
             return;
         }
-        
-        // 3. ถ้าไม่เจอ → เช็คประวัติ
         const historyId = this.barcodeHistory[barcode];
         if (historyId) {
             const histProduct = this.products.find(p => p.id === historyId);
@@ -1113,21 +1100,16 @@ class StockApp {
                 }
             }
         }
-        
-        // 4. ถ้าไม่เจอ → ให้ค้นหาด้วยชื่อ
         console.log('❌ ไม่พบบาร์โค้ด:', barcode, 'ให้ค้นหาด้วยชื่อ');
         this.showSearchDialog(barcode);
     }
 
-    // ===== SEARCH DIALOG =====
     showSearchDialog(barcode) {
         const searchInput = document.getElementById('searchProduct');
         searchInput.value = '';
         searchInput.focus();
         searchInput.placeholder = `🔍 บาร์โค้ด: ${barcode} - พิมพ์ชื่อสินค้าเพื่อจับคู่...`;
-        
         this.showToast(`🔍 ไม่พบบาร์โค้ด: ${barcode} กรุณาค้นหาด้วยชื่อสินค้า`, 'warning');
-        
         document.getElementById('searchResults').style.display = 'block';
         document.getElementById('searchResults').innerHTML = `
             <div style="padding:10px;text-align:center;color:var(--text-muted);font-size:12px;">
@@ -1138,26 +1120,21 @@ class StockApp {
         `;
     }
 
-    // ===== SEARCH PRODUCT - ค้นหาแบบ Contains =====
     searchProduct(query) {
         const container = document.getElementById('searchResults');
         if (!query || query.length < 1) { 
             container.style.display = 'none'; 
             return; 
         }
-        
         const results = this.products.filter(p =>
             p.name.toLowerCase().includes(query.toLowerCase())
         ).slice(0, 20);
-        
         if (results.length === 0) {
             container.style.display = 'block';
-            container.innerHTML = `<p style="color:var(--text-muted);text-align:center;padding:14px;font-size:12px;">❌ ไม่พบสินค้า " ${query} "</p>`;
+            container.innerHTML = `<p style="color:var(--text-muted);text-align:center;padding:14px;font-size:12px;">❌ ไม่พบสินค้า "${query}"</p>`;
             return;
         }
-        
         const hasPending = !!this.pendingBarcode;
-        
         container.style.display = 'block';
         container.innerHTML = results.map(p => {
             const name = p.name;
@@ -1169,10 +1146,8 @@ class StockApp {
                 const after = name.substring(index + query.length);
                 displayName = before + '<span class="search-highlight">' + match + '</span>' + after;
             }
-            
             const hasBarcode = p.barcodes && p.barcodes.length > 0 && p.barcodes[0];
             const barcodeDisplay = hasBarcode ? `🏷️ ${p.barcodes.join(', ')}` : '⚠️ ยังไม่มีบาร์โค้ด';
-            
             return `<div class="search-result-item" onclick="window.selectProductFromSearch('${p.id}')">
                         <div class="info">
                             <div class="name">${displayName}</div>
@@ -1188,32 +1163,24 @@ class StockApp {
         }).join('');
     }
 
-    // ===== SELECT PRODUCT FROM SEARCH - แก้ไขให้สมบูรณ์ =====
     async selectProductFromSearch(productId) {
         console.log('🖱️ เลือกสินค้า ID:', productId);
-        
-        const product = this.products.find(p => p.id === productId);
+        const product = this.products.find(p => String(p.id) === String(productId) || p.id === productId);
         if (!product) {
-            this.showToast('⚠️ ไม่พบสินค้า', 'error');
+            console.error('❌ ไม่พบสินค้า ID:', productId);
+            this.showToast('⚠️ ไม่พบสินค้าในระบบ กรุณาลองใหม่', 'error');
             return;
         }
-        
         console.log('📦 สินค้าที่เลือก:', product.name);
-        
-        // ✅ ถ้ามี pending barcode (สแกนไว้แล้ว)
         if (this.pendingBarcode) {
-            // ตรวจสอบว่าบาร์โค้ดนี้มีในระบบแล้วหรือยัง
             const existingProduct = this.products.find(p => 
                 p.barcodes && p.barcodes.includes(this.pendingBarcode)
             );
-            
             if (existingProduct && existingProduct.id !== product.id) {
                 if (!confirm(`⚠️ บาร์โค้ด ${this.pendingBarcode} ถูกใช้กับ "${existingProduct.name}" แล้ว\nต้องการเปลี่ยนมาใช้กับ "${product.name}" หรือไม่?`)) {
                     return;
                 }
             }
-            
-            // ผูกบาร์โค้ดกับสินค้า
             if (!product.barcodes) product.barcodes = [product.primaryBarcode].filter(Boolean);
             if (!product.barcodes.includes(this.pendingBarcode)) {
                 product.barcodes.push(this.pendingBarcode);
@@ -1221,33 +1188,23 @@ class StockApp {
                     product.primaryBarcode = this.pendingBarcode;
                 }
                 await this.saveProduct(product);
-                
                 this.barcodeHistory[this.pendingBarcode] = product.id;
                 localStorage.setItem('barcodeHistory_' + CONFIG.STORE_ID, JSON.stringify(this.barcodeHistory));
-                
                 this.showToast(`✅ ผูกบาร์โค้ด ${this.pendingBarcode} กับ "${product.name}" สำเร็จ!`, 'success');
                 console.log('✅ บันทึกบาร์โค้ด:', this.pendingBarcode, '→', product.name);
             } else {
                 this.showToast(`ℹ️ บาร์โค้ดนี้มีอยู่แล้วในระบบ`, 'info');
             }
-            
             this.pendingBarcode = null;
             this.updatePendingDisplay();
         }
-        
-        // ✅ แสดงสินค้าให้เลือกนับ
         this.currentProduct = product;
         this.showProduct(product);
-        
-        // ✅ ซ่อนผลการค้นหา
         document.getElementById('searchResults').style.display = 'none';
         document.getElementById('searchProduct').value = '';
-        
-        // ✅ เลื่อนไปยังส่วนรายละเอียดสินค้า
         document.getElementById('productDetail').scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
-    // ===== CLEAR PENDING BARCODE =====
     clearPendingBarcode() {
         this.pendingBarcode = null;
         this.updatePendingDisplay();
@@ -1257,28 +1214,23 @@ class StockApp {
         this.showToast('ยกเลิกการจับคู่บาร์โค้ด', 'info');
     }
 
-    // ===== SHOW PRODUCT =====
     showProduct(product) {
         const detail = document.getElementById('productDetail');
         detail.style.display = 'block';
         document.getElementById('productName').textContent = '📦 ' + product.name;
-        
         const barcodeDisplay = product.barcodes && product.barcodes.length > 0 
             ? product.barcodes.join(', ') 
             : (product.primaryBarcode || '-');
         document.getElementById('productBarcode').textContent = '🏷️ บาร์โค้ด: ' + barcodeDisplay;
         document.getElementById('productStock').textContent = '📊 ในระบบ: ' + (product.stock || 0) + ' ชิ้น | 💰 ทุนต่อหน่วย: ' + (product.costPerUnit || 0).toFixed(2);
-        
         const sellPrice = product.sellPrice1 || 0;
         const profit = sellPrice - (product.costPerUnit || 0);
         document.getElementById('productSellPrice').textContent = '💰 ราคาขาย: ' + sellPrice.toFixed(2) + ' บาท';
         document.getElementById('productSellPrice').style.display = sellPrice > 0 ? 'block' : 'none';
         document.getElementById('productProfit').textContent = '📈 กำไรต่อหน่วย: ' + profit.toFixed(2) + ' บาท';
         document.getElementById('productProfit').style.display = sellPrice > 0 ? 'block' : 'none';
-        
         document.getElementById('qtyInput').value = 1;
         this.showExpiryWarning(product);
-        
         if (product.lot) {
             document.getElementById('lotSelection').style.display = 'block';
             document.getElementById('lotList').innerHTML =
@@ -1326,7 +1278,6 @@ class StockApp {
         document.getElementById('manualBarcodeInput').value = '';
     }
 
-    // ===== CONTINUOUS MODE =====
     toggleContinuousMode() {
         this.continuousMode = !this.continuousMode;
         const btn = document.getElementById('btnContinuous');
@@ -1343,7 +1294,6 @@ class StockApp {
         }
     }
 
-    // ===== QTY CONTROL =====
     changeQty(delta) {
         const input = document.getElementById('qtyInput');
         let val = parseInt(input.value) || 0;
@@ -1458,9 +1408,7 @@ class StockApp {
         }).join('');
     }
 
-    // ============================================================
-    // ✅ LAYOUT
-    // ============================================================
+    // ===== LAYOUT =====
     addCabinet() {
         const name = document.getElementById('newCabinetName').value.trim();
         if (!name) { this.showToast('⚠️ กรุณาใส่ชื่อตู้', 'warning'); return; }
@@ -1594,9 +1542,7 @@ class StockApp {
         this.selectScanLocation(document.getElementById('locationSelect').value);
     }
 
-    // ============================================================
-    // ✅ FILE IMPORT
-    // ============================================================
+    // ===== FILE IMPORT =====
     setupDragDrop() {
         const zone = document.getElementById('dropZone');
         zone.addEventListener('dragover', (e) => { e.preventDefault(); zone.style.borderColor = 'var(--primary)'; zone.style.background = '#eef2ff'; });
@@ -1636,7 +1582,6 @@ class StockApp {
             if (data.length < 2) { this.showToast('❌ ไฟล์ไม่มีข้อมูล', 'error'); return; }
             this.pendingHeaders = data[0].map(h => String(h).trim());
             this.pendingRows = data.slice(1);
-            
             document.getElementById('mappingCard').style.display = 'block';
             document.getElementById('previewCard').style.display = 'block';
             this.showMapping();
@@ -1684,7 +1629,6 @@ class StockApp {
             { key: 'supplier', label: '🏢 ผู้จัดจำหน่าย' },
             { key: 'barcode', label: '📱 บาร์โค้ดสินค้า' }
         ];
-        
         div.innerHTML = fields.map(f => `
             <div class="mapping-item">
                 <label>${f.label}</label>
@@ -1701,19 +1645,15 @@ class StockApp {
             this.showToast('⚠️ ไม่มีข้อมูลที่จะนำเข้า', 'warning'); 
             return; 
         }
-
         const mapping = {};
         ['code', 'name', 'lot', 'mfgDate', 'expiryDate', 'sellPrice', 'costPerUnit', 'stock', 'unit', 'supplier', 'barcode'].forEach(f => {
             mapping[f] = document.getElementById('map_' + f).value;
         });
-
         if (!mapping.name) {
             this.showToast('⚠️ กรุณาเลือกคอลัมน์ "ชื่อสินค้า"', 'warning');
             return;
         }
-
         this.showToast('📥 กำลังนำเข้าข้อมูล...', 'info');
-        
         try {
             const clearTx = this.db.transaction('products', 'readwrite');
             await new Promise((resolve, reject) => {
@@ -1721,24 +1661,19 @@ class StockApp {
                 req.onsuccess = resolve;
                 req.onerror = reject;
             });
-
             const tx = this.db.transaction('products', 'readwrite');
             const store = tx.objectStore('products');
             let count = 0;
             let convertedCount = 0;
-
             for (const row of this.pendingRows) {
                 const idx = (key) => {
                     const col = mapping[key];
                     return col ? this.pendingHeaders.indexOf(col) : -1;
                 };
-
                 const rawStock = idx('stock') >= 0 ? parseFloat(row[idx('stock')]) || 0 : 0;
                 const unit = idx('unit') >= 0 ? String(row[idx('unit')] || '').trim() : '';
-                
                 let convertedStock = rawStock;
                 const unitLower = unit.toLowerCase();
-                
                 if (unitLower.includes('โหล') || unitLower === 'โหล') {
                     convertedStock = rawStock * 12;
                     convertedCount++;
@@ -1748,7 +1683,6 @@ class StockApp {
                 } else {
                     convertedStock = rawStock;
                 }
-
                 const product = {
                     id: Date.now() + count + Math.random() * 1000,
                     code: idx('code') >= 0 ? String(row[idx('code')] || '').trim() : '',
@@ -1765,11 +1699,9 @@ class StockApp {
                     barcodes: [],
                     createdAt: new Date().toISOString()
                 };
-
                 if (product.primaryBarcode) {
                     product.barcodes = [product.primaryBarcode];
                 }
-
                 if (product.name) {
                     await new Promise(r => {
                         const req = store.put(product);
@@ -1778,18 +1710,14 @@ class StockApp {
                     });
                 }
             }
-
             document.getElementById('mappingCard').style.display = 'none';
             this.lastImportDate = new Date().toISOString();
             localStorage.setItem('lastImportDate_' + CONFIG.STORE_ID, this.lastImportDate);
-            
             await this.loadProducts();
             this.updateProgress();
-            
             const msg = `✅ นำเข้าสำเร็จ ${count} รายการ${convertedCount > 0 ? ` (แปลงหน่วย ${convertedCount} รายการ)` : ''}`;
             this.updateStatus(msg);
             this.showToast(msg, 'success');
-
         } catch (err) {
             console.error('Import error:', err);
             this.showToast('❌ นำเข้าข้อมูลไม่สำเร็จ', 'error');
@@ -1813,7 +1741,6 @@ class StockApp {
             if (!values || values.length < 2) { this.showToast('❌ ไม่พบข้อมูลใน Google Sheets', 'error'); return; }
             this.pendingHeaders = values[0].map(h => String(h).trim());
             this.pendingRows = values.slice(1);
-            
             document.getElementById('mappingCard').style.display = 'block';
             document.getElementById('previewCard').style.display = 'block';
             this.showMapping();
@@ -1825,9 +1752,7 @@ class StockApp {
         }
     }
 
-    // ============================================================
-    // ✅ FINISH & REPORT
-    // ============================================================
+    // ===== REPORT - แก้ไขให้มีทุกฟังก์ชัน =====
     finishCount() {
         if (this.sessionItems.length === 0) { this.showToast('⚠️ ยังไม่มีรายการนับ', 'warning'); return; }
         if (navigator.onLine && this.offlineQueue.length > 0) this.syncOfflineQueue();
@@ -1839,11 +1764,11 @@ class StockApp {
     generateReport() {
         const countedItems = this.sessionItems;
         const allProducts = this.products;
-        const countedBarcodes = new Set(countedItems.map(item => item.barcode));
-        const uncountedItems = allProducts.filter(p =>
-            !countedBarcodes.has(p.primaryBarcode || p.barcodes?.[0] || '') &&
-            (p.stock || 0) > 0
-        );
+        const countedBarcodes = new Set(countedItems.map(item => item.barcode || item.id));
+        const uncountedItems = allProducts.filter(p => {
+            const id = p.primaryBarcode || (p.barcodes && p.barcodes[0]) || p.id;
+            return !countedBarcodes.has(id) && (p.stock || 0) > 0;
+        });
         
         document.getElementById('rptTotalItems').textContent = allProducts.length;
         document.getElementById('rptCounted').textContent = countedItems.length;
@@ -1854,10 +1779,10 @@ class StockApp {
         const totalCostDiff = countedItems.reduce((s, i) => s + i.cost_diff, 0);
         document.getElementById('rptCost').textContent = totalCostDiff.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         
-        const totalValue = countedItems.reduce((s, i) => s + (i.system_qty * i.cost), 0);
-        const pct = totalValue > 0 ? (totalCostDiff / totalValue * 100) : 0;
-        document.getElementById('rptPercent').textContent = pct.toFixed(2) + '%';
+        const totalSellDiff = countedItems.reduce((s, i) => s + i.sell_diff, 0);
+        document.getElementById('rptSellDiff').textContent = totalSellDiff.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         
+        // สินค้าที่ยังไม่ได้นับ
         const uncountedCard = document.getElementById('uncountedCard');
         if (uncountedItems.length > 0) {
             uncountedCard.style.display = 'block';
@@ -1869,13 +1794,103 @@ class StockApp {
                     <td class="text-center">${p.stock || 0}</td>
                     <td class="text-right">${(p.costPerUnit || 0).toFixed(2)}</td>
                     <td class="text-right">${(p.sellPrice1 || 0).toFixed(2)}</td>
-                    <td class="text-right">${((p.stock || 0) * (p.costPerUnit || 0)).toFixed(2)}</td>
+                    <td class="text-right">${((p.stock || 0) * (p.sellPrice1 || 0)).toFixed(2)}</td>
                     <td style="color:${p.expiryDate && new Date(p.expiryDate) < new Date(Date.now() + 90 * 86400000) ? 'var(--danger)' : 'var(--text-muted)'}">${this.formatDate(p.expiryDate)}</td>
                 </tr>
             `).join('');
         } else { uncountedCard.style.display = 'none'; }
         
+        // สินค้าที่เกิน/ขาด
+        const overItems = countedItems.filter(i => i.difference > 0);
+        const shortItems = countedItems.filter(i => i.difference < 0);
+        const diffCard = document.getElementById('diffCard');
+        if (overItems.length > 0 || shortItems.length > 0) {
+            diffCard.style.display = 'block';
+            document.getElementById('overItems').innerHTML = overItems.length > 0 
+                ? overItems.map(i => 
+                    `<div style="padding:2px 0;border-bottom:1px dashed rgba(0,0,0,0.1);">
+                        <strong>${i.name}</strong> ${i.lot ? 'Lot: '+i.lot : ''} 
+                        +${i.difference} ชิ้น | ทุน ${(i.cost*i.difference).toFixed(2)} | ขาย ${(i.sellPrice*i.difference).toFixed(2)}
+                    </div>`
+                ).join('')
+                : 'ไม่มีสินค้าเกิน';
+            document.getElementById('shortItems').innerHTML = shortItems.length > 0
+                ? shortItems.map(i => 
+                    `<div style="padding:2px 0;border-bottom:1px dashed rgba(0,0,0,0.1);">
+                        <strong>${i.name}</strong> ${i.lot ? 'Lot: '+i.lot : ''} 
+                        ${i.difference} ชิ้น | ทุน ${(i.cost*i.difference).toFixed(2)} | ขาย ${(i.sellPrice*i.difference).toFixed(2)}
+                    </div>`
+                ).join('')
+                : 'ไม่มีสินค้าขาด';
+        } else { diffCard.style.display = 'none'; }
+        
         this.sortReport();
+        this.generateLocationSummary();
+    }
+
+    generateLocationSummary() {
+        const container = document.getElementById('locationSummary');
+        const items = this.sessionItems;
+        if (items.length === 0 || this.locations.length === 0) {
+            container.innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:14px;font-size:11px;">ยังไม่มีข้อมูลตำแหน่ง</p>';
+            return;
+        }
+        
+        // จัดกลุ่มตาม location
+        const locationMap = {};
+        const locationNames = {};
+        this.locations.forEach(cab => {
+            locationNames['cab_'+cab.id] = cab.name;
+            cab.shelves.forEach(shelf => {
+                locationNames['cab_'+cab.id+'_shelf_'+shelf.id] = cab.name + ' ชั้น ' + shelf.number;
+            });
+        });
+        locationNames['all'] = 'ทั้งร้าน';
+        
+        items.forEach(item => {
+            const loc = item.location || 'all';
+            if (!locationMap[loc]) {
+                locationMap[loc] = { items: [], totalQty: 0, totalCost: 0, totalSell: 0, totalDiff: 0, totalSellDiff: 0 };
+            }
+            locationMap[loc].items.push(item);
+            locationMap[loc].totalQty += item.counted_qty;
+            locationMap[loc].totalCost += item.counted_qty * item.cost;
+            locationMap[loc].totalSell += item.counted_qty * item.sellPrice;
+            locationMap[loc].totalDiff += item.cost_diff;
+            locationMap[loc].totalSellDiff += item.sell_diff;
+        });
+        
+        let html = '';
+        for (const [loc, data] of Object.entries(locationMap)) {
+            const name = locationNames[loc] || loc;
+            const diffColor = data.totalDiff < 0 ? 'var(--danger)' : data.totalDiff > 0 ? 'var(--success)' : 'var(--text-muted)';
+            const sellDiffColor = data.totalSellDiff < 0 ? 'var(--danger)' : data.totalSellDiff > 0 ? 'var(--success)' : 'var(--text-muted)';
+            html += `
+                <div style="border:1px solid var(--border-color);border-radius:var(--radius-sm);margin-bottom:6px;overflow:hidden;">
+                    <div class="collapse-header" onclick="this.nextElementSibling.classList.toggle('open')">
+                        <span><i class="fas fa-map-pin"></i> ${name}</span>
+                        <span>${data.items.length} รายการ | ${data.totalQty} ชิ้น</span>
+                    </div>
+                    <div class="collapse-body" style="display:none;padding:6px 8px;">
+                        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;font-size:10px;margin-bottom:4px;">
+                            <div>💰 ทุนรวม: ${data.totalCost.toFixed(2)}</div>
+                            <div>💵 ขายรวม: ${data.totalSell.toFixed(2)}</div>
+                            <div style="color:${diffColor};">📊 ต่าง(ทุน): ${data.totalDiff.toFixed(2)}</div>
+                            <div style="color:${sellDiffColor};">📊 ต่าง(ขาย): ${data.totalSellDiff.toFixed(2)}</div>
+                        </div>
+                        ${data.items.map(i => `
+                            <div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px solid var(--border-color);font-size:9px;">
+                                <span>${i.name} ${i.lot ? 'Lot:'+i.lot : ''}</span>
+                                <span style="color:${i.difference < 0 ? 'var(--danger)' : i.difference > 0 ? 'var(--success)' : 'var(--text-muted)'}">
+                                    ระบบ:${i.system_qty} → นับ:${i.counted_qty} (${i.difference > 0 ? '+' : ''}${i.difference})
+                                </span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+        container.innerHTML = html || '<p style="text-align:center;color:var(--text-muted);padding:14px;font-size:11px;">ไม่มีข้อมูล</p>';
     }
 
     sortReport() {
@@ -1898,34 +1913,43 @@ class StockApp {
             tbody.innerHTML = `<tr><td colspan="10" style="text-align:center;padding:14px;color:var(--text-muted);font-size:11px;"><i class="fas fa-inbox" style="font-size:18px;display:block;margin-bottom:5px;opacity:0.5;"></i>ยังไม่มีข้อมูลสรุปผล</td></tr>`;
             return;
         }
+        // get location name
+        const getLocationName = (loc) => {
+            if (!loc || loc === 'all') return 'ทั้งร้าน';
+            const parts = loc.replace('cab_', '').split('_shelf_');
+            const cab = this.locations.find(l => l.id === parseInt(parts[0]));
+            if (!cab) return loc;
+            if (parts.length === 1) return cab.name;
+            const shelf = cab.shelves.find(s => s.id === parseInt(parts[1]));
+            return cab.name + ' ชั้น ' + (shelf ? shelf.number : '?');
+        };
+        
         tbody.innerHTML = items.map(item => {
             const diffClass = item.difference > 0 ? 'badge-green' : item.difference < 0 ? 'badge-red' : '';
             const diffText = item.difference > 0 ? '+' + item.difference : item.difference;
-            const pct = item.system_qty > 0 ? ((item.difference / item.system_qty) * 100).toFixed(1) + '%' : '-';
+            const locationName = getLocationName(item.location);
             return `<tr>
-                    <td>${item.barcode || '-'}</td>
                     <td><strong>${item.name}</strong></td>
                     <td>${item.lot || '-'}</td>
+                    <td><span class="location-badge">${locationName}</span></td>
                     <td class="text-center">${item.system_qty}</td>
                     <td class="text-center">${item.counted_qty}</td>
                     <td class="text-center"><span class="badge ${diffClass}">${diffText}</span></td>
                     <td class="text-right">${item.cost.toFixed(2)}</td>
                     <td class="text-right">${item.sellPrice.toFixed(2)}</td>
                     <td class="text-right" style="color:${item.cost_diff < 0 ? 'var(--danger)' : 'var(--success)'};font-weight:600;">${item.cost_diff.toFixed(2)}</td>
-                    <td class="text-center">${pct}</td>
+                    <td class="text-right" style="color:${item.sell_diff < 0 ? 'var(--danger)' : 'var(--success)'};font-weight:600;">${item.sell_diff.toFixed(2)}</td>
                 </tr>`;
         }).join('');
     }
 
-    // ============================================================
-    // ✅ EXPORT FUNCTIONS
-    // ============================================================
+    // ===== EXPORT =====
     exportData(format) {
         if (this.sessionItems.length === 0) { this.showToast('⚠️ ไม่มีข้อมูลสำหรับส่งออก', 'warning'); return; }
         const items = this.sessionItems.map(item => ({
-            barcode: item.barcode || '-',
             name: item.name,
             lot: item.lot || '-',
+            location: this.getLocationName(item.location),
             system_qty: item.system_qty,
             counted_qty: item.counted_qty,
             difference: item.difference,
@@ -1933,14 +1957,13 @@ class StockApp {
             sellPrice: item.sellPrice || 0,
             cost_diff: item.cost_diff,
             sell_diff: item.sell_diff || 0,
-            profit_loss: item.profit_loss || 0,
-            percent: item.system_qty > 0 ? ((item.difference / item.system_qty) * 100).toFixed(1) : 0
+            profit_loss: item.profit_loss || 0
         }));
-        const headers = ['บาร์โค้ด', 'ชื่อสินค้า', 'Lot', 'ระบบ', 'นับ', 'ต่าง', 'ทุน', 'ขาย', 'มูลค่าต่าง(ทุน)', 'มูลค่าต่าง(ขาย)', 'กำไรหายไป', '%'];
+        const headers = ['ชื่อสินค้า', 'Lot', 'ตำแหน่ง', 'ระบบ', 'นับ', 'ต่าง', 'ทุน', 'ขาย', 'มูลค่าต่าง(ทุน)', 'มูลค่าต่าง(ขาย)', 'กำไรหายไป'];
         const rows = items.map(item => [
-            item.barcode, item.name, item.lot, item.system_qty, item.counted_qty,
+            item.name, item.lot, item.location, item.system_qty, item.counted_qty,
             item.difference, item.cost, item.sellPrice, item.cost_diff, item.sell_diff,
-            item.profit_loss, item.percent
+            item.profit_loss
         ]);
         switch (format) {
             case 'csv': this.exportGenericCSV(headers, rows, 'report'); break;
@@ -1948,6 +1971,16 @@ class StockApp {
             case 'pdf': this.exportGenericPDF(headers, rows, 'report'); break;
             default: this.showToast('⚠️ รูปแบบไม่รองรับ', 'warning');
         }
+    }
+
+    getLocationName(loc) {
+        if (!loc || loc === 'all') return 'ทั้งร้าน';
+        const parts = loc.replace('cab_', '').split('_shelf_');
+        const cab = this.locations.find(l => l.id === parseInt(parts[0]));
+        if (!cab) return loc;
+        if (parts.length === 1) return cab.name;
+        const shelf = cab.shelves.find(s => s.id === parseInt(parts[1]));
+        return cab.name + ' ชั้น ' + (shelf ? shelf.number : '?');
     }
 
     exportGenericCSV(headers, rows, type) {
@@ -1994,9 +2027,7 @@ class StockApp {
         URL.revokeObjectURL(url);
     }
 
-    // ============================================================
-    // ✅ CLEAR DATA
-    // ============================================================
+    // ===== CLEAR DATA =====
     async clearAllData() {
         if (!confirm('⚠️ คุณแน่ใจหรือไม่ว่าต้องการลบข้อมูลทั้งหมด?')) return;
         if (!confirm('🚨 ยืนยันครั้งสุดท้าย: ข้อมูลทั้งหมดจะถูกลบถาวร!')) return;
@@ -2027,20 +2058,15 @@ class StockApp {
     }
 }
 
-// ================================================================
-// ✅ GLOBAL INSTANCE
-// ================================================================
+// ===== GLOBAL =====
 let app = null;
-
 document.addEventListener('DOMContentLoaded', function() {
     app = new StockApp();
     window.app = app;
-    console.log('✅ ระบบนับสินค้าร้านยา v2.0.10 พร้อมใช้งาน!');
+    console.log('✅ ระบบนับสินค้าร้านยา v2.0.11 พร้อมใช้งาน!');
 });
 
-// ================================================================
-// ✅ GLOBAL FUNCTIONS
-// ================================================================
+// ===== GLOBAL FUNCTIONS =====
 function switchTab(name) { if (app) app.switchTab(name); }
 function toggleTheme() { if (app) app.toggleTheme(); }
 function changeBranch() { if (app) app.changeBranch(); }
@@ -2065,18 +2091,15 @@ function sortReport() { if (app) app.sortReport(); }
 function exportData(format) { if (app) app.exportData(format); }
 function clearAllData() { if (app) app.clearAllData(); }
 
-// ✅ Global functions for barcode pairing
 window.selectProductFromSearch = function(productId) {
     if (app) app.selectProductFromSearch(productId);
 };
-
 window.clearPendingBarcode = function() {
     if (app) app.clearPendingBarcode();
 };
 
-console.log('✅ ระบบนับสินค้าร้านยา v2.0.10 พร้อมใช้งาน!');
-console.log('📖 เริ่มต้นใช้งาน: อัปโหลดไฟล์ Excel/CSV หรือเชื่อมต่อ Google Sheets');
-console.log('✨ v2.0.10: แก้ไขการเลือกสินค้า, จับคู่บาร์โค้ด, ค้นหาแบบ Contains, แสดงสถานะ');
+console.log('✅ ระบบนับสินค้าร้านยา v2.0.11 พร้อมใช้งาน!');
+console.log('✨ v2.0.11: เพิ่มผลต่างราคาขาย, สินค้าเกิน/ขาด, สรุปตามตู้/ชั้น, ตำแหน่งสินค้า');
 </script>
 </body>
-</html>
+    </html>
