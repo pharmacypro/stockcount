@@ -8,7 +8,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="ระบบนับสินค้าร้านยา">
     <meta name="theme-color" content="#4f46e5">
-    <title>ระบบนับสินค้าร้านยา v2.0.12</title>
+    <title>ระบบนับสินค้าร้านยา v3.0.0</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,10 +25,8 @@
     <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
 
-    <!-- ✅ Manifest ฉบับสมบูรณ์ -->
     <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIuC4reC4s+C5gOC4oeC4o+C4suC4oeC4o+C4suC4h+C4o+C4s+C4oCDguJnguYHguIfguJrguK3guJnguK3guJnguYHguJkiLAogICJzaG9ydF9uYW1lIjogIuC4reC4s+C5gOC4oeC4oyIsCiAgImRlc2NyaXB0aW9uIjogIuC4reC4s+C5gOC4oeC4o+C4suC4oeC4o+C4suC4h+C4o+C4s+C4oCDguJnguYHguIfguJrguK3guJnguK3guJnguYHguJkiLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgIm9yaWVudGF0aW9uIjogInBvcnRyYWl0IiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjNGY0NmU1IiwKICAidGhlbWVfY29sb3IiOiAiIzRmNDZlNSIsCiAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogImZhdmljb24uaWNvIiwKICAgICAgInNpemVzIjogIjY0eDY0IiwKICAgICAgInR5cGUiOiAiaW1hZ2UveC1pY29uIgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICJhcHBsZS10b3VjaC1pY29uLnBuZyIsCiAgICAgICJzaXplcyI6ICIxODB4MTgwIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICJhbmRyb2lkLWNocm9tZS0xOTJ4MTkyLnBuZyIsCiAgICAgICJzaXplcyI6ICIxOTJ4MTkyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICJhbmRyb2lkLWNocm9tZS01MTJ4NTEyLnBuZyIsCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfQogIF0KfQ==">
 
-    <!-- ไอคอนแอป -->
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
@@ -64,6 +62,8 @@
             --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
             --shadow-lg: 0 20px 60px rgba(0,0,0,0.12);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --front-color: #10b981;
+            --back-color: #f59e0b;
         }
 
         [data-theme="dark"] {
@@ -135,10 +135,13 @@
         .btn-outline-danger { background:transparent; border:2px solid var(--danger); color:var(--danger); }
         .btn-sm { padding:4px 8px; font-size:9px; border-radius:var(--radius-sm); }
         .btn-block { width:100%; }
+        .btn-front { background:var(--front-color); color:#fff; }
+        .btn-back { background:var(--back-color); color:#fff; }
 
         .input { width:100%; padding:8px 12px; border:2px solid var(--border-color); border-radius:var(--radius-md); font-size:12px; color:var(--text-main); background:var(--bg-body); transition:var(--transition); font-family:'Plus Jakarta Sans',sans-serif; }
         .input:focus { outline:none; border-color:var(--primary); box-shadow:0 0 0 3px rgba(79,70,229,0.1); }
         .input-group { display:flex; gap:5px; align-items:center; flex-wrap:wrap; }
+        .input-sm { padding:4px 8px; font-size:10px; }
 
         .mapping-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
         .mapping-grid .mapping-item { display:flex; flex-direction:column; gap:3px; }
@@ -214,6 +217,8 @@
         .badge-purple { background:#e0e7ff; color:#3730a3; }
         .badge-new { background:#fef3c7; color:#92400e; }
         .badge-exists { background:#d1fae5; color:#065f46; }
+        .badge-front { background:#d1fae5; color:#065f46; }
+        .badge-back { background:#fef3c7; color:#92400e; }
 
         .modal-overlay { position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(15,23,42,0.6); backdrop-filter:blur(8px); z-index:200; display:none; align-items:flex-end; justify-content:center; }
         .modal-overlay.show { display:flex; }
@@ -233,7 +238,9 @@
 
         .flex { display:flex; }
         .flex-between { display:flex; justify-content:space-between; align-items:center; }
+        .flex-center { display:flex; align-items:center; justify-content:center; }
         .gap-4 { gap:4px; }
+        .gap-8 { gap:8px; }
         .mt-6 { margin-top:6px; }
         .mt-10 { margin-top:10px; }
         .mb-6 { margin-bottom:6px; }
@@ -282,6 +289,9 @@
         [data-theme="dark"] .cabinet-block.selected { background:#1e293b; }
         .cabinet-icon { font-size:20px; margin-bottom:2px; }
         .cabinet-name { font-weight:700; font-size:11px; font-family:'Outfit',sans-serif; }
+        .cabinet-type { font-size:8px; padding:1px 6px; border-radius:8px; font-weight:600; display:inline-block; }
+        .cabinet-type.front { background:#d1fae5; color:#065f46; }
+        .cabinet-type.back { background:#fef3c7; color:#92400e; }
         .cabinet-shelves { display:flex; flex-direction:column; gap:2px; margin-top:5px; }
         .shelf-row { background:var(--bg-body); padding:2px 6px; border-radius:4px; font-size:9px; cursor:pointer; transition:var(--transition); display:flex; justify-content:space-between; align-items:center; font-weight:500; color:var(--text-muted); }
         .shelf-row:hover { background:#e0e7ff; color:var(--text-main); }
@@ -296,6 +306,11 @@
         .collapse-header:hover { background:var(--border-color); }
         .collapse-body { padding:6px 10px; display:none; border:1px solid var(--border-color); border-top:none; border-radius:0 0 var(--radius-sm) var(--radius-sm); }
         .collapse-body.open { display:block; }
+
+        .location-select-group { display:flex; flex-wrap:wrap; gap:4px; margin:6px 0; }
+        .location-select-group select { flex:1; min-width:80px; padding:4px 6px; border:2px solid var(--border-color); border-radius:var(--radius-sm); font-size:10px; background:var(--bg-card); color:var(--text-main); }
+        .location-select-group select:focus { outline:none; border-color:var(--primary); }
+        .location-select-group .btn-add { background:var(--primary); color:#fff; border:none; border-radius:var(--radius-sm); padding:4px 8px; font-size:10px; cursor:pointer; }
 
         @keyframes pulse-badge { 0%,100% { opacity:1; } 50% { opacity:0.6; } }
 
@@ -321,6 +336,8 @@
             .summary-grid-4 .stat-value { font-size:14px; }
             .search-result-item .info .name { font-size:12px; }
             .search-result-item .info .detail { font-size:9px; }
+            .location-select-group select { font-size:9px; padding:3px 4px; min-width:60px; }
+            .location-select-group .btn-add { font-size:9px; padding:3px 6px; }
         }
     </style>
 </head>
@@ -334,7 +351,7 @@
             <div class="logo-text">
                 <span class="brand">
                     <span class="main">ระบบนับสินค้า</span>
-                    <span class="version">v2.0.12</span>
+                    <span class="version">v3.0.0</span>
                 </span>
                 <span class="tagline"><i class="fas fa-circle" style="font-size:4px;color:#34d399;margin-right:3px;"></i>ระบบนับสินค้าในร้านยา</span>
             </div>
@@ -417,15 +434,35 @@
     <div class="page" id="page-scan">
         <div class="card" style="padding:8px;">
             <div class="flex-between" style="flex-wrap:wrap;gap:4px;">
-                <div class="input-group" style="flex:1;min-width:120px;">
-                    <span style="font-weight:600;font-size:11px;flex-shrink:0;"><i class="fas fa-map-pin"></i> ตำแหน่ง:</span>
-                    <select class="input" id="locationSelect" onchange="changeLocation()" style="font-size:11px;padding:5px 8px;flex:1;">
-                        <option value="all">🌐 ทั้งร้าน</option>
-                    </select>
-                </div>
                 <button class="btn btn-primary btn-sm" onclick="showAddProductModal()" style="font-size:10px;padding:4px 10px;"><i class="fas fa-plus"></i> เพิ่มสินค้า</button>
             </div>
         </div>
+
+        <!-- 📍 ตำแหน่งสินค้า - เลือกระหว่างนับ -->
+        <div class="card" style="padding:8px;background:var(--bg-body);border:2px solid var(--primary-light);">
+            <div style="font-size:11px;font-weight:600;margin-bottom:4px;color:var(--primary);">
+                <i class="fas fa-map-pin"></i> ตำแหน่งสินค้า
+            </div>
+            <div class="location-select-group">
+                <select id="locationType" onchange="updateLocationDropdowns()" style="flex:1;min-width:80px;padding:4px 6px;border:2px solid var(--border-color);border-radius:var(--radius-sm);font-size:10px;background:var(--bg-card);color:var(--text-main);">
+                    <option value="front">🏪 หน้าร้าน</option>
+                    <option value="back">📦 หลังร้าน</option>
+                </select>
+                <select id="locationCabinet" onchange="updateShelfDropdown()" style="flex:1;min-width:80px;padding:4px 6px;border:2px solid var(--border-color);border-radius:var(--radius-sm);font-size:10px;background:var(--bg-card);color:var(--text-main);">
+                    <option value="new">➕ สร้างตู้ใหม่</option>
+                </select>
+                <select id="locationShelf" style="flex:1;min-width:80px;padding:4px 6px;border:2px solid var(--border-color);border-radius:var(--radius-sm);font-size:10px;background:var(--bg-card);color:var(--text-main);">
+                    <option value="new">➕ สร้างชั้นใหม่</option>
+                </select>
+            </div>
+            <div style="display:flex;gap:4px;margin-top:4px;flex-wrap:wrap;">
+                <input type="text" id="newCabinetInput" placeholder="ชื่อตู้ใหม่" style="flex:1;min-width:60px;padding:3px 6px;border:2px solid var(--border-color);border-radius:var(--radius-sm);font-size:9px;background:var(--bg-card);color:var(--text-main);display:none;">
+                <button class="btn btn-primary btn-sm" onclick="addCabinetFromScan()" style="font-size:9px;padding:2px 8px;display:none;" id="btnAddCabinetFromScan"><i class="fas fa-plus"></i> เพิ่มตู้</button>
+                <input type="text" id="newShelfInput" placeholder="ชื่อชั้นใหม่" style="flex:1;min-width:60px;padding:3px 6px;border:2px solid var(--border-color);border-radius:var(--radius-sm);font-size:9px;background:var(--bg-card);color:var(--text-main);display:none;">
+                <button class="btn btn-primary btn-sm" onclick="addShelfFromScan()" style="font-size:9px;padding:2px 8px;display:none;" id="btnAddShelfFromScan"><i class="fas fa-plus"></i> เพิ่มชั้น</button>
+            </div>
+        </div>
+
         <div class="card" style="padding:8px;background:var(--bg-body);">
             <div class="flex-between"><span style="font-size:11px;font-weight:600;"><i class="fas fa-chart-line"></i> ความคืบหน้า</span><span id="progressText" style="font-size:11px;font-weight:700;color:var(--primary);">0 / 0 (0%)</span></div>
             <div class="progress-container"><div class="progress-bar" id="progressBar" style="width:0%;"></div></div>
@@ -511,9 +548,23 @@
     <div class="page" id="page-layout">
         <div class="card">
             <div class="card-title"><i class="fas fa-sitemap"></i> แผนผังร้าน</div>
-            <p style="font-size:9px;color:var(--text-muted);margin-bottom:8px;"><i class="fas fa-info-circle"></i> สร้างตู้และชั้นวางสินค้าเพื่อใช้ในการนับสต็อก</p>
+            <p style="font-size:9px;color:var(--text-muted);margin-bottom:8px;"><i class="fas fa-info-circle"></i> จัดการตู้และชั้นวางสินค้า แบ่งเป็นหน้าร้านและหลังร้าน</p>
+            
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
+                <div style="padding:6px;background:var(--success-light);border-radius:var(--radius-sm);text-align:center;font-size:10px;font-weight:600;color:#065f46;">
+                    <i class="fas fa-store"></i> หน้าร้าน
+                </div>
+                <div style="padding:6px;background:var(--warning-light);border-radius:var(--radius-sm);text-align:center;font-size:10px;font-weight:600;color:#92400e;">
+                    <i class="fas fa-warehouse"></i> หลังร้าน
+                </div>
+            </div>
+
             <div class="input-group" style="margin-bottom:8px;">
-                <input type="text" class="input" id="newCabinetName" placeholder="ชื่อตู้ใหม่" style="font-size:11px;padding:6px 10px;">
+                <select id="newCabinetType" style="flex:1;padding:6px 8px;border:2px solid var(--border-color);border-radius:var(--radius-sm);font-size:11px;background:var(--bg-card);color:var(--text-main);">
+                    <option value="front">🏪 หน้าร้าน</option>
+                    <option value="back">📦 หลังร้าน</option>
+                </select>
+                <input type="text" class="input" id="newCabinetName" placeholder="ชื่อตู้ใหม่" style="flex:2;font-size:11px;padding:6px 10px;">
                 <button class="btn btn-primary" onclick="addCabinet()" style="flex-shrink:0;font-size:11px;padding:6px 12px;"><i class="fas fa-plus"></i> เพิ่มตู้</button>
             </div>
             <div class="pharmacy-map" id="pharmacyMap">
@@ -581,7 +632,22 @@
             </div>
         </div>
 
-        <!-- รายละเอียดการนับ (มีสถานะบาร์โค้ด) -->
+        <!-- สรุปหน้าร้าน/หลังร้าน -->
+        <div class="card" style="padding:10px;border:2px solid var(--primary-light);">
+            <div class="card-title" style="font-size:12px;"><i class="fas fa-store-alt"></i> สรุปหน้าร้าน / หลังร้าน</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                <div style="background:var(--success-light);border-radius:var(--radius-md);padding:8px;">
+                    <div style="font-weight:700;font-size:10px;color:#065f46;"><i class="fas fa-store"></i> หน้าร้าน</div>
+                    <div id="frontSummary" style="font-size:10px;color:#065f46;">-</div>
+                </div>
+                <div style="background:var(--warning-light);border-radius:var(--radius-md);padding:8px;">
+                    <div style="font-weight:700;font-size:10px;color:#92400e;"><i class="fas fa-warehouse"></i> หลังร้าน</div>
+                    <div id="backSummary" style="font-size:10px;color:#92400e;">-</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- รายละเอียดการนับ -->
         <div class="card" style="padding:10px;">
             <div class="flex-between" style="flex-wrap:wrap;gap:5px;">
                 <span class="card-title" style="margin:0;font-size:12px;"><i class="fas fa-table"></i> รายละเอียดการนับ</span>
@@ -589,6 +655,7 @@
                     <button class="btn btn-outline btn-sm" onclick="exportData('csv')" style="font-size:9px;padding:3px 6px;"><i class="fas fa-file-csv"></i> CSV</button>
                     <button class="btn btn-outline btn-sm" onclick="exportData('xlsx')" style="font-size:9px;padding:3px 6px;"><i class="fas fa-file-excel"></i> Excel</button>
                     <button class="btn btn-outline btn-sm" onclick="exportData('pdf')" style="font-size:9px;padding:3px 6px;"><i class="fas fa-file-pdf"></i> PDF</button>
+                    <button class="btn btn-outline-success btn-sm" onclick="exportLocationReport()" style="font-size:9px;padding:3px 6px;"><i class="fas fa-map-pin"></i> ตู้/ชั้น</button>
                     <button class="btn btn-outline-success btn-sm" onclick="exportBarcodeMaster()" style="font-size:9px;padding:3px 6px;"><i class="fas fa-barcode"></i> Master</button>
                 </div>
             </div>
@@ -606,10 +673,11 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>บาร์โค้ด</th><th>ชื่อสินค้า</th><th>Lot</th><th>ตำแหน่ง</th>
+                            <th>บาร์โค้ด</th><th>ชื่อสินค้า</th><th>Lot</th>
+                            <th>ประเภท</th><th>ตู้/ชั้น</th>
                             <th>ระบบ</th><th>นับ</th><th>ต่าง</th>
                             <th>ทุน</th><th>ขาย</th>
-                            <th>ต่าง(ทุน)</th><th>ต่าง(ขาย)</th><th>สถานะ</th>
+                            <th>ต่าง(ทุน)</th><th>ต่าง(ขาย)</th>
                         </tr>
                     </thead>
                     <tbody id="reportBody"><tr><td colspan="12" style="text-align:center;padding:14px;color:var(--text-muted);font-size:11px;"><i class="fas fa-inbox" style="font-size:18px;display:block;margin-bottom:5px;opacity:0.5;"></i>ยังไม่มีข้อมูลสรุปผล</td></tr></tbody>
@@ -657,6 +725,32 @@
     </div>
 </div>
 
+<!-- ===== ADD CABINET FROM SCAN MODAL ===== -->
+<div class="modal-overlay" id="addCabinetScanModal">
+    <div class="modal">
+        <div class="modal-handle"></div>
+        <div class="modal-title"><i class="fas fa-plus-circle"></i> เพิ่มตู้ใหม่</div>
+        <input type="text" class="input" id="scanNewCabinetName" placeholder="ชื่อตู้" style="margin-bottom:6px;font-size:12px;padding:6px 10px;">
+        <div class="flex" style="gap:5px;margin-top:4px;">
+            <button class="btn btn-success btn-block" onclick="confirmScanAddCabinet()" style="font-size:13px;padding:10px;"><i class="fas fa-save"></i> บันทึกตู้</button>
+            <button class="btn btn-outline btn-block" onclick="closeAddCabinetScanModal()" style="font-size:13px;padding:10px;"><i class="fas fa-times"></i> ยกเลิก</button>
+        </div>
+    </div>
+</div>
+
+<!-- ===== ADD SHELF FROM SCAN MODAL ===== -->
+<div class="modal-overlay" id="addShelfScanModal">
+    <div class="modal">
+        <div class="modal-handle"></div>
+        <div class="modal-title"><i class="fas fa-plus-circle"></i> เพิ่มชั้นใหม่</div>
+        <input type="text" class="input" id="scanNewShelfName" placeholder="ชื่อชั้น" style="margin-bottom:6px;font-size:12px;padding:6px 10px;">
+        <div class="flex" style="gap:5px;margin-top:4px;">
+            <button class="btn btn-success btn-block" onclick="confirmScanAddShelf()" style="font-size:13px;padding:10px;"><i class="fas fa-save"></i> บันทึกชั้น</button>
+            <button class="btn btn-outline btn-block" onclick="closeAddShelfScanModal()" style="font-size:13px;padding:10px;"><i class="fas fa-times"></i> ยกเลิก</button>
+        </div>
+    </div>
+</div>
+
 <div class="toast-container" id="toastContainer"></div>
 
 <!-- ============================================ JAVASCRIPT ============================================ -->
@@ -667,7 +761,7 @@ console.log('✅ Eruda เปิดใช้งานแล้ว!');
 const CONFIG = {
     GOOGLE_SHEETS: { API_KEY: '', SPREADSHEET_ID: '', RANGES: { PRODUCTS: 'Products!A:L', REPORTS: 'Reports!A:H', HISTORY: 'History!A:F' } },
     APP_NAME: 'ระบบนับสินค้าร้านยา',
-    VERSION: '2.0.12',
+    VERSION: '3.0.0',
     STORE_ID: localStorage.getItem('storeId') || 'default',
     EXPIRY_WARNING_DAYS: 90
 };
@@ -697,10 +791,14 @@ class StockApp {
         this.branchId = localStorage.getItem('branchId') || 'default';
         this.expiryFilter = 30;
         this.pendingBarcode = null;
-        this.newlyPairedBarcodes = []; // เก็บบาร์โค้ดที่ถูกผูกใหม่
+        this.newlyPairedBarcodes = [];
         this.unitConversionMap = {
             'โหล': 12, 'ลัง': 12, 'กล่อง': 1, 'แพ็ค': 1, 'แผง': 1, 'ชิ้น': 1, 'ขวด': 1, 'แผ่น': 1, 'หลอด': 1, 'ซอง': 1
         };
+        // สถานะการเลือกตำแหน่งขณะนับ
+        this.selectedLocationType = 'front';
+        this.selectedCabinetId = null;
+        this.selectedShelfId = null;
         this.init();
     }
 
@@ -717,13 +815,141 @@ class StockApp {
         this.initNetworkListener();
         this.updateStatus('พร้อมใช้งาน');
         this.startAutoSync();
-        console.log('✅ ระบบนับสินค้าร้านยา v2.0.12 พร้อมใช้งาน!');
+        this.updateLocationDropdowns();
+        console.log('✅ ระบบนับสินค้าร้านยา v3.0.0 พร้อมใช้งาน!');
         if (this.products.length === 0) {
             this.updateStatus('📥 กรุณานำเข้าข้อมูลสินค้าก่อนใช้งาน');
             this.showToast('📥 กรุณานำเข้าข้อมูลสินค้าจาก Excel หรือ Google Sheets', 'info');
         }
     }
 
+    // ===== LOCATION DROPDOWNS (ขณะนับ) =====
+    updateLocationDropdowns() {
+        const type = document.getElementById('locationType').value;
+        this.selectedLocationType = type;
+        
+        const cabinetSelect = document.getElementById('locationCabinet');
+        const currentCabinet = cabinetSelect.value;
+        cabinetSelect.innerHTML = '<option value="new">➕ สร้างตู้ใหม่</option>';
+        
+        // กรองตู้ตามประเภท
+        const filtered = this.locations.filter(l => l.type === type);
+        filtered.forEach(cab => {
+            cabinetSelect.innerHTML += `<option value="${cab.id}">🗄️ ${cab.name}</option>`;
+        });
+        
+        // เรียกใช้ shelf dropdown
+        this.updateShelfDropdown();
+        
+        // แสดง/ซ่อนปุ่มเพิ่มตู้
+        const showAddCabinet = cabinetSelect.value === 'new';
+        document.getElementById('newCabinetInput').style.display = showAddCabinet ? 'block' : 'none';
+        document.getElementById('btnAddCabinetFromScan').style.display = showAddCabinet ? 'inline-flex' : 'none';
+    }
+
+    updateShelfDropdown() {
+        const cabinetId = document.getElementById('locationCabinet').value;
+        const shelfSelect = document.getElementById('locationShelf');
+        const currentShelf = shelfSelect.value;
+        shelfSelect.innerHTML = '<option value="new">➕ สร้างชั้นใหม่</option>';
+        
+        if (cabinetId !== 'new') {
+            const cabinet = this.locations.find(l => l.id === parseInt(cabinetId));
+            if (cabinet && cabinet.shelves) {
+                cabinet.shelves.sort((a, b) => a.number - b.number).forEach(s => {
+                    shelfSelect.innerHTML += `<option value="${s.id}">📚 ชั้น ${s.number}</option>`;
+                });
+            }
+        }
+        
+        // แสดง/ซ่อนปุ่มเพิ่มชั้น
+        const showAddShelf = shelfSelect.value === 'new';
+        document.getElementById('newShelfInput').style.display = showAddShelf ? 'block' : 'none';
+        document.getElementById('btnAddShelfFromScan').style.display = showAddShelf ? 'inline-flex' : 'none';
+    }
+
+    addCabinetFromScan() {
+        const name = document.getElementById('newCabinetInput').value.trim();
+        if (!name) {
+            this.showToast('⚠️ กรุณาใส่ชื่อตู้', 'warning');
+            return;
+        }
+        const type = document.getElementById('locationType').value;
+        const cabinet = {
+            id: Date.now(),
+            name: name,
+            type: type,
+            shelves: [],
+            createdAt: new Date().toISOString()
+        };
+        this.locations.push(cabinet);
+        this.saveLocations();
+        this.updateLocationDropdowns();
+        this.renderMap();
+        document.getElementById('newCabinetInput').value = '';
+        this.showToast(`✅ เพิ่มตู้ "${name}" สำเร็จ`, 'success');
+    }
+
+    addShelfFromScan() {
+        const cabinetId = document.getElementById('locationCabinet').value;
+        if (cabinetId === 'new') {
+            this.showToast('⚠️ กรุณาเลือกหรือสร้างตู้ก่อน', 'warning');
+            return;
+        }
+        const name = document.getElementById('newShelfInput').value.trim();
+        if (!name) {
+            this.showToast('⚠️ กรุณาใส่ชื่อชั้น', 'warning');
+            return;
+        }
+        const cabinet = this.locations.find(l => l.id === parseInt(cabinetId));
+        if (!cabinet) {
+            this.showToast('⚠️ ไม่พบตู้', 'error');
+            return;
+        }
+        const shelfNumber = parseInt(name) || cabinet.shelves.length + 1;
+        cabinet.shelves.push({ id: Date.now(), number: shelfNumber });
+        this.saveLocations();
+        this.updateShelfDropdown();
+        this.renderMap();
+        document.getElementById('newShelfInput').value = '';
+        this.showToast(`✅ เพิ่มชั้น ${shelfNumber} สำเร็จ`, 'success');
+    }
+
+    getSelectedLocation() {
+        const type = document.getElementById('locationType').value;
+        const cabinetId = document.getElementById('locationCabinet').value;
+        const shelfId = document.getElementById('locationShelf').value;
+        
+        let locationId = 'all';
+        let locationName = 'ทั้งร้าน';
+        let typeName = type === 'front' ? 'หน้าร้าน' : 'หลังร้าน';
+        
+        if (cabinetId !== 'new') {
+            const cabinet = this.locations.find(l => l.id === parseInt(cabinetId));
+            if (cabinet) {
+                locationId = 'cab_' + cabinet.id;
+                locationName = cabinet.name;
+                if (shelfId !== 'new') {
+                    const shelf = cabinet.shelves.find(s => s.id === parseInt(shelfId));
+                    if (shelf) {
+                        locationId = 'cab_' + cabinet.id + '_shelf_' + shelf.id;
+                        locationName = cabinet.name + ' ชั้น ' + shelf.number;
+                    }
+                }
+            }
+        }
+        
+        return {
+            id: locationId,
+            name: locationName,
+            type: type,
+            typeName: typeName,
+            cabinetId: cabinetId !== 'new' ? cabinetId : null,
+            shelfId: shelfId !== 'new' ? shelfId : null
+        };
+    }
+
+    // ===== BRANCH =====
     loadBranch() {
         document.getElementById('branchSelect').value = this.branchId;
         CONFIG.STORE_ID = this.branchId;
@@ -796,6 +1022,7 @@ class StockApp {
             const store = tx.objectStore('locations');
             const req = store.getAll();
             this.locations = await new Promise(r => { req.onsuccess = () => r(req.result || []); req.onerror = () => r([]); });
+            console.log('📦 โหลดตำแหน่งทั้งหมด:', this.locations.length, 'ตู้');
             this.renderMap();
             this.updateLocationSelect();
         } catch (e) { this.locations = []; console.error('Load locations error:', e); }
@@ -815,7 +1042,7 @@ class StockApp {
         await new Promise(r => { tx.oncomplete = r; });
     }
 
-    // ===== ADD PRODUCT (ใหม่) =====
+    // ===== ADD PRODUCT =====
     showAddProductModal() {
         document.getElementById('addProductModal').style.display = 'flex';
         document.getElementById('newProductBarcode').value = this.pendingBarcode || '';
@@ -844,7 +1071,6 @@ class StockApp {
         const unit = document.getElementById('newProductUnit').value.trim() || 'ชิ้น';
         const expiry = document.getElementById('newProductExpiry').value || '';
 
-        // ตรวจสอบว่าบาร์โค้ดซ้ำไหม
         if (barcode) {
             const existing = this.products.find(p => 
                 p.barcodes && p.barcodes.includes(barcode) || p.primaryBarcode === barcode
@@ -856,7 +1082,6 @@ class StockApp {
             }
         }
 
-        // สร้างรหัสสินค้าใหม่
         const newId = 'PCO' + String(Date.now()).padStart(10, '0');
 
         const product = {
@@ -864,8 +1089,8 @@ class StockApp {
             code: newId,
             name: name,
             lot: lot,
-            stock: 0, // เริ่มต้น 0
-            costPerUnit: 0, // ✅ ราคาทุน = 0 ตามที่คุณต้องการ
+            stock: 0,
+            costPerUnit: 0,
             sellPrice1: sellPrice,
             unit: unit,
             expiryDate: expiry,
@@ -890,15 +1115,13 @@ class StockApp {
 
         this.closeAddProductModal();
         this.updateProgress();
-        
-        // เลือกสินค้าที่เพิ่มใหม่ให้ใช้งานต่อได้ทันที
         this.currentProduct = product;
         this.showProduct(product);
         this.pendingBarcode = null;
         this.updatePendingDisplay();
     }
 
-    // ===== EXPORT BARCODE MASTER =====
+    // ===== EXPORT =====
     exportBarcodeMaster() {
         const data = this.products.filter(p => p.primaryBarcode || (p.barcodes && p.barcodes.length > 0));
         if (data.length === 0) {
@@ -916,6 +1139,84 @@ class StockApp {
         const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
         this.download(blob, `barcode_master_${Date.now()}.csv`);
         this.showToast('✅ ส่งออก Master Barcode สำเร็จ (' + data.length + ' รายการ)', 'success');
+    }
+
+    // ===== EXPORT LOCATION REPORT =====
+    exportLocationReport() {
+        const items = this.sessionItems;
+        if (items.length === 0) {
+            this.showToast('⚠️ ไม่มีข้อมูล', 'warning');
+            return;
+        }
+
+        const getLocationDetail = (loc) => {
+            if (!loc || loc === 'all') return { type: 'all', name: 'ทั้งร้าน', cabinet: 'ทั้งร้าน', shelf: '-' };
+            const parts = loc.replace('cab_', '').split('_shelf_');
+            const cab = this.locations.find(l => l.id === parseInt(parts[0]));
+            if (!cab) return { type: 'all', name: loc, cabinet: loc, shelf: '-' };
+            if (parts.length === 1) return { type: cab.type || 'front', name: cab.name, cabinet: cab.name, shelf: '-' };
+            const shelf = cab.shelves.find(s => s.id === parseInt(parts[1]));
+            return { 
+                type: cab.type || 'front', 
+                name: cab.name + ' ชั้น ' + (shelf ? shelf.number : '?'),
+                cabinet: cab.name,
+                shelf: shelf ? 'ชั้น ' + shelf.number : '?'
+            };
+        };
+
+        const data = items.map(item => {
+            const loc = getLocationDetail(item.location);
+            return {
+                barcode: item.barcode || '-',
+                name: item.name,
+                lot: item.lot || '-',
+                type: loc.type === 'front' ? 'หน้าร้าน' : loc.type === 'back' ? 'หลังร้าน' : 'ทั้งร้าน',
+                cabinet: loc.cabinet,
+                shelf: loc.shelf,
+                system_qty: item.system_qty,
+                counted_qty: item.counted_qty,
+                difference: item.difference,
+                cost: item.cost,
+                sellPrice: item.sellPrice || 0,
+                cost_diff: item.cost_diff,
+                sell_diff: item.sell_diff || 0
+            };
+        });
+
+        const headers = ['บาร์โค้ด', 'ชื่อสินค้า', 'Lot', 'ประเภท', 'ตู้', 'ชั้น', 'ระบบ', 'นับ', 'ต่าง', 'ทุน', 'ขาย', 'ต่าง(ทุน)', 'ต่าง(ขาย)'];
+        const rows = data.map(item => [
+            item.barcode, item.name, item.lot, item.type, item.cabinet, item.shelf,
+            item.system_qty, item.counted_qty, item.difference,
+            item.cost, item.sellPrice, item.cost_diff, item.sell_diff
+        ]);
+
+        // สรุปตามตู้
+        const cabinetSummary = {};
+        data.forEach(item => {
+            const key = item.cabinet + '|' + item.type;
+            if (!cabinetSummary[key]) {
+                cabinetSummary[key] = { cabinet: item.cabinet, type: item.type, items: [], totalQty: 0, totalCost: 0, totalSell: 0 };
+            }
+            cabinetSummary[key].items.push(item);
+            cabinetSummary[key].totalQty += item.counted_qty;
+            cabinetSummary[key].totalCost += item.counted_qty * item.cost;
+            cabinetSummary[key].totalSell += item.counted_qty * item.sellPrice;
+        });
+
+        let summaryRows = [];
+        for (const [key, val] of Object.entries(cabinetSummary)) {
+            summaryRows.push([
+                '--- สรุป ---', val.cabinet, val.type, '', '', '',
+                val.items.length + ' รายการ', val.totalQty, '',
+                val.totalCost.toFixed(2), val.totalSell.toFixed(2), '', ''
+            ]);
+        }
+
+        const allRows = [...rows, ...summaryRows];
+        this.exportGenericCSV(headers, allRows, 'location_report');
+        this.exportGenericXLSX(headers, allRows, 'location_report');
+        this.exportGenericPDF(headers, allRows, 'location_report');
+        this.showToast('✅ ส่งออกรายงานตำแหน่งสำเร็จ', 'success');
     }
 
     checkExpiryWarnings() {
@@ -1082,6 +1383,7 @@ class StockApp {
         if (page) page.classList.add('active');
         if (name === 'scan') this.updateScanBadge();
         if (name === 'report') this.generateReport();
+        if (name === 'layout') this.renderMap();
     }
 
     updateScanBadge() {
@@ -1478,7 +1780,9 @@ class StockApp {
         const sellDiff = diff * sellPrice;
         const profitLoss = diff * (sellPrice - (product.costPerUnit || 0));
         
-        // ตรวจสอบว่าบาร์โค้ดนี้เพิ่งถูกผูกใหม่หรือไม่
+        // ✅ เก็บตำแหน่งที่เลือก
+        const location = this.getSelectedLocation();
+        
         const isNewlyPaired = this.newlyPairedBarcodes.some(b => b.barcode === this.currentBarcode);
         const barcodeStatus = isNewlyPaired ? '🆕 ผูกใหม่' : (product.primaryBarcode ? '✅ มีในระบบ' : '⚠️ ไม่มีบาร์โค้ด');
         
@@ -1496,7 +1800,10 @@ class StockApp {
             sell_diff: sellDiff,
             profit_loss: profitLoss,
             expiry: product.expiryDate || '',
-            location: this.currentLocation,
+            location: location.id,
+            locationName: location.name,
+            locationType: location.type,
+            locationTypeName: location.typeName,
             timestamp: new Date().toISOString(),
             barcodeStatus: barcodeStatus,
             isNewlyPaired: isNewlyPaired
@@ -1511,7 +1818,7 @@ class StockApp {
         this.updateProgress();
         this.updateScanBadge();
         this.checkCountComplete();
-        this.showToast(`✅ ${product.name} (${qty} ชิ้น)`, 'success');
+        this.showToast(`✅ ${product.name} (${qty} ชิ้น) ${location.name}`, 'success');
     }
 
     async saveCountHistory(item) {
@@ -1568,10 +1875,11 @@ class StockApp {
         container.innerHTML = this.sessionItems.slice(-20).reverse().map(item => {
             const diffClass = item.difference > 0 ? 'positive' : item.difference < 0 ? 'negative' : 'zero';
             const diffText = item.difference > 0 ? '+' + item.difference : item.difference;
+            const typeIcon = item.locationType === 'front' ? '🏪' : '📦';
             return `<div class="recent-item">
                     <div>
                         <div class="name">${item.name}</div>
-                        <div class="detail">${item.lot ? 'Lot: ' + item.lot : ''} ระบบ: ${item.system_qty} | นับ: ${item.counted_qty}</div>
+                        <div class="detail">${item.lot ? 'Lot: ' + item.lot : ''} ระบบ: ${item.system_qty} | นับ: ${item.counted_qty} ${item.locationName ? '| ' + typeIcon + ' ' + item.locationName : ''}</div>
                     </div>
                     <span class="qty-diff ${diffClass}">${diffText}</span>
                 </div>`;
@@ -1580,15 +1888,17 @@ class StockApp {
 
     // ===== LAYOUT =====
     addCabinet() {
+        const type = document.getElementById('newCabinetType').value;
         const name = document.getElementById('newCabinetName').value.trim();
         if (!name) { this.showToast('⚠️ กรุณาใส่ชื่อตู้', 'warning'); return; }
-        const cabinet = { id: Date.now(), name: name, type: 'cabinet', shelves: [], createdAt: new Date().toISOString() };
+        const cabinet = { id: Date.now(), name: name, type: type, shelves: [], createdAt: new Date().toISOString() };
         this.locations.push(cabinet);
         this.saveLocations();
         this.renderMap();
         this.updateLocationSelect();
+        this.updateLocationDropdowns();
         document.getElementById('newCabinetName').value = '';
-        this.showToast('✅ เพิ่มตู้ ' + name + ' สำเร็จ', 'success');
+        this.showToast('✅ เพิ่มตู้ ' + name + ' (' + (type === 'front' ? 'หน้าร้าน' : 'หลังร้าน') + ') สำเร็จ', 'success');
     }
 
     deleteCabinet(id) {
@@ -1597,6 +1907,7 @@ class StockApp {
         this.saveLocations();
         this.renderMap();
         this.updateLocationSelect();
+        this.updateLocationDropdowns();
         if (this.selectedCabinetId === id) {
             this.selectedCabinetId = null;
             document.getElementById('shelfCard').style.display = 'none';
@@ -1615,6 +1926,7 @@ class StockApp {
         this.saveLocations();
         this.renderMap();
         this.updateLocationSelect();
+        this.updateLocationDropdowns();
         this.renderShelfList(cabinet);
         document.getElementById('newShelfNumber').value = '';
         this.showToast('✅ เพิ่มชั้น ' + num + ' สำเร็จ', 'success');
@@ -1627,6 +1939,7 @@ class StockApp {
             this.saveLocations();
             this.renderMap();
             this.updateLocationSelect();
+            this.updateLocationDropdowns();
             this.renderShelfList(cabinet);
         }
     }
@@ -1636,7 +1949,7 @@ class StockApp {
         document.getElementById('shelfCard').style.display = 'block';
         const cabinet = this.locations.find(l => l.id === cabinetId);
         if (cabinet) {
-            document.getElementById('shelfCardTitle').innerHTML = `<i class="fas fa-layer-group"></i> จัดการชั้นใน ${cabinet.name}`;
+            document.getElementById('shelfCardTitle').innerHTML = `<i class="fas fa-layer-group"></i> จัดการชั้นใน ${cabinet.name} (${cabinet.type === 'front' ? '🏪 หน้าร้าน' : '📦 หลังร้าน'})`;
             this.renderShelfList(cabinet);
         }
         document.querySelectorAll('.cabinet-block').forEach(b => b.classList.remove('selected'));
@@ -1660,56 +1973,100 @@ class StockApp {
     renderMap() {
         const grid = document.getElementById('cabinetGrid');
         if (this.locations.length === 0) {
-            grid.innerHTML = `<div style="text-align:center;color:var(--text-muted);padding:24px;grid-column:1/-1;font-size:12px;"><i class="fas fa-boxes" style="font-size:28px;display:block;margin-bottom:5px;opacity:0.5;"></i>ยังไม่มีตู้สินค้า<br><small>เพิ่มตู้ด้านบนเพื่อเริ่มจัดผังร้าน</small></div>`;
+            grid.innerHTML = `<div style="text-align:center;color:var(--text-muted);padding:24px;grid-column:1/-1;font-size:12px;">
+                <i class="fas fa-boxes" style="font-size:28px;display:block;margin-bottom:5px;opacity:0.5;"></i>
+                ยังไม่มีตู้สินค้า<br><small>เพิ่มตู้ด้านบนเพื่อเริ่มจัดผังร้าน</small>
+            </div>`;
             return;
         }
-        grid.innerHTML = this.locations.map(cabinet => {
-            const counted = this.sessionItems.filter(i => i.location && i.location.includes(String(cabinet.id))).length;
-            return `<div class="cabinet-block ${this.selectedCabinetId === cabinet.id ? 'selected' : ''}" data-cabinet="${cabinet.id}" onclick="app.selectCabinet(${cabinet.id})" ondblclick="app.selectScanLocation('cab_${cabinet.id}'); app.switchTab('scan')">
-                    <div class="cabinet-icon"><i class="fas fa-archive"></i></div>
-                    <div class="cabinet-name">${cabinet.name}</div>
-                    <div style="font-size:9px;color:var(--text-muted);">${cabinet.shelves.length} ชั้นวาง</div>
-                    ${counted > 0 ? `<div style="font-size:8px;color:var(--success);margin-top:2px;font-weight:600;"><i class="fas fa-check-circle"></i> นับแล้ว ${counted}</div>` : ''}
-                    <div class="cabinet-shelves">
-                        ${cabinet.shelves.sort((a,b) => a.number - b.number).slice(0,3).map(s => {
-                            const countedOnShelf = this.sessionItems.filter(i => i.location === 'cab_' + cabinet.id + '_shelf_' + s.id).length;
-                            return `<div class="shelf-row ${countedOnShelf > 0 ? 'selected' : ''}" onclick="event.stopPropagation(); app.selectScanLocation('cab_${cabinet.id}_shelf_${s.id}'); app.switchTab('scan');">
-                                    <span>ชั้น ${s.number}</span>
-                                    ${countedOnShelf > 0 ? '<span class="shelf-count"><i class="fas fa-check"></i></span>' : '<span class="shelf-count">-</span>'}
-                                </div>`;
-                        }).join('')}
-                        ${cabinet.shelves.length > 3 ? `<div style="font-size:8px;color:var(--text-muted);text-align:center;margin-top:2px;">+ อีก ${cabinet.shelves.length - 3} ชั้น</div>` : ''}
-                    </div>
-                    <button class="btn btn-danger btn-sm" onclick="event.stopPropagation(); app.deleteCabinet(${cabinet.id})" style="margin-top:6px;width:100%;font-size:8px;padding:2px;"><i class="fas fa-trash"></i> ลบตู้</button>
-                </div>`;
-        }).join('');
+
+        // แยกหน้าร้าน/หลังร้าน
+        const frontCabinets = this.locations.filter(l => l.type === 'front');
+        const backCabinets = this.locations.filter(l => l.type === 'back');
+
+        let html = '';
+        
+        // หน้าร้าน
+        html += `<div style="grid-column:1/-1;margin:4px 0;padding:4px 8px;background:var(--success-light);border-radius:var(--radius-sm);font-size:10px;font-weight:700;color:#065f46;">
+            <i class="fas fa-store"></i> หน้าร้าน (${frontCabinets.length} ตู้)
+        </div>`;
+        if (frontCabinets.length === 0) {
+            html += `<div style="grid-column:1/-1;text-align:center;color:var(--text-muted);padding:8px;font-size:10px;">ยังไม่มีตู้ในหน้าร้าน</div>`;
+        } else {
+            frontCabinets.forEach(cabinet => {
+                html += this.renderCabinetBlock(cabinet);
+            });
+        }
+
+        // หลังร้าน
+        html += `<div style="grid-column:1/-1;margin:4px 0;padding:4px 8px;background:var(--warning-light);border-radius:var(--radius-sm);font-size:10px;font-weight:700;color:#92400e;">
+            <i class="fas fa-warehouse"></i> หลังร้าน (${backCabinets.length} ตู้)
+        </div>`;
+        if (backCabinets.length === 0) {
+            html += `<div style="grid-column:1/-1;text-align:center;color:var(--text-muted);padding:8px;font-size:10px;">ยังไม่มีตู้ในหลังร้าน</div>`;
+        } else {
+            backCabinets.forEach(cabinet => {
+                html += this.renderCabinetBlock(cabinet);
+            });
+        }
+
+        grid.innerHTML = html;
+    }
+
+    renderCabinetBlock(cabinet) {
+        const counted = this.sessionItems.filter(i => i.location && i.location.includes(String(cabinet.id))).length;
+        const typeLabel = cabinet.type === 'front' ? '🏪 หน้าร้าน' : '📦 หลังร้าน';
+        const typeClass = cabinet.type === 'front' ? 'front' : 'back';
+        
+        return `<div class="cabinet-block ${this.selectedCabinetId === cabinet.id ? 'selected' : ''}" data-cabinet="${cabinet.id}" onclick="app.selectCabinet(${cabinet.id})" ondblclick="app.selectScanLocation('cab_${cabinet.id}'); app.switchTab('scan')">
+            <div class="cabinet-icon"><i class="fas fa-archive"></i></div>
+            <div class="cabinet-name">${cabinet.name}</div>
+            <div><span class="cabinet-type ${typeClass}">${typeLabel}</span></div>
+            <div style="font-size:9px;color:var(--text-muted);">${cabinet.shelves.length} ชั้นวาง</div>
+            ${counted > 0 ? `<div style="font-size:8px;color:var(--success);margin-top:2px;font-weight:600;"><i class="fas fa-check-circle"></i> นับแล้ว ${counted}</div>` : ''}
+            <div class="cabinet-shelves">
+                ${cabinet.shelves.sort((a,b) => a.number - b.number).slice(0,3).map(s => {
+                    const countedOnShelf = this.sessionItems.filter(i => i.location === 'cab_' + cabinet.id + '_shelf_' + s.id).length;
+                    return `<div class="shelf-row ${countedOnShelf > 0 ? 'selected' : ''}" onclick="event.stopPropagation(); app.selectScanLocation('cab_${cabinet.id}_shelf_${s.id}'); app.switchTab('scan');">
+                            <span>ชั้น ${s.number}</span>
+                            ${countedOnShelf > 0 ? '<span class="shelf-count"><i class="fas fa-check"></i></span>' : '<span class="shelf-count">-</span>'}
+                        </div>`;
+                }).join('')}
+                ${cabinet.shelves.length > 3 ? `<div style="font-size:8px;color:var(--text-muted);text-align:center;margin-top:2px;">+ อีก ${cabinet.shelves.length - 3} ชั้น</div>` : ''}
+            </div>
+            <button class="btn btn-danger btn-sm" onclick="event.stopPropagation(); app.deleteCabinet(${cabinet.id})" style="margin-top:6px;width:100%;font-size:8px;padding:2px;"><i class="fas fa-trash"></i> ลบตู้</button>
+        </div>`;
     }
 
     updateLocationSelect() {
-        const select = document.getElementById('locationSelect');
-        let html = '<option value="all">🌐 ทั้งร้าน</option>';
-        this.locations.forEach(cabinet => {
-            html += `<option value="cab_${cabinet.id}">🗄️ ${cabinet.name}</option>`;
-            cabinet.shelves.forEach(shelf => {
-                html += `<option value="cab_${cabinet.id}_shelf_${shelf.id}">&nbsp;&nbsp;└ ชั้น ${shelf.number} (${cabinet.name})</option>`;
-            });
-        });
-        select.innerHTML = html;
+        // ใช้สำหรับ dropdown ในหน้านับ (เก่า) - แต่ตอนนี้ใช้ location-select-group แทน
+        // เก็บไว้เพื่อความเข้ากันได้
     }
 
     selectScanLocation(locationId) {
+        // ใช้สำหรับคลิกจากผังร้าน
         this.currentLocation = locationId;
-        document.getElementById('locationSelect').value = locationId;
+        // อัปเดต dropdown
+        const parts = locationId.replace('cab_', '').split('_shelf_');
+        const cabinetId = parts[0];
+        const shelfId = parts.length > 1 ? parts[1] : null;
+        
+        // หาตู้
+        const cabinet = this.locations.find(l => l.id === parseInt(cabinetId));
+        if (cabinet) {
+            document.getElementById('locationType').value = cabinet.type || 'front';
+            this.updateLocationDropdowns();
+            document.getElementById('locationCabinet').value = cabinet.id;
+            this.updateShelfDropdown();
+            if (shelfId) {
+                document.getElementById('locationShelf').value = parseInt(shelfId);
+            }
+        }
+        
         document.querySelectorAll('.cabinet-block').forEach(b => b.classList.remove('selected'));
-        if (locationId.startsWith('cab_')) {
-            const parts = locationId.replace('cab_', '').split('_shelf_');
-            const cabinetId = parseInt(parts[0]);
+        if (cabinetId) {
             document.querySelector('[data-cabinet="' + cabinetId + '"]')?.classList.add('selected');
         }
-    }
-
-    changeLocation() {
-        this.selectScanLocation(document.getElementById('locationSelect').value);
     }
 
     // ===== FILE IMPORT (APPEND MODE) =====
@@ -1825,7 +2182,6 @@ class StockApp {
         }
         this.showToast('📥 กำลังนำเข้าข้อมูล (Append Mode)...', 'info');
         try {
-            // ✅ APPEND MODE: ไม่ลบข้อมูลเดิม
             const tx = this.db.transaction('products', 'readwrite');
             const store = tx.objectStore('products');
             let count = 0;
@@ -1854,14 +2210,12 @@ class StockApp {
                 const barcode = idx('barcode') >= 0 ? String(row[idx('barcode')] || '').trim() : '';
                 const name = idx('name') >= 0 ? String(row[idx('name')] || '').trim() : '';
                 
-                // ตรวจสอบว่าสินค้านี้มีอยู่แล้วหรือไม่ (เช็คจาก code)
                 let existingProduct = null;
                 if (code) {
                     existingProduct = this.products.find(p => p.code === code || p.id === code);
                 }
                 
                 if (existingProduct) {
-                    // ✅ อัปเดตข้อมูลสินค้าที่มีอยู่
                     if (barcode && !existingProduct.barcodes.includes(barcode)) {
                         existingProduct.barcodes.push(barcode);
                     }
@@ -1882,7 +2236,6 @@ class StockApp {
                         req.onerror = () => r();
                     });
                 } else {
-                    // ✅ เพิ่มสินค้าใหม่
                     const product = {
                         id: code || ('PCO' + String(Date.now() + count).padStart(10, '0')),
                         code: code,
@@ -2021,8 +2374,40 @@ class StockApp {
                 : 'ไม่มีสินค้าขาด';
         } else { diffCard.style.display = 'none'; }
         
+        // สรุปหน้าร้าน/หลังร้าน
+        this.generateFrontBackSummary();
         this.sortReport();
         this.generateLocationSummary();
+    }
+
+    generateFrontBackSummary() {
+        const items = this.sessionItems;
+        const frontItems = items.filter(i => i.locationType === 'front');
+        const backItems = items.filter(i => i.locationType === 'back');
+        const otherItems = items.filter(i => !i.locationType || i.locationType === 'all');
+
+        const sumItems = (arr) => {
+            const totalQty = arr.reduce((s, i) => s + i.counted_qty, 0);
+            const totalCost = arr.reduce((s, i) => s + (i.counted_qty * i.cost), 0);
+            const totalSell = arr.reduce((s, i) => s + (i.counted_qty * i.sellPrice), 0);
+            const totalDiff = arr.reduce((s, i) => s + i.cost_diff, 0);
+            return { totalQty, totalCost, totalSell, totalDiff, count: arr.length };
+        };
+
+        const front = sumItems(frontItems);
+        const back = sumItems(backItems);
+
+        document.getElementById('frontSummary').innerHTML = `
+            ${front.count} รายการ | ${front.totalQty} ชิ้น<br>
+            ทุนรวม: ${front.totalCost.toFixed(2)} | ขายรวม: ${front.totalSell.toFixed(2)}
+            ${front.totalDiff !== 0 ? ` | ผลต่าง: ${front.totalDiff.toFixed(2)}` : ''}
+        `;
+        
+        document.getElementById('backSummary').innerHTML = `
+            ${back.count} รายการ | ${back.totalQty} ชิ้น<br>
+            ทุนรวม: ${back.totalCost.toFixed(2)} | ขายรวม: ${back.totalSell.toFixed(2)}
+            ${back.totalDiff !== 0 ? ` | ผลต่าง: ${back.totalDiff.toFixed(2)}` : ''}
+        `;
     }
 
     generateLocationSummary() {
@@ -2036,9 +2421,9 @@ class StockApp {
         const locationMap = {};
         const locationNames = {};
         this.locations.forEach(cab => {
-            locationNames['cab_'+cab.id] = cab.name;
+            locationNames['cab_'+cab.id] = cab.name + ' (' + (cab.type === 'front' ? 'หน้าร้าน' : 'หลังร้าน') + ')';
             cab.shelves.forEach(shelf => {
-                locationNames['cab_'+cab.id+'_shelf_'+shelf.id] = cab.name + ' ชั้น ' + shelf.number;
+                locationNames['cab_'+cab.id+'_shelf_'+shelf.id] = cab.name + ' ชั้น ' + shelf.number + ' (' + (cab.type === 'front' ? 'หน้าร้าน' : 'หลังร้าน') + ')';
             });
         });
         locationNames['all'] = 'ทั้งร้าน';
@@ -2109,26 +2494,35 @@ class StockApp {
             tbody.innerHTML = `<tr><td colspan="12" style="text-align:center;padding:14px;color:var(--text-muted);font-size:11px;"><i class="fas fa-inbox" style="font-size:18px;display:block;margin-bottom:5px;opacity:0.5;"></i>ยังไม่มีข้อมูลสรุปผล</td></tr>`;
             return;
         }
-        const getLocationName = (loc) => {
-            if (!loc || loc === 'all') return 'ทั้งร้าน';
+        
+        const getLocationDetail = (loc) => {
+            if (!loc || loc === 'all') return { type: 'all', name: 'ทั้งร้าน', cabinet: 'ทั้งร้าน', shelf: '-' };
             const parts = loc.replace('cab_', '').split('_shelf_');
             const cab = this.locations.find(l => l.id === parseInt(parts[0]));
-            if (!cab) return loc;
-            if (parts.length === 1) return cab.name;
+            if (!cab) return { type: 'all', name: loc, cabinet: loc, shelf: '-' };
+            if (parts.length === 1) return { type: cab.type || 'front', name: cab.name, cabinet: cab.name, shelf: '-' };
             const shelf = cab.shelves.find(s => s.id === parseInt(parts[1]));
-            return cab.name + ' ชั้น ' + (shelf ? shelf.number : '?');
+            return { 
+                type: cab.type || 'front', 
+                name: cab.name + ' ชั้น ' + (shelf ? shelf.number : '?'),
+                cabinet: cab.name,
+                shelf: shelf ? 'ชั้น ' + shelf.number : '?'
+            };
         };
         
         tbody.innerHTML = items.map(item => {
             const diffClass = item.difference > 0 ? 'badge-green' : item.difference < 0 ? 'badge-red' : '';
             const diffText = item.difference > 0 ? '+' + item.difference : item.difference;
-            const locationName = getLocationName(item.location);
-            const barcodeStatus = item.isNewlyPaired ? '🆕 ผูกใหม่' : (item.barcode ? '✅ มีในระบบ' : '⚠️ ไม่มี');
+            const loc = getLocationDetail(item.location);
+            const typeLabel = loc.type === 'front' ? '🏪 หน้าร้าน' : loc.type === 'back' ? '📦 หลังร้าน' : '🌐 ทั้งร้าน';
+            const locationLabel = loc.name;
+            
             return `<tr>
                     <td>${item.barcode || '-'}</td>
                     <td><strong>${item.name}</strong></td>
                     <td>${item.lot || '-'}</td>
-                    <td><span class="location-badge">${locationName}</span></td>
+                    <td><span class="badge ${loc.type === 'front' ? 'badge-front' : loc.type === 'back' ? 'badge-back' : 'badge-info'}">${typeLabel}</span></td>
+                    <td><span class="location-badge">${locationLabel}</span></td>
                     <td class="text-center">${item.system_qty}</td>
                     <td class="text-center">${item.counted_qty}</td>
                     <td class="text-center"><span class="badge ${diffClass}">${diffText}</span></td>
@@ -2136,7 +2530,6 @@ class StockApp {
                     <td class="text-right">${item.sellPrice.toFixed(2)}</td>
                     <td class="text-right" style="color:${item.cost_diff < 0 ? 'var(--danger)' : 'var(--success)'};font-weight:600;">${item.cost_diff.toFixed(2)}</td>
                     <td class="text-right" style="color:${item.sell_diff < 0 ? 'var(--danger)' : 'var(--success)'};font-weight:600;">${item.sell_diff.toFixed(2)}</td>
-                    <td><span class="badge ${item.isNewlyPaired ? 'badge-new' : 'badge-exists'}">${barcodeStatus}</span></td>
                 </tr>`;
         }).join('');
     }
@@ -2144,43 +2537,57 @@ class StockApp {
     // ===== EXPORT =====
     exportData(format) {
         if (this.sessionItems.length === 0) { this.showToast('⚠️ ไม่มีข้อมูลสำหรับส่งออก', 'warning'); return; }
-        const items = this.sessionItems.map(item => ({
-            barcode: item.barcode || '-',
-            name: item.name,
-            lot: item.lot || '-',
-            location: this.getLocationName(item.location),
-            system_qty: item.system_qty,
-            counted_qty: item.counted_qty,
-            difference: item.difference,
-            cost: item.cost,
-            sellPrice: item.sellPrice || 0,
-            cost_diff: item.cost_diff,
-            sell_diff: item.sell_diff || 0,
-            profit_loss: item.profit_loss || 0,
-            barcode_status: item.isNewlyPaired ? '🆕 ผูกใหม่' : (item.barcode ? '✅ มีในระบบ' : '⚠️ ไม่มี')
-        }));
-        const headers = ['บาร์โค้ด', 'ชื่อสินค้า', 'Lot', 'ตำแหน่ง', 'ระบบ', 'นับ', 'ต่าง', 'ทุน', 'ขาย', 'ต่าง(ทุน)', 'ต่าง(ขาย)', 'กำไรหายไป', 'สถานะบาร์โค้ด'];
+        
+        const getLocationDetail = (loc) => {
+            if (!loc || loc === 'all') return { type: 'ทั้งร้าน', name: 'ทั้งร้าน', cabinet: 'ทั้งร้าน', shelf: '-' };
+            const parts = loc.replace('cab_', '').split('_shelf_');
+            const cab = this.locations.find(l => l.id === parseInt(parts[0]));
+            if (!cab) return { type: 'อื่นๆ', name: loc, cabinet: loc, shelf: '-' };
+            if (parts.length === 1) return { type: cab.type === 'front' ? 'หน้าร้าน' : 'หลังร้าน', name: cab.name, cabinet: cab.name, shelf: '-' };
+            const shelf = cab.shelves.find(s => s.id === parseInt(parts[1]));
+            return { 
+                type: cab.type === 'front' ? 'หน้าร้าน' : 'หลังร้าน', 
+                name: cab.name + ' ชั้น ' + (shelf ? shelf.number : '?'),
+                cabinet: cab.name,
+                shelf: shelf ? 'ชั้น ' + shelf.number : '?'
+            };
+        };
+
+        const items = this.sessionItems.map(item => {
+            const loc = getLocationDetail(item.location);
+            return {
+                barcode: item.barcode || '-',
+                name: item.name,
+                lot: item.lot || '-',
+                type: loc.type,
+                cabinet: loc.cabinet,
+                shelf: loc.shelf,
+                system_qty: item.system_qty,
+                counted_qty: item.counted_qty,
+                difference: item.difference,
+                cost: item.cost,
+                sellPrice: item.sellPrice || 0,
+                cost_diff: item.cost_diff,
+                sell_diff: item.sell_diff || 0,
+                profit_loss: item.profit_loss || 0,
+                barcode_status: item.isNewlyPaired ? '🆕 ผูกใหม่' : (item.barcode ? '✅ มีในระบบ' : '⚠️ ไม่มี')
+            };
+        });
+        
+        const headers = ['บาร์โค้ด', 'ชื่อสินค้า', 'Lot', 'ประเภท', 'ตู้', 'ชั้น', 'ระบบ', 'นับ', 'ต่าง', 'ทุน', 'ขาย', 'ต่าง(ทุน)', 'ต่าง(ขาย)', 'กำไรหายไป', 'สถานะบาร์โค้ด'];
         const rows = items.map(item => [
-            item.barcode, item.name, item.lot, item.location, item.system_qty, item.counted_qty,
-            item.difference, item.cost, item.sellPrice, item.cost_diff, item.sell_diff,
+            item.barcode, item.name, item.lot, item.type, item.cabinet, item.shelf,
+            item.system_qty, item.counted_qty, item.difference,
+            item.cost, item.sellPrice, item.cost_diff, item.sell_diff,
             item.profit_loss, item.barcode_status
         ]);
+        
         switch (format) {
             case 'csv': this.exportGenericCSV(headers, rows, 'report'); break;
             case 'xlsx': this.exportGenericXLSX(headers, rows, 'report'); break;
             case 'pdf': this.exportGenericPDF(headers, rows, 'report'); break;
             default: this.showToast('⚠️ รูปแบบไม่รองรับ', 'warning');
         }
-    }
-
-    getLocationName(loc) {
-        if (!loc || loc === 'all') return 'ทั้งร้าน';
-        const parts = loc.replace('cab_', '').split('_shelf_');
-        const cab = this.locations.find(l => l.id === parseInt(parts[0]));
-        if (!cab) return loc;
-        if (parts.length === 1) return cab.name;
-        const shelf = cab.shelves.find(s => s.id === parseInt(parts[1]));
-        return cab.name + ' ชั้น ' + (shelf ? shelf.number : '?');
     }
 
     exportGenericCSV(headers, rows, type) {
@@ -2204,7 +2611,7 @@ class StockApp {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF('landscape');
         doc.setFontSize(14);
-        doc.text('รายงานการนับสต็อก - v2.0.12', 14, 20);
+        doc.text('รายงานการนับสต็อก - v3.0.0', 14, 20);
         const tableData = rows.map(row => row.map(v => v !== undefined ? String(v) : ''));
         doc.autoTable({
             head: [headers.map(h => String(h))],
@@ -2246,6 +2653,7 @@ class StockApp {
             localStorage.removeItem('barcodeHistory_' + CONFIG.STORE_ID);
             this.renderMap();
             this.updateLocationSelect();
+            this.updateLocationDropdowns();
             this.updateProgress();
             this.renderRecentScans();
             this.updateScanBadge();
@@ -2263,7 +2671,7 @@ let app = null;
 document.addEventListener('DOMContentLoaded', function() {
     app = new StockApp();
     window.app = app;
-    console.log('✅ ระบบนับสินค้าร้านยา v2.0.12 พร้อมใช้งาน!');
+    console.log('✅ ระบบนับสินค้าร้านยา v3.0.0 พร้อมใช้งาน!');
 });
 
 // ===== GLOBAL FUNCTIONS =====
@@ -2290,10 +2698,17 @@ function searchProduct(value) { if (app) app.searchProduct(value); }
 function sortReport() { if (app) app.sortReport(); }
 function exportData(format) { if (app) app.exportData(format); }
 function exportBarcodeMaster() { if (app) app.exportBarcodeMaster(); }
+function exportLocationReport() { if (app) app.exportLocationReport(); }
 function clearAllData() { if (app) app.clearAllData(); }
 function showAddProductModal() { if (app) app.showAddProductModal(); }
 function closeAddProductModal() { if (app) app.closeAddProductModal(); }
 function confirmAddProduct() { if (app) app.confirmAddProduct(); }
+
+// Location functions
+function updateLocationDropdowns() { if (app) app.updateLocationDropdowns(); }
+function updateShelfDropdown() { if (app) app.updateShelfDropdown(); }
+function addCabinetFromScan() { if (app) app.addCabinetFromScan(); }
+function addShelfFromScan() { if (app) app.addShelfFromScan(); }
 
 window.selectProductFromSearch = function(productId) {
     if (app) app.selectProductFromSearch(productId);
@@ -2302,8 +2717,8 @@ window.clearPendingBarcode = function() {
     if (app) app.clearPendingBarcode();
 };
 
-console.log('✅ ระบบนับสินค้าร้านยา v2.0.12 พร้อมใช้งาน!');
-console.log('✨ v2.0.12: เพิ่มสินค้าตอนสแกนไม่เจอ, Append Excel, ปุ่มเพิ่มสินค้า, สถานะบาร์โค้ดในรายงาน, Master Barcode Export');
+console.log('✅ ระบบนับสินค้าร้านยา v3.0.0 พร้อมใช้งาน!');
+console.log('✨ v3.0.0: แยกหน้าร้าน/หลังร้าน, เพิ่มตู้/ชั้นขณะนับ, รายงานตามตำแหน่ง, สรุปตามตู้/ชั้น/ประเภท');
 </script>
 </body>
-            </html>
+</html>
