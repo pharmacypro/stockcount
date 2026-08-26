@@ -427,10 +427,11 @@
             </div>
             <div class="scanner-status idle" id="scannerStatus"><i class="fas fa-circle" style="font-size:8px;"></i> กล้องปิดอยู่</div>
             <div class="scanner-controls">
-                <button class="btn btn-primary" onclick="toggleScanner()" id="btnToggleScanner"><i class="fas fa-camera"></i> เปิดกล้อง</button>
+                <button class="btn btn-primary" onclick="app.toggleScanner()" id="btnToggleScanner"><i class="fas fa-camera"></i> เปิดกล้อง</button>
                 <button class="btn btn-outline btn-sm" onclick="manualBarcode()"><i class="fas fa-keyboard"></i> ใส่รหัส</button>
                 <button class="btn btn-sm" onclick="toggleContinuousMode()" id="btnContinuous" style="background:var(--text-muted);color:#fff;"><i class="fas fa-infinity"></i> ต่อเนื่อง: ปิด</button>
                 <button class="btn btn-sm" onclick="refocusScanner()" style="background:var(--primary);color:#fff;min-height:36px;padding:6px 12px;font-size:12px;"><i class="fas fa-crosshairs"></i> โฟกัส</button>
+                <button class="btn btn-sm" onclick="app.testCamera()" style="background:var(--warning);color:#fff;min-height:36px;padding:6px 12px;font-size:11px;"><i class="fas fa-bug"></i> ทดสอบ</button>
             </div>
             <div class="continuous-warning" id="continuousWarning">
                 <i class="fas fa-exclamation-triangle"></i>
@@ -990,27 +991,28 @@
 <div class="toast-container" id="toastContainer"></div>
 
 <script>
+// ================================================================
+// ✅ Service Worker (แก้ไขแล้ว)
+// ================================================================
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/stockcount/sw.js')
-        .then(() => console.log('✅ Service Worker ลงทะเบียนสำเร็จ'))
-        .catch(() => console.log('ℹ️ Service Worker ไม่ทำงาน (ต้องใช้ HTTPS)'));
+    navigator.serviceWorker.register('./sw.js')
+        .then((registration) => {
+            console.log('✅ Service Worker ลงทะเบียนสำเร็จ');
+            console.log('Scope:', registration.scope);
+        })
+        .catch((err) => {
+            console.warn('ℹ️ Service Worker ไม่ทำงาน:', err.message);
+            // ไม่ต้องแสดง alert ให้ผู้ใช้เห็น
+        });
 }
-    // ================================================================
-// ✅ JavaScript - MediStock v3.5.0 (ส่วนหลัก)
+
+// ================================================================
+// ✅ JavaScript - MediStock v3.5.0 (แก้ไขกล้องแล้ว)
 // ================================================================
 eruda.init();
 console.log('✅ MediStock v3.5.0 กำลังเริ่มต้น...');
 
 const CONFIG = {
-    GOOGLE_SHEETS: {
-        API_KEY: localStorage.getItem('apiGoogleSheets') || '',
-        SPREADSHEET_ID: localStorage.getItem('apiSpreadsheetId') || '',
-        RANGES: {
-            PRODUCTS: 'Products!A:L',
-            REPORTS: 'Reports!A:H',
-            HISTORY: 'History!A:F'
-        }
-    },
     APP_NAME: 'MediStock',
     VERSION: '3.5.0',
     STORE_ID: localStorage.getItem('storeId') || 'default',
@@ -1049,13 +1051,9 @@ class StockApp {
         this.pendingBarcode = null;
         this.newlyPairedBarcodes = [];
         this.selectedLocationType = 'front';
-        this.selectedCabinetId = null;
-        this.selectedShelfId = null;
         this.branches = [];
         this.editingIndex = -1;
         this.history = JSON.parse(localStorage.getItem('countHistory_' + CONFIG.STORE_ID) || '[]');
-        this.cloudConnected = false;
-        this.cloudType = null;
         this.abcChart = null;
         this.minStockThreshold = CONFIG.MIN_STOCK_ALERT;
         this.maxStockThreshold = CONFIG.MAX_STOCK_ALERT;
@@ -1624,8 +1622,37 @@ class StockApp {
     }
 
     // ================================================================
-    // SCANNER
+    // ✅ SCANNER (แก้ไขแล้ว)
     // ================================================================
+    async testCamera() {
+        console.log('🧪 ทดสอบกล้อง...');
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({
+                video: { 
+                    facingMode: "environment",
+                    width: { ideal: 640 },
+                    height: { ideal: 480 }
+                }
+            });
+            stream.getTracks().forEach(track => track.stop());
+            this.showToast('✅ กล้องทำงานปกติ!', 'success');
+            console.log('✅ กล้องทำงานปกติ');
+            return true;
+        } catch (err) {
+            console.error('❌ ทดสอบกล้องล้มเหลว:', err);
+            let msg = '❌ กล้องไม่ทำงาน: ';
+            if (err.name === 'NotAllowedError') {
+                msg += 'กรุณาอนุญาตให้เว็บไซต์เข้าถึงกล้อง (คลิกที่ไอคอนกล้องในแถบ URL)';
+            } else if (err.name === 'NotFoundError') {
+                msg += 'ไม่พบกล้องในอุปกรณ์นี้';
+            } else {
+                msg += err.message || 'ไม่ทราบสาเหตุ';
+            }
+            this.showToast(msg, 'error');
+            return false;
+        }
+    }
+
     refocusScanner() {
         if (this.html5Scanner) {
             try {
@@ -1668,40 +1695,68 @@ class StockApp {
 
     async startScanner() {
         console.log('📷 startScanner ถูกเรียก');
+        console.log('🔍 this คือ:', this);
+        console.log('🔍 typeof Html5Qrcode:', typeof Html5Qrcode);
 
+        // ✅ ขออนุญาตกล้องก่อน
+        try {
+            console.log('📷 กำลังขออนุญาตกล้อง...');
+            const stream = await navigator.mediaDevices.getUserMedia({
+                video: { 
+                    facingMode: "environment",
+                    width: { ideal: 640 },
+                    height: { ideal: 480 }
+                }
+            });
+            stream.getTracks().forEach(track => track.stop());
+            console.log('✅ ได้รับอนุญาตกล้องแล้ว');
+        } catch (err) {
+            console.error('❌ ขออนุญาตกล้องไม่สำเร็จ:', err);
+            let msg = '❌ เปิดกล้องไม่สำเร็จ: ';
+            if (err.name === 'NotAllowedError') {
+                msg += 'กรุณาอนุญาตให้เว็บไซต์เข้าถึงกล้อง (คลิกที่ไอคอนกล้องในแถบ URL)';
+            } else if (err.name === 'NotFoundError') {
+                msg += 'ไม่พบกล้องในอุปกรณ์นี้';
+            } else {
+                msg += err.message || 'ไม่ทราบสาเหตุ';
+            }
+            document.getElementById('scannerStatus').textContent = msg;
+            document.getElementById('scannerStatus').className = 'scanner-status error';
+            this.showToast(msg, 'error');
+            return;
+        }
+
+        // ✅ ตรวจสอบไลบรารี
         if (typeof Html5Qrcode === 'undefined') {
             console.error('❌ Html5Qrcode ไม่ถูกโหลด');
-            this.showToast('⚠️ ไลบรารีสแกนโหลดไม่สำเร็จ', 'error');
+            this.showToast('⚠️ ไลบรารีสแกนโหลดไม่สำเร็จ กรุณารีเฟรชหน้า', 'error');
             return;
         }
 
-        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-            console.error('❌ ไม่รองรับกล้อง');
-            this.showToast('⚠️ เบราว์เซอร์นี้ไม่รองรับกล้อง', 'error');
-            return;
+        // ✅ ปิด Scanner เดิมถ้ามี
+        if (this.html5Scanner) {
+            try {
+                await this.html5Scanner.stop();
+                this.html5Scanner.clear();
+            } catch(e) {}
+            this.html5Scanner = null;
         }
+
+        // ✅ อัปเดต UI
+        document.getElementById('scannerPlaceholder').style.display = 'none';
+        document.getElementById('scannerOverlay').style.display = 'block';
+        document.getElementById('scannerStatus').innerHTML = '<i class="fas fa-circle" style="color:var(--success);font-size:8px;"></i> กำลังเปิดกล้อง...';
+        document.getElementById('scannerStatus').className = 'scanner-status success';
+        document.getElementById('btnToggleScanner').innerHTML = '<i class="fas fa-stop"></i> ปิดกล้อง';
+
+        console.log('📷 กำลังสร้าง Html5Qrcode...');
 
         try {
-            if (this.html5Scanner) {
-                try {
-                    await this.html5Scanner.stop();
-                    this.html5Scanner.clear();
-                } catch(e) {}
-                this.html5Scanner = null;
-            }
-
-            document.getElementById('scannerPlaceholder').style.display = 'none';
-            document.getElementById('scannerOverlay').style.display = 'block';
-            document.getElementById('scannerStatus').innerHTML = '<i class="fas fa-circle" style="color:var(--success);font-size:8px;"></i> กำลังเปิดกล้อง...';
-            document.getElementById('scannerStatus').className = 'scanner-status success';
-            document.getElementById('btnToggleScanner').innerHTML = '<i class="fas fa-stop"></i> ปิดกล้อง';
-
-            console.log('📷 กำลังสร้าง Html5Qrcode...');
             this.html5Scanner = new Html5Qrcode("reader");
 
             const config = {
                 fps: 30,
-                qrbox: { width: 340, height: 220 },
+                qrbox: { width: 280, height: 200 },
                 aspectRatio: 1.333,
                 formatsToSupport: [
                     Html5QrcodeSupportedFormats.EAN_13,
@@ -1722,10 +1777,10 @@ class StockApp {
             };
 
             console.log('📷 กำลังเริ่มสแกน...');
+
             await this.html5Scanner.start(
                 {
-                    facingMode: "environment",
-                    focusMode: "continuous"
+                    facingMode: "environment"
                 },
                 config,
                 (decodedText) => {
@@ -1811,10 +1866,16 @@ class StockApp {
     }
 
     async toggleScanner() {
-        if (this.scanning) {
-            await this.stopScanner();
-        } else {
-            await this.startScanner();
+        console.log('🔄 toggleScanner ถูกเรียก, scanning:', this.scanning);
+        try {
+            if (this.scanning) {
+                await this.stopScanner();
+            } else {
+                await this.startScanner();
+            }
+        } catch (err) {
+            console.error('❌ toggleScanner error:', err);
+            this.showToast('❌ เกิดข้อผิดพลาด: ' + err.message, 'error');
         }
     }
 
@@ -3178,7 +3239,7 @@ class StockApp {
         const match = url.match(/\/d\/([a-zA-Z0-9-_]+)/);
         if (match) spreadsheetId = match[1];
 
-        const apiKey = CONFIG.GOOGLE_SHEETS.API_KEY || '';
+        const apiKey = CONFIG.GOOGLE_SHEETS?.API_KEY || '';
         if (!apiKey) {
             this.showToast('⚠️ ต้องตั้งค่า API Key ในไฟล์ก่อน', 'warning');
             return;
@@ -4509,7 +4570,7 @@ window.clearPendingBarcode = function() {
 };
 
 console.log('✅ MediStock v3.5.0 พร้อมใช้งาน!');
-console.log('✨ MediStock v3.5.0: เพิ่มระบบแปลงหน่วย, Min/Max Stock, ปรับปรุงการสแกน, Multi-language พื้นฐาน');
+console.log('✨ MediStock v3.5.0: แก้ไขปัญหาเปิดกล้องแล้ว');
 </script>
 
 </body>
