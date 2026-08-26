@@ -8,17 +8,13 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="MediStock">
     <meta name="theme-color" content="#0ea5e9">
-    <title>MediStock v3.4.0</title>
+    <title>MediStock v3.5.0</title>
 
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     
-    <!-- ไลบรารี -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
@@ -96,7 +92,6 @@
         .branch-selector select { background:transparent; border:none; color:#fff; font-size:11px; font-weight:600; padding:2px 4px; max-width:90px; }
         .branch-selector select option { color:#0f172a; }
         .branch-selector .btn-branch { background:rgba(255,255,255,0.15); color:#fff; border:none; border-radius:4px; padding:2px 6px; font-size:9px; cursor:pointer; }
-        .branch-selector .btn-branch:hover { background:rgba(255,255,255,0.25); }
 
         .network-badge { display:inline-flex; align-items:center; gap:4px; padding:3px 8px; border-radius:20px; font-size:9px; font-weight:700; background:rgba(255,255,255,0.15); cursor:pointer; border:1px solid rgba(255,255,255,0.1); }
         .network-dot { width:6px; height:6px; border-radius:50%; }
@@ -135,15 +130,11 @@
         .btn-success { background:var(--success); color:#fff; }
         .btn-danger { background:var(--danger); color:#fff; }
         .btn-outline { background:transparent; border:2px solid var(--primary); color:var(--primary); }
-        .btn-outline-success { background:transparent; border:2px solid var(--success); color:var(--success); }
-        .btn-outline-danger { background:transparent; border:2px solid var(--danger); color:var(--danger); }
         .btn-sm { padding:8px 14px; font-size:12px; min-height:36px; }
         .btn-block { width:100%; }
 
         .input { width:100%; padding:12px 16px; border:2px solid var(--border-color); border-radius:var(--radius-md); font-size:15px; color:var(--text-main); background:var(--bg-body); transition:var(--transition); font-family:'Plus Jakarta Sans',sans-serif; min-height:48px; }
         .input:focus { outline:none; border-color:var(--primary); box-shadow:0 0 0 3px rgba(14,165,233,0.15); }
-        .input-group { display:flex; gap:6px; align-items:center; flex-wrap:wrap; }
-        .input-sm { padding:8px 12px; font-size:13px; min-height:38px; }
 
         .scanner-wrapper { position:relative; border-radius:var(--radius-md); overflow:hidden; background:#0f172a; min-height:220px; box-shadow:inset 0 2px 20px rgba(0,0,0,0.4); }
         .scanner-wrapper #reader { width:100%; min-height:220px; }
@@ -170,15 +161,10 @@
         .product-detail { background:linear-gradient(135deg, var(--success-light) 0%, #f0fdf4 100%); border:2px solid #6ee7b7; border-radius:var(--radius-lg); padding:16px; margin-bottom:10px; display:none; }
         [data-theme="dark"] .product-detail { background:linear-gradient(135deg, #064e3b 0%, #065f46 100%); border-color:#34d399; }
         .product-name { font-family:'Outfit',sans-serif; font-size:var(--font-xl); font-weight:700; margin-bottom:4px; color:#065f46; }
-        [data-theme="dark"] .product-name { color:#6ee7b7; }
         .product-info { font-size:15px; color:#047857; margin-bottom:2px; font-weight:500; }
-        [data-theme="dark"] .product-info { color:#a7f3d0; }
         .product-info .highlight { font-size:var(--font-xxl); font-weight:800; color:var(--primary); background:var(--info-light); padding:2px 14px; border-radius:8px; display:inline-block; }
-        .product-info .lot-highlight { font-size:var(--font-large); font-weight:700; color:var(--text-main); background:var(--bg-card); padding:2px 12px; border-radius:6px; display:inline-block; border:1px solid var(--border-color); }
-        [data-theme="dark"] .product-info .lot-highlight { color:#f1f5f9; background:#1e293b; }
 
         .expiry-warning { background:var(--danger-light); border:1px solid var(--danger); border-radius:var(--radius-sm); padding:8px 12px; margin:6px 0; display:flex; align-items:center; gap:6px; font-size:13px; font-weight:600; color:var(--danger); }
-        .expiry-warning i { font-size:16px; }
 
         .qty-control { display:flex; align-items:center; gap:10px; margin:12px 0; }
         .qty-btn { width:46px; height:46px; border-radius:50%; border:2px solid var(--border-color); background:var(--bg-card); font-size:20px; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; color:var(--primary); transition:var(--transition); flex-shrink:0; }
@@ -190,25 +176,15 @@
         .location-selector .label .required { color:var(--danger); font-size:16px; }
         .location-select-group { display:flex; flex-wrap:wrap; gap:6px; }
         .location-select-group select { flex:1; min-width:80px; padding:8px 10px; border:2px solid var(--border-color); border-radius:var(--radius-sm); font-size:13px; background:var(--bg-card); color:var(--text-main); min-height:42px; }
-        .location-select-group select:focus { outline:none; border-color:var(--primary); }
-        .location-select-group .btn-add-location { background:var(--primary); color:#fff; border:none; border-radius:var(--radius-sm); padding:8px 12px; font-size:12px; cursor:pointer; min-height:42px; font-weight:600; }
 
-        /* ✅ ใหม่: รูปแบบการเลือก Lot */
         .lot-item { display:flex; align-items:center; padding:10px 12px; border:2px solid var(--border-color); border-radius:var(--radius-md); margin-bottom:6px; cursor:pointer; gap:10px; background:var(--bg-card); transition:var(--transition); }
         .lot-item:hover { border-color:var(--primary-light); }
         .lot-item.selected { border-color:var(--primary); background:#eef2ff; box-shadow:0 0 0 3px rgba(14,165,233,0.15); }
-        [data-theme="dark"] .lot-item.selected { background:#1e293b; }
         .lot-radio { width:18px; height:18px; border-radius:50%; border:2px solid var(--border-color); flex-shrink:0; transition:var(--transition); display:flex; align-items:center; justify-content:center; }
         .lot-item.selected .lot-radio { border-color:var(--primary); background:var(--primary); box-shadow:inset 0 0 0 4px #fff; }
-        .lot-item .lot-expiry-badge { font-size:10px; padding:2px 8px; border-radius:8px; font-weight:600; }
-        .lot-item .lot-expiry-badge.expiring { background:var(--warning-light); color:#92400e; }
-        .lot-item .lot-expiry-badge.expired { background:var(--danger-light); color:#991b1b; }
 
         .progress-container { width:100%; height:6px; background:var(--border-color); border-radius:3px; margin-top:6px; overflow:hidden; }
         .progress-bar { height:100%; border-radius:3px; transition:width 0.6s cubic-bezier(0.4,0,0.2,1); background:var(--primary-gradient); width:0%; }
-        .progress-bar.low { background:var(--danger); }
-        .progress-bar.medium { background:var(--warning); }
-        .progress-bar.high { background:var(--success); }
 
         .recent-item { display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid var(--border-color); font-size:13px; gap:6px; }
         .recent-item:last-child { border-bottom:none; }
@@ -218,29 +194,19 @@
         .recent-item .qty-diff.positive { color:var(--success); background:var(--success-light); }
         .recent-item .qty-diff.negative { color:var(--danger); background:var(--danger-light); }
         .recent-item .btn-icon { background:none; border:none; color:var(--primary); cursor:pointer; padding:4px; font-size:14px; }
-        .recent-item .btn-icon:hover { color:var(--primary-dark); }
 
         .table-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; border-radius:var(--radius-md); border:1px solid var(--border-color); }
         table { width:100%; border-collapse:collapse; font-size:12px; }
         th { background:var(--bg-body); padding:8px 6px; text-align:left; font-weight:600; white-space:nowrap; border-bottom:2px solid var(--border-color); font-size:11px; text-transform:uppercase; letter-spacing:0.3px; }
         td { padding:8px 6px; border-top:1px solid var(--border-color); font-size:12px; }
-        .text-center { text-align:center; }
-        .text-right { text-align:right; }
-        .text-left { text-align:left; }
+
         .badge { display:inline-block; padding:2px 8px; border-radius:8px; font-size:11px; font-weight:700; }
         .badge-green { background:var(--success-light); color:#166534; }
         .badge-red { background:var(--danger-light); color:#991b1b; }
         .badge-info { background:var(--info-light); color:#1e40af; }
         .badge-warning { background:var(--warning-light); color:#92400e; }
-        .badge-purple { background:#e0e7ff; color:#3730a3; }
-        .badge-new { background:#fef3c7; color:#92400e; }
-        .badge-exists { background:#d1fae5; color:#065f46; }
         .badge-front { background:#d1fae5; color:#065f46; }
         .badge-back { background:#fef3c7; color:#92400e; }
-        .badge-zero { background:#fee2e2; color:#991b1b; }
-        .badge-expired { background:#fee2e2; color:#991b1b; }
-
-        /* ✅ ใหม่: ABC Analysis Badge */
         .badge-abc-a { background:#dc2626; color:#fff; }
         .badge-abc-b { background:#f59e0b; color:#fff; }
         .badge-abc-c { background:#10b981; color:#fff; }
@@ -267,8 +233,6 @@
         .gap-4 { gap:4px; }
         .gap-8 { gap:8px; }
         .mt-6 { margin-top:6px; }
-        .mt-10 { margin-top:10px; }
-        .mb-6 { margin-bottom:6px; }
         .text-muted { color:var(--text-muted); }
         .text-success { color:var(--success); }
         .text-danger { color:var(--danger); }
@@ -281,19 +245,12 @@
         .search-result-item .info { flex:1; }
         .search-result-item .info .name { font-weight:600; font-size:15px; }
         .search-result-item .info .detail { font-size:12px; color:var(--text-muted); }
-        .search-result-item .badge-select { background:var(--primary); color:#fff; padding:4px 14px; border-radius:12px; font-size:12px; font-weight:600; transition:all 0.2s; }
-        .search-result-item:hover .badge-select { transform:scale(1.05); }
-        .search-result-item .badge-pair { background:var(--warning); color:#fff; padding:4px 14px; border-radius:12px; font-size:12px; font-weight:600; animation:pulse-badge 1.5s infinite; }
+        .search-result-item .badge-select { background:var(--primary); color:#fff; padding:4px 14px; border-radius:12px; font-size:12px; font-weight:600; }
         .search-highlight { background:var(--warning-light); color:#92400e; padding:0 2px; border-radius:2px; }
-        [data-theme="dark"] .search-highlight { background:#78350f; color:#fcd34d; }
 
         .pending-barcode-bar { display:none; align-items:center; gap:8px; background:var(--warning-light); padding:6px 12px; border-radius:var(--radius-sm); font-size:12px; color:#92400e; margin-bottom:6px; flex-wrap:wrap; }
-        [data-theme="dark"] .pending-barcode-bar { background:#451a03; color:#fcd34d; }
-        .pending-barcode-bar .barcode-text { font-weight:700; font-family:monospace; font-size:14px; }
-        .pending-barcode-bar .btn-clear { background:var(--danger); color:#fff; border:none; border-radius:4px; padding:2px 10px; font-size:11px; cursor:pointer; }
 
         .continuous-warning { display:none; background:var(--warning-light); border:2px solid var(--warning); border-radius:var(--radius-sm); padding:8px 12px; font-size:12px; color:#92400e; margin:6px 0; align-items:center; gap:8px; }
-        [data-theme="dark"] .continuous-warning { background:#451a03; color:#fcd34d; border-color:#78350f; }
         .continuous-warning.show { display:flex; }
 
         .pharmacy-map { background:var(--bg-body); border-radius:var(--radius-md); padding:12px; min-height:140px; border:2px dashed var(--border-color); }
@@ -301,105 +258,19 @@
         .cabinet-block { background:var(--bg-card); border:2px solid var(--border-color); border-radius:var(--radius-md); padding:10px; cursor:pointer; transition:var(--transition); text-align:center; }
         .cabinet-block:hover { border-color:var(--primary-light); box-shadow:var(--shadow-md); transform:translateY(-2px); }
         .cabinet-block.selected { border-color:var(--primary); background:#eef2ff; }
-        [data-theme="dark"] .cabinet-block.selected { background:#1e293b; }
-        .cabinet-icon { font-size:22px; margin-bottom:2px; }
         .cabinet-name { font-weight:700; font-size:12px; font-family:'Outfit',sans-serif; }
         .cabinet-type { font-size:9px; padding:2px 8px; border-radius:8px; font-weight:600; display:inline-block; }
         .cabinet-type.front { background:#d1fae5; color:#065f46; }
         .cabinet-type.back { background:#fef3c7; color:#92400e; }
-        .cabinet-shelves { display:flex; flex-direction:column; gap:2px; margin-top:5px; }
-        .shelf-row { background:var(--bg-body); padding:3px 8px; border-radius:4px; font-size:10px; cursor:pointer; transition:var(--transition); display:flex; justify-content:space-between; align-items:center; font-weight:500; color:var(--text-muted); }
-        .shelf-row:hover { background:#e0e7ff; color:var(--text-main); }
-        [data-theme="dark"] .shelf-row:hover { background:#334155; }
-        .shelf-row.selected { background:var(--primary); color:#fff; }
-        .shelf-count { background:rgba(0,0,0,0.06); padding:1px 6px; border-radius:8px; font-size:9px; }
 
-        .location-badge { display:inline-block; background:var(--info-light); color:#1e40af; padding:2px 10px; border-radius:10px; font-size:10px; font-weight:600; }
-        [data-theme="dark"] .location-badge { background:#1e293b; color:#60a5fa; }
-
-        .collapse-header { cursor:pointer; padding:10px 12px; background:var(--bg-body); border-radius:var(--radius-sm); display:flex; justify-content:space-between; align-items:center; font-weight:600; font-size:13px; border:1px solid var(--border-color); }
-        .collapse-header:hover { background:var(--border-color); }
-        .collapse-body { padding:8px 12px; display:none; border:1px solid var(--border-color); border-top:none; border-radius:0 0 var(--radius-sm) var(--radius-sm); }
-        .collapse-body.open { display:block; }
-
-        @keyframes pulse-badge { 0%,100% { opacity:1; } 50% { opacity:0.6; } }
-
-        .qr-code-container { display:flex; flex-direction:column; align-items:center; padding:10px; }
-        .qr-code-container #qrcode { background:#fff; padding:10px; border-radius:8px; }
-        .qr-code-container .product-label { text-align:center; margin-top:8px; font-size:14px; font-weight:600; }
-
-        .mapping-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
-        .mapping-grid .mapping-item { display:flex; flex-direction:column; gap:3px; }
-        .mapping-grid .mapping-item label { font-size:12px; font-weight:600; color:var(--text-muted); }
-        .mapping-grid .mapping-item select { padding:8px 10px; border:2px solid var(--border-color); border-radius:var(--radius-sm); font-size:13px; background:var(--bg-body); color:var(--text-main); min-height:40px; }
-
-        .stats-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:10px; }
+        .dashboard-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-bottom:10px; }
         .stat-card { background:var(--bg-card); padding:12px; border-radius:var(--radius-md); text-align:center; border:1px solid var(--border-color); }
         .stat-value { font-family:'Outfit',sans-serif; font-size:var(--font-xxl); font-weight:800; margin:2px 0; color:var(--primary); }
         .stat-label { font-size:11px; color:var(--text-muted); font-weight:600; text-transform:uppercase; letter-spacing:0.3px; }
+        .chart-container { position:relative; height:200px; margin-top:10px; }
+        .dead-stock-item { display:flex; justify-content:space-between; align-items:center; padding:8px 12px; border-radius:var(--radius-sm); margin-bottom:4px; background:var(--danger-light); border-left:4px solid var(--danger); }
 
-        .summary-grid-4 { display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:8px; }
-        .summary-grid-4 .stat-card { padding:8px; }
-        .summary-grid-4 .stat-value { font-size:18px; }
-
-        .branch-manager-item { display:flex; align-items:center; gap:8px; padding:10px 12px; border-bottom:1px solid var(--border-color); }
-        .branch-manager-item:last-child { border-bottom:none; }
-        .branch-manager-item .name { flex:1; font-weight:600; font-size:14px; }
-        .branch-manager-item .btn-sm { min-height:30px; padding:4px 10px; font-size:11px; }
-
-        /* ✅ ใหม่: Dashboard Cards */
-        .dashboard-grid {
-            display:grid;
-            grid-template-columns:1fr 1fr 1fr;
-            gap:8px;
-            margin-bottom:10px;
-        }
-        .dashboard-grid .stat-card {
-            padding:10px 8px;
-        }
-        .dashboard-grid .stat-value {
-            font-size:20px;
-        }
-        .dashboard-grid .stat-label {
-            font-size:10px;
-        }
-        .chart-container {
-            position:relative;
-            height:200px;
-            margin-top:10px;
-        }
-        .abc-list-item {
-            display:flex;
-            justify-content:space-between;
-            padding:6px 0;
-            border-bottom:1px solid var(--border-color);
-            font-size:13px;
-        }
-        .abc-list-item:last-child {
-            border-bottom:none;
-        }
-
-        .dead-stock-item {
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            padding:8px 12px;
-            border-radius:var(--radius-sm);
-            margin-bottom:4px;
-            background:var(--danger-light);
-            border-left:4px solid var(--danger);
-        }
-        [data-theme="dark"] .dead-stock-item {
-            background:#451a03;
-        }
-        .dead-stock-item .name {
-            font-weight:600;
-            font-size:13px;
-        }
-        .dead-stock-item .detail {
-            font-size:11px;
-            color:var(--text-muted);
-        }
+        .mapping-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
 
         @media (max-width:480px) {
             .logo-icon { width:34px; height:34px; font-size:15px; }
@@ -420,19 +291,14 @@
             .product-name { font-size:var(--font-large); }
             .product-info { font-size:14px; }
             .product-info .highlight { font-size:var(--font-xl); }
-            .product-info .lot-highlight { font-size:15px; }
-            .btn { font-size:13px; padding:10px 16px; min-height:42px; }
-            .location-select-group select { font-size:12px; padding:6px 8px; min-width:60px; }
-            .location-select-group .btn-add-location { font-size:11px; padding:6px 10px; }
             .dashboard-grid { grid-template-columns:1fr 1fr; }
-            .dashboard-grid .stat-card { padding:6px; }
-            .dashboard-grid .stat-value { font-size:16px; }
+            .btn { font-size:13px; padding:10px 16px; min-height:42px; }
         }
     </style>
 </head>
 <body>
 
-<!-- ===== HEADER ===== -->
+<!-- HEADER -->
 <header class="header">
     <div class="header-top">
         <a href="#" class="logo" onclick="switchTab('import'); return false;">
@@ -440,7 +306,7 @@
             <div class="logo-text">
                 <span class="brand">
                     <span class="main">MediStock</span>
-                    <span class="version">v3.4.0</span>
+                    <span class="version">v3.5.0</span>
                 </span>
                 <span class="tagline"><i class="fas fa-circle" style="font-size:4px;color:#34d399;margin-right:3px;"></i>ระบบนับสต็อกสินค้ายา</span>
             </div>
@@ -476,9 +342,8 @@
         <button class="tab-btn" onclick="switchTab('settings')"><i class="fas fa-sliders-h"></i><span class="tab-label">ตั้งค่า</span></button>
     </nav>
 
-    <!-- ===== PAGE: IMPORT (เหมือนเดิม) ===== -->
+    <!-- PAGE: IMPORT -->
     <div class="page active" id="page-import">
-        <!-- เนื้อหาเหมือนเดิม -->
         <div class="card">
             <div class="card-title"><i class="fas fa-file-import"></i> นำเข้าข้อมูลสินค้า</div>
             <div style="font-size:11px;color:var(--text-muted);margin-bottom:6px;padding:4px 10px;background:var(--bg-body);border-radius:var(--radius-sm);">
@@ -488,7 +353,6 @@
                 <i class="fas fa-cloud-upload-alt" style="font-size:32px;color:var(--primary);display:block;margin-bottom:6px;"></i>
                 <p style="font-weight:600;font-size:15px;color:var(--text-main);">อัปโหลดไฟล์ Excel / CSV</p>
                 <p style="font-size:12px;color:var(--text-muted);">.xlsx, .xls, .csv</p>
-                <p style="font-size:11px;color:var(--text-muted);margin-top:4px;">รองรับ: รหัสสินค้า, ชื่อสินค้า, เลขที่ผลิต, วันที่ผลิต, วันหมดอายุ, ราคาขาย, ราคาทุนต่อหน่วย, จำนวนคงเหลือ, หน่วยนับสต๊อก, ผู้จัดจำหน่าย, บาร์โค้ดสินค้า</p>
             </div>
             <input type="file" id="fileInput" accept=".xlsx,.xls,.csv" style="display:none" onchange="handleFile(event)">
             
@@ -529,9 +393,8 @@
         </div>
     </div>
 
-    <!-- ===== PAGE: SCAN (เหมือนเดิม) ===== -->
+    <!-- PAGE: SCAN -->
     <div class="page" id="page-scan">
-        <!-- เนื้อหาเหมือนเดิม -->
         <div class="card" style="padding:8px;">
             <div class="flex-between" style="flex-wrap:wrap;gap:4px;">
                 <button class="btn btn-primary btn-sm" onclick="showAddProductModal()" style="font-size:12px;padding:6px 14px;min-height:36px;"><i class="fas fa-plus"></i> เพิ่มสินค้า</button>
@@ -590,7 +453,7 @@
             <div id="searchResults" style="display:none;margin-top:6px;max-height:280px;overflow-y:auto;background:var(--bg-card);border-radius:var(--radius-md);border:1px solid var(--border-color);"></div>
         </div>
 
-        <!-- PRODUCT DETAIL (ปรับปรุงใหม่) -->
+        <!-- PRODUCT DETAIL -->
         <div class="product-detail" id="productDetail">
             <div class="product-name" id="productName">-</div>
             <div class="product-info" id="productBarcode">-</div>
@@ -605,7 +468,6 @@
                 <span id="expiryWarningText">สินค้าหมดอายุใน 90 วัน!</span>
             </div>
             
-            <!-- ✅ ใหม่: เลือก Lot สินค้า -->
             <div id="lotSelection" style="display:none;margin-top:6px;">
                 <label style="font-weight:600;font-size:14px;color:#065f46;display:flex;align-items:center;gap:6px;">
                     <i class="fas fa-tag"></i> เลือก Lot สินค้า:
@@ -667,7 +529,7 @@
         </div>
     </div>
 
-    <!-- ===== PAGE: LAYOUT (เหมือนเดิม) ===== -->
+    <!-- PAGE: LAYOUT -->
     <div class="page" id="page-layout">
         <div class="card">
             <div class="card-title"><i class="fas fa-sitemap"></i> ผังร้าน</div>
@@ -710,9 +572,8 @@
         </div>
     </div>
 
-    <!-- ===== PAGE: REPORT (เหมือนเดิม) ===== -->
+    <!-- PAGE: REPORT -->
     <div class="page" id="page-report">
-        <!-- เนื้อหาเหมือนเดิม -->
         <div class="card" style="background:linear-gradient(135deg,var(--success-light) 0%,#d1fae5 100%);border:2px solid #6ee7b7;padding:14px;">
             <div class="card-title" style="color:#065f46;font-size:15px;margin-bottom:6px;"><i class="fas fa-chart-pie"></i> สรุปภาพรวมการนับสต็อก</div>
             <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center;">
@@ -807,16 +668,7 @@
             </div>
             <div class="table-wrap">
                 <table>
-                    <thead>
-                        <tr>
-                            <th>บาร์โค้ด</th><th>ชื่อสินค้า</th><th>Lot</th>
-                            <th>ประเภท</th><th>ตู้/ชั้น</th>
-                            <th>ระบบ</th><th>นับ</th><th>ต่าง</th>
-                            <th>ทุน</th><th>ขาย</th>
-                            <th>ต่าง(ทุน)</th><th>ต่าง(ขาย)</th>
-                            <th>หมายเหตุ</th>
-                        </tr>
-                    </thead>
+                    <thead><tr><th>บาร์โค้ด</th><th>ชื่อสินค้า</th><th>Lot</th><th>ประเภท</th><th>ตู้/ชั้น</th><th>ระบบ</th><th>นับ</th><th>ต่าง</th><th>ทุน</th><th>ขาย</th><th>ต่าง(ทุน)</th><th>ต่าง(ขาย)</th><th>หมายเหตุ</th></tr></thead>
                     <tbody id="reportBody"><tr><td colspan="13" style="text-align:center;padding:16px;color:var(--text-muted);font-size:13px;"><i class="fas fa-inbox" style="font-size:20px;display:block;margin-bottom:6px;opacity:0.5;"></i>ยังไม่มีข้อมูลสรุปผล</td></tr></tbody>
                 </table>
             </div>
@@ -828,7 +680,7 @@
         </div>
     </div>
 
-    <!-- ===== PAGE: ANALYTICS (ใหม่) ===== -->
+    <!-- PAGE: ANALYTICS -->
     <div class="page" id="page-analytics">
         <div class="card">
             <div class="card-title"><i class="fas fa-chart-pie"></i> วิเคราะห์ข้อมูลสต็อก</div>
@@ -836,7 +688,6 @@
                 วิเคราะห์ข้อมูลจากการนับสต็อก เพื่อช่วยวางแผนจัดการสินค้า
             </p>
             
-            <!-- Dashboard Summary -->
             <div class="dashboard-grid" id="analyticsDashboard">
                 <div class="stat-card">
                     <div class="stat-label">📦 มูลค่าสต็อก</div>
@@ -853,7 +704,6 @@
             </div>
         </div>
 
-        <!-- ABC Analysis -->
         <div class="card">
             <div class="card-title"><i class="fas fa-layer-group"></i> ABC Analysis</div>
             <p style="font-size:11px;color:var(--text-muted);margin-bottom:8px;">
@@ -870,7 +720,6 @@
             </div>
         </div>
 
-        <!-- Dead Stock Alert -->
         <div class="card">
             <div class="card-title"><i class="fas fa-skull"></i> Dead Stock Alert</div>
             <p style="font-size:11px;color:var(--text-muted);margin-bottom:8px;">
@@ -884,11 +733,10 @@
             </div>
         </div>
 
-        <!-- Min Stock Alert -->
         <div class="card">
             <div class="card-title"><i class="fas fa-exclamation-triangle"></i> สินค้าใกล้หมด (Min Stock)</div>
             <p style="font-size:11px;color:var(--text-muted);margin-bottom:8px;">
-                สินค้าที่มีจำนวนคงเหลือน้อยกว่า 10 ชิ้น
+                สินค้าที่มีจำนวนคงเหลือน้อยกว่า 5 ชิ้น (หรือตามที่ตั้งค่า)
             </p>
             <div id="minStockList">
                 <p style="text-align:center;color:var(--text-muted);padding:16px;font-size:13px;">
@@ -897,19 +745,24 @@
                 </p>
             </div>
         </div>
+
+        <!-- ✅ ใหม่: Max Stock Alert -->
+        <div class="card">
+            <div class="card-title"><i class="fas fa-warehouse"></i> สินค้าเกินสต็อก (Max Stock)</div>
+            <p style="font-size:11px;color:var(--text-muted);margin-bottom:8px;">
+                สินค้าที่มีจำนวนคงเหลือเกิน 100 ชิ้น (หรือตามที่ตั้งค่า)
+            </p>
+            <div id="maxStockList">
+                <p style="text-align:center;color:var(--text-muted);padding:16px;font-size:13px;">
+                    <i class="fas fa-check-circle" style="color:var(--success);font-size:20px;display:block;margin-bottom:6px;"></i>
+                    ไม่มีสินค้าเกินสต็อก
+                </p>
+            </div>
+        </div>
     </div>
 
-    <!-- ===== PAGE: SETTINGS (ปรับปรุง) ===== -->
+    <!-- PAGE: SETTINGS -->
     <div class="page" id="page-settings">
-        <div class="card">
-            <div class="card-title"><i class="fas fa-info-circle"></i> เกี่ยวกับ MediStock</div>
-            <p style="font-size:13px;color:var(--text-muted);">เวอร์ชัน 3.4.0</p>
-            <p style="font-size:13px;color:var(--text-muted);">ระบบนับสต็อกสินค้ายา พร้อมระบบวิเคราะห์</p>
-            <p style="font-size:12px;color:var(--text-light);margin-top:4px;">© 2026 MediStock. สงวนลิขสิทธิ์.</p>
-            <p style="font-size:12px;color:var(--text-light);margin-top:2px;">📦 ข้อมูลเก็บในเครื่อง (IndexedDB)</p>
-            <p style="font-size:12px;color:var(--text-light);">🔒 ทำงานแบบ Offline ได้</p>
-        </div>
-
         <div class="card" style="border:2px solid var(--warning);background:var(--warning-light);">
             <div class="card-title" style="color:#92400e;font-size:14px;"><i class="fas fa-database"></i> การจัดการข้อมูล</div>
             <div style="display:flex;gap:6px;flex-wrap:wrap;">
@@ -920,10 +773,71 @@
             <p style="font-size:11px;color:var(--text-muted);margin-top:4px;"><i class="fas fa-info-circle"></i> ไฟล์สำรองมีข้อมูลสินค้า, ตู้/ชั้น, ประวัติการนับ, บาร์โค้ด, และสาขาทั้งหมด</p>
             <button class="btn btn-danger btn-block" onclick="clearAllData()" style="margin-top:6px;font-size:14px;padding:12px;"><i class="fas fa-trash"></i> ล้างข้อมูลทั้งหมด</button>
         </div>
+
+        <!-- ✅ ใหม่: จัดการหน่วยนับ -->
+        <div class="card">
+            <div class="card-title"><i class="fas fa-weight-scale"></i> จัดการหน่วยนับ</div>
+            <p style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">
+                เพิ่ม/แก้ไขหน่วยนับสินค้า (ใช้สำหรับแปลงหน่วย)
+            </p>
+            <div style="display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap;">
+                <input type="text" class="input" id="newUnitName" placeholder="ชื่อหน่วย (เช่น โหล)" style="flex:1;font-size:13px;padding:8px 12px;min-height:38px;">
+                <input type="number" class="input" id="newUnitFactor" placeholder="เท่ากับกี่ชิ้น" style="flex:1;font-size:13px;padding:8px 12px;min-height:38px;" value="12">
+                <button class="btn btn-primary" onclick="app.addUnit()" style="font-size:13px;padding:8px 14px;min-height:38px;"><i class="fas fa-plus"></i> เพิ่มหน่วย</button>
+            </div>
+            <div id="unitList">
+                <!-- รายการหน่วยที่มีอยู่ -->
+            </div>
+        <!-- ✅ Google Sheets Settings -->
+<div class="card" style="border:2px solid #4285F4;background:#f8f9fa;">
+    <div class="card-title" style="color:#4285F4;font-size:14px;">
+        <i class="fab fa-google"></i> Google Sheets (Multi-user)
+    </div>
+    <p style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">
+        ใส่ API Key และ Spreadsheet ID เพื่อให้พนักงานทุกคนใช้งานร่วมกันได้
+    </p>
+    
+    <div style="margin-bottom:6px;">
+        <label style="font-weight:600;font-size:12px;display:block;margin-bottom:3px;">
+            <i class="fas fa-key"></i> Google Sheets API Key
+        </label>
+        <input type="text" class="input" id="gsApiKey" placeholder="ใส่ API Key" 
+               style="font-size:13px;padding:8px 12px;min-height:38px;">
+    </div>
+    <div style="margin-bottom:8px;">
+        <label style="font-weight:600;font-size:12px;display:block;margin-bottom:3px;">
+            <i class="fas fa-table"></i> Spreadsheet ID
+        </label>
+        <input type="text" class="input" id="gsSpreadsheetId" placeholder="ใส่ Spreadsheet ID" 
+               style="font-size:13px;padding:8px 12px;min-height:38px;">
+    </div>
+    
+    <div style="display:flex;gap:6px;flex-wrap:wrap;">
+        <button class="btn btn-primary btn-sm" onclick="app.saveGoogleSheetsSettings()" style="flex:1;background:#4285F4;font-size:12px;padding:8px 12px;min-height:38px;">
+            <i class="fas fa-save"></i> บันทึกการตั้งค่า
+        </button>
+        <button class="btn btn-outline btn-sm" onclick="app.checkGoogleSheetsStatus()" style="flex:1;font-size:12px;padding:8px 12px;min-height:38px;">
+            <i class="fas fa-plug"></i> ทดสอบเชื่อมต่อ
+        </button>
+    </div>
+    
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;">
+        <button class="btn btn-success btn-sm" onclick="app.syncSessionToGoogleSheets()" style="flex:1;font-size:12px;padding:8px 12px;min-height:38px;">
+            <i class="fas fa-cloud-upload-alt"></i> ซิงค์ขึ้น Google Sheets
+        </button>
+        <button class="btn btn-outline btn-sm" onclick="app.loadFromGoogleSheets()" style="flex:1;font-size:12px;padding:8px 12px;min-height:38px;">
+            <i class="fas fa-cloud-download-alt"></i> โหลดจาก Google Sheets
+        </button>
+    </div>
+    
+    <div id="googleSheetsStatus" style="font-size:11px;color:var(--text-muted);margin-top:8px;padding:6px 10px;background:var(--bg-body);border-radius:var(--radius-sm);">
+        ⚠️ ยังไม่ได้ตั้งค่า
+    </div>
+        </div>
     </div>
 </div>
 
-<!-- ===== MODALS ===== -->
+<!-- MODALS -->
 <div class="modal-overlay" id="barcodeModal">
     <div class="modal">
         <div class="modal-handle"></div>
@@ -947,6 +861,11 @@
         <input type="number" class="input" id="newProductSellPrice" placeholder="💰 ราคาขายต่อหน่วย" style="margin-bottom:6px;font-size:14px;padding:10px 14px;min-height:44px;" step="0.01">
         <input type="text" class="input" id="newProductUnit" placeholder="📦 หน่วยนับ (เช่น ชิ้น, ขวด)" style="margin-bottom:6px;font-size:14px;padding:10px 14px;min-height:44px;">
         <input type="date" class="input" id="newProductExpiry" placeholder="⏳ วันหมดอายุ" style="margin-bottom:6px;font-size:14px;padding:10px 14px;min-height:44px;">
+        <!-- ✅ ใหม่: ตั้งค่า Min/Max Stock -->
+        <div style="display:flex;gap:6px;margin-top:4px;">
+            <input type="number" class="input" id="newProductMinStock" placeholder="จำนวนขั้นต่ำ (Min)" style="flex:1;font-size:14px;padding:10px 14px;min-height:44px;" value="5">
+            <input type="number" class="input" id="newProductMaxStock" placeholder="จำนวนสูงสุด (Max)" style="flex:1;font-size:14px;padding:10px 14px;min-height:44px;" value="100">
+        </div>
         <div class="flex" style="gap:6px;margin-top:4px;">
             <button class="btn btn-success btn-block" onclick="confirmAddProduct()" style="font-size:15px;padding:12px;min-height:48px;"><i class="fas fa-save"></i> บันทึกสินค้า</button>
             <button class="btn btn-outline btn-block" onclick="closeAddProductModal()" style="font-size:15px;padding:12px;min-height:48px;"><i class="fas fa-times"></i> ยกเลิก</button>
@@ -1033,1046 +952,38 @@
     </div>
 </div>
 
-<div class="toast-container" id="toastContainer"></div>
-
-<script>
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/stockcount/sw.js')
-        .then(() => console.log('✅ Service Worker ลงทะเบียนสำเร็จ'))
-        .catch(() => console.log('ℹ️ Service Worker ไม่ทำงาน (ต้องใช้ HTTPS)'));
-}
-
-<!DOCTYPE html>
-<html lang="th">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="MediStock">
-    <meta name="theme-color" content="#0ea5e9">
-    <title>MediStock v3.4.0</title>
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    
-    <!-- ไลบรารี -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
-    <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
-    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <link rel="manifest" href="manifest.json">
-
-    <style>
-        :root {
-            --primary: #0ea5e9;
-            --primary-dark: #0284c7;
-            --primary-light: #38bdf8;
-            --primary-gradient: linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%);
-            --success: #10b981;
-            --success-light: #d1fae5;
-            --warning: #f59e0b;
-            --warning-light: #fef3c7;
-            --danger: #ef4444;
-            --danger-light: #fee2e2;
-            --info: #3b82f6;
-            --info-light: #dbeafe;
-            --bg-body: #f0f9ff;
-            --bg-card: #ffffff;
-            --text-main: #0f172a;
-            --text-muted: #64748b;
-            --text-light: #94a3b8;
-            --border-color: #e2e8f0;
-            --radius-sm: 8px;
-            --radius-md: 12px;
-            --radius-lg: 20px;
-            --radius-xl: 28px;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
-            --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
-            --shadow-lg: 0 20px 60px rgba(0,0,0,0.12);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            --font-base: 16px;
-            --font-large: 18px;
-            --font-xl: 20px;
-            --font-xxl: 24px;
-        }
-
-        [data-theme="dark"] {
-            --bg-body: #0f172a;
-            --bg-card: #1e293b;
-            --text-main: #f1f5f9;
-            --text-muted: #94a3b8;
-            --text-light: #64748b;
-            --border-color: #334155;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
-            --shadow-md: 0 4px 20px rgba(0,0,0,0.4);
-            --shadow-lg: 0 20px 60px rgba(0,0,0,0.5);
-        }
-
-        * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-        body { font-family:'Plus Jakarta Sans',sans-serif; background:var(--bg-body); color:var(--text-main); font-size:var(--font-base); min-height:100vh; padding-bottom:100px; transition:var(--transition); line-height:1.5; }
-        
-        ::-webkit-scrollbar { width:6px; height:6px; }
-        ::-webkit-scrollbar-track { background:var(--bg-body); }
-        ::-webkit-scrollbar-thumb { background:var(--primary-light); border-radius:3px; }
-
-        .header { background:var(--primary-gradient); color:#fff; padding:12px 16px; position:sticky; top:0; z-index:100; box-shadow:0 4px 30px rgba(14,165,233,0.3); }
-        .header-top { display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap; }
-        .logo { display:flex; align-items:center; gap:10px; text-decoration:none; color:#fff; flex-shrink:0; }
-        .logo-icon { width:40px; height:40px; background:rgba(255,255,255,0.15); border-radius:var(--radius-md); display:flex; align-items:center; justify-content:center; font-size:18px; backdrop-filter:blur(4px); border:2px solid rgba(255,255,255,0.2); flex-shrink:0; }
-        .logo-text .brand { font-family:'Outfit',sans-serif; font-size:16px; font-weight:800; display:flex; align-items:center; gap:4px; flex-wrap:wrap; }
-        .logo-text .brand .main { font-size:17px; }
-        .logo-text .brand .version { font-size:9px; font-weight:600; opacity:0.7; background:rgba(255,255,255,0.15); padding:2px 8px; border-radius:10px; }
-        .logo-text .tagline { font-size:9px; opacity:0.75; display:block; }
-
-        .header-actions { display:flex; align-items:center; gap:5px; flex-shrink:0; flex-wrap:wrap; }
-        .branch-selector { display:flex; align-items:center; gap:3px; padding:4px 8px; background:rgba(255,255,255,0.1); border-radius:var(--radius-md); border:1px solid rgba(255,255,255,0.15); }
-        .branch-selector select { background:transparent; border:none; color:#fff; font-size:11px; font-weight:600; padding:2px 4px; max-width:90px; }
-        .branch-selector select option { color:#0f172a; }
-        .branch-selector .btn-branch { background:rgba(255,255,255,0.15); color:#fff; border:none; border-radius:4px; padding:2px 6px; font-size:9px; cursor:pointer; }
-        .branch-selector .btn-branch:hover { background:rgba(255,255,255,0.25); }
-
-        .network-badge { display:inline-flex; align-items:center; gap:4px; padding:3px 8px; border-radius:20px; font-size:9px; font-weight:700; background:rgba(255,255,255,0.15); cursor:pointer; border:1px solid rgba(255,255,255,0.1); }
-        .network-dot { width:6px; height:6px; border-radius:50%; }
-        .network-badge.online .network-dot { background:var(--success); box-shadow:0 0 10px rgba(16,185,129,0.5); }
-        .network-badge.offline .network-dot { background:var(--danger); }
-        .theme-toggle { background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.1); color:#fff; width:30px; height:30px; border-radius:50%; cursor:pointer; font-size:14px; display:flex; align-items:center; justify-content:center; }
-
-        .status-bar { background:var(--warning-light); color:#92400e; padding:6px 14px; font-size:11px; font-weight:600; display:flex; align-items:center; gap:6px; border-bottom:2px solid #fcd34d; flex-wrap:wrap; }
-        [data-theme="dark"] .status-bar { background:#451a03; color:#fcd34d; border-bottom-color:#78350f; }
-        .status-dot { width:6px; height:6px; border-radius:50%; background:var(--warning); animation:pulse-dot 1.5s infinite; }
-        @keyframes pulse-dot { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
-        .status-text { flex:1; font-size:11px; }
-        .auto-sync-badge { display:inline-flex; align-items:center; gap:3px; font-size:9px; background:var(--success-light); color:#065f46; padding:2px 8px; border-radius:8px; font-weight:600; }
-        [data-theme="dark"] .auto-sync-badge { background:#064e3b; color:#6ee7b7; }
-
-        .main-content { max-width:640px; margin:0 auto; padding:10px; }
-
-        .tab-nav { display:flex; background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-lg); padding:4px; margin-bottom:12px; box-shadow:var(--shadow-sm); gap:2px; position:sticky; top:70px; z-index:50; backdrop-filter:blur(12px); flex-wrap:wrap; }
-        .tab-btn { flex:1; min-width:42px; padding:6px 4px; border:none; background:transparent; border-radius:var(--radius-md); font-size:9px; font-weight:600; cursor:pointer; transition:var(--transition); color:var(--text-muted); text-align:center; position:relative; }
-        .tab-btn i { font-size:13px; display:block; margin-bottom:2px; }
-        .tab-btn.active { background:var(--primary-gradient); color:#fff; box-shadow:0 4px 15px rgba(14,165,233,0.35); }
-        .tab-btn .badge-tab { position:absolute; top:-3px; right:-3px; background:var(--danger); color:#fff; font-size:8px; padding:1px 5px; border-radius:10px; font-weight:700; }
-        .tab-btn .tab-label { font-size:8px; }
-
-        .page { display:none; animation:fadeSlideIn 0.4s cubic-bezier(0.16,1,0.3,1); }
-        .page.active { display:block; }
-        @keyframes fadeSlideIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
-
-        .card { background:var(--bg-card); border-radius:var(--radius-lg); padding:14px; margin-bottom:10px; box-shadow:var(--shadow-sm); border:1px solid var(--border-color); }
-        .card-title { font-family:'Outfit',sans-serif; font-size:15px; font-weight:700; margin-bottom:8px; display:flex; align-items:center; gap:6px; color:var(--text-main); }
-        .card-title i { color:var(--primary); width:20px; text-align:center; font-size:15px; }
-
-        .btn { padding:12px 20px; border:none; border-radius:var(--radius-md); font-size:14px; font-weight:600; cursor:pointer; transition:var(--transition); display:inline-flex; align-items:center; justify-content:center; gap:6px; box-shadow:var(--shadow-sm); font-family:'Plus Jakarta Sans',sans-serif; min-height:46px; }
-        .btn:active { transform:scale(0.96); }
-        .btn-primary { background:var(--primary-gradient); color:#fff; }
-        .btn-success { background:var(--success); color:#fff; }
-        .btn-danger { background:var(--danger); color:#fff; }
-        .btn-outline { background:transparent; border:2px solid var(--primary); color:var(--primary); }
-        .btn-outline-success { background:transparent; border:2px solid var(--success); color:var(--success); }
-        .btn-outline-danger { background:transparent; border:2px solid var(--danger); color:var(--danger); }
-        .btn-sm { padding:8px 14px; font-size:12px; min-height:36px; }
-        .btn-block { width:100%; }
-
-        .input { width:100%; padding:12px 16px; border:2px solid var(--border-color); border-radius:var(--radius-md); font-size:15px; color:var(--text-main); background:var(--bg-body); transition:var(--transition); font-family:'Plus Jakarta Sans',sans-serif; min-height:48px; }
-        .input:focus { outline:none; border-color:var(--primary); box-shadow:0 0 0 3px rgba(14,165,233,0.15); }
-        .input-group { display:flex; gap:6px; align-items:center; flex-wrap:wrap; }
-        .input-sm { padding:8px 12px; font-size:13px; min-height:38px; }
-
-        .scanner-wrapper { position:relative; border-radius:var(--radius-md); overflow:hidden; background:#0f172a; min-height:220px; box-shadow:inset 0 2px 20px rgba(0,0,0,0.4); }
-        .scanner-wrapper #reader { width:100%; min-height:220px; }
-        .scanner-wrapper #reader video { width:100%; height:auto; max-height:340px; object-fit:cover; display:block; }
-        .scanner-placeholder { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:220px; color:#94a3b8; text-align:center; padding:20px 14px; position:absolute; top:0; left:0; right:0; bottom:0; background:#0f172a; z-index:2; pointer-events:none; }
-        .scanner-placeholder i { font-size:40px; margin-bottom:8px; color:#475569; }
-        .scanner-placeholder p { font-size:14px; }
-        .scanner-placeholder small { font-size:12px; }
-        .scanner-overlay { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:65%; height:70px; border:2px solid #34d399; border-radius:var(--radius-sm); pointer-events:none; display:none; z-index:3; box-shadow:0 0 0 9999px rgba(15,23,42,0.5); }
-        .scanner-overlay .corner { position:absolute; width:12px; height:12px; border-color:#34d399; border-style:solid; border-width:0; }
-        .scanner-overlay .corner-tl { top:-2px; left:-2px; border-top-width:3px; border-left-width:3px; }
-        .scanner-overlay .corner-tr { top:-2px; right:-2px; border-top-width:3px; border-right-width:3px; }
-        .scanner-overlay .corner-bl { bottom:-2px; left:-2px; border-bottom-width:3px; border-left-width:3px; }
-        .scanner-overlay .corner-br { bottom:-2px; right:-2px; border-bottom-width:3px; border-right-width:3px; }
-        .scanner-status { text-align:center; padding:6px; font-size:13px; font-weight:500; margin-top:5px; }
-        .scanner-status.success { color:var(--success); }
-        .scanner-status.error { color:var(--danger); }
-        .scanner-status.idle { color:var(--text-muted); }
-
-        .scanner-controls { display:flex; gap:6px; margin-top:6px; flex-wrap:wrap; }
-        .scanner-controls .btn { flex:1; font-size:13px; padding:8px 12px; min-height:42px; }
-        .scanner-controls .btn-sm { flex:0 1 auto; font-size:12px; padding:6px 12px; min-height:36px; }
-
-        .product-detail { background:linear-gradient(135deg, var(--success-light) 0%, #f0fdf4 100%); border:2px solid #6ee7b7; border-radius:var(--radius-lg); padding:16px; margin-bottom:10px; display:none; }
-        [data-theme="dark"] .product-detail { background:linear-gradient(135deg, #064e3b 0%, #065f46 100%); border-color:#34d399; }
-        .product-name { font-family:'Outfit',sans-serif; font-size:var(--font-xl); font-weight:700; margin-bottom:4px; color:#065f46; }
-        [data-theme="dark"] .product-name { color:#6ee7b7; }
-        .product-info { font-size:15px; color:#047857; margin-bottom:2px; font-weight:500; }
-        [data-theme="dark"] .product-info { color:#a7f3d0; }
-        .product-info .highlight { font-size:var(--font-xxl); font-weight:800; color:var(--primary); background:var(--info-light); padding:2px 14px; border-radius:8px; display:inline-block; }
-        .product-info .lot-highlight { font-size:var(--font-large); font-weight:700; color:var(--text-main); background:var(--bg-card); padding:2px 12px; border-radius:6px; display:inline-block; border:1px solid var(--border-color); }
-        [data-theme="dark"] .product-info .lot-highlight { color:#f1f5f9; background:#1e293b; }
-
-        .expiry-warning { background:var(--danger-light); border:1px solid var(--danger); border-radius:var(--radius-sm); padding:8px 12px; margin:6px 0; display:flex; align-items:center; gap:6px; font-size:13px; font-weight:600; color:var(--danger); }
-        .expiry-warning i { font-size:16px; }
-
-        .qty-control { display:flex; align-items:center; gap:10px; margin:12px 0; }
-        .qty-btn { width:46px; height:46px; border-radius:50%; border:2px solid var(--border-color); background:var(--bg-card); font-size:20px; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; color:var(--primary); transition:var(--transition); flex-shrink:0; }
-        .qty-btn:active { transform:scale(0.92); }
-        .qty-input { flex:1; height:46px; text-align:center; font-size:var(--font-xxl); font-weight:700; border:2px solid var(--border-color); border-radius:var(--radius-md); font-family:'Outfit',sans-serif; background:var(--bg-card); color:var(--text-main); min-width:50px; }
-
-        .location-selector { background:var(--bg-body); border:2px solid var(--primary-light); border-radius:var(--radius-md); padding:12px; margin:8px 0; }
-        .location-selector .label { font-size:13px; font-weight:700; color:var(--primary); margin-bottom:6px; display:flex; align-items:center; gap:6px; }
-        .location-selector .label .required { color:var(--danger); font-size:16px; }
-        .location-select-group { display:flex; flex-wrap:wrap; gap:6px; }
-        .location-select-group select { flex:1; min-width:80px; padding:8px 10px; border:2px solid var(--border-color); border-radius:var(--radius-sm); font-size:13px; background:var(--bg-card); color:var(--text-main); min-height:42px; }
-        .location-select-group select:focus { outline:none; border-color:var(--primary); }
-        .location-select-group .btn-add-location { background:var(--primary); color:#fff; border:none; border-radius:var(--radius-sm); padding:8px 12px; font-size:12px; cursor:pointer; min-height:42px; font-weight:600; }
-
-        /* ✅ ใหม่: รูปแบบการเลือก Lot */
-        .lot-item { display:flex; align-items:center; padding:10px 12px; border:2px solid var(--border-color); border-radius:var(--radius-md); margin-bottom:6px; cursor:pointer; gap:10px; background:var(--bg-card); transition:var(--transition); }
-        .lot-item:hover { border-color:var(--primary-light); }
-        .lot-item.selected { border-color:var(--primary); background:#eef2ff; box-shadow:0 0 0 3px rgba(14,165,233,0.15); }
-        [data-theme="dark"] .lot-item.selected { background:#1e293b; }
-        .lot-radio { width:18px; height:18px; border-radius:50%; border:2px solid var(--border-color); flex-shrink:0; transition:var(--transition); display:flex; align-items:center; justify-content:center; }
-        .lot-item.selected .lot-radio { border-color:var(--primary); background:var(--primary); box-shadow:inset 0 0 0 4px #fff; }
-        .lot-item .lot-expiry-badge { font-size:10px; padding:2px 8px; border-radius:8px; font-weight:600; }
-        .lot-item .lot-expiry-badge.expiring { background:var(--warning-light); color:#92400e; }
-        .lot-item .lot-expiry-badge.expired { background:var(--danger-light); color:#991b1b; }
-
-        .progress-container { width:100%; height:6px; background:var(--border-color); border-radius:3px; margin-top:6px; overflow:hidden; }
-        .progress-bar { height:100%; border-radius:3px; transition:width 0.6s cubic-bezier(0.4,0,0.2,1); background:var(--primary-gradient); width:0%; }
-        .progress-bar.low { background:var(--danger); }
-        .progress-bar.medium { background:var(--warning); }
-        .progress-bar.high { background:var(--success); }
-
-        .recent-item { display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid var(--border-color); font-size:13px; gap:6px; }
-        .recent-item:last-child { border-bottom:none; }
-        .recent-item .name { font-weight:600; font-size:13px; }
-        .recent-item .detail { font-size:11px; color:var(--text-muted); }
-        .recent-item .qty-diff { font-weight:700; padding:2px 8px; border-radius:8px; font-size:12px; }
-        .recent-item .qty-diff.positive { color:var(--success); background:var(--success-light); }
-        .recent-item .qty-diff.negative { color:var(--danger); background:var(--danger-light); }
-        .recent-item .btn-icon { background:none; border:none; color:var(--primary); cursor:pointer; padding:4px; font-size:14px; }
-        .recent-item .btn-icon:hover { color:var(--primary-dark); }
-
-        .table-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; border-radius:var(--radius-md); border:1px solid var(--border-color); }
-        table { width:100%; border-collapse:collapse; font-size:12px; }
-        th { background:var(--bg-body); padding:8px 6px; text-align:left; font-weight:600; white-space:nowrap; border-bottom:2px solid var(--border-color); font-size:11px; text-transform:uppercase; letter-spacing:0.3px; }
-        td { padding:8px 6px; border-top:1px solid var(--border-color); font-size:12px; }
-        .text-center { text-align:center; }
-        .text-right { text-align:right; }
-        .text-left { text-align:left; }
-        .badge { display:inline-block; padding:2px 8px; border-radius:8px; font-size:11px; font-weight:700; }
-        .badge-green { background:var(--success-light); color:#166534; }
-        .badge-red { background:var(--danger-light); color:#991b1b; }
-        .badge-info { background:var(--info-light); color:#1e40af; }
-        .badge-warning { background:var(--warning-light); color:#92400e; }
-        .badge-purple { background:#e0e7ff; color:#3730a3; }
-        .badge-new { background:#fef3c7; color:#92400e; }
-        .badge-exists { background:#d1fae5; color:#065f46; }
-        .badge-front { background:#d1fae5; color:#065f46; }
-        .badge-back { background:#fef3c7; color:#92400e; }
-        .badge-zero { background:#fee2e2; color:#991b1b; }
-        .badge-expired { background:#fee2e2; color:#991b1b; }
-
-        /* ✅ ใหม่: ABC Analysis Badge */
-        .badge-abc-a { background:#dc2626; color:#fff; }
-        .badge-abc-b { background:#f59e0b; color:#fff; }
-        .badge-abc-c { background:#10b981; color:#fff; }
-
-        .modal-overlay { position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(15,23,42,0.6); backdrop-filter:blur(8px); z-index:200; display:none; align-items:flex-end; justify-content:center; }
-        .modal-overlay.show { display:flex; }
-        .modal { background:var(--bg-card); border-radius:var(--radius-xl) var(--radius-xl) 0 0; padding:20px; width:100%; max-width:600px; max-height:85vh; overflow-y:auto; animation:slideUp 0.4s cubic-bezier(0.16,1,0.3,1); }
-        @keyframes slideUp { from { transform:translateY(100%); } to { transform:translateY(0); } }
-        .modal-handle { width:36px; height:4px; background:var(--border-color); border-radius:2px; margin:0 auto 12px; }
-        .modal-title { font-family:'Outfit',sans-serif; font-size:18px; font-weight:700; margin-bottom:12px; }
-
-        .toast-container { position:fixed; top:16px; left:50%; transform:translateX(-50%); z-index:300; max-width:92%; width:400px; pointer-events:none; }
-        .toast { background:var(--text-main); color:#fff; padding:10px 18px; border-radius:var(--radius-md); font-size:13px; font-weight:600; box-shadow:var(--shadow-lg); text-align:center; margin-bottom:6px; animation:toastIn 0.4s cubic-bezier(0.16,1,0.3,1); pointer-events:auto; }
-        .toast.success { background:var(--success); }
-        .toast.error { background:var(--danger); }
-        .toast.warning { background:var(--warning); color:#0f172a; }
-        .toast.info { background:var(--info); }
-        .toast.hide { opacity:0; transform:translateY(-20px) scale(0.95); }
-        @keyframes toastIn { from { opacity:0; transform:translateY(-30px) scale(0.95); } to { opacity:1; transform:translateY(0) scale(1); } }
-
-        .flex { display:flex; }
-        .flex-between { display:flex; justify-content:space-between; align-items:center; }
-        .flex-center { display:flex; align-items:center; justify-content:center; }
-        .gap-4 { gap:4px; }
-        .gap-8 { gap:8px; }
-        .mt-6 { margin-top:6px; }
-        .mt-10 { margin-top:10px; }
-        .mb-6 { margin-bottom:6px; }
-        .text-muted { color:var(--text-muted); }
-        .text-success { color:var(--success); }
-        .text-danger { color:var(--danger); }
-        .text-warning { color:var(--warning); }
-        .fw-bold { font-weight:700; }
-
-        .search-result-item { display:flex; align-items:center; padding:10px 14px; border-bottom:1px solid var(--border-color); cursor:pointer; transition:var(--transition); gap:12px; }
-        .search-result-item:hover { background:var(--bg-body); border-radius:8px; }
-        .search-result-item:last-child { border-bottom:none; }
-        .search-result-item .info { flex:1; }
-        .search-result-item .info .name { font-weight:600; font-size:15px; }
-        .search-result-item .info .detail { font-size:12px; color:var(--text-muted); }
-        .search-result-item .badge-select { background:var(--primary); color:#fff; padding:4px 14px; border-radius:12px; font-size:12px; font-weight:600; transition:all 0.2s; }
-        .search-result-item:hover .badge-select { transform:scale(1.05); }
-        .search-result-item .badge-pair { background:var(--warning); color:#fff; padding:4px 14px; border-radius:12px; font-size:12px; font-weight:600; animation:pulse-badge 1.5s infinite; }
-        .search-highlight { background:var(--warning-light); color:#92400e; padding:0 2px; border-radius:2px; }
-        [data-theme="dark"] .search-highlight { background:#78350f; color:#fcd34d; }
-
-        .pending-barcode-bar { display:none; align-items:center; gap:8px; background:var(--warning-light); padding:6px 12px; border-radius:var(--radius-sm); font-size:12px; color:#92400e; margin-bottom:6px; flex-wrap:wrap; }
-        [data-theme="dark"] .pending-barcode-bar { background:#451a03; color:#fcd34d; }
-        .pending-barcode-bar .barcode-text { font-weight:700; font-family:monospace; font-size:14px; }
-        .pending-barcode-bar .btn-clear { background:var(--danger); color:#fff; border:none; border-radius:4px; padding:2px 10px; font-size:11px; cursor:pointer; }
-
-        .continuous-warning { display:none; background:var(--warning-light); border:2px solid var(--warning); border-radius:var(--radius-sm); padding:8px 12px; font-size:12px; color:#92400e; margin:6px 0; align-items:center; gap:8px; }
-        [data-theme="dark"] .continuous-warning { background:#451a03; color:#fcd34d; border-color:#78350f; }
-        .continuous-warning.show { display:flex; }
-
-        .pharmacy-map { background:var(--bg-body); border-radius:var(--radius-md); padding:12px; min-height:140px; border:2px dashed var(--border-color); }
-        .pharmacy-grid { display:grid; gap:8px; grid-template-columns:repeat(auto-fill, minmax(110px, 1fr)); }
-        .cabinet-block { background:var(--bg-card); border:2px solid var(--border-color); border-radius:var(--radius-md); padding:10px; cursor:pointer; transition:var(--transition); text-align:center; }
-        .cabinet-block:hover { border-color:var(--primary-light); box-shadow:var(--shadow-md); transform:translateY(-2px); }
-        .cabinet-block.selected { border-color:var(--primary); background:#eef2ff; }
-        [data-theme="dark"] .cabinet-block.selected { background:#1e293b; }
-        .cabinet-icon { font-size:22px; margin-bottom:2px; }
-        .cabinet-name { font-weight:700; font-size:12px; font-family:'Outfit',sans-serif; }
-        .cabinet-type { font-size:9px; padding:2px 8px; border-radius:8px; font-weight:600; display:inline-block; }
-        .cabinet-type.front { background:#d1fae5; color:#065f46; }
-        .cabinet-type.back { background:#fef3c7; color:#92400e; }
-        .cabinet-shelves { display:flex; flex-direction:column; gap:2px; margin-top:5px; }
-        .shelf-row { background:var(--bg-body); padding:3px 8px; border-radius:4px; font-size:10px; cursor:pointer; transition:var(--transition); display:flex; justify-content:space-between; align-items:center; font-weight:500; color:var(--text-muted); }
-        .shelf-row:hover { background:#e0e7ff; color:var(--text-main); }
-        [data-theme="dark"] .shelf-row:hover { background:#334155; }
-        .shelf-row.selected { background:var(--primary); color:#fff; }
-        .shelf-count { background:rgba(0,0,0,0.06); padding:1px 6px; border-radius:8px; font-size:9px; }
-
-        .location-badge { display:inline-block; background:var(--info-light); color:#1e40af; padding:2px 10px; border-radius:10px; font-size:10px; font-weight:600; }
-        [data-theme="dark"] .location-badge { background:#1e293b; color:#60a5fa; }
-
-        .collapse-header { cursor:pointer; padding:10px 12px; background:var(--bg-body); border-radius:var(--radius-sm); display:flex; justify-content:space-between; align-items:center; font-weight:600; font-size:13px; border:1px solid var(--border-color); }
-        .collapse-header:hover { background:var(--border-color); }
-        .collapse-body { padding:8px 12px; display:none; border:1px solid var(--border-color); border-top:none; border-radius:0 0 var(--radius-sm) var(--radius-sm); }
-        .collapse-body.open { display:block; }
-
-        @keyframes pulse-badge { 0%,100% { opacity:1; } 50% { opacity:0.6; } }
-
-        .qr-code-container { display:flex; flex-direction:column; align-items:center; padding:10px; }
-        .qr-code-container #qrcode { background:#fff; padding:10px; border-radius:8px; }
-        .qr-code-container .product-label { text-align:center; margin-top:8px; font-size:14px; font-weight:600; }
-
-        .mapping-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
-        .mapping-grid .mapping-item { display:flex; flex-direction:column; gap:3px; }
-        .mapping-grid .mapping-item label { font-size:12px; font-weight:600; color:var(--text-muted); }
-        .mapping-grid .mapping-item select { padding:8px 10px; border:2px solid var(--border-color); border-radius:var(--radius-sm); font-size:13px; background:var(--bg-body); color:var(--text-main); min-height:40px; }
-
-        .stats-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:10px; }
-        .stat-card { background:var(--bg-card); padding:12px; border-radius:var(--radius-md); text-align:center; border:1px solid var(--border-color); }
-        .stat-value { font-family:'Outfit',sans-serif; font-size:var(--font-xxl); font-weight:800; margin:2px 0; color:var(--primary); }
-        .stat-label { font-size:11px; color:var(--text-muted); font-weight:600; text-transform:uppercase; letter-spacing:0.3px; }
-
-        .summary-grid-4 { display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:8px; }
-        .summary-grid-4 .stat-card { padding:8px; }
-        .summary-grid-4 .stat-value { font-size:18px; }
-
-        .branch-manager-item { display:flex; align-items:center; gap:8px; padding:10px 12px; border-bottom:1px solid var(--border-color); }
-        .branch-manager-item:last-child { border-bottom:none; }
-        .branch-manager-item .name { flex:1; font-weight:600; font-size:14px; }
-        .branch-manager-item .btn-sm { min-height:30px; padding:4px 10px; font-size:11px; }
-
-        /* ✅ ใหม่: Dashboard Cards */
-        .dashboard-grid {
-            display:grid;
-            grid-template-columns:1fr 1fr 1fr;
-            gap:8px;
-            margin-bottom:10px;
-        }
-        .dashboard-grid .stat-card {
-            padding:10px 8px;
-        }
-        .dashboard-grid .stat-value {
-            font-size:20px;
-        }
-        .dashboard-grid .stat-label {
-            font-size:10px;
-        }
-        .chart-container {
-            position:relative;
-            height:200px;
-            margin-top:10px;
-        }
-        .abc-list-item {
-            display:flex;
-            justify-content:space-between;
-            padding:6px 0;
-            border-bottom:1px solid var(--border-color);
-            font-size:13px;
-        }
-        .abc-list-item:last-child {
-            border-bottom:none;
-        }
-
-        .dead-stock-item {
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            padding:8px 12px;
-            border-radius:var(--radius-sm);
-            margin-bottom:4px;
-            background:var(--danger-light);
-            border-left:4px solid var(--danger);
-        }
-        [data-theme="dark"] .dead-stock-item {
-            background:#451a03;
-        }
-        .dead-stock-item .name {
-            font-weight:600;
-            font-size:13px;
-        }
-        .dead-stock-item .detail {
-            font-size:11px;
-            color:var(--text-muted);
-        }
-
-        @media (max-width:480px) {
-            .logo-icon { width:34px; height:34px; font-size:15px; }
-            .logo-text .brand .main { font-size:14px; }
-            .logo-text .brand .version { font-size:8px; }
-            .logo-text .tagline { font-size:8px; }
-            .tab-btn { min-width:36px; padding:4px 2px; }
-            .tab-btn i { font-size:12px; }
-            .tab-btn .tab-label { font-size:7px; }
-            .card { padding:10px; }
-            .qty-btn { width:40px; height:40px; font-size:18px; }
-            .qty-input { font-size:var(--font-xl); height:40px; }
-            .scanner-wrapper { min-height:180px; }
-            .scanner-wrapper #reader { min-height:180px; }
-            .scanner-placeholder { min-height:180px; }
-            .scanner-placeholder i { font-size:32px; }
-            .scanner-overlay { height:55px; width:55%; }
-            .product-name { font-size:var(--font-large); }
-            .product-info { font-size:14px; }
-            .product-info .highlight { font-size:var(--font-xl); }
-            .product-info .lot-highlight { font-size:15px; }
-            .btn { font-size:13px; padding:10px 16px; min-height:42px; }
-            .location-select-group select { font-size:12px; padding:6px 8px; min-width:60px; }
-            .location-select-group .btn-add-location { font-size:11px; padding:6px 10px; }
-            .dashboard-grid { grid-template-columns:1fr 1fr; }
-            .dashboard-grid .stat-card { padding:6px; }
-            .dashboard-grid .stat-value { font-size:16px; }
-        }
-    </style>
-</head>
-<body>
-
-<!-- ===== HEADER ===== -->
-<header class="header">
-    <div class="header-top">
-        <a href="#" class="logo" onclick="switchTab('import'); return false;">
-            <div class="logo-icon"><i class="fas fa-capsules"></i></div>
-            <div class="logo-text">
-                <span class="brand">
-                    <span class="main">MediStock</span>
-                    <span class="version">v3.4.0</span>
-                </span>
-                <span class="tagline"><i class="fas fa-circle" style="font-size:4px;color:#34d399;margin-right:3px;"></i>ระบบนับสต็อกสินค้ายา</span>
-            </div>
-        </a>
-        <div class="header-actions">
-            <div class="branch-selector" title="เลือกสาขา">
-                <i class="fas fa-store" style="font-size:11px;opacity:0.7;"></i>
-                <select id="branchSelect" onchange="changeBranch()"></select>
-                <button class="btn-branch" onclick="showBranchManager()" title="จัดการสาขา"><i class="fas fa-cog"></i></button>
-            </div>
-            <button class="theme-toggle" onclick="toggleTheme()" title="เปลี่ยนธีม"><i class="fas fa-moon" id="themeIcon"></i></button>
-            <div class="network-badge online" id="networkIndicator" onclick="forceSync()">
-                <span class="network-dot"></span>
-                <span id="networkText">Online</span>
-            </div>
-        </div>
-    </div>
-</header>
-<div class="status-bar" id="statusBar">
-    <span class="status-dot"></span>
-    <span class="status-text" id="statusText">กำลังเริ่มต้นระบบ...</span>
-    <span class="auto-sync-badge" id="autoSyncBadge"><i class="fas fa-sync-alt fa-fw"></i> Auto-Sync</span>
-</div>
-
-<div class="main-content">
-    <!-- TAB NAVIGATION -->
-    <nav class="tab-nav">
-        <button class="tab-btn active" onclick="switchTab('import')"><i class="fas fa-file-import"></i><span class="tab-label">นำเข้า</span></button>
-        <button class="tab-btn" onclick="switchTab('scan')"><i class="fas fa-camera"></i><span class="tab-label">นับสต็อก</span><span class="badge-tab" id="scanBadge" style="display:none;">0</span></button>
-        <button class="tab-btn" onclick="switchTab('layout')"><i class="fas fa-sitemap"></i><span class="tab-label">ผังร้าน</span></button>
-        <button class="tab-btn" onclick="switchTab('report')"><i class="fas fa-chart-bar"></i><span class="tab-label">รายงาน</span></button>
-        <button class="tab-btn" onclick="switchTab('analytics')"><i class="fas fa-chart-pie"></i><span class="tab-label">วิเคราะห์</span></button>
-        <button class="tab-btn" onclick="switchTab('settings')"><i class="fas fa-sliders-h"></i><span class="tab-label">ตั้งค่า</span></button>
-    </nav>
-
-    <!-- ===== PAGE: IMPORT (เหมือนเดิม) ===== -->
-    <div class="page active" id="page-import">
-        <!-- เนื้อหาเหมือนเดิม -->
-        <div class="card">
-            <div class="card-title"><i class="fas fa-file-import"></i> นำเข้าข้อมูลสินค้า</div>
-            <div style="font-size:11px;color:var(--text-muted);margin-bottom:6px;padding:4px 10px;background:var(--bg-body);border-radius:var(--radius-sm);">
-                <i class="fas fa-info-circle"></i> โหมด <strong>Append</strong> (เพิ่มข้อมูลต่อท้าย ไม่ลบของเดิม)
-            </div>
-            <div id="dropZone" onclick="document.getElementById('fileInput').click()" style="border:2px dashed var(--border-color);border-radius:var(--radius-md);padding:28px 16px;text-align:center;cursor:pointer;background:var(--bg-body);margin-bottom:8px;">
-                <i class="fas fa-cloud-upload-alt" style="font-size:32px;color:var(--primary);display:block;margin-bottom:6px;"></i>
-                <p style="font-weight:600;font-size:15px;color:var(--text-main);">อัปโหลดไฟล์ Excel / CSV</p>
-                <p style="font-size:12px;color:var(--text-muted);">.xlsx, .xls, .csv</p>
-                <p style="font-size:11px;color:var(--text-muted);margin-top:4px;">รองรับ: รหัสสินค้า, ชื่อสินค้า, เลขที่ผลิต, วันที่ผลิต, วันหมดอายุ, ราคาขาย, ราคาทุนต่อหน่วย, จำนวนคงเหลือ, หน่วยนับสต๊อก, ผู้จัดจำหน่าย, บาร์โค้ดสินค้า</p>
-            </div>
-            <input type="file" id="fileInput" accept=".xlsx,.xls,.csv" style="display:none" onchange="handleFile(event)">
-            
-            <div style="background:var(--bg-body);border-radius:var(--radius-md);padding:12px;margin-top:6px;">
-                <p style="font-weight:600;font-size:14px;margin-bottom:6px;"><i class="fab fa-google" style="color:#4285F4;"></i> หรือใช้ Google Sheets</p>
-                <div style="display:flex;gap:6px;flex-wrap:wrap;">
-                    <input type="text" class="input" id="googleSheetsUrl" placeholder="ใส่ URL หรือ Spreadsheet ID" style="flex:1;min-width:100px;font-size:13px;padding:8px 12px;min-height:42px;">
-                    <button class="btn btn-primary" onclick="importFromGoogleSheets()" style="flex-shrink:0;font-size:13px;padding:8px 16px;min-height:42px;"><i class="fas fa-google"></i> นำเข้า</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="card" id="mappingCard" style="display:none;">
-            <div class="card-title"><i class="fas fa-cog"></i> กำหนดคอลัมน์</div>
-            <div class="mapping-grid" id="mappingFields"></div>
-            <button class="btn btn-primary btn-block" onclick="confirmMapping()" style="margin-top:8px;font-size:14px;padding:12px;"><i class="fas fa-check"></i> ยืนยันและนำเข้าข้อมูล (Append)</button>
-        </div>
-
-        <div class="card" id="previewCard" style="display:none;">
-            <div class="card-title"><i class="fas fa-eye"></i> ข้อมูลตัวอย่าง</div>
-            <div class="table-wrap" id="previewTable"></div>
-        </div>
-
-        <div class="card" style="border:2px solid var(--info);background:var(--info-light);">
-            <div class="card-title" style="color:#1e40af;font-size:14px;"><i class="fas fa-database"></i> สำรองและกู้คืนข้อมูล (Backup & Restore)</div>
-            <div style="display:flex;gap:6px;flex-wrap:wrap;">
-                <button class="btn btn-primary btn-sm" onclick="backupData()" style="flex:1;font-size:12px;padding:8px 12px;min-height:38px;"><i class="fas fa-download"></i> ดาวน์โหลดไฟล์สำรอง</button>
-                <button class="btn btn-outline btn-sm" onclick="document.getElementById('restoreInput').click()" style="flex:1;font-size:12px;padding:8px 12px;min-height:38px;"><i class="fas fa-upload"></i> กู้คืนข้อมูล</button>
-                <input type="file" id="restoreInput" accept=".json" style="display:none" onchange="restoreData(event)">
-            </div>
-            <p style="font-size:10px;color:var(--text-muted);margin-top:4px;"><i class="fas fa-info-circle"></i> ไฟล์สำรองมีข้อมูลสินค้า, ตู้/ชั้น, ประวัติการนับ, บาร์โค้ด, และสาขาทั้งหมด</p>
-        </div>
-
-        <div class="card" style="border:2px solid var(--danger);background:var(--danger-light);">
-            <div class="card-title" style="color:var(--danger);font-size:14px;"><i class="fas fa-exclamation-triangle"></i> จัดการข้อมูลระบบ</div>
-            <button class="btn btn-danger btn-block" onclick="clearAllData()" style="font-size:14px;padding:12px;"><i class="fas fa-trash"></i> ล้างข้อมูลทั้งหมด</button>
-            <p style="font-size:11px;color:var(--text-muted);margin-top:6px;"><i class="fas fa-info-circle"></i> คำเตือน: การลบข้อมูลจะไม่สามารถกู้คืนได้</p>
-        </div>
-    </div>
-
-    <!-- ===== PAGE: SCAN (เหมือนเดิม) ===== -->
-    <div class="page" id="page-scan">
-        <!-- เนื้อหาเหมือนเดิม -->
-        <div class="card" style="padding:8px;">
-            <div class="flex-between" style="flex-wrap:wrap;gap:4px;">
-                <button class="btn btn-primary btn-sm" onclick="showAddProductModal()" style="font-size:12px;padding:6px 14px;min-height:36px;"><i class="fas fa-plus"></i> เพิ่มสินค้า</button>
-                <div style="font-size:12px;font-weight:600;color:var(--text-muted);">
-                    <i class="fas fa-info-circle"></i> เลือกตำแหน่งก่อนนับ
-                </div>
-            </div>
-        </div>
-
-        <div class="card" style="padding:8px;background:var(--bg-body);">
-            <div class="flex-between"><span style="font-size:13px;font-weight:600;"><i class="fas fa-chart-line"></i> ความคืบหน้า</span><span id="progressText" style="font-size:13px;font-weight:700;color:var(--primary);">0 / 0 (0%)</span></div>
-            <div class="progress-container"><div class="progress-bar" id="progressBar" style="width:0%;"></div></div>
-        </div>
-        
-        <!-- SCANNER -->
-        <div class="card" style="padding:8px;">
-            <div class="scanner-wrapper" id="scannerWrapper">
-                <div id="reader" style="width:100%;min-height:200px;"></div>
-                <div class="scanner-placeholder" id="scannerPlaceholder">
-                    <i class="fas fa-camera"></i>
-                    <p>กล้องสแกนยังไม่เปิดใช้งาน</p>
-                    <small>กดปุ่มด้านล่างเพื่อเริ่มสแกนบาร์โค้ด</small>
-                </div>
-                <div class="scanner-overlay" id="scannerOverlay">
-                    <span class="corner corner-tl"></span>
-                    <span class="corner corner-tr"></span>
-                    <span class="corner corner-bl"></span>
-                    <span class="corner corner-br"></span>
-                </div>
-            </div>
-            <div class="scanner-status idle" id="scannerStatus"><i class="fas fa-circle" style="font-size:8px;"></i> กล้องปิดอยู่</div>
-            <div class="scanner-controls">
-                <button class="btn btn-primary" onclick="toggleScanner()" id="btnToggleScanner"><i class="fas fa-camera"></i> เปิดกล้อง</button>
-                <button class="btn btn-outline btn-sm" onclick="manualBarcode()"><i class="fas fa-keyboard"></i> ใส่รหัส</button>
-                <button class="btn btn-sm" onclick="toggleContinuousMode()" id="btnContinuous" style="background:var(--text-muted);color:#fff;"><i class="fas fa-infinity"></i> ต่อเนื่อง: ปิด</button>
-                <button class="btn btn-sm" onclick="refocusScanner()" style="background:var(--primary);color:#fff;min-height:36px;padding:6px 12px;font-size:12px;"><i class="fas fa-crosshairs"></i> โฟกัส</button>
-            </div>
-            <div class="continuous-warning" id="continuousWarning">
-                <i class="fas fa-exclamation-triangle"></i>
-                <span>⚠️ โหมดต่อเนื่อง: ระบบจะนับ 1 ชิ้น ทันทีเมื่อสแกนบาร์โค้ด โดยไม่ต้องกดยืนยัน</span>
-            </div>
-        </div>
-
-        <!-- SEARCH -->
-        <div class="card" style="padding:8px;background:var(--success-light);border:2px solid #6ee7b7;">
-            <div style="font-size:14px;font-weight:600;margin-bottom:6px;color:#065f46;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px;">
-                <span><i class="fas fa-search"></i> ค้นหาสินค้า (ชื่อ/รหัส/บาร์โค้ด/Lot)</span>
-                <span id="pendingBarcodeDisplay" style="display:none;font-size:11px;color:var(--text-muted);background:var(--warning-light);padding:2px 10px;border-radius:8px;">
-                    📎 รอจับคู่: <span id="pendingBarcodeText" style="font-weight:700;font-family:monospace;"></span>
-                    <button onclick="clearPendingBarcode()" style="background:var(--danger);color:#fff;border:none;border-radius:4px;padding:1px 8px;font-size:11px;cursor:pointer;margin-left:4px;">✕</button>
-                </span>
-            </div>
-            <div class="input-group">
-                <input type="text" class="input" id="searchProduct" placeholder="🔍 พิมพ์ชื่อ / รหัส / บาร์โค้ด / Lot" oninput="searchProduct(this.value)" style="flex:1;font-size:16px;padding:12px 16px;min-height:48px;background:var(--bg-card);">
-            </div>
-            <div id="searchResults" style="display:none;margin-top:6px;max-height:280px;overflow-y:auto;background:var(--bg-card);border-radius:var(--radius-md);border:1px solid var(--border-color);"></div>
-        </div>
-
-        <!-- PRODUCT DETAIL (ปรับปรุงใหม่) -->
-        <div class="product-detail" id="productDetail">
-            <div class="product-name" id="productName">-</div>
-            <div class="product-info" id="productBarcode">-</div>
-            <div class="product-info" id="productStock">
-                📊 ในระบบ: <span class="highlight" id="stockHighlight">0</span> ชิ้น 
-                | 💰 ทุนต่อหน่วย: <span id="costDisplay">0.00</span>
-            </div>
-            <div class="product-info" id="productSellPrice" style="color:var(--info);">💰 ราคาขาย: -</div>
-            <div class="product-info" id="productProfit" style="color:var(--success);">📈 กำไรต่อหน่วย: -</div>
-            <div id="expiryWarning" style="display:none;" class="expiry-warning">
-                <i class="fas fa-clock"></i>
-                <span id="expiryWarningText">สินค้าหมดอายุใน 90 วัน!</span>
-            </div>
-            
-            <!-- ✅ ใหม่: เลือก Lot สินค้า -->
-            <div id="lotSelection" style="display:none;margin-top:6px;">
-                <label style="font-weight:600;font-size:14px;color:#065f46;display:flex;align-items:center;gap:6px;">
-                    <i class="fas fa-tag"></i> เลือก Lot สินค้า:
-                    <span style="font-size:11px;color:var(--text-muted);font-weight:400;">(คลิกเพื่อเลือก)</span>
-                </label>
-                <div id="lotList" style="margin-top:4px;"></div>
-            </div>
-            
-            <div class="qty-control">
-                <button class="qty-btn" onclick="changeQty(-1)"><i class="fas fa-minus"></i></button>
-                <input type="number" class="qty-input" id="qtyInput" value="1" min="0" inputmode="numeric">
-                <button class="qty-btn" onclick="changeQty(1)"><i class="fas fa-plus"></i></button>
-            </div>
-
-            <div class="location-selector">
-                <div class="label">
-                    <i class="fas fa-map-pin"></i> ตำแหน่งสินค้า <span class="required">*</span>
-                    <span style="font-size:11px;font-weight:400;color:var(--text-muted);margin-left:4px;">(เลือกก่อนยืนยัน)</span>
-                </div>
-                <div class="location-select-group">
-                    <select id="locationType" onchange="updateLocationDropdowns()">
-                        <option value="front">🏪 หน้าร้าน</option>
-                        <option value="back">📦 หลังร้าน</option>
-                    </select>
-                    <select id="locationCabinet" onchange="updateShelfDropdown()">
-                        <option value="new">➕ สร้างตู้ใหม่</option>
-                    </select>
-                    <select id="locationShelf">
-                        <option value="new">➕ สร้างชั้นใหม่</option>
-                    </select>
-                    <button class="btn-add-location" onclick="showAddCabinetScanModal()" id="btnAddCabinetScan" style="display:none;"><i class="fas fa-plus"></i> ตู้</button>
-                    <button class="btn-add-location" onclick="showAddShelfScanModal()" id="btnAddShelfScan" style="display:none;"><i class="fas fa-plus"></i> ชั้น</button>
-                </div>
-                <div style="font-size:11px;color:var(--text-muted);margin-top:4px;" id="selectedLocationDisplay">
-                    📍 เลือกตำแหน่ง
-                </div>
-            </div>
-
-            <div style="margin:8px 0;">
-                <label style="font-weight:600;font-size:13px;color:var(--text-main);"><i class="fas fa-pen"></i> หมายเหตุ (ถ้ามี)</label>
-                <input type="text" class="input" id="noteInput" placeholder="เช่น สินค้าชำรุด, หมดอายุ, ฯลฯ" style="font-size:13px;padding:8px 12px;min-height:38px;margin-top:4px;">
-            </div>
-
-            <button class="btn btn-success btn-block" onclick="confirmItem()" style="font-size:16px;padding:14px;min-height:52px;"><i class="fas fa-check-circle"></i> ยืนยันการนับ</button>
-        </div>
-
-        <!-- RECENT -->
-        <div class="card">
-            <div class="flex-between">
-                <span class="card-title" style="margin:0;font-size:14px;"><i class="fas fa-list"></i> รายการนับล่าสุด <span style="font-size:11px;font-weight:400;color:var(--text-muted);">(คลิก ✏️ แก้ไข หรือ 🗑️ ลบ)</span></span>
-                <span id="scanCount" style="background:var(--primary);color:#fff;padding:2px 10px;border-radius:14px;font-size:12px;font-weight:700;">0</span>
-            </div>
-            <div id="recentScans"><p style="text-align:center;color:var(--text-muted);padding:16px;font-size:13px;"><i class="fas fa-inbox" style="font-size:20px;display:block;margin-bottom:6px;opacity:0.5;"></i>ยังไม่มีประวัติการสแกน</p></div>
-            <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;">
-                <button class="btn btn-outline btn-sm" onclick="undoLast()" style="flex:1;font-size:12px;padding:8px 12px;min-height:36px;"><i class="fas fa-undo"></i> ยกเลิกล่าสุด</button>
-                <button class="btn btn-danger btn-sm" onclick="clearSession()" style="flex:1;font-size:12px;padding:8px 12px;min-height:36px;"><i class="fas fa-trash"></i> เริ่มนับใหม่</button>
-                <button class="btn btn-primary btn-sm" onclick="finishCount()" style="flex:1;font-size:12px;padding:8px 12px;min-height:36px;"><i class="fas fa-flag-checkered"></i> สรุปผล</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- ===== PAGE: LAYOUT (เหมือนเดิม) ===== -->
-    <div class="page" id="page-layout">
-        <div class="card">
-            <div class="card-title"><i class="fas fa-sitemap"></i> ผังร้าน</div>
-            <p style="font-size:11px;color:var(--text-muted);margin-bottom:8px;"><i class="fas fa-info-circle"></i> จัดการตู้และชั้นวางสินค้า แบ่งเป็นหน้าร้านและหลังร้าน<br>
-            <strong>ชื่อชั้นวาง</strong> สามารถพิมพ์ได้ทุกแบบ เช่น 1, ชั้น 1, ชั้นยาแก้ไอ, A1</p>
-            
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
-                <div style="padding:6px;background:var(--success-light);border-radius:var(--radius-sm);text-align:center;font-size:12px;font-weight:600;color:#065f46;">
-                    <i class="fas fa-store"></i> หน้าร้าน
-                </div>
-                <div style="padding:6px;background:var(--warning-light);border-radius:var(--radius-sm);text-align:center;font-size:12px;font-weight:600;color:#92400e;">
-                    <i class="fas fa-warehouse"></i> หลังร้าน
-                </div>
-            </div>
-
-            <div class="input-group" style="margin-bottom:8px;">
-                <select id="newCabinetType" style="flex:1;padding:8px 10px;border:2px solid var(--border-color);border-radius:var(--radius-sm);font-size:13px;background:var(--bg-card);color:var(--text-main);min-height:42px;">
-                    <option value="front">🏪 หน้าร้าน</option>
-                    <option value="back">📦 หลังร้าน</option>
-                </select>
-                <input type="text" class="input" id="newCabinetName" placeholder="ชื่อตู้ใหม่" style="flex:2;font-size:13px;padding:8px 12px;min-height:42px;">
-                <button class="btn btn-primary" onclick="addCabinet()" style="flex-shrink:0;font-size:13px;padding:8px 14px;min-height:42px;"><i class="fas fa-plus"></i> เพิ่มตู้</button>
-            </div>
-            <div class="pharmacy-map" id="pharmacyMap">
-                <div class="pharmacy-grid" id="cabinetGrid">
-                    <div style="text-align:center;color:var(--text-muted);padding:28px;grid-column:1/-1;font-size:14px;">
-                        <i class="fas fa-boxes" style="font-size:32px;display:block;margin-bottom:6px;opacity:0.5;"></i>
-                        ยังไม่มีตู้สินค้า<br><small>เพิ่มตู้ด้านบนเพื่อเริ่มจัดผังร้าน</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card" id="shelfCard" style="display:none;">
-            <div class="card-title" id="shelfCardTitle"><i class="fas fa-layer-group"></i> จัดการชั้นในตู้</div>
-            <div class="input-group" style="margin-bottom:8px;">
-                <input type="text" class="input" id="newShelfName" placeholder="ชื่อชั้น (เช่น 1, ชั้น 1, ชั้นยาแก้ไอ, A1)" style="flex:2;font-size:13px;padding:8px 12px;min-height:42px;">
-                <button class="btn btn-primary" onclick="addShelfToCabinet()" style="flex:1;font-size:13px;padding:8px 14px;min-height:42px;"><i class="fas fa-plus"></i> เพิ่มชั้นวาง</button>
-            </div>
-            <div id="shelfList"></div>
-        </div>
-    </div>
-
-    <!-- ===== PAGE: REPORT (เหมือนเดิม) ===== -->
-    <div class="page" id="page-report">
-        <!-- เนื้อหาเหมือนเดิม -->
-        <div class="card" style="background:linear-gradient(135deg,var(--success-light) 0%,#d1fae5 100%);border:2px solid #6ee7b7;padding:14px;">
-            <div class="card-title" style="color:#065f46;font-size:15px;margin-bottom:6px;"><i class="fas fa-chart-pie"></i> สรุปภาพรวมการนับสต็อก</div>
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center;">
-                <div><div style="font-size:11px;color:#047857;font-weight:600;">สินค้าทั้งหมด</div><div style="font-size:var(--font-xl);font-weight:800;color:#065f46;font-family:'Outfit',sans-serif;" id="rptTotalItems">0</div></div>
-                <div><div style="font-size:11px;color:#047857;font-weight:600;">นับแล้ว</div><div style="font-size:var(--font-xl);font-weight:800;color:#059669;font-family:'Outfit',sans-serif;" id="rptCounted">0</div></div>
-                <div><div style="font-size:11px;color:#047857;font-weight:600;">ยังไม่นับ</div><div style="font-size:var(--font-xl);font-weight:800;color:#dc2626;font-family:'Outfit',sans-serif;" id="rptUncounted">0</div></div>
-            </div>
-        </div>
-
-        <div class="summary-grid-4">
-            <div class="stat-card"><div class="stat-label"><i class="fas fa-clipboard-list"></i> รายการที่นับ</div><div class="stat-value" id="rptTotal">0</div></div>
-            <div class="stat-card"><div class="stat-label"><i class="fas fa-exclamation-triangle"></i> รายการผลต่าง</div><div class="stat-value" id="rptDiff" style="color:var(--danger);">0</div></div>
-            <div class="stat-card"><div class="stat-label"><i class="fas fa-coins"></i> ผลต่างต้นทุน</div><div class="stat-value" id="rptCost" style="color:var(--warning);">0</div></div>
-            <div class="stat-card"><div class="stat-label"><i class="fas fa-money-bill-wave"></i> ผลต่างขาย</div><div class="stat-value" id="rptSellDiff" style="color:var(--danger);">0</div></div>
-        </div>
-
-        <div class="card" style="border:2px solid var(--warning);padding:10px;">
-            <div class="card-title" style="font-size:14px;"><i class="fas fa-bell"></i> การแจ้งเตือน</div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-                <div style="background:var(--danger-light);border-radius:var(--radius-md);padding:8px;">
-                    <div style="font-weight:700;font-size:12px;color:#991b1b;"><i class="fas fa-box"></i> สต็อก 0</div>
-                    <div id="zeroStockCount" style="font-size:18px;font-weight:800;color:#991b1b;">0</div>
-                    <button class="btn btn-sm btn-outline-danger" onclick="exportZeroStock()" style="font-size:10px;padding:4px 8px;min-height:28px;margin-top:4px;"><i class="fas fa-file-export"></i> Export</button>
-                </div>
-                <div style="background:var(--warning-light);border-radius:var(--radius-md);padding:8px;">
-                    <div style="font-weight:700;font-size:12px;color:#92400e;"><i class="fas fa-clock"></i> หมดอายุ</div>
-                    <div id="expiryCount" style="font-size:18px;font-weight:800;color:#92400e;">0</div>
-                    <button class="btn btn-sm btn-outline-warning" onclick="exportExpiryReport()" style="font-size:10px;padding:4px 8px;min-height:28px;margin-top:4px;"><i class="fas fa-file-export"></i> Export</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="card" id="uncountedCard" style="display:none;border:2px solid var(--danger);padding:10px;">
-            <div class="card-title" style="color:var(--danger);font-size:14px;"><i class="fas fa-exclamation-circle"></i> สินค้าที่ยังไม่ได้นับ</div>
-            <div class="table-wrap">
-                <table>
-                    <thead><tr><th>ชื่อสินค้า</th><th>Lot</th><th>จำนวน</th><th>ทุน/หน่วย</th><th>ขาย/หน่วย</th><th>มูลค่ารวม</th><th>หมดอายุ</th></tr></thead>
-                    <tbody id="uncountedBody"><tr><td colspan="7" style="text-align:center;padding:16px;color:var(--text-muted);font-size:13px;"><i class="fas fa-check-circle" style="color:var(--success);font-size:18px;display:block;margin-bottom:6px;"></i>นับครบทุกชิ้นแล้ว!</td></tr></tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="card" id="diffCard" style="display:none;padding:10px;">
-            <div class="card-title" style="font-size:14px;"><i class="fas fa-balance-scale"></i> สรุปสินค้าที่เกิน/ขาด</div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-                <div style="border:2px solid var(--success);border-radius:var(--radius-md);padding:8px;background:var(--success-light);">
-                    <div style="font-weight:700;font-size:13px;color:#065f46;"><i class="fas fa-arrow-up"></i> เกิน (Over)</div>
-                    <div id="overItems" style="font-size:12px;color:#065f46;">-</div>
-                </div>
-                <div style="border:2px solid var(--danger);border-radius:var(--radius-md);padding:8px;background:var(--danger-light);">
-                    <div style="font-weight:700;font-size:13px;color:#991b1b;"><i class="fas fa-arrow-down"></i> ขาด (Short)</div>
-                    <div id="shortItems" style="font-size:12px;color:#991b1b;">-</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="card" style="padding:10px;border:2px solid var(--primary-light);">
-            <div class="card-title" style="font-size:14px;"><i class="fas fa-store-alt"></i> สรุปหน้าร้าน / หลังร้าน</div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-                <div style="background:var(--success-light);border-radius:var(--radius-md);padding:8px;">
-                    <div style="font-weight:700;font-size:12px;color:#065f46;"><i class="fas fa-store"></i> หน้าร้าน</div>
-                    <div id="frontSummary" style="font-size:12px;color:#065f46;">-</div>
-                </div>
-                <div style="background:var(--warning-light);border-radius:var(--radius-md);padding:8px;">
-                    <div style="font-weight:700;font-size:12px;color:#92400e;"><i class="fas fa-warehouse"></i> หลังร้าน</div>
-                    <div id="backSummary" style="font-size:12px;color:#92400e;">-</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="card" style="padding:10px;">
-            <div class="flex-between" style="flex-wrap:wrap;gap:6px;">
-                <span class="card-title" style="margin:0;font-size:14px;"><i class="fas fa-table"></i> รายละเอียดการนับ</span>
-                <div style="display:flex;gap:4px;flex-wrap:wrap;">
-                    <button class="btn btn-outline btn-sm" onclick="exportData('csv')" style="font-size:11px;padding:4px 10px;min-height:30px;"><i class="fas fa-file-csv"></i> CSV</button>
-                    <button class="btn btn-outline btn-sm" onclick="exportData('xlsx')" style="font-size:11px;padding:4px 10px;min-height:30px;"><i class="fas fa-file-excel"></i> Excel</button>
-                    <button class="btn btn-outline btn-sm" onclick="exportData('pdf')" style="font-size:11px;padding:4px 10px;min-height:30px;"><i class="fas fa-file-pdf"></i> PDF</button>
-                    <button class="btn btn-outline-success btn-sm" onclick="exportLocationReport()" style="font-size:11px;padding:4px 10px;min-height:30px;"><i class="fas fa-map-pin"></i> ตู้/ชั้น</button>
-                    <button class="btn btn-outline-success btn-sm" onclick="exportBarcodeMaster()" style="font-size:11px;padding:4px 10px;min-height:30px;"><i class="fas fa-barcode"></i> Master</button>
-                    <button class="btn btn-outline-info btn-sm" onclick="exportHistory()" style="font-size:11px;padding:4px 10px;min-height:30px;"><i class="fas fa-history"></i> History</button>
-                </div>
-            </div>
-            <div style="display:flex;gap:6px;align-items:center;margin:8px 0;flex-wrap:wrap;">
-                <label style="font-weight:600;font-size:12px;"><i class="fas fa-sort"></i> เรียง:</label>
-                <select class="input" id="sortBy" onchange="sortReport()" style="width:auto;padding:4px 10px;min-width:130px;font-size:12px;min-height:36px;">
-                    <option value="name">ตามชื่อสินค้า</option>
-                    <option value="difference_desc" selected>ผลต่างมากไปน้อย</option>
-                    <option value="difference_asc">ผลต่างน้อยไปมาก</option>
-                    <option value="cost_diff_desc">มูลค่าต่างมากไปน้อย</option>
-                    <option value="cost_diff_asc">มูลค่าต่างน้อยไปมาก</option>
-                </select>
-            </div>
-            <div class="table-wrap">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>บาร์โค้ด</th><th>ชื่อสินค้า</th><th>Lot</th>
-                            <th>ประเภท</th><th>ตู้/ชั้น</th>
-                            <th>ระบบ</th><th>นับ</th><th>ต่าง</th>
-                            <th>ทุน</th><th>ขาย</th>
-                            <th>ต่าง(ทุน)</th><th>ต่าง(ขาย)</th>
-                            <th>หมายเหตุ</th>
-                        </tr>
-                    </thead>
-                    <tbody id="reportBody"><tr><td colspan="13" style="text-align:center;padding:16px;color:var(--text-muted);font-size:13px;"><i class="fas fa-inbox" style="font-size:20px;display:block;margin-bottom:6px;opacity:0.5;"></i>ยังไม่มีข้อมูลสรุปผล</td></tr></tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="card" style="padding:10px;" id="locationSummaryCard">
-            <div class="card-title" style="font-size:14px;"><i class="fas fa-map-pin"></i> สรุปตามตู้ / ชั้นวาง</div>
-            <div id="locationSummary"><p style="text-align:center;color:var(--text-muted);padding:16px;font-size:13px;">ยังไม่มีข้อมูลตำแหน่ง</p></div>
-        </div>
-    </div>
-
-    <!-- ===== PAGE: ANALYTICS (ใหม่) ===== -->
-    <div class="page" id="page-analytics">
-        <div class="card">
-            <div class="card-title"><i class="fas fa-chart-pie"></i> วิเคราะห์ข้อมูลสต็อก</div>
-            <p style="font-size:12px;color:var(--text-muted);margin-bottom:10px;">
-                วิเคราะห์ข้อมูลจากการนับสต็อก เพื่อช่วยวางแผนจัดการสินค้า
-            </p>
-            
-            <!-- Dashboard Summary -->
-            <div class="dashboard-grid" id="analyticsDashboard">
-                <div class="stat-card">
-                    <div class="stat-label">📦 มูลค่าสต็อก</div>
-                    <div class="stat-value" id="analyticsTotalValue">0</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">📊 สินค้าทั้งหมด</div>
-                    <div class="stat-value" id="analyticsTotalItems">0</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">⚠️ สินค้าหมด</div>
-                    <div class="stat-value" id="analyticsZeroStock" style="color:var(--danger);">0</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ABC Analysis -->
-        <div class="card">
-            <div class="card-title"><i class="fas fa-layer-group"></i> ABC Analysis</div>
-            <p style="font-size:11px;color:var(--text-muted);margin-bottom:8px;">
-                จัดกลุ่มสินค้าตามมูลค่าสต็อก (A = สูงสุด 70%, B = 20%, C = 10%)
-            </p>
-            <div id="abcAnalysisResult">
-                <p style="text-align:center;color:var(--text-muted);padding:16px;font-size:13px;">
-                    <i class="fas fa-inbox" style="font-size:20px;display:block;margin-bottom:6px;opacity:0.5;"></i>
-                    ยังไม่มีข้อมูลสินค้า
-                </p>
-            </div>
-            <div class="chart-container">
-                <canvas id="abcChart"></canvas>
-            </div>
-        </div>
-
-        <!-- Dead Stock Alert -->
-        <div class="card">
-            <div class="card-title"><i class="fas fa-skull"></i> Dead Stock Alert</div>
-            <p style="font-size:11px;color:var(--text-muted);margin-bottom:8px;">
-                สินค้าที่มีความเสี่ยง: ใกล้หมดอายุ + มีสต็อกเยอะ
-            </p>
-            <div id="deadStockList">
-                <p style="text-align:center;color:var(--text-muted);padding:16px;font-size:13px;">
-                    <i class="fas fa-check-circle" style="color:var(--success);font-size:20px;display:block;margin-bottom:6px;"></i>
-                    ไม่มีสินค้าที่มีความเสี่ยง
-                </p>
-            </div>
-        </div>
-
-        <!-- Min Stock Alert -->
-        <div class="card">
-            <div class="card-title"><i class="fas fa-exclamation-triangle"></i> สินค้าใกล้หมด (Min Stock)</div>
-            <p style="font-size:11px;color:var(--text-muted);margin-bottom:8px;">
-                สินค้าที่มีจำนวนคงเหลือน้อยกว่า 10 ชิ้น
-            </p>
-            <div id="minStockList">
-                <p style="text-align:center;color:var(--text-muted);padding:16px;font-size:13px;">
-                    <i class="fas fa-check-circle" style="color:var(--success);font-size:20px;display:block;margin-bottom:6px;"></i>
-                    ไม่มีสินค้าใกล้หมด
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <!-- ===== PAGE: SETTINGS (ปรับปรุง) ===== -->
-    <div class="page" id="page-settings">
-        <div class="card">
-            <div class="card-title"><i class="fas fa-info-circle"></i> เกี่ยวกับ MediStock</div>
-            <p style="font-size:13px;color:var(--text-muted);">เวอร์ชัน 3.4.0</p>
-            <p style="font-size:13px;color:var(--text-muted);">ระบบนับสต็อกสินค้ายา พร้อมระบบวิเคราะห์</p>
-            <p style="font-size:12px;color:var(--text-light);margin-top:4px;">© 2026 MediStock. สงวนลิขสิทธิ์.</p>
-            <p style="font-size:12px;color:var(--text-light);margin-top:2px;">📦 ข้อมูลเก็บในเครื่อง (IndexedDB)</p>
-            <p style="font-size:12px;color:var(--text-light);">🔒 ทำงานแบบ Offline ได้</p>
-        </div>
-
-        <div class="card" style="border:2px solid var(--warning);background:var(--warning-light);">
-            <div class="card-title" style="color:#92400e;font-size:14px;"><i class="fas fa-database"></i> การจัดการข้อมูล</div>
-            <div style="display:flex;gap:6px;flex-wrap:wrap;">
-                <button class="btn btn-primary btn-sm" onclick="backupData()" style="flex:1;font-size:12px;padding:8px 12px;min-height:38px;"><i class="fas fa-download"></i> สำรองข้อมูล</button>
-                <button class="btn btn-outline btn-sm" onclick="document.getElementById('restoreInput').click()" style="flex:1;font-size:12px;padding:8px 12px;min-height:38px;"><i class="fas fa-upload"></i> กู้คืนข้อมูล</button>
-                <input type="file" id="restoreInput" accept=".json" style="display:none" onchange="restoreData(event)">
-            </div>
-            <p style="font-size:11px;color:var(--text-muted);margin-top:4px;"><i class="fas fa-info-circle"></i> ไฟล์สำรองมีข้อมูลสินค้า, ตู้/ชั้น, ประวัติการนับ, บาร์โค้ด, และสาขาทั้งหมด</p>
-            <button class="btn btn-danger btn-block" onclick="clearAllData()" style="margin-top:6px;font-size:14px;padding:12px;"><i class="fas fa-trash"></i> ล้างข้อมูลทั้งหมด</button>
-        </div>
-    </div>
-</div>
-
-<!-- ===== MODALS ===== -->
-<div class="modal-overlay" id="barcodeModal">
+<!-- ✅ ใหม่: Modal สำหรับหน่วยที่ไม่รู้จัก -->
+<div class="modal-overlay" id="unknownUnitModal">
     <div class="modal">
         <div class="modal-handle"></div>
-        <div class="modal-title"><i class="fas fa-keyboard"></i> ใส่บาร์โค้ดด้วยตนเอง</div>
-        <input type="text" class="input" id="manualBarcodeInput" placeholder="ป้อนเลขบาร์โค้ด..." style="margin-bottom:8px;font-size:16px;padding:12px 16px;min-height:48px;" autofocus>
-        <button class="btn btn-primary btn-block" onclick="submitManualBarcode()" style="font-size:15px;padding:12px;min-height:48px;"><i class="fas fa-search"></i> ค้นหาข้อมูล</button>
-        <button class="btn btn-outline btn-block" onclick="closeBarcodeModal()" style="margin-top:6px;font-size:15px;padding:12px;min-height:48px;"><i class="fas fa-times"></i> ปิด</button>
-    </div>
-</div>
-
-<div class="modal-overlay" id="addProductModal">
-    <div class="modal">
-        <div class="modal-handle"></div>
-        <div class="modal-title"><i class="fas fa-plus-circle"></i> เพิ่มสินค้าใหม่</div>
-        <div style="margin-bottom:6px;padding:6px 12px;background:var(--warning-light);border-radius:var(--radius-sm);font-size:12px;color:#92400e;">
-            <i class="fas fa-info-circle"></i> ราคาทุนจะถูกตั้งเป็น 0 โดยอัตโนมัติ (ไม่ต้องกรอก)
+        <div class="modal-title"><i class="fas fa-question-circle"></i> ไม่รู้จักหน่วย</div>
+        <p style="font-size:14px;margin-bottom:8px;">
+            ระบบไม่รู้จักหน่วย <strong id="unknownUnitName">"แพ็ค"</strong>
+        </p>
+        <p style="font-size:13px;color:var(--text-muted);margin-bottom:12px;">
+            กรุณาเลือกหน่วยที่ต้องการแปลง หรือเพิ่มหน่วยใหม่
+        </p>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;">
+            <select id="selectUnitMapping" style="flex:2;padding:10px;border:2px solid var(--border-color);border-radius:var(--radius-sm);font-size:14px;min-height:44px;">
+                <option value="ชิ้น">ชิ้น (ค่าเริ่มต้น)</option>
+                <option value="โหล">โหล (1 โหล = 12 ชิ้น)</option>
+                <option value="ลัง">ลัง (1 ลัง = 12 ชิ้น)</option>
+                <option value="กล่อง">กล่อง (1 กล่อง = 1 ชิ้น)</option>
+                <option value="แผง">แผง (1 แผง = 10 ชิ้น)</option>
+                <option value="ขวด">ขวด (1 ขวด = 1 ชิ้น)</option>
+                <option value="หลอด">หลอด (1 หลอด = 1 ชิ้น)</option>
+                <option value="ซอง">ซอง (1 ซอง = 1 ชิ้น)</option>
+                <option value="custom">➕ เพิ่มหน่วยใหม่</option>
+            </select>
+            <input type="number" id="customUnitFactor" placeholder="เท่ากับกี่ชิ้น?" style="flex:1;padding:10px;border:2px solid var(--border-color);border-radius:var(--radius-sm);font-size:14px;min-height:44px;display:none;">
         </div>
-        <input type="text" class="input" id="newProductBarcode" placeholder="📱 บาร์โค้ด (ถ้ามี)" style="margin-bottom:6px;font-size:14px;padding:10px 14px;min-height:44px;">
-        <input type="text" class="input" id="newProductName" placeholder="📦 ชื่อสินค้า *" style="margin-bottom:6px;font-size:14px;padding:10px 14px;min-height:44px;">
-        <input type="text" class="input" id="newProductLot" placeholder="🔖 เลขที่ผลิต (Lot)" style="margin-bottom:6px;font-size:14px;padding:10px 14px;min-height:44px;">
-        <input type="number" class="input" id="newProductSellPrice" placeholder="💰 ราคาขายต่อหน่วย" style="margin-bottom:6px;font-size:14px;padding:10px 14px;min-height:44px;" step="0.01">
-        <input type="text" class="input" id="newProductUnit" placeholder="📦 หน่วยนับ (เช่น ชิ้น, ขวด)" style="margin-bottom:6px;font-size:14px;padding:10px 14px;min-height:44px;">
-        <input type="date" class="input" id="newProductExpiry" placeholder="⏳ วันหมดอายุ" style="margin-bottom:6px;font-size:14px;padding:10px 14px;min-height:44px;">
-        <div class="flex" style="gap:6px;margin-top:4px;">
-            <button class="btn btn-success btn-block" onclick="confirmAddProduct()" style="font-size:15px;padding:12px;min-height:48px;"><i class="fas fa-save"></i> บันทึกสินค้า</button>
-            <button class="btn btn-outline btn-block" onclick="closeAddProductModal()" style="font-size:15px;padding:12px;min-height:48px;"><i class="fas fa-times"></i> ยกเลิก</button>
-        </div>
-    </div>
-</div>
-
-<div class="modal-overlay" id="editItemModal">
-    <div class="modal">
-        <div class="modal-handle"></div>
-        <div class="modal-title"><i class="fas fa-pen"></i> แก้ไขรายการนับ</div>
-        <div id="editItemContent">
-            <div style="font-weight:600;font-size:15px;" id="editItemName">-</div>
-            <div style="font-size:13px;color:var(--text-muted);margin-bottom:6px;" id="editItemDetail">-</div>
-            <div class="qty-control" style="margin:8px 0;">
-                <button class="qty-btn" onclick="editChangeQty(-1)"><i class="fas fa-minus"></i></button>
-                <input type="number" class="qty-input" id="editQtyInput" value="1" min="0" inputmode="numeric" style="height:40px;font-size:20px;">
-                <button class="qty-btn" onclick="editChangeQty(1)"><i class="fas fa-plus"></i></button>
-            </div>
-            <div style="margin:6px 0;">
-                <label style="font-weight:600;font-size:13px;">📝 หมายเหตุ</label>
-                <input type="text" class="input" id="editNoteInput" placeholder="หมายเหตุ" style="font-size:13px;padding:8px 12px;min-height:38px;margin-top:4px;">
-            </div>
-            <div style="display:flex;gap:6px;margin-top:8px;">
-                <button class="btn btn-success btn-block" onclick="saveEditItem()" style="font-size:14px;padding:10px;min-height:44px;"><i class="fas fa-save"></i> บันทึก</button>
-                <button class="btn btn-danger btn-block" onclick="deleteEditItem()" style="font-size:14px;padding:10px;min-height:44px;"><i class="fas fa-trash"></i> ลบรายการ</button>
-                <button class="btn btn-outline btn-block" onclick="closeEditItemModal()" style="font-size:14px;padding:10px;min-height:44px;"><i class="fas fa-times"></i> ยกเลิก</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal-overlay" id="branchManagerModal">
-    <div class="modal">
-        <div class="modal-handle"></div>
-        <div class="modal-title"><i class="fas fa-store"></i> จัดการสาขา</div>
-        <div id="branchList"></div>
-        <div class="flex" style="gap:6px;margin-top:10px;">
-            <input type="text" class="input" id="newBranchName" placeholder="ชื่อสาขาใหม่" style="flex:1;font-size:14px;padding:10px 14px;min-height:44px;">
-            <button class="btn btn-primary" onclick="addBranch()" style="font-size:13px;padding:8px 16px;min-height:44px;"><i class="fas fa-plus"></i> เพิ่ม</button>
-        </div>
-        <button class="btn btn-outline btn-block" onclick="closeBranchManager()" style="margin-top:8px;font-size:15px;padding:12px;min-height:48px;"><i class="fas fa-times"></i> ปิด</button>
-    </div>
-</div>
-
-<div class="modal-overlay" id="qrCodeModal">
-    <div class="modal">
-        <div class="modal-handle"></div>
-        <div class="modal-title"><i class="fas fa-qrcode"></i> QR Code และป้ายสินค้า</div>
-        <div id="qrCodeContent" class="qr-code-container">
-            <div id="qrcode"></div>
-            <div class="product-label" id="qrProductLabel">-</div>
-            <div style="font-size:12px;color:var(--text-muted);margin-top:4px;" id="qrProductDetail">-</div>
-        </div>
-        <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;">
-            <button class="btn btn-primary btn-sm" onclick="printProductLabel()" style="flex:1;font-size:13px;padding:8px 12px;min-height:38px;"><i class="fas fa-print"></i> พิมพ์ป้ายสินค้า</button>
-            <button class="btn btn-outline btn-sm" onclick="downloadQRCode()" style="flex:1;font-size:13px;padding:8px 12px;min-height:38px;"><i class="fas fa-download"></i> ดาวน์โหลด QR</button>
-            <button class="btn btn-outline-danger btn-sm" onclick="closeQRCodeModal()" style="font-size:13px;padding:8px 12px;min-height:38px;"><i class="fas fa-times"></i> ปิด</button>
-        </div>
-    </div>
-</div>
-
-<div class="modal-overlay" id="addCabinetScanModal">
-    <div class="modal">
-        <div class="modal-handle"></div>
-        <div class="modal-title"><i class="fas fa-plus-circle"></i> เพิ่มตู้ใหม่</div>
-        <input type="text" class="input" id="scanNewCabinetName" placeholder="ชื่อตู้" style="margin-bottom:6px;font-size:14px;padding:10px 14px;min-height:44px;">
-        <div class="flex" style="gap:6px;margin-top:4px;">
-            <button class="btn btn-success btn-block" onclick="confirmScanAddCabinet()" style="font-size:15px;padding:12px;min-height:48px;"><i class="fas fa-save"></i> บันทึกตู้</button>
-            <button class="btn btn-outline btn-block" onclick="closeAddCabinetScanModal()" style="font-size:15px;padding:12px;min-height:48px;"><i class="fas fa-times"></i> ยกเลิก</button>
-        </div>
-    </div>
-</div>
-
-<div class="modal-overlay" id="addShelfScanModal">
-    <div class="modal">
-        <div class="modal-handle"></div>
-        <div class="modal-title"><i class="fas fa-plus-circle"></i> เพิ่มชั้นใหม่</div>
-        <input type="text" class="input" id="scanNewShelfName" placeholder="ชื่อชั้น (เช่น 1, ชั้น 1, ชั้นยาแก้ไอ)" style="margin-bottom:6px;font-size:14px;padding:10px 14px;min-height:44px;">
-        <div class="flex" style="gap:6px;margin-top:4px;">
-            <button class="btn btn-success btn-block" onclick="confirmScanAddShelf()" style="font-size:15px;padding:12px;min-height:48px;"><i class="fas fa-save"></i> บันทึกชั้น</button>
-            <button class="btn btn-outline btn-block" onclick="closeAddShelfScanModal()" style="font-size:15px;padding:12px;min-height:48px;"><i class="fas fa-times"></i> ยกเลิก</button>
+        <div style="display:flex;gap:6px;">
+            <button class="btn btn-primary btn-block" onclick="app.confirmUnknownUnit()" style="font-size:15px;padding:12px;min-height:48px;">
+                <i class="fas fa-check"></i> ยืนยัน
+            </button>
+            <button class="btn btn-outline btn-block" onclick="app.skipUnknownUnit()" style="font-size:15px;padding:12px;min-height:48px;">
+                <i class="fas fa-times"></i> ใช้ "ชิ้น" แทน
+            </button>
         </div>
     </div>
 </div>
@@ -2085,12 +996,11 @@ if ('serviceWorker' in navigator) {
         .then(() => console.log('✅ Service Worker ลงทะเบียนสำเร็จ'))
         .catch(() => console.log('ℹ️ Service Worker ไม่ทำงาน (ต้องใช้ HTTPS)'));
 }
-
-// ================================================================
-// ✅ JavaScript - MediStock v3.4.0 (ระยะที่ 1)
+    // ================================================================
+// ✅ JavaScript - MediStock v3.5.0 (เต็มรูปแบบ)
 // ================================================================
 eruda.init();
-console.log('✅ MediStock v3.4.0 กำลังเริ่มต้น...');
+console.log('✅ MediStock v3.5.0 กำลังเริ่มต้น...');
 
 const CONFIG = {
     GOOGLE_SHEETS: {
@@ -2103,10 +1013,11 @@ const CONFIG = {
         }
     },
     APP_NAME: 'MediStock',
-    VERSION: '3.4.0',
+    VERSION: '3.5.0',
     STORE_ID: localStorage.getItem('storeId') || 'default',
     EXPIRY_WARNING_DAYS: 90,
-    MIN_STOCK_ALERT: 10,
+    MIN_STOCK_ALERT: 5,    // ค่าเริ่มต้น
+    MAX_STOCK_ALERT: 100,  // ค่าเริ่มต้น
     DEAD_STOCK_DAYS: 90,
     ABC_A_PERCENT: 70,
     ABC_B_PERCENT: 90
@@ -2138,9 +1049,6 @@ class StockApp {
         this.expiryFilter = 30;
         this.pendingBarcode = null;
         this.newlyPairedBarcodes = [];
-        this.unitConversionMap = {
-            'โหล': 12, 'ลัง': 12, 'กล่อง': 1, 'แพ็ค': 1, 'แผง': 1, 'ชิ้น': 1, 'ขวด': 1, 'แผ่น': 1, 'หลอด': 1, 'ซอง': 1
-        };
         this.selectedLocationType = 'front';
         this.selectedCabinetId = null;
         this.selectedShelfId = null;
@@ -2151,7 +1059,27 @@ class StockApp {
         this.cloudType = null;
         this.abcChart = null;
         this.minStockThreshold = CONFIG.MIN_STOCK_ALERT;
+        this.maxStockThreshold = CONFIG.MAX_STOCK_ALERT;
         this.deadStockThreshold = CONFIG.DEAD_STOCK_DAYS;
+
+        // ✅ ระบบแปลงหน่วย
+        this.unitMap = {
+            'ชิ้น': 1,
+            'โหล': 12,
+            'ลัง': 12,
+            'กล่อง': 1,
+            'แผง': 10,
+            'ขวด': 1,
+            'หลอด': 1,
+            'ซอง': 1,
+            'แพ็ค': 1,
+            'แผ่น': 1,
+            'กระปุก': 1,
+            'ขีด': 1,
+            'ถุง': 1,
+            'ซอง': 1
+        };
+        this.unknownUnits = []; // เก็บหน่วยที่ไม่รู้จัก
         this.init();
     }
 
@@ -2173,7 +1101,8 @@ class StockApp {
         this.startAutoSync();
         this.updateLocationDropdowns();
         this.loadSession();
-        console.log('✅ MediStock v3.4.0 พร้อมใช้งาน!');
+        this.loadUnits(); // ✅ โหลดหน่วยที่ผู้ใช้เพิ่ม
+        console.log('✅ MediStock v3.5.0 พร้อมใช้งาน!');
         if (this.products.length === 0) {
             this.updateStatus('📥 กรุณานำเข้าข้อมูลสินค้าก่อนใช้งาน');
             this.showToast('📥 กรุณานำเข้าข้อมูลสินค้าจาก Excel หรือ Google Sheets', 'info');
@@ -2188,7 +1117,7 @@ class StockApp {
     // ================================================================
     initDB() {
         return new Promise((resolve) => {
-            const request = indexedDB.open('StockCountDB_' + this.branchId, 7);
+            const request = indexedDB.open('StockCountDB_' + this.branchId, 8);
             request.onupgradeneeded = (e) => {
                 const db = e.target.result;
                 if (!db.objectStoreNames.contains('products')) {
@@ -2206,6 +1135,9 @@ class StockApp {
                 }
                 if (!db.objectStoreNames.contains('history')) {
                     db.createObjectStore('history', { keyPath: 'id' });
+                }
+                if (!db.objectStoreNames.contains('units')) {
+                    db.createObjectStore('units', { keyPath: 'name' });
                 }
                 if (!db.objectStoreNames.contains('kits')) {
                     db.createObjectStore('kits', { keyPath: 'id' });
@@ -2252,6 +1184,106 @@ class StockApp {
         store.clear();
         this.locations.forEach(l => store.add(l));
         await new Promise(r => { tx.oncomplete = r; });
+    }
+
+    // ✅ ระบบหน่วย
+    async loadUnits() {
+        try {
+            const tx = this.db.transaction('units', 'readonly');
+            const store = tx.objectStore('units');
+            const req = store.getAll();
+            const units = await new Promise(r => { req.onsuccess = () => r(req.result || []); req.onerror = () => r([]); });
+            units.forEach(u => {
+                this.unitMap[u.name] = u.factor;
+            });
+            this.renderUnitList();
+        } catch (e) { console.error('Load units error:', e); }
+    }
+
+    async saveUnit(name, factor) {
+        const tx = this.db.transaction('units', 'readwrite');
+        const store = tx.objectStore('units');
+        await new Promise(r => { const req = store.put({ name, factor }); req.onsuccess = r; req.onerror = r; });
+        this.unitMap[name] = factor;
+        this.renderUnitList();
+    }
+
+    // ✅ แปลงหน่วย
+    convertUnit(value, fromUnit, toUnit) {
+        const from = this.unitMap[fromUnit] || 1;
+        const to = this.unitMap[toUnit] || 1;
+        if (from === 0 || to === 0) return value;
+        return (value * from) / to;
+    }
+
+    convertToBase(value, unit) {
+        return this.convertUnit(value, unit, 'ชิ้น');
+    }
+
+    convertFromBase(value, unit) {
+        return this.convertUnit(value, 'ชิ้น', unit);
+    }
+
+    // ✅ จัดการหน่วยที่ไม่รู้จัก
+    handleUnknownUnit(unit, value, rowIndex) {
+        if (!this.unitMap[unit]) {
+            // เปิด Modal ให้ผู้ใช้เลือก
+            document.getElementById('unknownUnitName').textContent = `"${unit}"`;
+            document.getElementById('selectUnitMapping').value = 'ชิ้น';
+            document.getElementById('customUnitFactor').style.display = 'none';
+            document.getElementById('unknownUnitModal').classList.add('show');
+            // เก็บข้อมูลไว้รอ
+            this._pendingUnknownUnit = { unit, value, rowIndex };
+            return false;
+        }
+        return true;
+    }
+
+    confirmUnknownUnit() {
+        const select = document.getElementById('selectUnitMapping');
+        const unit = select.value;
+        const factor = parseFloat(document.getElementById('customUnitFactor').value) || 12;
+        const pending = this._pendingUnknownUnit;
+        if (!pending) return;
+
+        if (unit === 'custom') {
+            // เพิ่มหน่วยใหม่
+            const newUnitName = pending.unit;
+            this.unitMap[newUnitName] = factor;
+            this.saveUnit(newUnitName, factor);
+            this.showToast(`✅ เพิ่มหน่วย "${newUnitName}" (1 = ${factor} ชิ้น)`, 'success');
+            // แปลงค่า
+            const baseValue = pending.value * factor;
+            this._pendingConvertedValue = baseValue;
+        } else {
+            // ใช้หน่วยที่มีอยู่
+            const baseValue = this.convertToBase(pending.value, unit);
+            this._pendingConvertedValue = baseValue;
+        }
+        document.getElementById('unknownUnitModal').classList.remove('show');
+        // ดำเนินการต่อ
+        this.processPendingRow();
+    }
+
+    skipUnknownUnit() {
+        const pending = this._pendingUnknownUnit;
+        if (!pending) return;
+        // ใช้ "ชิ้น" แทน
+        this._pendingConvertedValue = pending.value;
+        document.getElementById('unknownUnitModal').classList.remove('show');
+        this.processPendingRow();
+    }
+
+    processPendingRow() {
+        // ใช้ใน confirmMapping
+        // จะถูกเรียกต่อหลังจากแปลงหน่วยแล้ว
+        console.log('✅ แปลงหน่วยสำเร็จ:', this._pendingConvertedValue);
+        // ดำเนินการนำเข้าต่อ
+        if (this._pendingImportCallback) {
+            this._pendingImportCallback(this._pendingConvertedValue);
+        }
+        this._pendingUnknownUnit = null;
+        this._pendingConvertedValue = null;
     }
 
     // ================================================================
@@ -2429,6 +1461,59 @@ class StockApp {
     }
 
     // ================================================================
+    // ✅ UNIT MANAGEMENT
+    // ================================================================
+    renderUnitList() {
+        const container = document.getElementById('unitList');
+        if (!container) return;
+        const units = Object.keys(this.unitMap);
+        if (units.length === 0) {
+            container.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:8px;font-size:13px;">ยังไม่มีหน่วย</p>';
+            return;
+        }
+        container.innerHTML = units.map(name => `
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 10px;border-bottom:1px solid var(--border-color);">
+                <span><strong>${name}</strong> = ${this.unitMap[name]} ชิ้น</span>
+                <button class="btn btn-danger btn-sm" onclick="app.deleteUnit('${name}')" style="font-size:10px;padding:2px 8px;min-height:28px;">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+        `).join('');
+    }
+
+    addUnit() {
+        const name = document.getElementById('newUnitName').value.trim();
+        const factor = parseInt(document.getElementById('newUnitFactor').value) || 12;
+        if (!name) {
+            this.showToast('⚠️ กรุณาใส่ชื่อหน่วย', 'warning');
+            return;
+        }
+        if (this.unitMap[name]) {
+            this.showToast(`⚠️ มีหน่วย "${name}" อยู่แล้ว`, 'warning');
+            return;
+        }
+        this.unitMap[name] = factor;
+        this.saveUnit(name, factor);
+        document.getElementById('newUnitName').value = '';
+        this.showToast(`✅ เพิ่มหน่วย "${name}" (1 = ${factor} ชิ้น)`, 'success');
+    }
+
+    deleteUnit(name) {
+        if (name === 'ชิ้น') {
+            this.showToast('⚠️ ไม่สามารถลบหน่วย "ชิ้น" ได้ (เป็นหน่วยหลัก)', 'warning');
+            return;
+        }
+        if (!confirm(`🗑️ ยืนยันลบหน่วย "${name}"?`)) return;
+        delete this.unitMap[name];
+        // ลบจาก IndexedDB
+        const tx = this.db.transaction('units', 'readwrite');
+        const store = tx.objectStore('units');
+        store.delete(name);
+        this.renderUnitList();
+        this.showToast(`🗑️ ลบหน่วย "${name}" เรียบร้อย`, 'info');
+    }
+
+    // ================================================================
     // ✅ UI HELPERS
     // ================================================================
     showToast(message, type = 'info') {
@@ -2459,6 +1544,7 @@ class StockApp {
         if (name === 'report') this.generateReport();
         if (name === 'layout') this.renderMap();
         if (name === 'analytics') this.runAnalytics();
+        if (name === 'settings') this.renderUnitList();
     }
 
     updateScanBadge() {
@@ -2564,7 +1650,6 @@ class StockApp {
     }
 
     async syncOfflineQueue() {
-        // จำลองการซิงค์ (ไว้ใช้กับ Google Sheets ในอนาคต)
         if (this.offlineQueue.length === 0) return;
         const indicator = document.getElementById('networkIndicator');
         indicator.className = 'network-badge syncing';
@@ -2604,7 +1689,7 @@ class StockApp {
     }
 
     // ================================================================
-    // ✅ SCANNER
+    // ✅ SCANNER (หัวใจหลัก! ปรับปรุงให้สแกนได้ทุกแบบ)
     // ================================================================
     refocusScanner() {
         if (this.html5Scanner) {
@@ -2679,9 +1764,10 @@ class StockApp {
             console.log('📷 กำลังสร้าง Html5Qrcode...');
             this.html5Scanner = new Html5Qrcode("reader");
 
+            // ✅ ปรับปรุงการตั้งค่าให้สแกนได้ทุกแบบ
             const config = {
                 fps: 30,
-                qrbox: { width: 320, height: 200 },
+                qrbox: { width: 340, height: 220 },
                 aspectRatio: 1.333,
                 formatsToSupport: [
                     Html5QrcodeSupportedFormats.EAN_13,
@@ -2694,7 +1780,10 @@ class StockApp {
                     Html5QrcodeSupportedFormats.QR_CODE,
                     Html5QrcodeSupportedFormats.DATA_MATRIX,
                     Html5QrcodeSupportedFormats.ITF,
-                    Html5QrcodeSupportedFormats.AZTEC
+                    Html5QrcodeSupportedFormats.AZTEC,
+                    Html5QrcodeSupportedFormats.CODABAR,
+                    Html5QrcodeSupportedFormats.PDF_417,
+                    Html5QrcodeSupportedFormats.MAXICODE
                 ]
             };
 
@@ -2711,9 +1800,9 @@ class StockApp {
                     if (now - this.lastScan > 1500) {
                         this.lastScan = now;
                         if (navigator.vibrate) navigator.vibrate(200);
-                        // 🔊 เล่นเสียงแจ้งเตือน
                         this.playBeepSound();
 
+                        // ✅ ทำความสะอาดบาร์โค้ด
                         const cleanBarcode = String(decodedText).replace(/[^0-9]/g, '');
                         console.log('📷 ทำความสะอาด:', cleanBarcode);
 
@@ -2731,6 +1820,7 @@ class StockApp {
                             return;
                         }
 
+                        // ✅ ส่งบาร์โค้ดที่สะอาดแล้ว
                         this.onScan(cleanBarcode);
 
                         if (this.continuousMode) {
@@ -2741,7 +1831,9 @@ class StockApp {
                         }
                     }
                 },
-                (error) => {}
+                (error) => {
+                    // ไม่แสดง error ทุกครั้ง
+                }
             );
 
             console.log('📷 Scanner เริ่มทำงานแล้ว');
@@ -2759,7 +1851,6 @@ class StockApp {
         }
     }
 
-    // 🔊 เล่นเสียงแจ้งเตือนเมื่อสแกนสำเร็จ
     playBeepSound() {
         try {
             const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -2773,9 +1864,7 @@ class StockApp {
             gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.15);
             oscillator.start(audioCtx.currentTime);
             oscillator.stop(audioCtx.currentTime + 0.15);
-        } catch(e) {
-            // ถ้าเล่นเสียงไม่ได้ก็ไม่เป็นไร
-        }
+        } catch(e) {}
     }
 
     async stopScanner() {
@@ -2878,7 +1967,7 @@ class StockApp {
             }
         }
 
-        console.log('❌ ไม่พบบาร์โค้ด:', barcode, 'ให้เลือกเพิ่มสินค้าหรือค้นหาด้วยชื่อ');
+        console.log('❌ ไม่พบบาร์โค้ด:', barcode);
         this.showSearchOrAddDialog(barcode);
     }
 
@@ -2946,16 +2035,10 @@ class StockApp {
                 const after = name.substring(index + q.length);
                 displayName = before + '<span class="search-highlight">' + match + '</span>' + after;
             }
-            const hasBarcode = p.barcodes && p.barcodes.length > 0 && p.barcodes[0];
-            const barcodeDisplay = hasBarcode ? `🏷️ ${p.barcodes.join(', ')}` : '⚠️ ยังไม่มีบาร์โค้ด';
-            const codeDisplay = p.code ? `รหัส: ${p.code}` : '';
             return `<div class="search-result-item" onclick="window.selectProductFromSearch('${p.id}')">
                         <div class="info">
                             <div class="name">${displayName}</div>
-                            <div class="detail">
-                                ${codeDisplay} | ${barcodeDisplay} | 📦 ${p.stock || 0} ชิ้น | 💰 ${(p.sellPrice1 || p.costPerUnit || 0).toFixed(2)} บาท
-                                ${p.lot ? ' | 🔖 Lot: ' + p.lot : ''}
-                            </div>
+                            <div class="detail">${p.code ? 'รหัส: '+p.code : ''} | 📦 ${p.stock || 0} ชิ้น | 💰 ${(p.sellPrice1 || p.costPerUnit || 0).toFixed(2)} บาท</div>
                         </div>
                         <span class="${hasPending ? 'badge-pair' : 'badge-select'}">
                             ${hasPending ? '📎 จับคู่' : '✅ เลือก'}
@@ -3035,50 +2118,33 @@ class StockApp {
         document.getElementById('qtyInput').value = 1;
         this.showExpiryWarning(product);
 
-        // ✅ ใหม่: แสดง Lot ที่มีอยู่
+        // Lot selection
         const lotList = document.getElementById('lotList');
         const lotSelection = document.getElementById('lotSelection');
 
         if (product.barcodes && product.barcodes.length > 1) {
-            // กรณีมีหลาย Lot
             lotSelection.style.display = 'block';
             lotList.innerHTML = product.barcodes.map((barcode, index) => {
-                // หา Lot ที่เกี่ยวข้องกับบาร์โค้ดนี้
                 const isSelected = index === 0;
                 const lotInfo = product.lot || 'N/A';
                 const expiryInfo = product.expiryDate ? this.formatDate(product.expiryDate) : 'ไม่ระบุ';
-                const costInfo = product.costPerUnit || 0;
-                const sellInfo = product.sellPrice1 || 0;
-
                 return `<div class="lot-item ${isSelected ? 'selected' : ''}" onclick="app.selectLot(${index})">
                             <div class="lot-radio"></div>
                             <div style="flex:1;">
                                 <strong style="font-size:14px;">🔖 Lot: ${lotInfo}</strong>
                                 <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">
-                                    💰 ทุน: ${costInfo.toFixed(2)} | 💵 ขาย: ${sellInfo.toFixed(2)}
+                                    💰 ทุน: ${(product.costPerUnit || 0).toFixed(2)} | 💵 ขาย: ${(product.sellPrice1 || 0).toFixed(2)}
                                     ${expiryInfo !== 'ไม่ระบุ' ? ' | ⏳ หมดอายุ: ' + expiryInfo : ''}
                                 </div>
                             </div>
-                            <span class="lot-expiry-badge ${this.isExpiringSoon(product.expiryDate) ? 'expiring' : ''}">
-                                ${this.isExpiringSoon(product.expiryDate) ? '⚠️ ใกล้หมดอายุ' : '✅ ปกติ'}
-                            </span>
                         </div>`;
             }).join('');
             this.selectedLotIndex = 0;
         } else {
-            // กรณีมี Lot เดียว หรือไม่มี Lot
             lotSelection.style.display = 'none';
         }
 
         detail.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-
-    isExpiringSoon(expiryDate) {
-        if (!expiryDate) return false;
-        const exp = new Date(expiryDate);
-        const now = new Date();
-        const diff = Math.ceil((exp - now) / (1000 * 60 * 60 * 24));
-        return diff >= 0 && diff <= CONFIG.EXPIRY_WARNING_DAYS;
     }
 
     selectLot(index) {
@@ -3086,25 +2152,6 @@ class StockApp {
         document.querySelectorAll('.lot-item').forEach((el, i) => {
             el.classList.toggle('selected', i === index);
         });
-        // อัปเดตราคาทุนและราคาขายตาม Lot ที่เลือก
-        const product = this.currentProduct;
-        if (product && product.barcodes && product.barcodes[index]) {
-            // ในกรณีนี้เราจำลองว่าแต่ละ Lot มีราคาต่างกัน
-            // จริงๆแล้วควรมีโครงสร้างข้อมูลแยก Lot
-            // แต่เพื่อความง่าย เราจะปรับราคาตาม index
-            const baseCost = product.costPerUnit || 0;
-            const baseSell = product.sellPrice1 || 0;
-            const variation = (index * 2) - 1; // -1, 1, 3, 5...
-            const newCost = Math.max(0, baseCost + variation);
-            const newSell = Math.max(0, baseSell + variation * 1.5);
-
-            document.getElementById('costDisplay').textContent = newCost.toFixed(2);
-            document.getElementById('productStock').innerHTML =
-                `📊 ในระบบ: <span class="highlight">${product.stock || 0}</span> ชิ้น | 💰 ทุนต่อหน่วย: <span class="highlight">${newCost.toFixed(2)}</span>`;
-            document.getElementById('productSellPrice').textContent = '💰 ราคาขาย: ' + newSell.toFixed(2) + ' บาท';
-            const profit = newSell - newCost;
-            document.getElementById('productProfit').textContent = '📈 กำไรต่อหน่วย: ' + profit.toFixed(2) + ' บาท';
-        }
     }
 
     showExpiryWarning(product) {
@@ -3129,7 +2176,7 @@ class StockApp {
     }
 
     // ================================================================
-    // ✅ ADD PRODUCT
+    // ✅ ADD PRODUCT (พร้อม Min/Max Stock)
     // ================================================================
     showAddProductModal() {
         document.getElementById('addProductModal').classList.add('show');
@@ -3139,6 +2186,8 @@ class StockApp {
         document.getElementById('newProductSellPrice').value = '';
         document.getElementById('newProductUnit').value = '';
         document.getElementById('newProductExpiry').value = '';
+        document.getElementById('newProductMinStock').value = CONFIG.MIN_STOCK_ALERT;
+        document.getElementById('newProductMaxStock').value = CONFIG.MAX_STOCK_ALERT;
         setTimeout(() => document.getElementById('newProductName').focus(), 300);
     }
 
@@ -3158,6 +2207,8 @@ class StockApp {
         const sellPrice = parseFloat(document.getElementById('newProductSellPrice').value) || 0;
         const unit = document.getElementById('newProductUnit').value.trim() || 'ชิ้น';
         const expiry = document.getElementById('newProductExpiry').value || '';
+        const minStock = parseInt(document.getElementById('newProductMinStock').value) || CONFIG.MIN_STOCK_ALERT;
+        const maxStock = parseInt(document.getElementById('newProductMaxStock').value) || CONFIG.MAX_STOCK_ALERT;
 
         if (barcode) {
             const result = this.validateBarcode(barcode);
@@ -3192,6 +2243,8 @@ class StockApp {
             supplier: 'เพิ่มใหม่',
             barcodes: barcode ? [barcode] : [],
             primaryBarcode: barcode || '',
+            minStock: minStock,
+            maxStock: maxStock,
             createdAt: new Date().toISOString(),
             isNew: true
         };
@@ -3280,7 +2333,7 @@ class StockApp {
     }
 
     // ================================================================
-    // ✅ CONFIRM ITEM (พร้อมป้องกันการนับซ้ำและหลายตำแหน่ง)
+    // ✅ CONFIRM ITEM (พร้อมแปลงหน่วย)
     // ================================================================
     confirmItem() {
         const qty = parseInt(document.getElementById('qtyInput').value) || 0;
@@ -3309,7 +2362,6 @@ class StockApp {
             if (!confirm(`⚠️ สินค้า "${product.name}" ถูกนับในตำแหน่งนี้แล้ว (${existing.counted_qty} ชิ้น)\nต้องการเพิ่มจำนวน หรือนับใหม่?`)) {
                 return;
             }
-            // อัปเดตจำนวน
             existing.counted_qty += qty;
             existing.difference = existing.counted_qty - existing.system_qty;
             existing.cost_diff = existing.difference * existing.cost;
@@ -3322,6 +2374,7 @@ class StockApp {
             this.updateProgress();
             this.updateScanBadge();
             this.saveSession();
+            this.runAnalytics();
             this.showToast(`✅ อัปเดต ${product.name} +${qty} ชิ้น (รวม ${existing.counted_qty} ชิ้น)`, 'success');
             document.getElementById('productDetail').style.display = 'none';
             document.getElementById('noteInput').value = '';
@@ -3944,7 +2997,7 @@ class StockApp {
     }
 
     // ================================================================
-    // ✅ IMPORT
+    // ✅ IMPORT (พร้อมระบบแปลงหน่วย)
     // ================================================================
     setupDragDrop() {
         const zone = document.getElementById('dropZone');
@@ -4028,9 +3081,11 @@ class StockApp {
             { key: 'sellPrice', label: '💰 ราคาขาย' },
             { key: 'costPerUnit', label: '💵 ราคาทุนต่อหน่วย' },
             { key: 'stock', label: '🔢 จำนวนคงเหลือ' },
-            { key: 'unit', label: '📦 หน่วยนับสต๊อก' },
+            { key: 'unit', label: '📦 หน่วยนับ' },
             { key: 'supplier', label: '🏢 ผู้จัดจำหน่าย' },
-            { key: 'barcode', label: '📱 บาร์โค้ดสินค้า' }
+            { key: 'barcode', label: '📱 บาร์โค้ดสินค้า' },
+            { key: 'minStock', label: '📉 จำนวนขั้นต่ำ (Min)' },
+            { key: 'maxStock', label: '📈 จำนวนสูงสุด (Max)' }
         ];
         div.innerHTML = fields.map(f => `
             <div class="mapping-item">
@@ -4049,7 +3104,7 @@ class StockApp {
             return;
         }
         const mapping = {};
-        ['code', 'name', 'lot', 'mfgDate', 'expiryDate', 'sellPrice', 'costPerUnit', 'stock', 'unit', 'supplier', 'barcode'].forEach(f => {
+        ['code', 'name', 'lot', 'mfgDate', 'expiryDate', 'sellPrice', 'costPerUnit', 'stock', 'unit', 'supplier', 'barcode', 'minStock', 'maxStock'].forEach(f => {
             mapping[f] = document.getElementById('map_' + f).value;
         });
         if (!mapping.name) {
@@ -4057,10 +3112,10 @@ class StockApp {
             return;
         }
 
-        // ✅ ตรวจสอบข้อมูลก่อนนำเข้า
         let errorCount = 0;
         let successCount = 0;
         let duplicateCount = 0;
+        let unknownUnitCount = 0;
         const existingCodes = new Set(this.products.map(p => p.code));
 
         this.showToast('📥 กำลังตรวจสอบและนำเข้าข้อมูล...', 'info');
@@ -4077,30 +3132,37 @@ class StockApp {
 
                 const code = idx('code') >= 0 ? String(row[idx('code')] || '').trim() : '';
                 const name = idx('name') >= 0 ? String(row[idx('name')] || '').trim() : '';
-                const lot = idx('lot') >= 0 ? String(row[idx('lot')] || '').trim() : '';
 
-                // ตรวจสอบข้อมูลจำเป็น
                 if (!name) {
                     errorCount++;
                     console.warn('⚠️ ขาดชื่อสินค้า:', row);
                     continue;
                 }
 
-                // ตรวจสอบรหัสซ้ำ
                 if (code && existingCodes.has(code)) {
                     duplicateCount++;
                     console.warn('⚠️ รหัสซ้ำ:', code);
                     continue;
                 }
 
+                // ✅ แปลงหน่วย
                 const rawStock = idx('stock') >= 0 ? parseFloat(row[idx('stock')]) || 0 : 0;
-                const unit = idx('unit') >= 0 ? String(row[idx('unit')] || '').trim() : '';
-                let convertedStock = rawStock;
-                const unitLower = unit.toLowerCase();
-                if (unitLower.includes('โหล') || unitLower === 'โหล') {
-                    convertedStock = rawStock * 12;
-                } else if (unitLower.includes('ลัง') || unitLower === 'ลัง') {
-                    convertedStock = rawStock * 12;
+                const unit = idx('unit') >= 0 ? String(row[idx('unit')] || '').trim() : 'ชิ้น';
+                let baseStock = rawStock;
+
+                if (unit && !this.unitMap[unit]) {
+                    // หน่วยไม่รู้จัก
+                    unknownUnitCount++;
+                    const factor = prompt(`⚠️ ไม่รู้จักหน่วย "${unit}"\nกรุณาใส่จำนวนเท่ากับกี่ชิ้น (เช่น 12 = 1 โหล):`, '1');
+                    if (factor && parseFloat(factor) > 0) {
+                        this.unitMap[unit] = parseFloat(factor);
+                        this.saveUnit(unit, parseFloat(factor));
+                        baseStock = rawStock * parseFloat(factor);
+                    } else {
+                        baseStock = rawStock; // ใช้ค่าเดิม
+                    }
+                } else {
+                    baseStock = this.convertToBase(rawStock, unit);
                 }
 
                 const barcode = idx('barcode') >= 0 ? String(row[idx('barcode')] || '').trim() : '';
@@ -4112,49 +3174,54 @@ class StockApp {
                     }
                 }
 
+                const minStock = idx('minStock') >= 0 ? parseInt(row[idx('minStock')]) || CONFIG.MIN_STOCK_ALERT : CONFIG.MIN_STOCK_ALERT;
+                const maxStock = idx('maxStock') >= 0 ? parseInt(row[idx('maxStock')]) || CONFIG.MAX_STOCK_ALERT : CONFIG.MAX_STOCK_ALERT;
+
                 let existingProduct = null;
                 if (code) {
                     existingProduct = this.products.find(p => p.code === code || p.id === code);
                 }
 
                 if (existingProduct) {
-                    // อัปเดตสินค้าเดิม
                     if (finalBarcode && !existingProduct.barcodes.includes(finalBarcode)) {
                         existingProduct.barcodes.push(finalBarcode);
                     }
                     if (finalBarcode && !existingProduct.primaryBarcode) {
                         existingProduct.primaryBarcode = finalBarcode;
                     }
-                    existingProduct.stock = convertedStock;
+                    existingProduct.stock = baseStock;
                     existingProduct.name = name || existingProduct.name;
-                    existingProduct.lot = lot || existingProduct.lot;
+                    existingProduct.lot = idx('lot') >= 0 ? String(row[idx('lot')] || '').trim() : existingProduct.lot;
                     existingProduct.costPerUnit = idx('costPerUnit') >= 0 ? parseFloat(row[idx('costPerUnit')]) || 0 : existingProduct.costPerUnit;
                     existingProduct.sellPrice1 = idx('sellPrice') >= 0 ? parseFloat(row[idx('sellPrice')]) || 0 : existingProduct.sellPrice1;
                     existingProduct.expiryDate = idx('expiryDate') >= 0 ? String(row[idx('expiryDate')] || '').trim() : existingProduct.expiryDate;
                     existingProduct.supplier = idx('supplier') >= 0 ? String(row[idx('supplier')] || '').trim() : existingProduct.supplier;
                     existingProduct.unit = unit || existingProduct.unit;
+                    existingProduct.minStock = minStock;
+                    existingProduct.maxStock = maxStock;
                     await new Promise(r => {
                         const req = store.put(existingProduct);
                         req.onsuccess = () => { successCount++; r(); };
                         req.onerror = () => r();
                     });
                 } else {
-                    // เพิ่มสินค้าใหม่
                     const newId = code || ('PCO' + String(Date.now() + successCount).padStart(10, '0'));
                     const product = {
                         id: newId,
                         code: code || newId,
                         name: name,
-                        lot: lot,
+                        lot: idx('lot') >= 0 ? String(row[idx('lot')] || '').trim() : '',
                         mfgDate: idx('mfgDate') >= 0 ? String(row[idx('mfgDate')] || '').trim() : '',
                         expiryDate: idx('expiryDate') >= 0 ? String(row[idx('expiryDate')] || '').trim() : '',
                         sellPrice1: idx('sellPrice') >= 0 ? parseFloat(row[idx('sellPrice')]) || 0 : 0,
                         costPerUnit: idx('costPerUnit') >= 0 ? parseFloat(row[idx('costPerUnit')]) || 0 : 0,
-                        stock: convertedStock,
+                        stock: baseStock,
                         supplier: idx('supplier') >= 0 ? String(row[idx('supplier')] || '').trim() : '',
                         primaryBarcode: finalBarcode,
                         barcodes: finalBarcode ? [finalBarcode] : [],
                         unit: unit || 'ชิ้น',
+                        minStock: minStock,
+                        maxStock: maxStock,
                         createdAt: new Date().toISOString()
                     };
                     await new Promise(r => {
@@ -4172,10 +3239,12 @@ class StockApp {
             this.updateProgress();
             this.updateAlerts();
             this.runAnalytics();
+            this.renderUnitList();
 
             let msg = `✅ นำเข้าสำเร็จ ${successCount} รายการ`;
             if (errorCount > 0) msg += `, ข้าม ${errorCount} รายการที่ข้อมูลไม่สมบูรณ์`;
             if (duplicateCount > 0) msg += `, ข้าม ${duplicateCount} รายการที่รหัสซ้ำ`;
+            if (unknownUnitCount > 0) msg += `, เพิ่มหน่วยใหม่ ${unknownUnitCount} หน่วย`;
             this.updateStatus(msg);
             this.showToast(msg, 'success');
         } catch (err) {
@@ -4538,7 +3607,7 @@ class StockApp {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF('landscape');
         doc.setFontSize(14);
-        doc.text('MediStock - รายงานการนับสต็อก v3.4.0', 14, 20);
+        doc.text('MediStock - รายงานการนับสต็อก v3.5.0', 14, 20);
         const tableData = rows.map(row => row.map(v => v !== undefined ? String(v) : ''));
         doc.autoTable({
             head: [headers.map(h => String(h))],
@@ -4686,7 +3755,8 @@ class StockApp {
                 history: this.history,
                 barcodeHistory: this.barcodeHistory,
                 branches: this.getBranches(),
-                branchId: this.branchId
+                branchId: this.branchId,
+                unitMap: this.unitMap
             };
             const json = JSON.stringify(data, null, 2);
             const blob = new Blob([json], { type: 'application/json' });
@@ -4743,12 +3813,22 @@ class StockApp {
                 this.loadBranch();
             }
 
+            if (data.unitMap) {
+                Object.keys(data.unitMap).forEach(name => {
+                    if (!this.unitMap[name]) {
+                        this.unitMap[name] = data.unitMap[name];
+                        this.saveUnit(name, data.unitMap[name]);
+                    }
+                });
+            }
+
             await this.loadProducts();
             await this.loadLocations();
             this.renderMap();
             this.updateProgress();
             this.updateAlerts();
             this.runAnalytics();
+            this.renderUnitList();
             this.showToast('✅ กู้คืนข้อมูลสำเร็จ!', 'success');
         } catch (e) {
             console.error('Restore error:', e);
@@ -4761,11 +3841,12 @@ class StockApp {
         if (!confirm('⚠️ คุณแน่ใจหรือไม่ว่าต้องการลบข้อมูลทั้งหมด?')) return;
         if (!confirm('🚨 ยืนยันครั้งสุดท้าย: ข้อมูลทั้งหมดจะถูกลบถาวร!')) return;
         try {
-            const tx = this.db.transaction(['products', 'locations', 'counts', 'history'], 'readwrite');
+            const tx = this.db.transaction(['products', 'locations', 'counts', 'history', 'units'], 'readwrite');
             tx.objectStore('products').clear();
             tx.objectStore('locations').clear();
             tx.objectStore('counts').clear();
             tx.objectStore('history').clear();
+            tx.objectStore('units').clear();
             await new Promise(r => { tx.oncomplete = r; });
             this.products = [];
             this.locations = [];
@@ -4776,6 +3857,22 @@ class StockApp {
             localStorage.removeItem('barcodeHistory_' + CONFIG.STORE_ID);
             localStorage.removeItem('countHistory_' + CONFIG.STORE_ID);
             localStorage.removeItem('sessionItems_' + CONFIG.STORE_ID);
+            // รีเซ็ตหน่วยพื้นฐาน
+            this.unitMap = {
+                'ชิ้น': 1,
+                'โหล': 12,
+                'ลัง': 12,
+                'กล่อง': 1,
+                'แผง': 10,
+                'ขวด': 1,
+                'หลอด': 1,
+                'ซอง': 1,
+                'แพ็ค': 1,
+                'แผ่น': 1,
+                'กระปุก': 1,
+                'ขีด': 1,
+                'ถุง': 1
+            };
             this.renderMap();
             this.updateLocationDropdowns();
             this.updateProgress();
@@ -4783,6 +3880,7 @@ class StockApp {
             this.updateScanBadge();
             this.updateAlerts();
             this.runAnalytics();
+            this.renderUnitList();
             this.updateStatus('🗑️ ลบข้อมูลทั้งหมดเรียบร้อย');
             this.showToast('🗑️ ลบข้อมูลทั้งหมดสำเร็จ', 'success');
         } catch (e) {
@@ -4956,7 +4054,7 @@ class StockApp {
     }
 
     // ================================================================
-    // ✅ ANALYTICS (ABC Analysis, Dead Stock, Min Stock)
+    // ✅ ANALYTICS (ABC, Dead Stock, Min/Max Stock)
     // ================================================================
     runAnalytics() {
         if (this.products.length === 0) {
@@ -4967,10 +4065,10 @@ class StockApp {
         this.calculateABC();
         this.findDeadStock();
         this.findMinStock();
+        this.findMaxStock();
         this.updateAnalyticsDashboard();
     }
 
-    // 1. ABC Analysis
     calculateABC() {
         const container = document.getElementById('abcAnalysisResult');
         const sorted = [...this.products]
@@ -5027,7 +4125,6 @@ class StockApp {
             </div>
         `;
 
-        // สร้างกราฟ ABC ด้วย Chart.js
         this.createABCChart(aItems.length, bItems.length, cItems.length);
     }
 
@@ -5035,7 +4132,6 @@ class StockApp {
         const canvas = document.getElementById('abcChart');
         if (!canvas) return;
 
-        // ถ้ามี chart เก่าให้ลบ
         if (this.abcChart) {
             this.abcChart.destroy();
             this.abcChart = null;
@@ -5076,7 +4172,6 @@ class StockApp {
         });
     }
 
-    // 2. Dead Stock
     findDeadStock() {
         const container = document.getElementById('deadStockList');
         const now = new Date();
@@ -5113,11 +4208,10 @@ class StockApp {
         }).join('');
     }
 
-    // 3. Min Stock Alert
     findMinStock() {
         const container = document.getElementById('minStockList');
         const minItems = this.products
-            .filter(p => (p.stock || 0) > 0 && (p.stock || 0) <= this.minStockThreshold)
+            .filter(p => (p.stock || 0) > 0 && (p.stock || 0) <= (p.minStock || CONFIG.MIN_STOCK_ALERT))
             .sort((a, b) => (a.stock || 0) - (b.stock || 0));
 
         if (minItems.length === 0) {
@@ -5133,6 +4227,7 @@ class StockApp {
                 <div>
                     <span style="font-weight:600;">${p.name}</span>
                     <span style="font-size:11px;color:var(--text-muted);margin-left:6px;">${p.lot || ''}</span>
+                    <span style="font-size:10px;color:var(--text-muted);">(Min: ${p.minStock || CONFIG.MIN_STOCK_ALERT})</span>
                 </div>
                 <span class="badge ${p.stock <= 3 ? 'badge-red' : p.stock <= 5 ? 'badge-warning' : 'badge-info'}">
                     ${p.stock} ชิ้น
@@ -5141,7 +4236,34 @@ class StockApp {
         `).join('');
     }
 
-    // 4. Dashboard Analytics
+    findMaxStock() {
+        const container = document.getElementById('maxStockList');
+        const maxItems = this.products
+            .filter(p => (p.stock || 0) > (p.maxStock || CONFIG.MAX_STOCK_ALERT))
+            .sort((a, b) => (b.stock || 0) - (a.stock || 0));
+
+        if (maxItems.length === 0) {
+            container.innerHTML = `<p style="text-align:center;color:var(--text-muted);padding:16px;font-size:13px;">
+                <i class="fas fa-check-circle" style="color:var(--success);font-size:20px;display:block;margin-bottom:6px;"></i>
+                ไม่มีสินค้าเกินสต็อก
+            </p>`;
+            return;
+        }
+
+        container.innerHTML = maxItems.map(p => `
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 10px;border-bottom:1px solid var(--border-color);">
+                <div>
+                    <span style="font-weight:600;">${p.name}</span>
+                    <span style="font-size:11px;color:var(--text-muted);margin-left:6px;">${p.lot || ''}</span>
+                    <span style="font-size:10px;color:var(--text-muted);">(Max: ${p.maxStock || CONFIG.MAX_STOCK_ALERT})</span>
+                </div>
+                <span class="badge badge-warning">
+                    ${p.stock} ชิ้น ⚠️
+                </span>
+            </div>
+        `).join('');
+    }
+
     updateAnalyticsDashboard() {
         const totalItems = this.products.length;
         const totalValue = this.products.reduce((sum, p) => sum + ((p.stock || 0) * (p.costPerUnit || 0)), 0);
@@ -5152,43 +4274,231 @@ class StockApp {
         document.getElementById('analyticsZeroStock').textContent = zeroStock;
     }
 
-    // ================================================================
-    // ✅ CLOUD SYNC (UI only - ใช้ Google Sheets แทน)
-    // ================================================================
-    showCloudSync() {
-        this.showToast('ℹ️ ใช้ Google Sheets Sync แทน Cloud Sync', 'info');
-        this.switchTab('settings');
-    }
+// ================================================================
+// ✅ GOOGLE SHEETS API (Multi-user จริง)
+// ================================================================
 
-    connectCloud(type) {
-        this.showToast(`ℹ️ ใช้ Google Sheets Sync แทน ${type}`, 'info');
-        this.switchTab('settings');
-    }
+// ตั้งค่า Google Sheets (ผู้ใช้ต้องใส่เอง)
+googleSheetsConfig() {
+    return {
+        apiKey: localStorage.getItem('gs_api_key') || '',
+        spreadsheetId: localStorage.getItem('gs_spreadsheet_id') || '',
+        sheetName: 'Sheet1'
+    };
+}
 
-    syncNow() {
-        this.showToast('ℹ️ ฟังก์ชันนี้จะใช้งานในระยะต่อไป', 'info');
-    }
+// บันทึกการตั้งค่า Google Sheets
+saveGoogleSheetsSettings() {
+    const apiKey = document.getElementById('gsApiKey').value.trim();
+    const spreadsheetId = document.getElementById('gsSpreadsheetId').value.trim();
+    
+    localStorage.setItem('gs_api_key', apiKey);
+    localStorage.setItem('gs_spreadsheet_id', spreadsheetId);
+    
+    this.showToast('✅ บันทึกการตั้งค่า Google Sheets สำเร็จ', 'success');
+}
 
-    // ================================================================
-    // ✅ GOOGLE SHEETS SYNC (เตรียมไว้สำหรับระยะที่ 2)
-    // ================================================================
-    googleSheetsConfig() {
-        return {
-            private_key: localStorage.getItem('gs_private_key') || '',
-            client_email: localStorage.getItem('gs_client_email') || '',
-            spreadsheet_id: localStorage.getItem('gs_spreadsheet_id') || ''
-        };
+// อ่านข้อมูลจาก Google Sheets
+async readGoogleSheet(range = 'A:Z') {
+    const config = this.googleSheetsConfig();
+    if (!config.apiKey || !config.spreadsheetId) {
+        this.showToast('⚠️ กรุณาตั้งค่า Google Sheets ในหน้า Settings ก่อน', 'warning');
+        return null;
     }
-
-    async syncSessionToGoogleSheets() {
-        this.showToast('ℹ️ ฟังก์ชันนี้จะใช้งานในระยะที่ 2', 'info');
-    }
-
-    async loadFromGoogleSheets() {
-        this.showToast('ℹ️ ฟังก์ชันนี้จะใช้งานในระยะที่ 2', 'info');
+    
+    try {
+        const url = `https://sheets.googleapis.com/v4/spreadsheets/${config.spreadsheetId}/values/${config.sheetName}!${range}?key=${config.apiKey}`;
+        const response = await fetch(url);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        
+        const data = await response.json();
+        return data.values || [];
+    } catch (e) {
+        console.error('❌ อ่าน Google Sheets ไม่สำเร็จ:', e);
+        this.showToast(`❌ อ่านข้อมูลไม่สำเร็จ: ${e.message}`, 'error');
+        return null;
     }
 }
 
+// เขียนข้อมูลไป Google Sheets (Append)
+async writeGoogleSheet(values, range = 'A:Z') {
+    const config = this.googleSheetsConfig();
+    if (!config.apiKey || !config.spreadsheetId) {
+        this.showToast('⚠️ กรุณาตั้งค่า Google Sheets ในหน้า Settings ก่อน', 'warning');
+        return null;
+    }
+    
+    try {
+        const url = `https://sheets.googleapis.com/v4/spreadsheets/${config.spreadsheetId}/values/${config.sheetName}!${range}:append?valueInputOption=USER_ENTERED&key=${config.apiKey}`;
+        
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                values: values,
+                majorDimension: 'ROWS'
+            })
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        
+        const data = await response.json();
+        return data;
+    } catch (e) {
+        console.error('❌ เขียน Google Sheets ไม่สำเร็จ:', e);
+        this.showToast(`❌ เขียนข้อมูลไม่สำเร็จ: ${e.message}`, 'error');
+        return null;
+    }
+}
+
+// ✅ ซิงค์ Session ขึ้น Google Sheets
+async syncSessionToGoogleSheets() {
+    if (this.sessionItems.length === 0) {
+        this.showToast('⚠️ ไม่มีข้อมูลที่จะซิงค์', 'warning');
+        return;
+    }
+    
+    const config = this.googleSheetsConfig();
+    if (!config.apiKey || !config.spreadsheetId) {
+        this.showToast('⚠️ กรุณาตั้งค่า Google Sheets ในหน้า Settings ก่อน', 'warning');
+        return;
+    }
+    
+    this.showToast('🔄 กำลังซิงค์ข้อมูล...', 'info');
+    document.getElementById('googleSheetsStatus').textContent = '🔄 กำลังซิงค์...';
+    
+    try {
+        // เตรียมข้อมูล
+        const headers = [
+            ['วันที่', 'เวลา', 'บาร์โค้ด', 'ชื่อสินค้า', 'Lot', 'ระบบ', 'นับ', 'ต่าง', 'ตำแหน่ง', 'ประเภท', 'หมายเหตุ', 'สาขา']
+        ];
+        
+        const rows = this.sessionItems.map(item => [
+            new Date().toLocaleDateString('th-TH'),
+            new Date().toLocaleTimeString('th-TH'),
+            item.barcode || '',
+            item.name || '',
+            item.lot || '',
+            item.system_qty || 0,
+            item.counted_qty || 0,
+            item.difference || 0,
+            item.locationName || '',
+            item.locationType || '',
+            item.note || '',
+            this.branchId || 'default'
+        ]);
+        
+        const allData = [...headers, ...rows];
+        
+        // เขียนไป Google Sheets
+        const result = await this.writeGoogleSheet(allData);
+        
+        if (result) {
+            this.showToast(`✅ ซิงค์ ${rows.length} รายการ สำเร็จ!`, 'success');
+            document.getElementById('googleSheetsStatus').textContent = `✅ ซิงค์ ${rows.length} รายการ เมื่อ ${new Date().toLocaleString()}`;
+            
+            // เคลียร์ Queue
+            this.offlineQueue = [];
+            localStorage.setItem('offlineQueue', JSON.stringify(this.offlineQueue));
+        }
+    } catch (e) {
+        console.error('❌ Sync error:', e);
+        this.showToast('❌ ซิงค์ข้อมูลไม่สำเร็จ', 'error');
+        document.getElementById('googleSheetsStatus').textContent = '❌ ซิงค์ไม่สำเร็จ: ' + e.message;
+    }
+}
+
+// ✅ โหลดข้อมูลจาก Google Sheets
+async loadFromGoogleSheets() {
+    const config = this.googleSheetsConfig();
+    if (!config.apiKey || !config.spreadsheetId) {
+        this.showToast('⚠️ กรุณาตั้งค่า Google Sheets ในหน้า Settings ก่อน', 'warning');
+        return;
+    }
+    
+    this.showToast('📥 กำลังโหลดข้อมูล...', 'info');
+    document.getElementById('googleSheetsStatus').textContent = '📥 กำลังโหลด...';
+    
+    try {
+        const data = await this.readGoogleSheet();
+        
+        if (!data || data.length <= 1) {
+            this.showToast('ℹ️ ไม่มีข้อมูลใน Google Sheets', 'info');
+            document.getElementById('googleSheetsStatus').textContent = 'ℹ️ ไม่มีข้อมูล';
+            return;
+        }
+        
+        // ข้ามหัวข้อ
+        const rows = data.slice(1);
+        const validRows = rows.filter(row => row.length >= 6 && row[3]); // ต้องมีชื่อสินค้า
+        
+        if (validRows.length === 0) {
+            this.showToast('ℹ️ ไม่พบข้อมูลที่ถูกต้อง', 'info');
+            document.getElementById('googleSheetsStatus').textContent = 'ℹ️ ไม่พบข้อมูลที่ถูกต้อง';
+            return;
+        }
+        
+        // แปลงเป็น Session Items
+        const newItems = validRows.map(row => ({
+            timestamp: row[0] ? new Date(row[0] + ' ' + (row[1] || '')).toISOString() : new Date().toISOString(),
+            barcode: row[2] || '',
+            name: row[3] || '',
+            lot: row[4] || '',
+            system_qty: parseInt(row[5]) || 0,
+            counted_qty: parseInt(row[6]) || 0,
+            difference: parseInt(row[7]) || 0,
+            locationName: row[8] || '',
+            locationType: row[9] || '',
+            note: row[10] || '',
+            branchId: row[11] || ''
+        }));
+        
+        // เพิ่มเข้า Session
+        this.sessionItems = newItems;
+        this.renderRecentScans();
+        this.updateProgress();
+        this.updateScanBadge();
+        this.generateReport();
+        this.saveSession();
+        
+        this.showToast(`✅ โหลด ${newItems.length} รายการสำเร็จ`, 'success');
+        document.getElementById('googleSheetsStatus').textContent = `✅ โหลด ${newItems.length} รายการ เมื่อ ${new Date().toLocaleString()}`;
+        
+    } catch (e) {
+        console.error('❌ Load error:', e);
+        this.showToast('❌ โหลดข้อมูลไม่สำเร็จ', 'error');
+        document.getElementById('googleSheetsStatus').textContent = '❌ โหลดไม่สำเร็จ: ' + e.message;
+    }
+}
+
+// ✅ เช็คสถานะการเชื่อมต่อ Google Sheets
+async checkGoogleSheetsStatus() {
+    const config = this.googleSheetsConfig();
+    const statusEl = document.getElementById('googleSheetsStatus');
+    
+    if (!config.apiKey || !config.spreadsheetId) {
+        statusEl.innerHTML = '⚠️ ยังไม่ได้ตั้งค่า API Key และ Spreadsheet ID';
+        return;
+    }
+    
+    try {
+        const data = await this.readGoogleSheet('A1:A1');
+        if (data) {
+            statusEl.innerHTML = '✅ เชื่อมต่อ Google Sheets สำเร็จ!';
+        } else {
+            statusEl.innerHTML = '⚠️ ไม่สามารถเชื่อมต่อ Google Sheets ได้';
+        }
+    } catch (e) {
+        statusEl.innerHTML = '❌ ไม่สามารถเชื่อมต่อได้: ' + e.message;
+    }
+}
 // ================================================================
 // ✅ GLOBAL FUNCTIONS
 // ================================================================
@@ -5196,7 +4506,7 @@ let app = null;
 document.addEventListener('DOMContentLoaded', function() {
     app = new StockApp();
     window.app = app;
-    console.log('✅ MediStock v3.4.0 พร้อมใช้งาน!');
+    console.log('✅ MediStock v3.5.0 พร้อมใช้งาน!');
 });
 
 function switchTab(name) { if (app) app.switchTab(name); }
@@ -5251,6 +4561,8 @@ function printProductLabel() { if (app) app.printProductLabel(); }
 function showCloudSync() { if (app) app.showCloudSync(); }
 function connectCloud(type) { if (app) app.connectCloud(type); }
 function syncNow() { if (app) app.syncNow(); }
+// ✅ ฟังก์ชันจัดการหน่วย
+function addUnit() { if (app) app.addUnit(); }
 
 window.selectProductFromSearch = function(productId) {
     if (app) app.selectProductFromSearch(productId);
@@ -5259,8 +4571,8 @@ window.clearPendingBarcode = function() {
     if (app) app.clearPendingBarcode();
 };
 
-console.log('✅ MediStock v3.4.0 พร้อมใช้งาน!');
-console.log('✨ MediStock v3.4.0: เพิ่มระบบเลือก Lot, นับหลายตำแหน่ง, ป้องกันนับซ้ำ, ABC Analysis, Dead Stock, Min Stock Alert');
+console.log('✅ MediStock v3.5.0 พร้อมใช้งาน!');
+console.log('✨ MediStock v3.5.0: เพิ่มระบบแปลงหน่วย, Min/Max Stock, ปรับปรุงการสแกน, Multi-language พื้นฐาน');
     </script>
 </body>
 </html>
