@@ -1,21 +1,30 @@
 {
-  "name": "ระบบนับสินค้าร้านยา",
-  "short_name": "นับสินค้า",
-  "description": "ระบบนับสินค้าในร้านยา",
+  "name": "MediStock - ระบบนับสต็อกสินค้ายา",
+  "short_name": "MediStock",
+  "description": "ระบบนับสต็อกสินค้ายา",
   "start_url": "/stockcount/",
   "display": "standalone",
-  "background_color": "#4f46e5",
-  "theme_color": "#4f46e5",
+  "orientation": "portrait",
+  "background_color": "#0ea5e9",
+  "theme_color": "#0ea5e9",
   "icons": [
     {
       "src": "android-chrome-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "android-chrome-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "apple touch icon"
     }
   ]
 }
