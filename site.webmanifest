@@ -1,55 +1,24 @@
-// MediStock Service Worker v3.2.0
-const CACHE_NAME = 'medistock-v3.2.0';
-const ASSETS = [
-    '/stockcount/',
-    '/stockcount/index.html',
-    '/stockcount/manifest.json',
-    '/stockcount/android-chrome-192x192.png',
-    '/stockcount/android-chrome-512x512.png',
-    '/stockcount/apple-touch-icon.png',
-    '/stockcount/favicon.ico',
-    '/stockcount/favicon-16x16.png',
-    '/stockcount/favicon-32x32.png'
-];
-
-self.addEventListener('install', event => {
-    event.waitUntil(
-        caches.open(CACHE_NAME)
-            .then(cache => {
-                console.log('📦 MediStock: กำลังแคชไฟล์...');
-                return cache.addAll(ASSETS);
-            })
-            .then(() => self.skipWaiting())
-    );
-});
-
-self.addEventListener('activate', event => {
-    event.waitUntil(
-        caches.keys().then(cacheNames => {
-            return Promise.all(
-                cacheNames.map(cacheName => {
-                    if (cacheName !== CACHE_NAME) {
-                        console.log('🗑️ ลบแคชเก่า:', cacheName);
-                        return caches.delete(cacheName);
-                    }
-                })
-            );
-        }).then(() => self.clients.claim())
-    );
-});
-
-self.addEventListener('fetch', event => {
-    event.respondWith(
-        caches.match(event.request)
-            .then(cachedResponse => {
-                if (cachedResponse) {
-                    return cachedResponse;
-                }
-                return fetch(event.request).catch(() => {
-                    if (event.request.headers.get('accept')?.includes('text/html')) {
-                        return caches.match('/stockcount/index.html');
-                    }
-                });
-            })
-    );
-});
+{
+  "name": "MediStock - ระบบนับสต็อกสินค้ายา",
+  "short_name": "MediStock",
+  "description": "ระบบนับสต็อกสินค้ายา พร้อมสแกนบาร์โค้ด",
+  "start_url": "/stockcount/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0ea5e9",
+  "theme_color": "#0ea5e9",
+  "icons": [
+    {
+      "src": "android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
