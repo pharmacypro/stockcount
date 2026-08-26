@@ -949,12 +949,13 @@
 // ================================================================
 // ✅ JavaScript - MediStock v3.2.1 (PART 2)
 // ================================================================
+<script>
+// ================================================================
+// ✅ JavaScript - MediStock v3.2.1
+// ================================================================
 eruda.init();
 console.log('✅ MediStock v3.2.1 กำลังเริ่มต้น...');
 
-// ================================================================
-// ✅ CONFIG
-// ================================================================
 const CONFIG = {
     GOOGLE_SHEETS: { 
         API_KEY: localStorage.getItem('apiGoogleSheets') || '', 
@@ -973,9 +974,6 @@ const CONFIG = {
     EXPIRY_WARNING_DAYS: 90
 };
 
-// ================================================================
-// ✅ MAIN APP CLASS
-// ================================================================
 class StockApp {
     constructor() {
         this.db = null;
@@ -1016,9 +1014,6 @@ class StockApp {
         this.init();
     }
 
-    // ================================================================
-    // ✅ INIT
-    // ================================================================
     async init() {
         await this.initDB();
         await this.loadLocations();
@@ -1044,9 +1039,6 @@ class StockApp {
         this.startAutoSave();
     }
 
-    // ================================================================
-    // ✅ LOAD API KEYS
-    // ================================================================
     loadApiKeys() {
         document.getElementById('apiGoogleSheets').value = localStorage.getItem('apiGoogleSheets') || '';
         document.getElementById('apiSpreadsheetId').value = localStorage.getItem('apiSpreadsheetId') || '';
@@ -1077,9 +1069,6 @@ class StockApp {
         this.showToast('✅ บันทึกการตั้งค่า API สำเร็จ', 'success');
     }
 
-    // ================================================================
-    // ✅ AUTO SAVE DRAFT
-    // ================================================================
     startAutoSave() {
         setInterval(() => {
             this.saveSession();
@@ -1109,9 +1098,6 @@ class StockApp {
         }
     }
 
-    // ================================================================
-    // ✅ BRANCH MANAGEMENT
-    // ================================================================
     getBranches() {
         const data = localStorage.getItem('pharmacy_branches');
         if (!data) {
@@ -1265,9 +1251,6 @@ class StockApp {
         this.showToast('🗑️ ลบสาขาเรียบร้อย', 'info');
     }
 
-    // ================================================================
-    // ✅ DATABASE
-    // ================================================================
     initDB() {
         return new Promise((resolve) => {
             const request = indexedDB.open('StockCountDB_' + this.branchId, 6);
@@ -1334,9 +1317,6 @@ class StockApp {
         await new Promise(r => { tx.oncomplete = r; });
     }
 
-    // ================================================================
-    // ✅ ALERTS
-    // ================================================================
     updateAlerts() {
         const zeroStock = this.products.filter(p => (p.stock || 0) === 0);
         const now = new Date();
@@ -1387,9 +1367,6 @@ class StockApp {
         this.showToast('✅ ส่งออกรายการหมดอายุ (' + expiring.length + ' รายการ)', 'success');
     }
 
-    // ================================================================
-    // ✅ AUTO SYNC
-    // ================================================================
     startAutoSync() {
         if (this.autoSyncEnabled) {
             setInterval(() => {
@@ -1463,9 +1440,6 @@ class StockApp {
         else this.showToast('⚠️ อยู่นอกระบบ กรุณาเชื่อมต่ออินเทอร์เน็ต', 'warning');
     }
 
-    // ================================================================
-    // ✅ THEME
-    // ================================================================
     loadTheme() {
         if (this.isDarkMode) {
             document.documentElement.setAttribute('data-theme', 'dark');
@@ -1485,9 +1459,6 @@ class StockApp {
         }
     }
 
-    // ================================================================
-    // ✅ UI HELPERS
-    // ================================================================
     showToast(message, type = 'info') {
         const container = document.getElementById('toastContainer');
         const toast = document.createElement('div');
@@ -1556,9 +1527,6 @@ class StockApp {
         URL.revokeObjectURL(url);
     }
 
-    // ================================================================
-    // ✅ VALIDATE BARCODE (13 หลัก)
-    // ================================================================
     validateBarcode(barcode) {
         const clean = String(barcode).replace(/[^0-9]/g, '');
         if (clean.length === 0) {
@@ -1573,9 +1541,6 @@ class StockApp {
         return { valid: true, barcode: clean };
     }
 
-    // ================================================================
-    // ✅ REFOCUS SCANNER
-    // ================================================================
     refocusScanner() {
         if (this.html5Scanner) {
             try {
@@ -1598,9 +1563,6 @@ class StockApp {
         }
     }
 
-    // ================================================================
-    // ✅ SCANNER
-    // ================================================================
     async startScanner() {
         if (typeof Html5Qrcode === 'undefined') {
             this.showToast('⚠️ ไลบรารีสแกนโหลดไม่สำเร็จ', 'error');
@@ -1707,9 +1669,6 @@ class StockApp {
         }
     }
 
-    // ================================================================
-    // ✅ BARCODE HANDLING
-    // ================================================================
     onScan(barcode) {
         console.log('📷 สแกนบาร์โค้ด:', barcode);
         this.currentBarcode = barcode;
@@ -1915,9 +1874,6 @@ class StockApp {
         this.showToast('ยกเลิกการจับคู่บาร์โค้ด', 'info');
     }
 
-    // ================================================================
-    // ✅ PRODUCT DISPLAY
-    // ================================================================
     showProduct(product) {
         const detail = document.getElementById('productDetail');
         detail.style.display = 'block';
@@ -1990,9 +1946,6 @@ class StockApp {
         }
     }
 
-    // ================================================================
-    // ✅ ADD PRODUCT
-    // ================================================================
     showAddProductModal() {
         document.getElementById('addProductModal').classList.add('show');
         document.getElementById('newProductBarcode').value = this.pendingBarcode || '';
@@ -2079,9 +2032,6 @@ class StockApp {
         this.updateAlerts();
     }
 
-    // ================================================================
-    // ✅ QTY & CONFIRM
-    // ================================================================
     manualBarcode() {
         document.getElementById('barcodeModal').classList.add('show');
         setTimeout(() => document.getElementById('manualBarcodeInput').focus(), 100);
@@ -2207,9 +2157,6 @@ class StockApp {
         } catch (e) { console.error('Save history error:', e); }
     }
 
-    // ================================================================
-    // ✅ LOCATION DROPDOWNS
-    // ================================================================
     updateLocationDropdowns() {
         const type = document.getElementById('locationType').value;
         this.selectedLocationType = type;
@@ -2388,9 +2335,6 @@ class StockApp {
         this.showToast(`✅ เพิ่มชั้น "${shelfName}" สำเร็จ`, 'success');
     }
 
-    // ================================================================
-    // ✅ UNDO / CLEAR SESSION
-    // ================================================================
     undoLast() {
         if (this.sessionItems.length === 0) {
             this.showToast('⚠️ ไม่มีรายการที่จะยกเลิก', 'warning');
@@ -2420,9 +2364,6 @@ class StockApp {
         this.showToast('🗑️ ล้าง Session เรียบร้อย', 'info');
     }
 
-    // ================================================================
-    // ✅ EDIT / DELETE ITEM
-    // ================================================================
     editItem(index) {
         this.editingIndex = index;
         const item = this.sessionItems[index];
@@ -2506,9 +2447,6 @@ class StockApp {
         this.showToast(`🗑️ ลบ ${removed[0].name} เรียบร้อย`, 'info');
     }
 
-    // ================================================================
-    // ✅ UPDATE PROGRESS
-    // ================================================================
     updateProgress() {
         const total = this.products.filter(p => (p.stock || 0) > 0).length;
         const counted = this.sessionItems.length;
@@ -2558,9 +2496,6 @@ class StockApp {
         }).join('');
     }
 
-    // ================================================================
-    // ✅ LAYOUT
-    // ================================================================
     addCabinet() {
         const type = document.getElementById('newCabinetType').value;
         const name = document.getElementById('newCabinetName').value.trim();
@@ -2752,9 +2687,6 @@ class StockApp {
         }
     }
 
-    // ================================================================
-    // ✅ FILE IMPORT
-    // ================================================================
     setupDragDrop() {
         const zone = document.getElementById('dropZone');
         zone.addEventListener('dragover', (e) => { e.preventDefault(); zone.style.borderColor = 'var(--primary)'; zone.style.background = '#eef2ff'; });
@@ -2971,9 +2903,6 @@ class StockApp {
         }
     }
 
-    // ================================================================
-    // ✅ GOOGLE SHEETS IMPORT
-    // ================================================================
     async importFromGoogleSheets() {
         const url = document.getElementById('googleSheetsUrl').value.trim();
         if (!url) { this.showToast('⚠️ กรุณาใส่ Google Sheets URL', 'warning'); return; }
@@ -3010,9 +2939,6 @@ class StockApp {
         }
     }
 
-    // ================================================================
-    // ✅ BACKUP / RESTORE
-    // ================================================================
     async backupData() {
         try {
             const data = {
@@ -3093,9 +3019,6 @@ class StockApp {
         event.target.value = '';
     }
 
-    // ================================================================
-    // ✅ QR CODE & PRODUCT LABEL
-    // ================================================================
     showQRCode(product) {
         if (!product) {
             this.showToast('⚠️ กรุณาเลือกสินค้าก่อน', 'warning');
@@ -3204,9 +3127,6 @@ class StockApp {
         this.showToast('✅ พิมพ์ป้ายสินค้าสำเร็จ', 'success');
     }
 
-    // ================================================================
-    // ✅ CLOUD SYNC
-    // ================================================================
     showCloudSync() {
         document.getElementById('cloudSyncModal').classList.add('show');
         this.updateCloudStatus();
@@ -3253,9 +3173,6 @@ class StockApp {
         }
     }
 
-    // ================================================================
-    // ✅ HISTORY EXPORT
-    // ================================================================
     exportHistory() {
         if (this.history.length === 0) {
             this.showToast('⚠️ ไม่มีประวัติการนับ', 'warning');
@@ -3282,9 +3199,6 @@ class StockApp {
         this.showToast('✅ ส่งออกประวัติการนับสำเร็จ', 'success');
     }
 
-    // ================================================================
-    // ✅ REPORT
-    // ================================================================
     finishCount() {
         if (this.sessionItems.length === 0) { this.showToast('⚠️ ยังไม่มีรายการนับ', 'warning'); return; }
         if (navigator.onLine && this.offlineQueue.length > 0) this.syncOfflineQueue();
@@ -3518,9 +3432,6 @@ class StockApp {
         }).join('');
     }
 
-    // ================================================================
-    // ✅ EXPORT
-    // ================================================================
     exportData(format) {
         if (this.sessionItems.length === 0) { this.showToast('⚠️ ไม่มีข้อมูลสำหรับส่งออก', 'warning'); return; }
         
@@ -3707,9 +3618,6 @@ class StockApp {
         this.showToast('✅ ดาวน์โหลด PDF สำเร็จ', 'success');
     }
 
-    // ================================================================
-    // ✅ CLEAR DATA
-    // ================================================================
     async clearAllData() {
         if (!confirm('⚠️ คุณแน่ใจหรือไม่ว่าต้องการลบข้อมูลทั้งหมด?')) return;
         if (!confirm('🚨 ยืนยันครั้งสุดท้าย: ข้อมูลทั้งหมดจะถูกลบถาวร!')) return;
@@ -3744,9 +3652,6 @@ class StockApp {
     }
 }
 
-// ================================================================
-// ✅ GLOBAL
-// ================================================================
 let app = null;
 document.addEventListener('DOMContentLoaded', function() {
     app = new StockApp();
@@ -3754,9 +3659,6 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('✅ MediStock v3.2.1 พร้อมใช้งาน!');
 });
 
-// ================================================================
-// ✅ GLOBAL FUNCTIONS
-// ================================================================
 function switchTab(name) { if (app) app.switchTab(name); }
 function toggleTheme() { if (app) app.toggleTheme(); }
 function changeBranch() { if (app) app.changeBranch(); }
@@ -3821,3 +3723,6 @@ window.clearPendingBarcode = function() {
 
 console.log('✅ MediStock v3.2.1 พร้อมใช้งาน!');
 console.log('✨ MediStock v3.2.1: ปรับปรุงการสแกน, เพิ่มปุ่มโฟกัส, ชื่อชั้นวางพิมพ์ได้ทุกแบบ');
+</script>
+</body>
+</html>
