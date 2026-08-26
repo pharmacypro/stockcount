@@ -12,23 +12,18 @@ const urlsToCache = [
   '/stockcount/favicon-32x32.png'
 ];
 
-// ตั้งชื่อแคช
 self.addEventListener('install', event => {
-  console.log('🔄 กำลังติดตั้ง Service Worker...');
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
         console.log('✅ เปิดแคชสำเร็จ');
-        return cache.addAll(urlsToCache)
-          .then(() => console.log('✅ แคชไฟล์ทั้งหมดสำเร็จ'))
-          .catch(err => console.error('❌ แคชล้มเหลว:', err));
+        return cache.addAll(urlsToCache);
       })
+      .catch(err => console.error('❌ แคชล้มเหลว:', err))
   );
 });
 
-// เปิดใช้งาน Service Worker
 self.addEventListener('activate', event => {
-  console.log('✅ Service Worker เปิดใช้งานแล้ว');
   event.waitUntil(
     caches.keys().then(cacheNames => {
       return Promise.all(
@@ -43,19 +38,15 @@ self.addEventListener('activate', event => {
   );
 });
 
-// ตอบสนองการร้องขอไฟล์
 self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request)
       .then(response => {
-        // ถ้ามีในแคช ให้ใช้ของในแคช
         if (response) {
           return response;
         }
-        // ถ้าไม่มี ให้โหลดจากเน็ตเวิร์ก
         return fetch(event.request)
           .then(response => {
-            // ถ้าโหลดสำเร็จ ให้เก็บไว้ในแคช
             if (!response || response.status !== 200 || response.type !== 'basic') {
               return response;
             }
@@ -65,10 +56,6 @@ self.addEventListener('fetch', event => {
                 cache.put(event.request, responseToCache);
               });
             return response;
-          })
-          .catch(() => {
-            // ถ้าไม่มีเน็ตและไม่มีในแคช
-            console.log('⚠️ ไม่มีไฟล์ในแคชและไม่มีการเชื่อมต่อ');
           });
       })
   );
