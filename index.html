@@ -583,7 +583,7 @@
             </div>
         </div>
 
-        <div class="summary-grid-4">
+        <div class="dashboard-grid">
             <div class="stat-card"><div class="stat-label"><i class="fas fa-clipboard-list"></i> รายการที่นับ</div><div class="stat-value" id="rptTotal">0</div></div>
             <div class="stat-card"><div class="stat-label"><i class="fas fa-exclamation-triangle"></i> รายการผลต่าง</div><div class="stat-value" id="rptDiff" style="color:var(--danger);">0</div></div>
             <div class="stat-card"><div class="stat-label"><i class="fas fa-coins"></i> ผลต่างต้นทุน</div><div class="stat-value" id="rptCost" style="color:var(--warning);">0</div></div>
@@ -746,7 +746,6 @@
             </div>
         </div>
 
-        <!-- ✅ ใหม่: Max Stock Alert -->
         <div class="card">
             <div class="card-title"><i class="fas fa-warehouse"></i> สินค้าเกินสต็อก (Max Stock)</div>
             <p style="font-size:11px;color:var(--text-muted);margin-bottom:8px;">
@@ -774,7 +773,6 @@
             <button class="btn btn-danger btn-block" onclick="clearAllData()" style="margin-top:6px;font-size:14px;padding:12px;"><i class="fas fa-trash"></i> ล้างข้อมูลทั้งหมด</button>
         </div>
 
-        <!-- ✅ ใหม่: จัดการหน่วยนับ -->
         <div class="card">
             <div class="card-title"><i class="fas fa-weight-scale"></i> จัดการหน่วยนับ</div>
             <p style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">
@@ -783,56 +781,58 @@
             <div style="display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap;">
                 <input type="text" class="input" id="newUnitName" placeholder="ชื่อหน่วย (เช่น โหล)" style="flex:1;font-size:13px;padding:8px 12px;min-height:38px;">
                 <input type="number" class="input" id="newUnitFactor" placeholder="เท่ากับกี่ชิ้น" style="flex:1;font-size:13px;padding:8px 12px;min-height:38px;" value="12">
-                <button class="btn btn-primary" onclick="app.addUnit()" style="font-size:13px;padding:8px 14px;min-height:38px;"><i class="fas fa-plus"></i> เพิ่มหน่วย</button>
+                <button class="btn btn-primary" onclick="addUnit()" style="font-size:13px;padding:8px 14px;min-height:38px;"><i class="fas fa-plus"></i> เพิ่มหน่วย</button>
             </div>
             <div id="unitList">
-                <!-- รายการหน่วยที่มีอยู่ -->
+                <p style="color:var(--text-muted);text-align:center;padding:8px;font-size:13px;">ยังไม่มีหน่วย</p>
             </div>
-        <!-- ✅ Google Sheets Settings -->
-<div class="card" style="border:2px solid #4285F4;background:#f8f9fa;">
-    <div class="card-title" style="color:#4285F4;font-size:14px;">
-        <i class="fab fa-google"></i> Google Sheets (Multi-user)
-    </div>
-    <p style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">
-        ใส่ API Key และ Spreadsheet ID เพื่อให้พนักงานทุกคนใช้งานร่วมกันได้
-    </p>
-    
-    <div style="margin-bottom:6px;">
-        <label style="font-weight:600;font-size:12px;display:block;margin-bottom:3px;">
-            <i class="fas fa-key"></i> Google Sheets API Key
-        </label>
-        <input type="text" class="input" id="gsApiKey" placeholder="ใส่ API Key" 
-               style="font-size:13px;padding:8px 12px;min-height:38px;">
-    </div>
-    <div style="margin-bottom:8px;">
-        <label style="font-weight:600;font-size:12px;display:block;margin-bottom:3px;">
-            <i class="fas fa-table"></i> Spreadsheet ID
-        </label>
-        <input type="text" class="input" id="gsSpreadsheetId" placeholder="ใส่ Spreadsheet ID" 
-               style="font-size:13px;padding:8px 12px;min-height:38px;">
-    </div>
-    
-    <div style="display:flex;gap:6px;flex-wrap:wrap;">
-        <button class="btn btn-primary btn-sm" onclick="app.saveGoogleSheetsSettings()" style="flex:1;background:#4285F4;font-size:12px;padding:8px 12px;min-height:38px;">
-            <i class="fas fa-save"></i> บันทึกการตั้งค่า
-        </button>
-        <button class="btn btn-outline btn-sm" onclick="app.checkGoogleSheetsStatus()" style="flex:1;font-size:12px;padding:8px 12px;min-height:38px;">
-            <i class="fas fa-plug"></i> ทดสอบเชื่อมต่อ
-        </button>
-    </div>
-    
-    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;">
-        <button class="btn btn-success btn-sm" onclick="app.syncSessionToGoogleSheets()" style="flex:1;font-size:12px;padding:8px 12px;min-height:38px;">
-            <i class="fas fa-cloud-upload-alt"></i> ซิงค์ขึ้น Google Sheets
-        </button>
-        <button class="btn btn-outline btn-sm" onclick="app.loadFromGoogleSheets()" style="flex:1;font-size:12px;padding:8px 12px;min-height:38px;">
-            <i class="fas fa-cloud-download-alt"></i> โหลดจาก Google Sheets
-        </button>
-    </div>
-    
-    <div id="googleSheetsStatus" style="font-size:11px;color:var(--text-muted);margin-top:8px;padding:6px 10px;background:var(--bg-body);border-radius:var(--radius-sm);">
-        ⚠️ ยังไม่ได้ตั้งค่า
-    </div>
+        </div>
+
+        <!-- Google Sheets Settings -->
+        <div class="card" style="border:2px solid #4285F4;background:#f8f9fa;">
+            <div class="card-title" style="color:#4285F4;font-size:14px;">
+                <i class="fab fa-google"></i> Google Sheets (Multi-user)
+            </div>
+            <p style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">
+                ใส่ API Key และ Spreadsheet ID เพื่อให้พนักงานทุกคนใช้งานร่วมกันได้
+            </p>
+            
+            <div style="margin-bottom:6px;">
+                <label style="font-weight:600;font-size:12px;display:block;margin-bottom:3px;">
+                    <i class="fas fa-key"></i> Google Sheets API Key
+                </label>
+                <input type="text" class="input" id="gsApiKey" placeholder="ใส่ API Key" 
+                       style="font-size:13px;padding:8px 12px;min-height:38px;">
+            </div>
+            <div style="margin-bottom:8px;">
+                <label style="font-weight:600;font-size:12px;display:block;margin-bottom:3px;">
+                    <i class="fas fa-table"></i> Spreadsheet ID
+                </label>
+                <input type="text" class="input" id="gsSpreadsheetId" placeholder="ใส่ Spreadsheet ID" 
+                       style="font-size:13px;padding:8px 12px;min-height:38px;">
+            </div>
+            
+            <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                <button class="btn btn-primary btn-sm" onclick="app.saveGoogleSheetsSettings()" style="flex:1;background:#4285F4;font-size:12px;padding:8px 12px;min-height:38px;">
+                    <i class="fas fa-save"></i> บันทึกการตั้งค่า
+                </button>
+                <button class="btn btn-outline btn-sm" onclick="app.checkGoogleSheetsStatus()" style="flex:1;font-size:12px;padding:8px 12px;min-height:38px;">
+                    <i class="fas fa-plug"></i> ทดสอบเชื่อมต่อ
+                </button>
+            </div>
+            
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;">
+                <button class="btn btn-success btn-sm" onclick="app.syncSessionToGoogleSheets()" style="flex:1;font-size:12px;padding:8px 12px;min-height:38px;">
+                    <i class="fas fa-cloud-upload-alt"></i> ซิงค์ขึ้น Google Sheets
+                </button>
+                <button class="btn btn-outline btn-sm" onclick="app.loadFromGoogleSheets()" style="flex:1;font-size:12px;padding:8px 12px;min-height:38px;">
+                    <i class="fas fa-cloud-download-alt"></i> โหลดจาก Google Sheets
+                </button>
+            </div>
+            
+            <div id="googleSheetsStatus" style="font-size:11px;color:var(--text-muted);margin-top:8px;padding:6px 10px;background:var(--bg-body);border-radius:var(--radius-sm);">
+                ⚠️ ยังไม่ได้ตั้งค่า
+            </div>
         </div>
     </div>
 </div>
@@ -861,7 +861,6 @@
         <input type="number" class="input" id="newProductSellPrice" placeholder="💰 ราคาขายต่อหน่วย" style="margin-bottom:6px;font-size:14px;padding:10px 14px;min-height:44px;" step="0.01">
         <input type="text" class="input" id="newProductUnit" placeholder="📦 หน่วยนับ (เช่น ชิ้น, ขวด)" style="margin-bottom:6px;font-size:14px;padding:10px 14px;min-height:44px;">
         <input type="date" class="input" id="newProductExpiry" placeholder="⏳ วันหมดอายุ" style="margin-bottom:6px;font-size:14px;padding:10px 14px;min-height:44px;">
-        <!-- ✅ ใหม่: ตั้งค่า Min/Max Stock -->
         <div style="display:flex;gap:6px;margin-top:4px;">
             <input type="number" class="input" id="newProductMinStock" placeholder="จำนวนขั้นต่ำ (Min)" style="flex:1;font-size:14px;padding:10px 14px;min-height:44px;" value="5">
             <input type="number" class="input" id="newProductMaxStock" placeholder="จำนวนสูงสุด (Max)" style="flex:1;font-size:14px;padding:10px 14px;min-height:44px;" value="100">
@@ -952,7 +951,7 @@
     </div>
 </div>
 
-<!-- ✅ ใหม่: Modal สำหรับหน่วยที่ไม่รู้จัก -->
+<!-- Modal: Unknown Unit -->
 <div class="modal-overlay" id="unknownUnitModal">
     <div class="modal">
         <div class="modal-handle"></div>
@@ -997,7 +996,7 @@ if ('serviceWorker' in navigator) {
         .catch(() => console.log('ℹ️ Service Worker ไม่ทำงาน (ต้องใช้ HTTPS)'));
 }
     // ================================================================
-// ✅ JavaScript - MediStock v3.5.0 (เต็มรูปแบบ)
+// ✅ JavaScript - MediStock v3.5.0 (ส่วนหลัก)
 // ================================================================
 eruda.init();
 console.log('✅ MediStock v3.5.0 กำลังเริ่มต้น...');
@@ -1016,8 +1015,8 @@ const CONFIG = {
     VERSION: '3.5.0',
     STORE_ID: localStorage.getItem('storeId') || 'default',
     EXPIRY_WARNING_DAYS: 90,
-    MIN_STOCK_ALERT: 5,    // ค่าเริ่มต้น
-    MAX_STOCK_ALERT: 100,  // ค่าเริ่มต้น
+    MIN_STOCK_ALERT: 5,
+    MAX_STOCK_ALERT: 100,
     DEAD_STOCK_DAYS: 90,
     ABC_A_PERCENT: 70,
     ABC_B_PERCENT: 90
@@ -1062,7 +1061,7 @@ class StockApp {
         this.maxStockThreshold = CONFIG.MAX_STOCK_ALERT;
         this.deadStockThreshold = CONFIG.DEAD_STOCK_DAYS;
 
-        // ✅ ระบบแปลงหน่วย
+        // ระบบแปลงหน่วย
         this.unitMap = {
             'ชิ้น': 1,
             'โหล': 12,
@@ -1076,15 +1075,14 @@ class StockApp {
             'แผ่น': 1,
             'กระปุก': 1,
             'ขีด': 1,
-            'ถุง': 1,
-            'ซอง': 1
+            'ถุง': 1
         };
-        this.unknownUnits = []; // เก็บหน่วยที่ไม่รู้จัก
+        this.unknownUnits = [];
         this.init();
     }
 
     // ================================================================
-    // ✅ INIT
+    // INIT
     // ================================================================
     async init() {
         await this.initDB();
@@ -1101,7 +1099,7 @@ class StockApp {
         this.startAutoSync();
         this.updateLocationDropdowns();
         this.loadSession();
-        this.loadUnits(); // ✅ โหลดหน่วยที่ผู้ใช้เพิ่ม
+        this.loadUnits();
         console.log('✅ MediStock v3.5.0 พร้อมใช้งาน!');
         if (this.products.length === 0) {
             this.updateStatus('📥 กรุณานำเข้าข้อมูลสินค้าก่อนใช้งาน');
@@ -1113,7 +1111,7 @@ class StockApp {
     }
 
     // ================================================================
-    // ✅ DATABASE
+    // DATABASE
     // ================================================================
     initDB() {
         return new Promise((resolve) => {
@@ -1186,7 +1184,9 @@ class StockApp {
         await new Promise(r => { tx.oncomplete = r; });
     }
 
-    // ✅ ระบบหน่วย
+    // ================================================================
+    // UNITS
+    // ================================================================
     async loadUnits() {
         try {
             const tx = this.db.transaction('units', 'readonly');
@@ -1208,7 +1208,6 @@ class StockApp {
         this.renderUnitList();
     }
 
-    // ✅ แปลงหน่วย
     convertUnit(value, fromUnit, toUnit) {
         const from = this.unitMap[fromUnit] || 1;
         const to = this.unitMap[toUnit] || 1;
@@ -1224,70 +1223,57 @@ class StockApp {
         return this.convertUnit(value, 'ชิ้น', unit);
     }
 
-    // ✅ จัดการหน่วยที่ไม่รู้จัก
-    handleUnknownUnit(unit, value, rowIndex) {
-        if (!this.unitMap[unit]) {
-            // เปิด Modal ให้ผู้ใช้เลือก
-            document.getElementById('unknownUnitName').textContent = `"${unit}"`;
-            document.getElementById('selectUnitMapping').value = 'ชิ้น';
-            document.getElementById('customUnitFactor').style.display = 'none';
-            document.getElementById('unknownUnitModal').classList.add('show');
-            // เก็บข้อมูลไว้รอ
-            this._pendingUnknownUnit = { unit, value, rowIndex };
-            return false;
+    renderUnitList() {
+        const container = document.getElementById('unitList');
+        if (!container) return;
+        const units = Object.keys(this.unitMap);
+        if (units.length === 0) {
+            container.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:8px;font-size:13px;">ยังไม่มีหน่วย</p>';
+            return;
         }
-        return true;
+        container.innerHTML = units.map(name => `
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 10px;border-bottom:1px solid var(--border-color);">
+                <span><strong>${name}</strong> = ${this.unitMap[name]} ชิ้น</span>
+                <button class="btn btn-danger btn-sm" onclick="app.deleteUnit('${name}')" style="font-size:10px;padding:2px 8px;min-height:28px;">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+        `).join('');
     }
 
-    confirmUnknownUnit() {
-        const select = document.getElementById('selectUnitMapping');
-        const unit = select.value;
-        const factor = parseFloat(document.getElementById('customUnitFactor').value) || 12;
-        const pending = this._pendingUnknownUnit;
-        if (!pending) return;
-
-        if (unit === 'custom') {
-            // เพิ่มหน่วยใหม่
-            const newUnitName = pending.unit;
-            this.unitMap[newUnitName] = factor;
-            this.saveUnit(newUnitName, factor);
-            this.showToast(`✅ เพิ่มหน่วย "${newUnitName}" (1 = ${factor} ชิ้น)`, 'success');
-            // แปลงค่า
-            const baseValue = pending.value * factor;
-            this._pendingConvertedValue = baseValue;
-        } else {
-            // ใช้หน่วยที่มีอยู่
-            const baseValue = this.convertToBase(pending.value, unit);
-            this._pendingConvertedValue = baseValue;
+    addUnit() {
+        const name = document.getElementById('newUnitName').value.trim();
+        const factor = parseInt(document.getElementById('newUnitFactor').value) || 12;
+        if (!name) {
+            this.showToast('⚠️ กรุณาใส่ชื่อหน่วย', 'warning');
+            return;
         }
-        document.getElementById('unknownUnitModal').classList.remove('show');
-        // ดำเนินการต่อ
-        this.processPendingRow();
+        if (this.unitMap[name]) {
+            this.showToast(`⚠️ มีหน่วย "${name}" อยู่แล้ว`, 'warning');
+            return;
+        }
+        this.unitMap[name] = factor;
+        this.saveUnit(name, factor);
+        document.getElementById('newUnitName').value = '';
+        this.showToast(`✅ เพิ่มหน่วย "${name}" (1 = ${factor} ชิ้น)`, 'success');
     }
 
-    skipUnknownUnit() {
-        const pending = this._pendingUnknownUnit;
-        if (!pending) return;
-        // ใช้ "ชิ้น" แทน
-        this._pendingConvertedValue = pending.value;
-        document.getElementById('unknownUnitModal').classList.remove('show');
-        this.processPendingRow();
-    }
-
-    processPendingRow() {
-        // ใช้ใน confirmMapping
-        // จะถูกเรียกต่อหลังจากแปลงหน่วยแล้ว
-        console.log('✅ แปลงหน่วยสำเร็จ:', this._pendingConvertedValue);
-        // ดำเนินการนำเข้าต่อ
-        if (this._pendingImportCallback) {
-            this._pendingImportCallback(this._pendingConvertedValue);
+    deleteUnit(name) {
+        if (name === 'ชิ้น') {
+            this.showToast('⚠️ ไม่สามารถลบหน่วย "ชิ้น" ได้ (เป็นหน่วยหลัก)', 'warning');
+            return;
         }
-        this._pendingUnknownUnit = null;
-        this._pendingConvertedValue = null;
+        if (!confirm(`🗑️ ยืนยันลบหน่วย "${name}"?`)) return;
+        delete this.unitMap[name];
+        const tx = this.db.transaction('units', 'readwrite');
+        const store = tx.objectStore('units');
+        store.delete(name);
+        this.renderUnitList();
+        this.showToast(`🗑️ ลบหน่วย "${name}" เรียบร้อย`, 'info');
     }
 
     // ================================================================
-    // ✅ THEME
+    // THEME
     // ================================================================
     loadTheme() {
         if (this.isDarkMode) {
@@ -1309,7 +1295,7 @@ class StockApp {
     }
 
     // ================================================================
-    // ✅ BRANCH
+    // BRANCH
     // ================================================================
     getBranches() {
         const data = localStorage.getItem('pharmacy_branches');
@@ -1402,14 +1388,16 @@ class StockApp {
             return;
         }
         container.innerHTML = this.branches.map(b => `
-            <div class="branch-manager-item">
-                <span class="name">🏪 ${b.name}</span>
-                <button class="btn btn-outline btn-sm" onclick="app.renameBranch('${b.id}')" style="min-height:30px;padding:4px 10px;font-size:11px;">
-                    <i class="fas fa-pen"></i>
-                </button>
-                <button class="btn btn-danger btn-sm" onclick="app.deleteBranch('${b.id}')" style="min-height:30px;padding:4px 10px;font-size:11px;">
-                    <i class="fas fa-trash"></i>
-                </button>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border-bottom:1px solid var(--border-color);">
+                <span>🏪 ${b.name}</span>
+                <div style="display:flex;gap:4px;">
+                    <button class="btn btn-outline btn-sm" onclick="app.renameBranch('${b.id}')" style="min-height:30px;padding:4px 10px;font-size:11px;">
+                        <i class="fas fa-pen"></i>
+                    </button>
+                    <button class="btn btn-danger btn-sm" onclick="app.deleteBranch('${b.id}')" style="min-height:30px;padding:4px 10px;font-size:11px;">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
             </div>
         `).join('');
     }
@@ -1461,60 +1449,7 @@ class StockApp {
     }
 
     // ================================================================
-    // ✅ UNIT MANAGEMENT
-    // ================================================================
-    renderUnitList() {
-        const container = document.getElementById('unitList');
-        if (!container) return;
-        const units = Object.keys(this.unitMap);
-        if (units.length === 0) {
-            container.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:8px;font-size:13px;">ยังไม่มีหน่วย</p>';
-            return;
-        }
-        container.innerHTML = units.map(name => `
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 10px;border-bottom:1px solid var(--border-color);">
-                <span><strong>${name}</strong> = ${this.unitMap[name]} ชิ้น</span>
-                <button class="btn btn-danger btn-sm" onclick="app.deleteUnit('${name}')" style="font-size:10px;padding:2px 8px;min-height:28px;">
-                    <i class="fas fa-trash"></i>
-                </button>
-            </div>
-        `).join('');
-    }
-
-    addUnit() {
-        const name = document.getElementById('newUnitName').value.trim();
-        const factor = parseInt(document.getElementById('newUnitFactor').value) || 12;
-        if (!name) {
-            this.showToast('⚠️ กรุณาใส่ชื่อหน่วย', 'warning');
-            return;
-        }
-        if (this.unitMap[name]) {
-            this.showToast(`⚠️ มีหน่วย "${name}" อยู่แล้ว`, 'warning');
-            return;
-        }
-        this.unitMap[name] = factor;
-        this.saveUnit(name, factor);
-        document.getElementById('newUnitName').value = '';
-        this.showToast(`✅ เพิ่มหน่วย "${name}" (1 = ${factor} ชิ้น)`, 'success');
-    }
-
-    deleteUnit(name) {
-        if (name === 'ชิ้น') {
-            this.showToast('⚠️ ไม่สามารถลบหน่วย "ชิ้น" ได้ (เป็นหน่วยหลัก)', 'warning');
-            return;
-        }
-        if (!confirm(`🗑️ ยืนยันลบหน่วย "${name}"?`)) return;
-        delete this.unitMap[name];
-        // ลบจาก IndexedDB
-        const tx = this.db.transaction('units', 'readwrite');
-        const store = tx.objectStore('units');
-        store.delete(name);
-        this.renderUnitList();
-        this.showToast(`🗑️ ลบหน่วย "${name}" เรียบร้อย`, 'info');
-    }
-
-    // ================================================================
-    // ✅ UI HELPERS
+    // UI HELPERS
     // ================================================================
     showToast(message, type = 'info') {
         const container = document.getElementById('toastContainer');
@@ -1586,7 +1521,7 @@ class StockApp {
     }
 
     // ================================================================
-    // ✅ AUTO SAVE
+    // AUTO SAVE
     // ================================================================
     startAutoSave() {
         setInterval(() => { this.saveSession(); }, 10000);
@@ -1616,7 +1551,7 @@ class StockApp {
     }
 
     // ================================================================
-    // ✅ NETWORK & SYNC
+    // NETWORK & SYNC
     // ================================================================
     initNetworkListener() {
         window.addEventListener('online', () => this.updateNetworkStatus(true));
@@ -1672,7 +1607,7 @@ class StockApp {
     }
 
     // ================================================================
-    // ✅ BARCODE VALIDATION
+    // BARCODE VALIDATION
     // ================================================================
     validateBarcode(barcode) {
         const clean = String(barcode).replace(/[^0-9]/g, '');
@@ -1689,7 +1624,7 @@ class StockApp {
     }
 
     // ================================================================
-    // ✅ SCANNER (หัวใจหลัก! ปรับปรุงให้สแกนได้ทุกแบบ)
+    // SCANNER
     // ================================================================
     refocusScanner() {
         if (this.html5Scanner) {
@@ -1764,7 +1699,6 @@ class StockApp {
             console.log('📷 กำลังสร้าง Html5Qrcode...');
             this.html5Scanner = new Html5Qrcode("reader");
 
-            // ✅ ปรับปรุงการตั้งค่าให้สแกนได้ทุกแบบ
             const config = {
                 fps: 30,
                 qrbox: { width: 340, height: 220 },
@@ -1802,7 +1736,6 @@ class StockApp {
                         if (navigator.vibrate) navigator.vibrate(200);
                         this.playBeepSound();
 
-                        // ✅ ทำความสะอาดบาร์โค้ด
                         const cleanBarcode = String(decodedText).replace(/[^0-9]/g, '');
                         console.log('📷 ทำความสะอาด:', cleanBarcode);
 
@@ -1820,7 +1753,6 @@ class StockApp {
                             return;
                         }
 
-                        // ✅ ส่งบาร์โค้ดที่สะอาดแล้ว
                         this.onScan(cleanBarcode);
 
                         if (this.continuousMode) {
@@ -1831,9 +1763,7 @@ class StockApp {
                         }
                     }
                 },
-                (error) => {
-                    // ไม่แสดง error ทุกครั้ง
-                }
+                (error) => {}
             );
 
             console.log('📷 Scanner เริ่มทำงานแล้ว');
@@ -1889,7 +1819,7 @@ class StockApp {
     }
 
     // ================================================================
-    // ✅ BARCODE LOOKUP
+    // BARCODE LOOKUP
     // ================================================================
     onScan(barcode) {
         console.log('📷 สแกนบาร์โค้ด:', barcode);
@@ -2091,7 +2021,7 @@ class StockApp {
     }
 
     // ================================================================
-    // ✅ SHOW PRODUCT (พร้อมเลือก Lot)
+    // SHOW PRODUCT
     // ================================================================
     showProduct(product) {
         const detail = document.getElementById('productDetail');
@@ -2118,7 +2048,6 @@ class StockApp {
         document.getElementById('qtyInput').value = 1;
         this.showExpiryWarning(product);
 
-        // Lot selection
         const lotList = document.getElementById('lotList');
         const lotSelection = document.getElementById('lotSelection');
 
@@ -2176,7 +2105,7 @@ class StockApp {
     }
 
     // ================================================================
-    // ✅ ADD PRODUCT (พร้อม Min/Max Stock)
+    // ADD PRODUCT
     // ================================================================
     showAddProductModal() {
         document.getElementById('addProductModal').classList.add('show');
@@ -2272,7 +2201,7 @@ class StockApp {
     }
 
     // ================================================================
-    // ✅ MANUAL BARCODE
+    // MANUAL BARCODE
     // ================================================================
     manualBarcode() {
         document.getElementById('barcodeModal').classList.add('show');
@@ -2301,7 +2230,7 @@ class StockApp {
     }
 
     // ================================================================
-    // ✅ CONTINUOUS MODE
+    // CONTINUOUS MODE
     // ================================================================
     toggleContinuousMode() {
         this.continuousMode = !this.continuousMode;
@@ -2323,7 +2252,7 @@ class StockApp {
     }
 
     // ================================================================
-    // ✅ QTY CONTROL
+    // QTY CONTROL
     // ================================================================
     changeQty(delta) {
         const input = document.getElementById('qtyInput');
@@ -2333,7 +2262,7 @@ class StockApp {
     }
 
     // ================================================================
-    // ✅ CONFIRM ITEM (พร้อมแปลงหน่วย)
+    // CONFIRM ITEM
     // ================================================================
     confirmItem() {
         const qty = parseInt(document.getElementById('qtyInput').value) || 0;
@@ -2351,7 +2280,6 @@ class StockApp {
 
         const product = this.currentProduct;
 
-        // ✅ ตรวจสอบการนับซ้ำในตำแหน่งเดียวกัน
         const existingIndex = this.sessionItems.findIndex(item =>
             item.barcode === (product.primaryBarcode || (product.barcodes && product.barcodes[0])) &&
             item.location === location.id
@@ -2447,7 +2375,7 @@ class StockApp {
     }
 
     // ================================================================
-    // ✅ LOCATION
+    // LOCATION
     // ================================================================
     updateLocationDropdowns() {
         const type = document.getElementById('locationType').value;
@@ -2551,7 +2479,7 @@ class StockApp {
     }
 
     // ================================================================
-    // ✅ ADD CABINET / SHELF WHILE SCANNING
+    // ADD CABINET / SHELF WHILE SCANNING
     // ================================================================
     showAddCabinetScanModal() {
         document.getElementById('addCabinetScanModal').classList.add('show');
@@ -2631,7 +2559,7 @@ class StockApp {
     }
 
     // ================================================================
-    // ✅ UNDO / CLEAR / EDIT
+    // UNDO / CLEAR / EDIT
     // ================================================================
     undoLast() {
         if (this.sessionItems.length === 0) {
@@ -2751,7 +2679,7 @@ class StockApp {
     }
 
     // ================================================================
-    // ✅ PROGRESS / RECENT
+    // PROGRESS / RECENT
     // ================================================================
     updateProgress() {
         const total = this.products.filter(p => (p.stock || 0) > 0).length;
@@ -2760,10 +2688,6 @@ class StockApp {
         document.getElementById('progressText').textContent = counted + ' / ' + total + ' (' + pct.toFixed(1) + '%)';
         const bar = document.getElementById('progressBar');
         bar.style.width = Math.min(pct, 100) + '%';
-        bar.className = 'progress-bar';
-        if (pct < 30) bar.classList.add('low');
-        else if (pct < 70) bar.classList.add('medium');
-        else if (pct >= 100) bar.classList.add('high');
     }
 
     checkCountComplete() {
@@ -2803,7 +2727,7 @@ class StockApp {
     }
 
     // ================================================================
-    // ✅ LAYOUT (MAP)
+    // LAYOUT (MAP)
     // ================================================================
     addCabinet() {
         const type = document.getElementById('newCabinetType').value;
@@ -2997,7 +2921,7 @@ class StockApp {
     }
 
     // ================================================================
-    // ✅ IMPORT (พร้อมระบบแปลงหน่วย)
+    // IMPORT
     // ================================================================
     setupDragDrop() {
         const zone = document.getElementById('dropZone');
@@ -3088,8 +3012,8 @@ class StockApp {
             { key: 'maxStock', label: '📈 จำนวนสูงสุด (Max)' }
         ];
         div.innerHTML = fields.map(f => `
-            <div class="mapping-item">
-                <label>${f.label}</label>
+            <div style="display:flex;flex-direction:column;gap:2px;">
+                <label style="font-size:12px;font-weight:600;">${f.label}</label>
                 <select class="input" id="map_${f.key}" style="font-size:13px;padding:6px 8px;min-height:38px;">
                     <option value="">-- เลือกคอลัมน์ --</option>
                     ${this.pendingHeaders.map(h => `<option value="${h}">${h}</option>`).join('')}
@@ -3115,7 +3039,6 @@ class StockApp {
         let errorCount = 0;
         let successCount = 0;
         let duplicateCount = 0;
-        let unknownUnitCount = 0;
         const existingCodes = new Set(this.products.map(p => p.code));
 
         this.showToast('📥 กำลังตรวจสอบและนำเข้าข้อมูล...', 'info');
@@ -3135,31 +3058,26 @@ class StockApp {
 
                 if (!name) {
                     errorCount++;
-                    console.warn('⚠️ ขาดชื่อสินค้า:', row);
                     continue;
                 }
 
                 if (code && existingCodes.has(code)) {
                     duplicateCount++;
-                    console.warn('⚠️ รหัสซ้ำ:', code);
                     continue;
                 }
 
-                // ✅ แปลงหน่วย
                 const rawStock = idx('stock') >= 0 ? parseFloat(row[idx('stock')]) || 0 : 0;
                 const unit = idx('unit') >= 0 ? String(row[idx('unit')] || '').trim() : 'ชิ้น';
                 let baseStock = rawStock;
 
                 if (unit && !this.unitMap[unit]) {
-                    // หน่วยไม่รู้จัก
-                    unknownUnitCount++;
                     const factor = prompt(`⚠️ ไม่รู้จักหน่วย "${unit}"\nกรุณาใส่จำนวนเท่ากับกี่ชิ้น (เช่น 12 = 1 โหล):`, '1');
                     if (factor && parseFloat(factor) > 0) {
                         this.unitMap[unit] = parseFloat(factor);
                         this.saveUnit(unit, parseFloat(factor));
                         baseStock = rawStock * parseFloat(factor);
                     } else {
-                        baseStock = rawStock; // ใช้ค่าเดิม
+                        baseStock = rawStock;
                     }
                 } else {
                     baseStock = this.convertToBase(rawStock, unit);
@@ -3244,7 +3162,6 @@ class StockApp {
             let msg = `✅ นำเข้าสำเร็จ ${successCount} รายการ`;
             if (errorCount > 0) msg += `, ข้าม ${errorCount} รายการที่ข้อมูลไม่สมบูรณ์`;
             if (duplicateCount > 0) msg += `, ข้าม ${duplicateCount} รายการที่รหัสซ้ำ`;
-            if (unknownUnitCount > 0) msg += `, เพิ่มหน่วยใหม่ ${unknownUnitCount} หน่วย`;
             this.updateStatus(msg);
             this.showToast(msg, 'success');
         } catch (err) {
@@ -3289,7 +3206,7 @@ class StockApp {
     }
 
     // ================================================================
-    // ✅ REPORT
+    // REPORT
     // ================================================================
     finishCount() {
         if (this.sessionItems.length === 0) { this.showToast('⚠️ ยังไม่มีรายการนับ', 'warning'); return; }
@@ -3322,25 +3239,23 @@ class StockApp {
 
         this.updateAlerts();
 
-        // Uncounted
         const uncountedCard = document.getElementById('uncountedCard');
         if (uncountedItems.length > 0) {
             uncountedCard.style.display = 'block';
             const tbody = document.getElementById('uncountedBody');
             tbody.innerHTML = uncountedItems.map(p => `
-                <tr class="uncounted-row">
+                <tr>
                     <td><strong>${p.name}</strong></td>
                     <td>${p.lot || '-'}</td>
-                    <td class="text-center">${p.stock || 0}</td>
-                    <td class="text-right">${(p.costPerUnit || 0).toFixed(2)}</td>
-                    <td class="text-right">${(p.sellPrice1 || 0).toFixed(2)}</td>
-                    <td class="text-right">${((p.stock || 0) * (p.sellPrice1 || 0)).toFixed(2)}</td>
+                    <td>${p.stock || 0}</td>
+                    <td>${(p.costPerUnit || 0).toFixed(2)}</td>
+                    <td>${(p.sellPrice1 || 0).toFixed(2)}</td>
+                    <td>${((p.stock || 0) * (p.sellPrice1 || 0)).toFixed(2)}</td>
                     <td style="color:${p.expiryDate && new Date(p.expiryDate) < new Date(Date.now() + 90 * 86400000) ? 'var(--danger)' : 'var(--text-muted)'}">${this.formatDate(p.expiryDate)}</td>
                 </tr>
             `).join('');
         } else { uncountedCard.style.display = 'none'; }
 
-        // Diff
         const overItems = countedItems.filter(i => i.difference > 0);
         const shortItems = countedItems.filter(i => i.difference < 0);
         const diffCard = document.getElementById('diffCard');
@@ -3439,11 +3354,11 @@ class StockApp {
             const sellDiffColor = data.totalSellDiff < 0 ? 'var(--danger)' : data.totalSellDiff > 0 ? 'var(--success)' : 'var(--text-muted)';
             html += `
                 <div style="border:1px solid var(--border-color);border-radius:var(--radius-sm);margin-bottom:6px;overflow:hidden;">
-                    <div class="collapse-header" onclick="this.nextElementSibling.classList.toggle('open')">
+                    <div onclick="this.nextElementSibling.classList.toggle('open')" style="padding:6px 10px;cursor:pointer;display:flex;justify-content:space-between;background:var(--bg-body);font-weight:600;font-size:12px;">
                         <span><i class="fas fa-map-pin"></i> ${name}</span>
                         <span>${data.items.length} รายการ | ${data.totalQty} ชิ้น</span>
                     </div>
-                    <div class="collapse-body" style="display:none;padding:8px 10px;">
+                    <div style="display:none;padding:8px 10px;">
                         <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;font-size:12px;margin-bottom:4px;">
                             <div>💰 ทุนรวม: ${data.totalCost.toFixed(2)}</div>
                             <div>💵 ขายรวม: ${data.totalSell.toFixed(2)}</div>
@@ -3514,21 +3429,21 @@ class StockApp {
                     <td><strong>${item.name}</strong></td>
                     <td>${item.lot || '-'}</td>
                     <td><span class="badge ${loc.type === 'front' ? 'badge-front' : loc.type === 'back' ? 'badge-back' : 'badge-info'}">${typeLabel}</span></td>
-                    <td><span class="location-badge">${locationLabel}</span></td>
-                    <td class="text-center">${item.system_qty}</td>
-                    <td class="text-center">${item.counted_qty}</td>
-                    <td class="text-center"><span class="badge ${diffClass}">${diffText}</span></td>
-                    <td class="text-right">${item.cost.toFixed(2)}</td>
-                    <td class="text-right">${item.sellPrice.toFixed(2)}</td>
-                    <td class="text-right" style="color:${item.cost_diff < 0 ? 'var(--danger)' : 'var(--success)'};font-weight:600;">${item.cost_diff.toFixed(2)}</td>
-                    <td class="text-right" style="color:${item.sell_diff < 0 ? 'var(--danger)' : 'var(--success)'};font-weight:600;">${item.sell_diff.toFixed(2)}</td>
+                    <td><span>${locationLabel}</span></td>
+                    <td>${item.system_qty}</td>
+                    <td>${item.counted_qty}</td>
+                    <td><span class="badge ${diffClass}">${diffText}</span></td>
+                    <td>${item.cost.toFixed(2)}</td>
+                    <td>${item.sellPrice.toFixed(2)}</td>
+                    <td style="color:${item.cost_diff < 0 ? 'var(--danger)' : 'var(--success)'};font-weight:600;">${item.cost_diff.toFixed(2)}</td>
+                    <td style="color:${item.sell_diff < 0 ? 'var(--danger)' : 'var(--success)'};font-weight:600;">${item.sell_diff.toFixed(2)}</td>
                     <td style="font-size:11px;color:var(--text-muted);">${noteDisplay}</td>
                 </tr>`;
         }).join('');
     }
 
     // ================================================================
-    // ✅ EXPORT
+    // EXPORT
     // ================================================================
     exportData(format) {
         if (this.sessionItems.length === 0) { this.showToast('⚠️ ไม่มีข้อมูลสำหรับส่งออก', 'warning'); return; }
@@ -3743,7 +3658,7 @@ class StockApp {
     }
 
     // ================================================================
-    // ✅ BACKUP / RESTORE / CLEAR
+    // BACKUP / RESTORE / CLEAR
     // ================================================================
     async backupData() {
         try {
@@ -3857,7 +3772,6 @@ class StockApp {
             localStorage.removeItem('barcodeHistory_' + CONFIG.STORE_ID);
             localStorage.removeItem('countHistory_' + CONFIG.STORE_ID);
             localStorage.removeItem('sessionItems_' + CONFIG.STORE_ID);
-            // รีเซ็ตหน่วยพื้นฐาน
             this.unitMap = {
                 'ชิ้น': 1,
                 'โหล': 12,
@@ -3890,7 +3804,7 @@ class StockApp {
     }
 
     // ================================================================
-    // ✅ ALERTS
+    // ALERTS
     // ================================================================
     updateAlerts() {
         const zeroStock = this.products.filter(p => (p.stock || 0) === 0);
@@ -3943,7 +3857,7 @@ class StockApp {
     }
 
     // ================================================================
-    // ✅ QR CODE / LABEL
+    // QR CODE / LABEL
     // ================================================================
     showQRCode(product) {
         if (!product) {
@@ -4054,7 +3968,7 @@ class StockApp {
     }
 
     // ================================================================
-    // ✅ ANALYTICS (ABC, Dead Stock, Min/Max Stock)
+    // ANALYTICS (ABC, Dead Stock, Min/Max Stock)
     // ================================================================
     runAnalytics() {
         if (this.products.length === 0) {
@@ -4116,7 +4030,7 @@ class StockApp {
             </div>
             <div style="max-height:200px;overflow-y:auto;">
                 ${results.slice(0, 15).map(p => `
-                    <div class="abc-list-item">
+                    <div style="display:flex;justify-content:space-between;padding:4px 8px;border-bottom:1px solid var(--border-color);font-size:12px;">
                         <span><span class="badge badge-abc-${p.category}">${p.category}</span> ${p.name}</span>
                         <span>${p.value.toFixed(2)} บาท (${p.percentage}%)</span>
                     </div>
@@ -4200,8 +4114,8 @@ class StockApp {
             const diff = Math.ceil((exp - now) / (1000 * 60 * 60 * 24));
             return `<div class="dead-stock-item">
                 <div>
-                    <div class="name">${p.name}</div>
-                    <div class="detail">Lot: ${p.lot || '-'} | เหลือ ${p.stock} ชิ้น | หมดอายุใน ${diff} วัน</div>
+                    <div style="font-weight:600;">${p.name}</div>
+                    <div style="font-size:12px;color:var(--text-muted);">Lot: ${p.lot || '-'} | เหลือ ${p.stock} ชิ้น | หมดอายุใน ${diff} วัน</div>
                 </div>
                 <span class="badge badge-red">⚠️ เสี่ยง</span>
             </div>`;
@@ -4274,231 +4188,258 @@ class StockApp {
         document.getElementById('analyticsZeroStock').textContent = zeroStock;
     }
 
-// ================================================================
-// ✅ GOOGLE SHEETS API (Multi-user จริง)
-// ================================================================
-
-// ตั้งค่า Google Sheets (ผู้ใช้ต้องใส่เอง)
-googleSheetsConfig() {
-    return {
-        apiKey: localStorage.getItem('gs_api_key') || '',
-        spreadsheetId: localStorage.getItem('gs_spreadsheet_id') || '',
-        sheetName: 'Sheet1'
-    };
-}
-
-// บันทึกการตั้งค่า Google Sheets
-saveGoogleSheetsSettings() {
-    const apiKey = document.getElementById('gsApiKey').value.trim();
-    const spreadsheetId = document.getElementById('gsSpreadsheetId').value.trim();
-    
-    localStorage.setItem('gs_api_key', apiKey);
-    localStorage.setItem('gs_spreadsheet_id', spreadsheetId);
-    
-    this.showToast('✅ บันทึกการตั้งค่า Google Sheets สำเร็จ', 'success');
-}
-
-// อ่านข้อมูลจาก Google Sheets
-async readGoogleSheet(range = 'A:Z') {
-    const config = this.googleSheetsConfig();
-    if (!config.apiKey || !config.spreadsheetId) {
-        this.showToast('⚠️ กรุณาตั้งค่า Google Sheets ในหน้า Settings ก่อน', 'warning');
-        return null;
+    // ================================================================
+    // ✅ GOOGLE SHEETS API (Multi-user)
+    // ================================================================
+    googleSheetsConfig() {
+        return {
+            apiKey: localStorage.getItem('gs_api_key') || '',
+            spreadsheetId: localStorage.getItem('gs_spreadsheet_id') || '',
+            sheetName: 'Sheet1'
+        };
     }
-    
-    try {
-        const url = `https://sheets.googleapis.com/v4/spreadsheets/${config.spreadsheetId}/values/${config.sheetName}!${range}?key=${config.apiKey}`;
-        const response = await fetch(url);
+
+    saveGoogleSheetsSettings() {
+        const apiKey = document.getElementById('gsApiKey').value.trim();
+        const spreadsheetId = document.getElementById('gsSpreadsheetId').value.trim();
         
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        localStorage.setItem('gs_api_key', apiKey);
+        localStorage.setItem('gs_spreadsheet_id', spreadsheetId);
+        
+        this.showToast('✅ บันทึกการตั้งค่า Google Sheets สำเร็จ', 'success');
+    }
+
+    async readGoogleSheet(range = 'A:Z') {
+        const config = this.googleSheetsConfig();
+        if (!config.apiKey || !config.spreadsheetId) {
+            this.showToast('⚠️ กรุณาตั้งค่า Google Sheets ในหน้า Settings ก่อน', 'warning');
+            return null;
         }
         
-        const data = await response.json();
-        return data.values || [];
-    } catch (e) {
-        console.error('❌ อ่าน Google Sheets ไม่สำเร็จ:', e);
-        this.showToast(`❌ อ่านข้อมูลไม่สำเร็จ: ${e.message}`, 'error');
-        return null;
-    }
-}
-
-// เขียนข้อมูลไป Google Sheets (Append)
-async writeGoogleSheet(values, range = 'A:Z') {
-    const config = this.googleSheetsConfig();
-    if (!config.apiKey || !config.spreadsheetId) {
-        this.showToast('⚠️ กรุณาตั้งค่า Google Sheets ในหน้า Settings ก่อน', 'warning');
-        return null;
-    }
-    
-    try {
-        const url = `https://sheets.googleapis.com/v4/spreadsheets/${config.spreadsheetId}/values/${config.sheetName}!${range}:append?valueInputOption=USER_ENTERED&key=${config.apiKey}`;
-        
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                values: values,
-                majorDimension: 'ROWS'
-            })
-        });
-        
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-        }
-        
-        const data = await response.json();
-        return data;
-    } catch (e) {
-        console.error('❌ เขียน Google Sheets ไม่สำเร็จ:', e);
-        this.showToast(`❌ เขียนข้อมูลไม่สำเร็จ: ${e.message}`, 'error');
-        return null;
-    }
-}
-
-// ✅ ซิงค์ Session ขึ้น Google Sheets
-async syncSessionToGoogleSheets() {
-    if (this.sessionItems.length === 0) {
-        this.showToast('⚠️ ไม่มีข้อมูลที่จะซิงค์', 'warning');
-        return;
-    }
-    
-    const config = this.googleSheetsConfig();
-    if (!config.apiKey || !config.spreadsheetId) {
-        this.showToast('⚠️ กรุณาตั้งค่า Google Sheets ในหน้า Settings ก่อน', 'warning');
-        return;
-    }
-    
-    this.showToast('🔄 กำลังซิงค์ข้อมูล...', 'info');
-    document.getElementById('googleSheetsStatus').textContent = '🔄 กำลังซิงค์...';
-    
-    try {
-        // เตรียมข้อมูล
-        const headers = [
-            ['วันที่', 'เวลา', 'บาร์โค้ด', 'ชื่อสินค้า', 'Lot', 'ระบบ', 'นับ', 'ต่าง', 'ตำแหน่ง', 'ประเภท', 'หมายเหตุ', 'สาขา']
-        ];
-        
-        const rows = this.sessionItems.map(item => [
-            new Date().toLocaleDateString('th-TH'),
-            new Date().toLocaleTimeString('th-TH'),
-            item.barcode || '',
-            item.name || '',
-            item.lot || '',
-            item.system_qty || 0,
-            item.counted_qty || 0,
-            item.difference || 0,
-            item.locationName || '',
-            item.locationType || '',
-            item.note || '',
-            this.branchId || 'default'
-        ]);
-        
-        const allData = [...headers, ...rows];
-        
-        // เขียนไป Google Sheets
-        const result = await this.writeGoogleSheet(allData);
-        
-        if (result) {
-            this.showToast(`✅ ซิงค์ ${rows.length} รายการ สำเร็จ!`, 'success');
-            document.getElementById('googleSheetsStatus').textContent = `✅ ซิงค์ ${rows.length} รายการ เมื่อ ${new Date().toLocaleString()}`;
+        try {
+            const url = `https://sheets.googleapis.com/v4/spreadsheets/${config.spreadsheetId}/values/${config.sheetName}!${range}?key=${config.apiKey}`;
+            const response = await fetch(url);
             
-            // เคลียร์ Queue
-            this.offlineQueue = [];
-            localStorage.setItem('offlineQueue', JSON.stringify(this.offlineQueue));
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+            
+            const data = await response.json();
+            return data.values || [];
+        } catch (e) {
+            console.error('❌ อ่าน Google Sheets ไม่สำเร็จ:', e);
+            this.showToast(`❌ อ่านข้อมูลไม่สำเร็จ: ${e.message}`, 'error');
+            return null;
         }
-    } catch (e) {
-        console.error('❌ Sync error:', e);
-        this.showToast('❌ ซิงค์ข้อมูลไม่สำเร็จ', 'error');
-        document.getElementById('googleSheetsStatus').textContent = '❌ ซิงค์ไม่สำเร็จ: ' + e.message;
     }
-}
 
-// ✅ โหลดข้อมูลจาก Google Sheets
-async loadFromGoogleSheets() {
-    const config = this.googleSheetsConfig();
-    if (!config.apiKey || !config.spreadsheetId) {
-        this.showToast('⚠️ กรุณาตั้งค่า Google Sheets ในหน้า Settings ก่อน', 'warning');
-        return;
-    }
-    
-    this.showToast('📥 กำลังโหลดข้อมูล...', 'info');
-    document.getElementById('googleSheetsStatus').textContent = '📥 กำลังโหลด...';
-    
-    try {
-        const data = await this.readGoogleSheet();
+    async writeGoogleSheet(values, range = 'A:Z') {
+        const config = this.googleSheetsConfig();
+        if (!config.apiKey || !config.spreadsheetId) {
+            this.showToast('⚠️ กรุณาตั้งค่า Google Sheets ในหน้า Settings ก่อน', 'warning');
+            return null;
+        }
         
-        if (!data || data.length <= 1) {
-            this.showToast('ℹ️ ไม่มีข้อมูลใน Google Sheets', 'info');
-            document.getElementById('googleSheetsStatus').textContent = 'ℹ️ ไม่มีข้อมูล';
+        try {
+            const url = `https://sheets.googleapis.com/v4/spreadsheets/${config.spreadsheetId}/values/${config.sheetName}!${range}:append?valueInputOption=USER_ENTERED&key=${config.apiKey}`;
+            
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    values: values,
+                    majorDimension: 'ROWS'
+                })
+            });
+            
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+            
+            const data = await response.json();
+            return data;
+        } catch (e) {
+            console.error('❌ เขียน Google Sheets ไม่สำเร็จ:', e);
+            this.showToast(`❌ เขียนข้อมูลไม่สำเร็จ: ${e.message}`, 'error');
+            return null;
+        }
+    }
+
+    async syncSessionToGoogleSheets() {
+        if (this.sessionItems.length === 0) {
+            this.showToast('⚠️ ไม่มีข้อมูลที่จะซิงค์', 'warning');
             return;
         }
         
-        // ข้ามหัวข้อ
-        const rows = data.slice(1);
-        const validRows = rows.filter(row => row.length >= 6 && row[3]); // ต้องมีชื่อสินค้า
-        
-        if (validRows.length === 0) {
-            this.showToast('ℹ️ ไม่พบข้อมูลที่ถูกต้อง', 'info');
-            document.getElementById('googleSheetsStatus').textContent = 'ℹ️ ไม่พบข้อมูลที่ถูกต้อง';
+        const config = this.googleSheetsConfig();
+        if (!config.apiKey || !config.spreadsheetId) {
+            this.showToast('⚠️ กรุณาตั้งค่า Google Sheets ในหน้า Settings ก่อน', 'warning');
             return;
         }
         
-        // แปลงเป็น Session Items
-        const newItems = validRows.map(row => ({
-            timestamp: row[0] ? new Date(row[0] + ' ' + (row[1] || '')).toISOString() : new Date().toISOString(),
-            barcode: row[2] || '',
-            name: row[3] || '',
-            lot: row[4] || '',
-            system_qty: parseInt(row[5]) || 0,
-            counted_qty: parseInt(row[6]) || 0,
-            difference: parseInt(row[7]) || 0,
-            locationName: row[8] || '',
-            locationType: row[9] || '',
-            note: row[10] || '',
-            branchId: row[11] || ''
-        }));
+        this.showToast('🔄 กำลังซิงค์ข้อมูล...', 'info');
+        document.getElementById('googleSheetsStatus').textContent = '🔄 กำลังซิงค์...';
         
-        // เพิ่มเข้า Session
-        this.sessionItems = newItems;
-        this.renderRecentScans();
-        this.updateProgress();
-        this.updateScanBadge();
-        this.generateReport();
-        this.saveSession();
-        
-        this.showToast(`✅ โหลด ${newItems.length} รายการสำเร็จ`, 'success');
-        document.getElementById('googleSheetsStatus').textContent = `✅ โหลด ${newItems.length} รายการ เมื่อ ${new Date().toLocaleString()}`;
-        
-    } catch (e) {
-        console.error('❌ Load error:', e);
-        this.showToast('❌ โหลดข้อมูลไม่สำเร็จ', 'error');
-        document.getElementById('googleSheetsStatus').textContent = '❌ โหลดไม่สำเร็จ: ' + e.message;
+        try {
+            const headers = [
+                ['วันที่', 'เวลา', 'บาร์โค้ด', 'ชื่อสินค้า', 'Lot', 'ระบบ', 'นับ', 'ต่าง', 'ตำแหน่ง', 'ประเภท', 'หมายเหตุ', 'สาขา']
+            ];
+            
+            const rows = this.sessionItems.map(item => [
+                new Date().toLocaleDateString('th-TH'),
+                new Date().toLocaleTimeString('th-TH'),
+                item.barcode || '',
+                item.name || '',
+                item.lot || '',
+                item.system_qty || 0,
+                item.counted_qty || 0,
+                item.difference || 0,
+                item.locationName || '',
+                item.locationType || '',
+                item.note || '',
+                this.branchId || 'default'
+            ]);
+            
+            const allData = [...headers, ...rows];
+            const result = await this.writeGoogleSheet(allData);
+            
+            if (result) {
+                this.showToast(`✅ ซิงค์ ${rows.length} รายการ สำเร็จ!`, 'success');
+                document.getElementById('googleSheetsStatus').textContent = `✅ ซิงค์ ${rows.length} รายการ เมื่อ ${new Date().toLocaleString()}`;
+                this.offlineQueue = [];
+                localStorage.setItem('offlineQueue', JSON.stringify(this.offlineQueue));
+            }
+        } catch (e) {
+            console.error('❌ Sync error:', e);
+            this.showToast('❌ ซิงค์ข้อมูลไม่สำเร็จ', 'error');
+            document.getElementById('googleSheetsStatus').textContent = '❌ ซิงค์ไม่สำเร็จ: ' + e.message;
+        }
     }
-}
 
-// ✅ เช็คสถานะการเชื่อมต่อ Google Sheets
-async checkGoogleSheetsStatus() {
-    const config = this.googleSheetsConfig();
-    const statusEl = document.getElementById('googleSheetsStatus');
-    
-    if (!config.apiKey || !config.spreadsheetId) {
-        statusEl.innerHTML = '⚠️ ยังไม่ได้ตั้งค่า API Key และ Spreadsheet ID';
-        return;
+    async loadFromGoogleSheets() {
+        const config = this.googleSheetsConfig();
+        if (!config.apiKey || !config.spreadsheetId) {
+            this.showToast('⚠️ กรุณาตั้งค่า Google Sheets ในหน้า Settings ก่อน', 'warning');
+            return;
+        }
+        
+        this.showToast('📥 กำลังโหลดข้อมูล...', 'info');
+        document.getElementById('googleSheetsStatus').textContent = '📥 กำลังโหลด...';
+        
+        try {
+            const data = await this.readGoogleSheet();
+            
+            if (!data || data.length <= 1) {
+                this.showToast('ℹ️ ไม่มีข้อมูลใน Google Sheets', 'info');
+                document.getElementById('googleSheetsStatus').textContent = 'ℹ️ ไม่มีข้อมูล';
+                return;
+            }
+            
+            const rows = data.slice(1);
+            const validRows = rows.filter(row => row.length >= 6 && row[3]);
+            
+            if (validRows.length === 0) {
+                this.showToast('ℹ️ ไม่พบข้อมูลที่ถูกต้อง', 'info');
+                document.getElementById('googleSheetsStatus').textContent = 'ℹ️ ไม่พบข้อมูลที่ถูกต้อง';
+                return;
+            }
+            
+            const newItems = validRows.map(row => ({
+                timestamp: row[0] ? new Date(row[0] + ' ' + (row[1] || '')).toISOString() : new Date().toISOString(),
+                barcode: row[2] || '',
+                name: row[3] || '',
+                lot: row[4] || '',
+                system_qty: parseInt(row[5]) || 0,
+                counted_qty: parseInt(row[6]) || 0,
+                difference: parseInt(row[7]) || 0,
+                locationName: row[8] || '',
+                locationType: row[9] || '',
+                note: row[10] || '',
+                branchId: row[11] || ''
+            }));
+            
+            this.sessionItems = newItems;
+            this.renderRecentScans();
+            this.updateProgress();
+            this.updateScanBadge();
+            this.generateReport();
+            this.saveSession();
+            
+            this.showToast(`✅ โหลด ${newItems.length} รายการสำเร็จ`, 'success');
+            document.getElementById('googleSheetsStatus').textContent = `✅ โหลด ${newItems.length} รายการ เมื่อ ${new Date().toLocaleString()}`;
+            
+        } catch (e) {
+            console.error('❌ Load error:', e);
+            this.showToast('❌ โหลดข้อมูลไม่สำเร็จ', 'error');
+            document.getElementById('googleSheetsStatus').textContent = '❌ โหลดไม่สำเร็จ: ' + e.message;
+        }
     }
-    
-    try {
-        const data = await this.readGoogleSheet('A1:A1');
-        if (data) {
-            statusEl.innerHTML = '✅ เชื่อมต่อ Google Sheets สำเร็จ!';
+
+    async checkGoogleSheetsStatus() {
+        const config = this.googleSheetsConfig();
+        const statusEl = document.getElementById('googleSheetsStatus');
+        
+        if (!config.apiKey || !config.spreadsheetId) {
+            statusEl.innerHTML = '⚠️ ยังไม่ได้ตั้งค่า API Key และ Spreadsheet ID';
+            return;
+        }
+        
+        try {
+            const data = await this.readGoogleSheet('A1:A1');
+            if (data) {
+                statusEl.innerHTML = '✅ เชื่อมต่อ Google Sheets สำเร็จ!';
+                this.showToast('✅ เชื่อมต่อ Google Sheets สำเร็จ', 'success');
+            } else {
+                statusEl.innerHTML = '⚠️ ไม่สามารถเชื่อมต่อ Google Sheets ได้';
+            }
+        } catch (e) {
+            statusEl.innerHTML = '❌ ไม่สามารถเชื่อมต่อได้: ' + e.message;
+        }
+    }
+
+    // ================================================================
+    // UNKNOWN UNIT HANDLER
+    // ================================================================
+    confirmUnknownUnit() {
+        const select = document.getElementById('selectUnitMapping');
+        const unit = select.value;
+        const factor = parseFloat(document.getElementById('customUnitFactor').value) || 12;
+        const pending = this._pendingUnknownUnit;
+        if (!pending) return;
+
+        if (unit === 'custom') {
+            const newUnitName = pending.unit;
+            this.unitMap[newUnitName] = factor;
+            this.saveUnit(newUnitName, factor);
+            this.showToast(`✅ เพิ่มหน่วย "${newUnitName}" (1 = ${factor} ชิ้น)`, 'success');
+            this._pendingConvertedValue = pending.value * factor;
         } else {
-            statusEl.innerHTML = '⚠️ ไม่สามารถเชื่อมต่อ Google Sheets ได้';
+            this._pendingConvertedValue = this.convertToBase(pending.value, unit);
         }
-    } catch (e) {
-        statusEl.innerHTML = '❌ ไม่สามารถเชื่อมต่อได้: ' + e.message;
+        document.getElementById('unknownUnitModal').classList.remove('show');
+        this.processPendingRow();
+    }
+
+    skipUnknownUnit() {
+        const pending = this._pendingUnknownUnit;
+        if (!pending) return;
+        this._pendingConvertedValue = pending.value;
+        document.getElementById('unknownUnitModal').classList.remove('show');
+        this.processPendingRow();
+    }
+
+    processPendingRow() {
+        console.log('✅ แปลงหน่วยสำเร็จ:', this._pendingConvertedValue);
+        if (this._pendingImportCallback) {
+            this._pendingImportCallback(this._pendingConvertedValue);
+        }
+        this._pendingUnknownUnit = null;
+        this._pendingConvertedValue = null;
     }
 }
+
 // ================================================================
 // ✅ GLOBAL FUNCTIONS
 // ================================================================
@@ -4558,10 +4499,6 @@ function showQRCode() { if (app) app.showQRCode(app.currentProduct); }
 function closeQRCodeModal() { if (app) app.closeQRCodeModal(); }
 function downloadQRCode() { if (app) app.downloadQRCode(); }
 function printProductLabel() { if (app) app.printProductLabel(); }
-function showCloudSync() { if (app) app.showCloudSync(); }
-function connectCloud(type) { if (app) app.connectCloud(type); }
-function syncNow() { if (app) app.syncNow(); }
-// ✅ ฟังก์ชันจัดการหน่วย
 function addUnit() { if (app) app.addUnit(); }
 
 window.selectProductFromSearch = function(productId) {
@@ -4573,6 +4510,7 @@ window.clearPendingBarcode = function() {
 
 console.log('✅ MediStock v3.5.0 พร้อมใช้งาน!');
 console.log('✨ MediStock v3.5.0: เพิ่มระบบแปลงหน่วย, Min/Max Stock, ปรับปรุงการสแกน, Multi-language พื้นฐาน');
-    </script>
+</script>
+
 </body>
 </html>
