@@ -1,24 +1,22 @@
-﻿const CACHE_NAME = 'pharmacypro-v5';  // ← เปลี่ยนเวอร์ชัน
+// MediStock Service Worker v3.2.0
+const CACHE_NAME = 'medistock-v3.2.0';
 const ASSETS = [
     '/stockcount/',
     '/stockcount/index.html',
     '/stockcount/manifest.json',
     '/stockcount/android-chrome-192x192.png',
     '/stockcount/android-chrome-512x512.png',
-    'https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap',
-    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css',
-    // ✅ ใช้ CDN เดียวกับ index.html
-    'https://cdnjs.cloudflare.com/ajax/libs/zxing-library/0.18.0/umd/index.min.js',
-    'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js',
-    'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js',
-    'https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js'
+    '/stockcount/apple-touch-icon.png',
+    '/stockcount/favicon.ico',
+    '/stockcount/favicon-16x16.png',
+    '/stockcount/favicon-32x32.png'
 ];
 
 self.addEventListener('install', event => {
     event.waitUntil(
         caches.open(CACHE_NAME)
             .then(cache => {
-                console.log('Caching assets...');
+                console.log('📦 MediStock: กำลังแคชไฟล์...');
                 return cache.addAll(ASSETS);
             })
             .then(() => self.skipWaiting())
@@ -31,7 +29,7 @@ self.addEventListener('activate', event => {
             return Promise.all(
                 cacheNames.map(cacheName => {
                     if (cacheName !== CACHE_NAME) {
-                        console.log('Deleting old cache:', cacheName);
+                        console.log('🗑️ ลบแคชเก่า:', cacheName);
                         return caches.delete(cacheName);
                     }
                 })
@@ -44,21 +42,14 @@ self.addEventListener('fetch', event => {
     event.respondWith(
         caches.match(event.request)
             .then(cachedResponse => {
-                if (cachedResponse) return cachedResponse;
-                return fetch(event.request)
-                    .then(response => {
-                        if (event.request.method !== 'GET' || !response.ok) return response;
-                        const responseToCache = response.clone();
-                        caches.open(CACHE_NAME).then(cache => {
-                            cache.put(event.request, responseToCache);
-                        });
-                        return response;
-                    })
-                    .catch(() => {
-                        if (event.request.headers.get('accept')?.includes('text/html')) {
-                            return caches.match('/stockcount/index.html');
-                        }
-                    });
+                if (cachedResponse) {
+                    return cachedResponse;
+                }
+                return fetch(event.request).catch(() => {
+                    if (event.request.headers.get('accept')?.includes('text/html')) {
+                        return caches.match('/stockcount/index.html');
+                    }
+                });
             })
     );
 });
