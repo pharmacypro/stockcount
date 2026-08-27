@@ -256,7 +256,6 @@
         .continuous-warning { display:none; background:var(--warning-light); border:2px solid var(--warning); border-radius:var(--radius-sm); padding:8px 12px; font-size:12px; color:#92400e; margin:6px 0; align-items:center; gap:8px; }
         .continuous-warning.show { display:flex; }
 
-        /* ✅ Floor Plan CSS */
         .floor-plan-container {
             background: var(--bg-body);
             border-radius: var(--radius-md);
@@ -378,7 +377,6 @@
         .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; }
         .legend-color { width: 20px; height: 20px; border-radius: 4px; border: 1px solid var(--border-color); }
 
-        /* ✅ Tooltip CSS */
         [data-tooltip] { position: relative; }
         [data-tooltip]:hover::after {
             content: attr(data-tooltip);
@@ -407,7 +405,6 @@
             z-index: 100;
         }
 
-        /* ✅ Help Modal CSS */
         .help-overlay {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -440,7 +437,6 @@
         .help-tip { margin-top: 16px; padding: 12px 16px; background: var(--warning-light); border-radius: var(--radius-sm); font-size: 13px; color: #92400e; border-left: 4px solid var(--warning); }
         .help-footer { padding: 12px 20px 20px; text-align: right; }
 
-        /* ✅ FAQ CSS */
         .faq-item { border-bottom: 1px solid var(--border-color); }
         .faq-item:last-child { border-bottom: none; }
         .faq-question {
@@ -624,8 +620,8 @@
         <div class="card" style="border:2px solid var(--info);background:var(--info-light);">
             <div class="card-title" style="color:#1e40af;font-size:14px;"><i class="fas fa-database"></i> สำรองและกู้คืนข้อมูล (Backup & Restore)</div>
             <div style="display:flex;gap:6px;flex-wrap:wrap;">
-                <button class="btn btn-primary btn-sm" onclick="backupData()" style="flex:1;font-size:12px;padding:8px 12px;min-height:38px;" data-tooltip="ดาวน์โหลดไฟล์สำรองข้อมูลทั้งหมด"><i class="fas fa-download"></i> ดาวน์โหลดไฟล์สำรอง</button>
-                <button class="btn btn-outline btn-sm" onclick="document.getElementById('restoreInput').click()" style="flex:1;font-size:12px;padding:8px 12px;min-height:38px;" data-tooltip="เลือกไฟล์ Backup เพื่อกู้คืนข้อมูล"><i class="fas fa-upload"></i> กู้คืนข้อมูล</button>
+                <button class="btn btn-primary btn-sm" onclick="backupData()" style="flex:1;font-size:12px;padding:8px 12px;min-height:38px;"><i class="fas fa-download"></i> ดาวน์โหลดไฟล์สำรอง</button>
+                <button class="btn btn-outline btn-sm" onclick="document.getElementById('restoreInput').click()" style="flex:1;font-size:12px;padding:8px 12px;min-height:38px;"><i class="fas fa-upload"></i> กู้คืนข้อมูล</button>
                 <input type="file" id="restoreInput" accept=".json" style="display:none" onchange="restoreData(event)">
             </div>
             <p style="font-size:10px;color:var(--text-muted);margin-top:4px;"><i class="fas fa-info-circle"></i> ไฟล์สำรองมีข้อมูลสินค้า, ตู้/ชั้น, ประวัติการนับ, บาร์โค้ด, และสาขาทั้งหมด</p>
@@ -633,7 +629,7 @@
 
         <div class="card" style="border:2px solid var(--danger);background:var(--danger-light);">
             <div class="card-title" style="color:var(--danger);font-size:14px;"><i class="fas fa-exclamation-triangle"></i> จัดการข้อมูลระบบ</div>
-            <button class="btn btn-danger btn-block" onclick="clearAllData()" style="font-size:14px;padding:12px;" data-tooltip="ลบข้อมูลทั้งหมด (ไม่สามารถกู้คืนได้)"><i class="fas fa-trash"></i> ล้างข้อมูลทั้งหมด</button>
+            <button class="btn btn-danger btn-block" onclick="clearAllData()" style="font-size:14px;padding:12px;"><i class="fas fa-trash"></i> ล้างข้อมูลทั้งหมด</button>
             <p style="font-size:11px;color:var(--text-muted);margin-top:6px;"><i class="fas fa-info-circle"></i> คำเตือน: การลบข้อมูลจะไม่สามารถกู้คืนได้</p>
         </div>
     </div>
@@ -642,7 +638,7 @@
     <div class="page" id="page-scan">
         <div class="card" style="padding:8px;">
             <div class="flex-between" style="flex-wrap:wrap;gap:4px;">
-                <button class="btn btn-primary btn-sm" onclick="showAddProductModal()" style="font-size:12px;padding:6px 14px;min-height:36px;" data-tooltip="เพิ่มสินค้าใหม่เข้าระบบ"><i class="fas fa-plus"></i> เพิ่มสินค้า</button>
+                <button class="btn btn-primary btn-sm" onclick="showAddProductModal()" style="font-size:12px;padding:6px 14px;min-height:36px;"><i class="fas fa-plus"></i> เพิ่มสินค้า</button>
                 <div style="font-size:12px;font-weight:600;color:var(--text-muted);">
                     <i class="fas fa-info-circle"></i> เลือกตำแหน่งก่อนนับ
                 </div>
@@ -672,11 +668,12 @@
             </div>
             <div class="scanner-status idle" id="scannerStatus"><i class="fas fa-circle" style="font-size:8px;"></i> กล้องปิดอยู่</div>
             <div class="scanner-controls">
-                <button class="btn btn-primary" onclick="app.toggleScanner()" id="btnToggleScanner" data-tooltip="เปิด/ปิดกล้องสแกนบาร์โค้ด"><i class="fas fa-camera"></i> เปิดกล้อง</button>
-                <button class="btn btn-outline btn-sm" onclick="manualBarcode()" data-tooltip="พิมพ์บาร์โค้ดด้วยมือ (กรณีสแกนไม่ได้)"><i class="fas fa-keyboard"></i> ใส่รหัส</button>
-                <button class="btn btn-sm" onclick="toggleContinuousMode()" id="btnContinuous" style="background:var(--text-muted);color:#fff;" data-tooltip="เปิด/ปิดโหมดต่อเนื่อง (สแกนแล้วนับ 1 ชิ้นทันที)"><i class="fas fa-infinity"></i> ต่อเนื่อง: ปิด</button>
-                <button class="btn btn-sm" onclick="refocusScanner()" style="background:var(--primary);color:#fff;min-height:36px;padding:6px 12px;font-size:12px;" data-tooltip="ปรับโฟกัสกล้องให้คมชัด"><i class="fas fa-crosshairs"></i> โฟกัส</button>
-                <button class="btn btn-sm" onclick="app.testCamera()" style="background:var(--warning);color:#fff;min-height:36px;padding:6px 12px;font-size:11px;" data-tooltip="ทดสอบว่ากล้องทำงานปกติหรือไม่"><i class="fas fa-bug"></i> ทดสอบ</button>
+                <button class="btn btn-primary" onclick="app.toggleScanner()" id="btnToggleScanner"><i class="fas fa-camera"></i> เปิดกล้อง</button>
+                <button class="btn btn-outline btn-sm" onclick="manualBarcode()"><i class="fas fa-keyboard"></i> ใส่รหัส</button>
+                <button class="btn btn-sm" onclick="toggleContinuousMode()" id="btnContinuous" style="background:var(--text-muted);color:#fff;"><i class="fas fa-infinity"></i> ต่อเนื่อง: ปิด</button>
+                <button class="btn btn-sm" onclick="refocusScanner()" style="background:var(--primary);color:#fff;min-height:36px;padding:6px 12px;font-size:12px;"><i class="fas fa-crosshairs"></i> โฟกัส</button>
+                <button class="btn btn-sm" onclick="app.toggleFlash()" id="flashBtn" style="background:var(--warning);color:#fff;min-height:36px;padding:6px 12px;font-size:11px;"><i class="fas fa-bolt"></i> ไฟฉาย</button>
+                <button class="btn btn-sm" onclick="app.testCamera()" style="background:var(--info);color:#fff;min-height:36px;padding:6px 12px;font-size:11px;"><i class="fas fa-bug"></i> ทดสอบ</button>
             </div>
             <div class="continuous-warning" id="continuousWarning">
                 <i class="fas fa-exclamation-triangle"></i>
@@ -723,9 +720,9 @@
             </div>
             
             <div class="qty-control">
-                <button class="qty-btn" onclick="changeQty(-1)" data-tooltip="ลดจำนวน 1"><i class="fas fa-minus"></i></button>
+                <button class="qty-btn" onclick="changeQty(-1)"><i class="fas fa-minus"></i></button>
                 <input type="number" class="qty-input" id="qtyInput" value="1" min="0" inputmode="numeric">
-                <button class="qty-btn" onclick="changeQty(1)" data-tooltip="เพิ่มจำนวน 1"><i class="fas fa-plus"></i></button>
+                <button class="qty-btn" onclick="changeQty(1)"><i class="fas fa-plus"></i></button>
             </div>
 
             <div class="location-selector">
@@ -744,8 +741,8 @@
                     <select id="locationShelf">
                         <option value="new">➕ สร้างชั้นใหม่</option>
                     </select>
-                    <button class="btn-add-location" onclick="showAddCabinetScanModal()" id="btnAddCabinetScan" style="display:none;" data-tooltip="เพิ่มตู้ใหม่"><i class="fas fa-plus"></i> ตู้</button>
-                    <button class="btn-add-location" onclick="showAddShelfScanModal()" id="btnAddShelfScan" style="display:none;" data-tooltip="เพิ่มชั้นวางใหม่"><i class="fas fa-plus"></i> ชั้น</button>
+                    <button class="btn-add-location" onclick="showAddCabinetScanModal()" id="btnAddCabinetScan" style="display:none;"><i class="fas fa-plus"></i> ตู้</button>
+                    <button class="btn-add-location" onclick="showAddShelfScanModal()" id="btnAddShelfScan" style="display:none;"><i class="fas fa-plus"></i> ชั้น</button>
                 </div>
                 <div style="font-size:11px;color:var(--text-muted);margin-top:4px;" id="selectedLocationDisplay">
                     📍 เลือกตำแหน่ง
@@ -758,11 +755,16 @@
             </div>
 
             <div style="display:flex;gap:6px;margin:8px 0;flex-wrap:wrap;">
-                <button class="btn btn-outline btn-sm" onclick="app.editProductInfo(app.currentProduct?.id)" style="flex:1;font-size:12px;padding:6px 12px;min-height:36px;" data-tooltip="แก้ไขข้อมูลสินค้า (ชื่อ, ราคา, หมดอายุ)"><i class="fas fa-pencil-alt"></i> แก้ไขข้อมูลสินค้า</button>
-                <button class="btn btn-warning btn-sm" onclick="app.recountProduct()" style="flex:1;font-size:12px;padding:6px 12px;min-height:36px;color:#fff;" data-tooltip="ลบการนับเดิมและเริ่มนับใหม่"><i class="fas fa-undo"></i> นับใหม่</button>
+                <button class="btn btn-outline btn-sm" onclick="app.editProductInfo(app.currentProduct?.id)" style="flex:1;font-size:12px;padding:6px 12px;min-height:36px;"><i class="fas fa-pencil-alt"></i> แก้ไขข้อมูลสินค้า</button>
+                <button class="btn btn-warning btn-sm" onclick="app.recountProduct()" style="flex:1;font-size:12px;padding:6px 12px;min-height:36px;color:#fff;"><i class="fas fa-undo"></i> นับใหม่</button>
             </div>
 
-            <button class="btn btn-success btn-block" onclick="confirmItem()" style="font-size:16px;padding:14px;min-height:52px;" data-tooltip="บันทึกการนับสินค้าชิ้นนี้"><i class="fas fa-check-circle"></i> ยืนยันการนับ</button>
+            <button class="btn btn-success btn-block" onclick="confirmItem()" style="font-size:16px;padding:14px;min-height:52px;"><i class="fas fa-check-circle"></i> ยืนยันการนับ</button>
+            
+            <!-- ✅ ปุ่มนับเพิ่ม (แก้ปัญหาสินค้านับไปแล้วแต่อยากเพิ่ม) -->
+            <button class="btn btn-outline btn-block" onclick="app.addMoreCount()" style="margin-top:6px;font-size:15px;padding:12px;min-height:44px;border-color:var(--success);color:var(--success);">
+                <i class="fas fa-plus-circle"></i> นับเพิ่ม (ไม่ลบของเดิม)
+            </button>
         </div>
 
         <!-- RECENT -->
@@ -773,63 +775,53 @@
             </div>
             <div id="recentScans"><p style="text-align:center;color:var(--text-muted);padding:16px;font-size:13px;"><i class="fas fa-inbox" style="font-size:20px;display:block;margin-bottom:6px;opacity:0.5;"></i>ยังไม่มีประวัติการสแกน</p></div>
             <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;">
-                <button class="btn btn-outline btn-sm" onclick="undoLast()" style="flex:1;font-size:12px;padding:8px 12px;min-height:36px;" data-tooltip="ยกเลิกรายการนับล่าสุด"><i class="fas fa-undo"></i> ยกเลิกล่าสุด</button>
-                <button class="btn btn-danger btn-sm" onclick="clearSession()" style="flex:1;font-size:12px;padding:8px 12px;min-height:36px;" data-tooltip="ลบข้อมูลการนับทั้งหมด (เริ่มใหม่)"><i class="fas fa-trash"></i> เริ่มนับใหม่</button>
-                <button class="btn btn-primary btn-sm" onclick="finishCount()" style="flex:1;font-size:12px;padding:8px 12px;min-height:36px;" data-tooltip="สร้างรายงานสรุปการนับ"><i class="fas fa-flag-checkered"></i> สรุปผล</button>
+                <button class="btn btn-outline btn-sm" onclick="undoLast()" style="flex:1;font-size:12px;padding:8px 12px;min-height:36px;"><i class="fas fa-undo"></i> ยกเลิกล่าสุด</button>
+                <button class="btn btn-danger btn-sm" onclick="clearSession()" style="flex:1;font-size:12px;padding:8px 12px;min-height:36px;"><i class="fas fa-trash"></i> เริ่มนับใหม่</button>
+                <button class="btn btn-primary btn-sm" onclick="finishCount()" style="flex:1;font-size:12px;padding:8px 12px;min-height:36px;"><i class="fas fa-flag-checkered"></i> สรุปผล</button>
             </div>
         </div>
     </div>
 
-    <!-- PAGE: LAYOUT (Floor Plan) -->
+    <!-- PAGE: LAYOUT -->
     <div class="page" id="page-layout">
         <div class="card">
-            <div class="card-title">
-                <i class="fas fa-sitemap"></i> ผังร้าน (Floor Plan)
-                <div style="display:flex;gap:4px;margin-left:auto;">
-                    <button class="btn btn-sm btn-outline" onclick="app.toggleFloorPlanEdit()" style="font-size:11px;padding:4px 12px;min-height:30px;" data-tooltip="เข้าโหมดแก้ไขผังร้าน (ลาก-วางตู้ได้)">
-                        <i class="fas fa-edit"></i> จัดเรียงตำแหน่ง
-                    </button>
-                    <button class="btn btn-sm btn-success" onclick="app.exportFloorPlanPDF()" style="font-size:11px;padding:4px 12px;min-height:30px;" data-tooltip="ส่งออกผังร้านเป็นไฟล์ PDF">
-                        <i class="fas fa-file-pdf"></i> Export PDF
-                    </button>
+            <div class="card-title"><i class="fas fa-sitemap"></i> ผังร้าน</div>
+            <p style="font-size:11px;color:var(--text-muted);margin-bottom:8px;"><i class="fas fa-info-circle"></i> จัดการตู้และชั้นวางสินค้า แบ่งเป็นหน้าร้านและหลังร้าน<br>
+            <strong>ชื่อชั้นวาง</strong> สามารถพิมพ์ได้ทุกแบบ เช่น 1, ชั้น 1, ชั้นยาแก้ไอ, A1</p>
+            
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
+                <div style="padding:6px;background:var(--success-light);border-radius:var(--radius-sm);text-align:center;font-size:12px;font-weight:600;color:#065f46;">
+                    <i class="fas fa-store"></i> หน้าร้าน
+                </div>
+                <div style="padding:6px;background:var(--warning-light);border-radius:var(--radius-sm);text-align:center;font-size:12px;font-weight:600;color:#92400e;">
+                    <i class="fas fa-warehouse"></i> หลังร้าน
                 </div>
             </div>
-            
-            <div style="font-size:11px;color:var(--text-muted);margin-bottom:8px;padding:6px 10px;background:var(--bg-body);border-radius:var(--radius-sm);">
-                <i class="fas fa-info-circle"></i> 
-                คลิกที่ตู้เพื่อจัดการชั้นวาง • ดับเบิ้ลคลิกเพื่อไปนับสินค้า • 
-                <span id="editModeHint">กด "จัดเรียงตำแหน่ง" เพื่อย้ายตู้ในผัง</span>
+
+            <div class="input-group" style="margin-bottom:8px;">
+                <select id="newCabinetType" style="flex:1;padding:8px 10px;border:2px solid var(--border-color);border-radius:var(--radius-sm);font-size:13px;background:var(--bg-card);color:var(--text-main);min-height:42px;">
+                    <option value="front">🏪 หน้าร้าน</option>
+                    <option value="back">📦 หลังร้าน</option>
+                </select>
+                <input type="text" class="input" id="newCabinetName" placeholder="ชื่อตู้ใหม่" style="flex:2;font-size:13px;padding:8px 12px;min-height:42px;">
+                <button class="btn btn-primary" onclick="addCabinet()" style="flex-shrink:0;font-size:13px;padding:8px 14px;min-height:42px;"><i class="fas fa-plus"></i> เพิ่มตู้</button>
             </div>
-            
-            <div class="floor-plan-container" id="floorPlanContainer">
-                <div class="floor-plan" id="floorPlan">
-                    <div style="text-align:center;color:var(--text-muted);padding:40px;grid-column:1/-1;font-size:14px;">
-                        <i class="fas fa-boxes" style="font-size:32px;display:block;margin-bottom:8px;opacity:0.5;"></i>
-                        ยังไม่มีตู้ในผังร้าน<br>
-                        <small>เพิ่มตู้ด้านล่าง แล้วลากไปวางในผัง</small>
+            <div class="pharmacy-map" id="pharmacyMap">
+                <div class="pharmacy-grid" id="cabinetGrid">
+                    <div style="text-align:center;color:var(--text-muted);padding:28px;grid-column:1/-1;font-size:14px;">
+                        <i class="fas fa-boxes" style="font-size:32px;display:block;margin-bottom:6px;opacity:0.5;"></i>
+                        ยังไม่มีตู้สินค้า<br><small>เพิ่มตู้ด้านบนเพื่อเริ่มจัดผังร้าน</small>
                     </div>
                 </div>
             </div>
-            
-            <div class="floor-plan-legend">
-                <div class="legend-item"><span class="legend-color" style="background:#dcfce7;"></span> หน้าร้าน</div>
-                <div class="legend-item"><span class="legend-color" style="background:#fef3c7;"></span> กลางร้าน</div>
-                <div class="legend-item"><span class="legend-color" style="background:#fee2e2;"></span> หลังร้าน</div>
-                <div class="legend-item"><span class="legend-color" style="background:#dbeafe;border:2px dashed var(--primary);"></span> ตำแหน่งว่าง</div>
-            </div>
         </div>
-
-        <div class="card">
-            <div class="card-title"><i class="fas fa-plus-circle"></i> เพิ่มตู้ใหม่</div>
-            <div style="display:flex;gap:6px;flex-wrap:wrap;">
-                <select id="newCabinetType" style="flex:1;padding:8px 10px;border:2px solid var(--border-color);border-radius:var(--radius-sm);font-size:13px;background:var(--bg-card);color:var(--text-main);min-height:42px;">
-                    <option value="front">🏪 หน้าร้าน (แถวหน้า)</option>
-                    <option value="middle">🏬 กลางร้าน (แถวกลาง)</option>
-                    <option value="back">📦 หลังร้าน (แถวหลัง)</option>
-                </select>
-                <input type="text" class="input" id="newCabinetName" placeholder="ชื่อตู้ (เช่น ตู้ A1)" style="flex:2;font-size:13px;padding:8px 12px;min-height:42px;">
-                <button class="btn btn-primary" onclick="app.addCabinetWithLayout()" style="flex-shrink:0;font-size:13px;padding:8px 14px;min-height:42px;" data-tooltip="เพิ่มตู้ใหม่เข้าไปในผังร้าน"><i class="fas fa-plus"></i> เพิ่มตู้</button>
+        <div class="card" id="shelfCard" style="display:none;">
+            <div class="card-title" id="shelfCardTitle"><i class="fas fa-layer-group"></i> จัดการชั้นในตู้</div>
+            <div class="input-group" style="margin-bottom:8px;">
+                <input type="text" class="input" id="newShelfName" placeholder="ชื่อชั้น (เช่น 1, ชั้น 1, ชั้นยาแก้ไอ, A1)" style="flex:2;font-size:13px;padding:8px 12px;min-height:42px;">
+                <button class="btn btn-primary" onclick="addShelfToCabinet()" style="flex:1;font-size:13px;padding:8px 14px;min-height:42px;"><i class="fas fa-plus"></i> เพิ่มชั้นวาง</button>
             </div>
+            <div id="shelfList"></div>
         </div>
     </div>
 
@@ -857,12 +849,12 @@
                 <div style="background:var(--danger-light);border-radius:var(--radius-md);padding:8px;">
                     <div style="font-weight:700;font-size:12px;color:#991b1b;"><i class="fas fa-box"></i> สต็อก 0</div>
                     <div id="zeroStockCount" style="font-size:18px;font-weight:800;color:#991b1b;">0</div>
-                    <button class="btn btn-sm btn-outline-danger" onclick="exportZeroStock()" style="font-size:10px;padding:4px 8px;min-height:28px;margin-top:4px;" data-tooltip="ส่งออกรายการสินค้าที่สต็อก 0"><i class="fas fa-file-export"></i> Export</button>
+                    <button class="btn btn-sm btn-outline-danger" onclick="exportZeroStock()" style="font-size:10px;padding:4px 8px;min-height:28px;margin-top:4px;"><i class="fas fa-file-export"></i> Export</button>
                 </div>
                 <div style="background:var(--warning-light);border-radius:var(--radius-md);padding:8px;">
                     <div style="font-weight:700;font-size:12px;color:#92400e;"><i class="fas fa-clock"></i> หมดอายุ</div>
                     <div id="expiryCount" style="font-size:18px;font-weight:800;color:#92400e;">0</div>
-                    <button class="btn btn-sm btn-outline-warning" onclick="exportExpiryReport()" style="font-size:10px;padding:4px 8px;min-height:28px;margin-top:4px;" data-tooltip="ส่งออกรายการสินค้าใกล้หมดอายุ"><i class="fas fa-file-export"></i> Export</button>
+                    <button class="btn btn-sm btn-outline-warning" onclick="exportExpiryReport()" style="font-size:10px;padding:4px 8px;min-height:28px;margin-top:4px;"><i class="fas fa-file-export"></i> Export</button>
                 </div>
             </div>
         </div>
@@ -909,12 +901,12 @@
             <div class="flex-between" style="flex-wrap:wrap;gap:6px;">
                 <span class="card-title" style="margin:0;font-size:14px;"><i class="fas fa-table"></i> รายละเอียดการนับ</span>
                 <div style="display:flex;gap:4px;flex-wrap:wrap;">
-                    <button class="btn btn-outline btn-sm" onclick="exportData('csv')" style="font-size:11px;padding:4px 10px;min-height:30px;" data-tooltip="ส่งออกเป็น CSV"><i class="fas fa-file-csv"></i> CSV</button>
-                    <button class="btn btn-outline btn-sm" onclick="exportData('xlsx')" style="font-size:11px;padding:4px 10px;min-height:30px;" data-tooltip="ส่งออกเป็น Excel"><i class="fas fa-file-excel"></i> Excel</button>
-                    <button class="btn btn-outline btn-sm" onclick="exportData('pdf')" style="font-size:11px;padding:4px 10px;min-height:30px;" data-tooltip="ส่งออกเป็น PDF"><i class="fas fa-file-pdf"></i> PDF</button>
-                    <button class="btn btn-outline-success btn-sm" onclick="exportLocationReport()" style="font-size:11px;padding:4px 10px;min-height:30px;" data-tooltip="ส่งออกรายงานแยกตามตู้/ชั้น"><i class="fas fa-map-pin"></i> ตู้/ชั้น</button>
-                    <button class="btn btn-outline-success btn-sm" onclick="exportBarcodeMaster()" style="font-size:11px;padding:4px 10px;min-height:30px;" data-tooltip="ส่งออกรายการบาร์โค้ดทั้งหมด"><i class="fas fa-barcode"></i> Master</button>
-                    <button class="btn btn-outline-info btn-sm" onclick="exportHistory()" style="font-size:11px;padding:4px 10px;min-height:30px;" data-tooltip="ส่งออกประวัติการนับทั้งหมด"><i class="fas fa-history"></i> History</button>
+                    <button class="btn btn-outline btn-sm" onclick="exportData('csv')" style="font-size:11px;padding:4px 10px;min-height:30px;"><i class="fas fa-file-csv"></i> CSV</button>
+                    <button class="btn btn-outline btn-sm" onclick="exportData('xlsx')" style="font-size:11px;padding:4px 10px;min-height:30px;"><i class="fas fa-file-excel"></i> Excel</button>
+                    <button class="btn btn-outline btn-sm" onclick="exportData('pdf')" style="font-size:11px;padding:4px 10px;min-height:30px;"><i class="fas fa-file-pdf"></i> PDF</button>
+                    <button class="btn btn-outline-success btn-sm" onclick="exportLocationReport()" style="font-size:11px;padding:4px 10px;min-height:30px;"><i class="fas fa-map-pin"></i> ตู้/ชั้น</button>
+                    <button class="btn btn-outline-success btn-sm" onclick="exportBarcodeMaster()" style="font-size:11px;padding:4px 10px;min-height:30px;"><i class="fas fa-barcode"></i> Master</button>
+                    <button class="btn btn-outline-info btn-sm" onclick="exportHistory()" style="font-size:11px;padding:4px 10px;min-height:30px;"><i class="fas fa-history"></i> History</button>
                 </div>
             </div>
             <div style="display:flex;gap:6px;align-items:center;margin:8px 0;flex-wrap:wrap;">
@@ -1026,30 +1018,12 @@
         <div class="card" style="border:2px solid var(--warning);background:var(--warning-light);">
             <div class="card-title" style="color:#92400e;font-size:14px;"><i class="fas fa-database"></i> การจัดการข้อมูล</div>
             <div style="display:flex;gap:6px;flex-wrap:wrap;">
-                <button class="btn btn-primary btn-sm" onclick="backupData()" style="flex:1;font-size:12px;padding:8px 12px;min-height:38px;" data-tooltip="ดาวน์โหลดไฟล์สำรองข้อมูลทั้งหมด"><i class="fas fa-download"></i> สำรองข้อมูล</button>
-                <button class="btn btn-outline btn-sm" onclick="document.getElementById('restoreInput').click()" style="flex:1;font-size:12px;padding:8px 12px;min-height:38px;" data-tooltip="เลือกไฟล์ Backup เพื่อกู้คืนข้อมูล"><i class="fas fa-upload"></i> กู้คืนข้อมูล</button>
+                <button class="btn btn-primary btn-sm" onclick="backupData()" style="flex:1;font-size:12px;padding:8px 12px;min-height:38px;"><i class="fas fa-download"></i> สำรองข้อมูล</button>
+                <button class="btn btn-outline btn-sm" onclick="document.getElementById('restoreInput').click()" style="flex:1;font-size:12px;padding:8px 12px;min-height:38px;"><i class="fas fa-upload"></i> กู้คืนข้อมูล</button>
                 <input type="file" id="restoreInput" accept=".json" style="display:none" onchange="restoreData(event)">
             </div>
             <p style="font-size:11px;color:var(--text-muted);margin-top:4px;"><i class="fas fa-info-circle"></i> ไฟล์สำรองมีข้อมูลสินค้า, ตู้/ชั้น, ประวัติการนับ, บาร์โค้ด, และสาขาทั้งหมด</p>
-            <button class="btn btn-danger btn-block" onclick="clearAllData()" style="margin-top:6px;font-size:14px;padding:12px;" data-tooltip="ลบข้อมูลทั้งหมด (ไม่สามารถกู้คืนได้)"><i class="fas fa-trash"></i> ล้างข้อมูลทั้งหมด</button>
-        </div>
-
-        <div class="card" style="border:2px solid var(--success);background:var(--success-light);">
-            <div class="card-title" style="color:#065f46;font-size:14px;"><i class="fas fa-mobile-alt"></i> ติดตั้งเป็นแอปบนมือถือ/แท็บเล็ต</div>
-            <p style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">
-                ติดตั้ง MediStock บนหน้าจอหลักของอุปกรณ์ ใช้งานเหมือนแอปจริง!
-            </p>
-            <div style="display:flex;gap:6px;flex-wrap:wrap;">
-                <button class="btn btn-success" onclick="app.installApp()" style="flex:1;font-size:14px;padding:12px;min-height:48px;" data-tooltip="ติดตั้ง MediStock เป็นแอปบนหน้าจอหลัก">
-                    <i class="fas fa-download"></i> ติดตั้งแอป
-                </button>
-                <button class="btn btn-outline" onclick="app.checkInstallStatus()" style="flex:1;font-size:14px;padding:12px;min-height:48px;" data-tooltip="ตรวจสอบสถานะการติดตั้ง">
-                    <i class="fas fa-info-circle"></i> ตรวจสอบสถานะ
-                </button>
-            </div>
-            <div id="installStatus" style="font-size:11px;color:var(--text-muted);margin-top:8px;padding:6px 10px;background:var(--bg-body);border-radius:var(--radius-sm);">
-                ℹ️ ยังไม่ได้ติดตั้ง
-            </div>
+            <button class="btn btn-danger btn-block" onclick="clearAllData()" style="margin-top:6px;font-size:14px;padding:12px;"><i class="fas fa-trash"></i> ล้างข้อมูลทั้งหมด</button>
         </div>
 
         <div class="card">
@@ -1060,7 +1034,7 @@
             <div style="display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap;">
                 <input type="text" class="input" id="newUnitName" placeholder="ชื่อหน่วย (เช่น โหล)" style="flex:1;font-size:13px;padding:8px 12px;min-height:38px;">
                 <input type="number" class="input" id="newUnitFactor" placeholder="เท่ากับกี่ชิ้น" style="flex:1;font-size:13px;padding:8px 12px;min-height:38px;" value="12">
-                <button class="btn btn-primary" onclick="addUnit()" style="font-size:13px;padding:8px 14px;min-height:38px;" data-tooltip="เพิ่มหน่วยนับใหม่"><i class="fas fa-plus"></i> เพิ่มหน่วย</button>
+                <button class="btn btn-primary" onclick="addUnit()" style="font-size:13px;padding:8px 14px;min-height:38px;"><i class="fas fa-plus"></i> เพิ่มหน่วย</button>
             </div>
             <div id="unitList">
                 <p style="color:var(--text-muted);text-align:center;padding:8px;font-size:13px;">ยังไม่มีหน่วย</p>
@@ -1092,109 +1066,25 @@
             </div>
             
             <div style="display:flex;gap:6px;flex-wrap:wrap;">
-                <button class="btn btn-primary btn-sm" onclick="app.saveGoogleSheetsSettings()" style="flex:1;background:#4285F4;font-size:12px;padding:8px 12px;min-height:38px;" data-tooltip="บันทึกการตั้งค่า Google Sheets">
+                <button class="btn btn-primary btn-sm" onclick="app.saveGoogleSheetsSettings()" style="flex:1;background:#4285F4;font-size:12px;padding:8px 12px;min-height:38px;">
                     <i class="fas fa-save"></i> บันทึกการตั้งค่า
                 </button>
-                <button class="btn btn-outline btn-sm" onclick="app.checkGoogleSheetsStatus()" style="flex:1;font-size:12px;padding:8px 12px;min-height:38px;" data-tooltip="ทดสอบการเชื่อมต่อ Google Sheets">
+                <button class="btn btn-outline btn-sm" onclick="app.checkGoogleSheetsStatus()" style="flex:1;font-size:12px;padding:8px 12px;min-height:38px;">
                     <i class="fas fa-plug"></i> ทดสอบเชื่อมต่อ
                 </button>
             </div>
             
             <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;">
-                <button class="btn btn-success btn-sm" onclick="app.syncSessionToGoogleSheets()" style="flex:1;font-size:12px;padding:8px 12px;min-height:38px;" data-tooltip="ซิงค์ข้อมูลการนับขึ้น Google Sheets">
+                <button class="btn btn-success btn-sm" onclick="app.syncSessionToGoogleSheets()" style="flex:1;font-size:12px;padding:8px 12px;min-height:38px;">
                     <i class="fas fa-cloud-upload-alt"></i> ซิงค์ขึ้น Google Sheets
                 </button>
-                <button class="btn btn-outline btn-sm" onclick="app.loadFromGoogleSheets()" style="flex:1;font-size:12px;padding:8px 12px;min-height:38px;" data-tooltip="โหลดข้อมูลจาก Google Sheets">
+                <button class="btn btn-outline btn-sm" onclick="app.loadFromGoogleSheets()" style="flex:1;font-size:12px;padding:8px 12px;min-height:38px;">
                     <i class="fas fa-cloud-download-alt"></i> โหลดจาก Google Sheets
                 </button>
             </div>
             
             <div id="googleSheetsStatus" style="font-size:11px;color:var(--text-muted);margin-top:8px;padding:6px 10px;background:var(--bg-body);border-radius:var(--radius-sm);">
                 ⚠️ ยังไม่ได้ตั้งค่า
-            </div>
-        </div>
-
-        <!-- ✅ FAQ Section -->
-        <div class="card">
-            <div class="card-title"><i class="fas fa-question-circle"></i> คำถามที่พบบ่อย (FAQ)</div>
-            
-            <div class="faq-item">
-                <div class="faq-question" onclick="this.classList.toggle('open')">
-                    <span>📷 สแกนบาร์โค้ดไม่ได้ ทำยังไง?</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>1. ตรวจสอบระยะห่าง: ควรห่าง 10-15 ซม. (ประมาณความยาวปากกา)</p>
-                    <p>2. ตรวจสอบแสง: ควรมีแสงสว่างพอ หรือใช้ไฟฉายช่วย</p>
-                    <p>3. ตรวจสอบบาร์โค้ด: ไม่ยับ ไม่ซีดจาง ไม่มีรอยขีดข่วน</p>
-                    <p>4. กดปุ่ม "โฟกัส" เพื่อปรับกล้อง</p>
-                    <p>5. ถ้ายังไม่ได้ กด "ใส่รหัส" เพื่อพิมพ์บาร์โค้ดด้วยมือ</p>
-                </div>
-            </div>
-            
-            <div class="faq-item">
-                <div class="faq-question" onclick="this.classList.toggle('open')">
-                    <span>📦 สินค้าไม่มีในระบบ ทำยังไง?</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>1. กดปุ่ม "+ เพิ่มสินค้า" ข้างๆ ช่องค้นหา</p>
-                    <p>2. กรอกชื่อสินค้า (จำเป็น) และข้อมูลอื่นๆ (บาร์โค้ด, ราคา, หมดอายุ)</p>
-                    <p>3. ถ้ามีบาร์โค้ด ให้ใส่ด้วย ระบบจะจำให้อัตโนมัติ</p>
-                    <p>4. กด "บันทึกสินค้า" แล้วนับได้ทันที</p>
-                </div>
-            </div>
-            
-            <div class="faq-item">
-                <div class="faq-question" onclick="this.classList.toggle('open')">
-                    <span>✏️ นับผิดแล้วแก้ยังไง?</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>1. ที่ "รายการนับล่าสุด" คลิก ✏️ (ดินสอ) ข้างรายการนั้น</p>
-                    <p>2. เปลี่ยนจำนวนแล้วกด "บันทึก"</p>
-                    <p>3. หรือกด 🗑️ (ถังขยะ) เพื่อลบแล้วนับใหม่</p>
-                    <p>4. หรือกดปุ่ม "นับใหม่" ข้างๆ ปุ่มยืนยัน</p>
-                </div>
-            </div>
-            
-            <div class="faq-item">
-                <div class="faq-question" onclick="this.classList.toggle('open')">
-                    <span>📊 ดูรายงานยังไง?</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>1. นับเสร็จแล้วกด "สรุปผล" ที่แท็บนับสต็อก</p>
-                    <p>2. หรือไปที่แท็บ "รายงาน" เพื่อดูข้อมูล</p>
-                    <p>3. กด Export เพื่อส่งออก CSV/Excel/PDF</p>
-                    <p>4. มี Export พิเศษ: ตู้/ชั้น, Master Barcode, History</p>
-                </div>
-            </div>
-            
-            <div class="faq-item">
-                <div class="faq-question" onclick="this.classList.toggle('open')">
-                    <span>💾 ข้อมูลหายไปทำยังไง?</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>1. ระบบมี Auto-Backup ฉุกเฉิน เมื่อเปิดหน้าจะถามกู้คืน</p>
-                    <p>2. แนะนำให้กด "สำรองข้อมูล" ทุกครั้งที่นับเสร็จ</p>
-                    <p>3. ถ้าข้อมูลหาย ให้ใช้ไฟล์ Backup ที่บันทึกไว้กู้คืน</p>
-                    <p>4. ควร Backup ไว้ในหลายที่ (มือถือ, คอม, Google Drive)</p>
-                </div>
-            </div>
-            
-            <div class="faq-item">
-                <div class="faq-question" onclick="this.classList.toggle('open')">
-                    <span>🌐 ใช้หลายเครื่องพร้อมกันได้ไหม?</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>1. ได้! ใช้ Google Sheets Sync เป็นตัวกลาง</p>
-                    <p>2. ตั้งค่า API Key และ Spreadsheet ID ในหน้า Settings</p>
-                    <p>3. แต่ละเครื่องกด "ซิงค์ขึ้น Google Sheets" เพื่ออัปเดต</p>
-                    <p>4. แนะนำให้แบ่งโซนนับ (คนนับหน้าร้าน, คนนับหลังร้าน)</p>
-                </div>
             </div>
         </div>
     </div>
@@ -1427,6 +1317,7 @@
 </div>
 
 <div class="toast-container" id="toastContainer"></div>
+
 <script>
 // ================================================================
 // ✅ Service Worker
@@ -1546,7 +1437,7 @@ class StockApp {
         this.loadBranches();
         this.loadBranch();
         this.setupDragDrop();
-        this.renderFloorPlan();
+        this.renderMap();
         this.updateProgress();
         this.initNetworkListener();
         this.updateStatus('พร้อมใช้งาน');
@@ -1622,7 +1513,7 @@ class StockApp {
             const req = store.getAll();
             this.locations = await new Promise(r => { req.onsuccess = () => r(req.result || []); req.onerror = () => r([]); });
             console.log('📦 โหลดตำแหน่งทั้งหมด:', this.locations.length, 'ตู้');
-            this.renderFloorPlan();
+            this.renderMap();
         } catch (e) { this.locations = []; console.error('Load locations error:', e); }
     }
 
@@ -1910,7 +1801,7 @@ class StockApp {
         if (page) page.classList.add('active');
         if (name === 'scan') this.updateScanBadge();
         if (name === 'report') this.generateReport();
-        if (name === 'layout') this.renderFloorPlan();
+        if (name === 'layout') this.renderMap();
         if (name === 'analytics') this.runAnalytics();
         if (name === 'settings') this.renderUnitList();
     }
@@ -2017,7 +1908,7 @@ class StockApp {
                             this.renderRecentScans();
                             this.updateProgress();
                             this.updateScanBadge();
-                            this.renderFloorPlan();
+                            this.renderMap();
                             this.showToast('✅ กู้คืนข้อมูลฉุกเฉินสำเร็จ (' + data.count + ' รายการ)', 'success');
                             localStorage.removeItem('emergency_backup_' + this.branchId);
                         }
@@ -2074,7 +1965,7 @@ class StockApp {
     }
 
     // ================================================================
-    // HELP (คู่มือการใช้งาน)
+    // HELP
     // ================================================================
     showHelp() {
         const currentTab = document.querySelector('.tab-btn.active');
@@ -2259,7 +2150,7 @@ class StockApp {
     }
 
     // ================================================================
-    // BARCODE VALIDATION (13 หลักเท่านั้น)
+    // ✅ BARCODE VALIDATION (13 หลักเท่านั้น)
     // ================================================================
     validateBarcode(barcode) {
         const clean = String(barcode).replace(/[^0-9]/g, '');
@@ -2276,11 +2167,15 @@ class StockApp {
     }
 
     // ================================================================
-    // SCANNER
+    // ✅ SCANNER (แก้ไขแล้ว - รับเฉพาะ 13 หลัก)
     // ================================================================
     async testCamera() {
         console.log('🧪 ทดสอบกล้อง...');
         try {
+            if (location.protocol !== 'https:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+                this.showToast('⚠️ ต้องใช้ HTTPS ในการเปิดกล้อง (ใช้ GitHub Pages)', 'error');
+                return false;
+            }
             const stream = await navigator.mediaDevices.getUserMedia({
                 video: { facingMode: "environment", width: { ideal: 640 }, height: { ideal: 480 } }
             });
@@ -2294,11 +2189,56 @@ class StockApp {
                 msg += 'กรุณาอนุญาตให้เว็บไซต์เข้าถึงกล้อง (คลิกที่ไอคอนกล้องในแถบ URL)';
             } else if (err.name === 'NotFoundError') {
                 msg += 'ไม่พบกล้องในอุปกรณ์นี้';
+            } else if (err.name === 'SecurityError') {
+                msg += 'ต้องใช้ HTTPS เท่านั้น (ใช้ GitHub Pages)';
             } else {
                 msg += err.message || 'ไม่ทราบสาเหตุ';
             }
             this.showToast(msg, 'error');
             return false;
+        }
+    }
+
+    // ✅ ฟังก์ชันเปิด/ปิดไฟฉาย
+    toggleFlash() {
+        if (this.html5Scanner) {
+            try {
+                const video = this.html5Scanner._videoElement;
+                if (video && video.srcObject) {
+                    const track = video.srcObject.getVideoTracks()[0];
+                    if (track && track.getCapabilities) {
+                        const capabilities = track.getCapabilities();
+                        if (capabilities && capabilities.torch) {
+                            const current = track.getSettings().torch || false;
+                            track.applyConstraints({
+                                advanced: [{ torch: !current }]
+                            }).then(() => {
+                                const btn = document.getElementById('flashBtn');
+                                if (!current) {
+                                    btn.innerHTML = '<i class="fas fa-bolt" style="color:#ffdd00;"></i> ไฟฉาย: เปิด';
+                                    this.showToast('💡 ไฟฉายเปิดแล้ว', 'success');
+                                } else {
+                                    btn.innerHTML = '<i class="fas fa-bolt"></i> ไฟฉาย';
+                                    this.showToast('💡 ไฟฉายปิดแล้ว', 'info');
+                                }
+                            }).catch(() => {
+                                this.showToast('⚠️ ไม่สามารถเปิดไฟฉายได้ (อาจไม่รองรับ)', 'warning');
+                            });
+                        } else {
+                            this.showToast('⚠️ กล้องนี้ไม่รองรับไฟฉาย', 'warning');
+                        }
+                    } else {
+                        this.showToast('⚠️ ไม่สามารถตรวจสอบไฟฉายได้', 'warning');
+                    }
+                } else {
+                    this.showToast('⚠️ ยังไม่เปิดกล้อง', 'warning');
+                }
+            } catch(e) {
+                console.error('Flash error:', e);
+                this.showToast('⚠️ ไม่สามารถเปิดไฟฉายได้', 'warning');
+            }
+        } else {
+            this.showToast('⚠️ ยังไม่เปิดกล้อง', 'warning');
         }
     }
 
@@ -2336,150 +2276,152 @@ class StockApp {
     }
 
     async startScanner() {
-       console.log('📷 startScanner ถูกเรียก');
-       console.log('🔍 Protocol:', location.protocol);
+        console.log('📷 startScanner ถูกเรียก');
 
-    // ✅ ตรวจสอบ HTTPS
-    if (location.protocol !== 'https:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
-        const msg = '⚠️ ต้องใช้ HTTPS ในการเปิดกล้อง\nกรุณาใช้ GitHub Pages หรือ ngrok';
-        document.getElementById('scannerStatus').textContent = msg;
-        document.getElementById('scannerStatus').className = 'scanner-status error';
-        this.showToast(msg, 'error');
-        return;
-    }
-
-    // ✅ ขออนุญาตกล้องก่อน
-    try {
-        console.log('📷 กำลังขออนุญาตกล้อง...');
-        const stream = await navigator.mediaDevices.getUserMedia({
-            video: { 
-                facingMode: "environment",
-                width: { ideal: 640 },
-                height: { ideal: 480 }
-            }
-        });
-        stream.getTracks().forEach(track => track.stop());
-        console.log('✅ ได้รับอนุญาตกล้องแล้ว');
-    } catch (err) {
-        console.error('❌ ขออนุญาตกล้องไม่สำเร็จ:', err);
-        let msg = '❌ เปิดกล้องไม่สำเร็จ: ';
-        if (err.name === 'NotAllowedError') {
-            msg += 'กรุณาอนุญาตให้เว็บไซต์เข้าถึงกล้อง (คลิกที่ไอคอนกล้องในแถบ URL)';
-        } else if (err.name === 'NotFoundError') {
-            msg += 'ไม่พบกล้องในอุปกรณ์นี้';
-        } else if (err.name === 'SecurityError') {
-            msg += 'ต้องใช้ HTTPS เท่านั้น (ใช้ GitHub Pages)';
-        } else {
-            msg += err.message || 'ไม่ทราบสาเหตุ';
+        // ✅ ตรวจสอบ HTTPS
+        if (location.protocol !== 'https:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+            const msg = '⚠️ ต้องใช้ HTTPS ในการเปิดกล้อง\nกรุณาใช้ GitHub Pages หรือ ngrok';
+            document.getElementById('scannerStatus').textContent = msg;
+            document.getElementById('scannerStatus').className = 'scanner-status error';
+            this.showToast(msg, 'error');
+            return;
         }
-        document.getElementById('scannerStatus').textContent = msg;
-        document.getElementById('scannerStatus').className = 'scanner-status error';
-        this.showToast(msg, 'error');
-        return;
-    }
 
-    // ✅ ตรวจสอบไลบรารี
-    if (typeof Html5Qrcode === 'undefined') {
-        console.error('❌ Html5Qrcode ไม่ถูกโหลด');
-        this.showToast('⚠️ ไลบรารีสแกนโหลดไม่สำเร็จ กรุณารีเฟรชหน้า', 'error');
-        return;
-    }
-
-    // ✅ ปิด Scanner เดิมถ้ามี
-    if (this.html5Scanner) {
+        // ✅ ขออนุญาตกล้องก่อน
         try {
-            await this.html5Scanner.stop();
-            this.html5Scanner.clear();
-        } catch(e) {}
-        this.html5Scanner = null;
-    }
-
-    // ✅ อัปเดต UI
-    document.getElementById('scannerPlaceholder').style.display = 'none';
-    document.getElementById('scannerOverlay').style.display = 'block';
-    document.getElementById('scannerStatus').innerHTML = '<i class="fas fa-circle" style="color:var(--success);font-size:8px;"></i> กำลังเปิดกล้อง...';
-    document.getElementById('scannerStatus').className = 'scanner-status success';
-    document.getElementById('btnToggleScanner').innerHTML = '<i class="fas fa-stop"></i> ปิดกล้อง';
-
-    console.log('📷 กำลังสร้าง Html5Qrcode...');
-
-    try {
-        this.html5Scanner = new Html5Qrcode("reader");
-        const config = {
-            fps: 30,
-            qrbox: { width: 300, height: 200 },
-            aspectRatio: 1.333,
-            formatsToSupport: [
-                Html5QrcodeSupportedFormats.EAN_13,
-                Html5QrcodeSupportedFormats.EAN_8,
-                Html5QrcodeSupportedFormats.UPC_A,
-                Html5QrcodeSupportedFormats.UPC_E,
-                Html5QrcodeSupportedFormats.CODE_128,
-                Html5QrcodeSupportedFormats.CODE_39,
-                Html5QrcodeSupportedFormats.CODE_93,
-                Html5QrcodeSupportedFormats.QR_CODE,
-                Html5QrcodeSupportedFormats.DATA_MATRIX,
-                Html5QrcodeSupportedFormats.ITF,
-                Html5QrcodeSupportedFormats.AZTEC,
-                Html5QrcodeSupportedFormats.CODABAR,
-                Html5QrcodeSupportedFormats.PDF_417,
-                Html5QrcodeSupportedFormats.MAXICODE
-            ]
-        };
-
-        console.log('📷 กำลังเริ่มสแกน...');
-
-        // ✅ แก้ไขตรงนี้! ส่งแค่ facingMode อย่างเดียว
-        await this.html5Scanner.start(
-            { facingMode: "environment" },  // ✅ มีแค่ 1 คีย์
-            config,
-            (decodedText) => {
-                console.log('📷 สแกนได้ Raw:', decodedText);
-                const now = Date.now();
-                if (now - this.lastScan > 1500) {
-                    this.lastScan = now;
-                    const cleanBarcode = String(decodedText).replace(/[^0-9]/g, '');
-                    console.log('📷 ทำความสะอาด:', cleanBarcode);
-                    
-                    if (cleanBarcode.length !== 13) {
-                        this.showToast(`⚠️ บาร์โค้ดต้องมี 13 หลัก (พบ ${cleanBarcode.length} หลัก)`, 'warning');
-                        document.getElementById('scannerStatus').innerHTML = `⚠️ ต้องมี 13 หลัก (พบ ${cleanBarcode.length} หลัก)`;
-                        document.getElementById('scannerStatus').className = 'scanner-status error';
-                        if (navigator.vibrate) navigator.vibrate([100, 100, 100]);
-                        return;
-                    }
-                    
-                    if (navigator.vibrate) navigator.vibrate(200);
-                    this.playBeepSound();
-                    const location = this.getSelectedLocation();
-                    if (this.checkDuplicateWithLocation(cleanBarcode, location.id)) return;
-                    this.onScan(cleanBarcode);
-                    
-                    if (this.continuousMode) {
-                        setTimeout(() => {
-                            document.getElementById('qtyInput').value = 1;
-                            this.confirmItem();
-                        }, 300);
-                    }
+            console.log('📷 กำลังขออนุญาตกล้อง...');
+            const stream = await navigator.mediaDevices.getUserMedia({
+                video: { 
+                    facingMode: "environment",
+                    width: { ideal: 640 },
+                    height: { ideal: 480 }
                 }
-            },
-            (error) => {}
-        );
+            });
+            stream.getTracks().forEach(track => track.stop());
+            console.log('✅ ได้รับอนุญาตกล้องแล้ว');
+        } catch (err) {
+            console.error('❌ ขออนุญาตกล้องไม่สำเร็จ:', err);
+            let msg = '❌ เปิดกล้องไม่สำเร็จ: ';
+            if (err.name === 'NotAllowedError') {
+                msg += 'กรุณาอนุญาตให้เว็บไซต์เข้าถึงกล้อง (คลิกที่ไอคอนกล้องในแถบ URL)';
+            } else if (err.name === 'NotFoundError') {
+                msg += 'ไม่พบกล้องในอุปกรณ์นี้';
+            } else if (err.name === 'SecurityError') {
+                msg += 'ต้องใช้ HTTPS เท่านั้น (ใช้ GitHub Pages)';
+            } else {
+                msg += err.message || 'ไม่ทราบสาเหตุ';
+            }
+            document.getElementById('scannerStatus').textContent = msg;
+            document.getElementById('scannerStatus').className = 'scanner-status error';
+            this.showToast(msg, 'error');
+            return;
+        }
 
-        console.log('📷 Scanner เริ่มทำงานแล้ว');
-        this.scanning = true;
-        this.showToast('📷 กล้องพร้อมสแกน (ต้องมี 13 หลักเท่านั้น)', 'success');
-        document.getElementById('scannerStatus').innerHTML = '<i class="fas fa-circle" style="color:var(--success);font-size:8px;"></i> พร้อมสแกน (13 หลัก)';
+        // ✅ ตรวจสอบไลบรารี
+        if (typeof Html5Qrcode === 'undefined') {
+            console.error('❌ Html5Qrcode ไม่ถูกโหลด');
+            this.showToast('⚠️ ไลบรารีสแกนโหลดไม่สำเร็จ กรุณารีเฟรชหน้า', 'error');
+            return;
+        }
+
+        // ✅ ปิด Scanner เดิมถ้ามี
+        if (this.html5Scanner) {
+            try {
+                await this.html5Scanner.stop();
+                this.html5Scanner.clear();
+            } catch(e) {}
+            this.html5Scanner = null;
+        }
+
+        // ✅ อัปเดต UI
+        document.getElementById('scannerPlaceholder').style.display = 'none';
+        document.getElementById('scannerOverlay').style.display = 'block';
+        document.getElementById('scannerStatus').innerHTML = '<i class="fas fa-circle" style="color:var(--success);font-size:8px;"></i> กำลังเปิดกล้อง...';
         document.getElementById('scannerStatus').className = 'scanner-status success';
+        document.getElementById('btnToggleScanner').innerHTML = '<i class="fas fa-stop"></i> ปิดกล้อง';
 
-    } catch (err) {
-        console.error('❌ Scanner error:', err);
-        document.getElementById('scannerStatus').innerHTML = '<i class="fas fa-exclamation-circle"></i> ' + (err.message || 'เกิดข้อผิดพลาด');
-        document.getElementById('scannerStatus').className = 'scanner-status error';
-        this.showToast('❌ เปิดกล้องไม่สำเร็จ: ' + (err.message || 'ไม่ทราบสาเหตุ'), 'error');
-        this.stopScanner();
+        console.log('📷 กำลังสร้าง Html5Qrcode...');
+
+        try {
+            this.html5Scanner = new Html5Qrcode("reader");
+            const config = {
+                fps: 30,
+                qrbox: { width: 300, height: 200 },
+                aspectRatio: 1.333,
+                formatsToSupport: [
+                    Html5QrcodeSupportedFormats.EAN_13,
+                    Html5QrcodeSupportedFormats.EAN_8,
+                    Html5QrcodeSupportedFormats.UPC_A,
+                    Html5QrcodeSupportedFormats.UPC_E,
+                    Html5QrcodeSupportedFormats.CODE_128,
+                    Html5QrcodeSupportedFormats.CODE_39,
+                    Html5QrcodeSupportedFormats.CODE_93,
+                    Html5QrcodeSupportedFormats.QR_CODE,
+                    Html5QrcodeSupportedFormats.DATA_MATRIX,
+                    Html5QrcodeSupportedFormats.ITF,
+                    Html5QrcodeSupportedFormats.AZTEC,
+                    Html5QrcodeSupportedFormats.CODABAR,
+                    Html5QrcodeSupportedFormats.PDF_417,
+                    Html5QrcodeSupportedFormats.MAXICODE
+                ]
+            };
+
+            console.log('📷 กำลังเริ่มสแกน...');
+
+            // ✅ แก้ไข: ส่งแค่ facingMode อย่างเดียว (แก้ Error 2 keys)
+            await this.html5Scanner.start(
+                { facingMode: "environment" },
+                config,
+                (decodedText) => {
+                    console.log('📷 สแกนได้ Raw:', decodedText);
+                    const now = Date.now();
+                    if (now - this.lastScan > 1500) {
+                        this.lastScan = now;
+                        const cleanBarcode = String(decodedText).replace(/[^0-9]/g, '');
+                        console.log('📷 ทำความสะอาด:', cleanBarcode);
+                        
+                        if (cleanBarcode.length !== 13) {
+                            this.showToast(`⚠️ บาร์โค้ดต้องมี 13 หลัก (พบ ${cleanBarcode.length} หลัก)`, 'warning');
+                            document.getElementById('scannerStatus').innerHTML = `⚠️ ต้องมี 13 หลัก (พบ ${cleanBarcode.length} หลัก)`;
+                            document.getElementById('scannerStatus').className = 'scanner-status error';
+                            if (navigator.vibrate) navigator.vibrate([100, 100, 100]);
+                            return;
+                        }
+                        
+                        if (navigator.vibrate) navigator.vibrate(200);
+                        this.playBeepSound();
+                        const location = this.getSelectedLocation();
+                        if (this.checkDuplicateWithLocation(cleanBarcode, location.id)) {
+                            // ✅ ถ้าสินค้านับไปแล้ว ให้แสดงข้อความและไม่บล็อก (รอให้กด "นับเพิ่ม")
+                            return;
+                        }
+                        this.onScan(cleanBarcode);
+                        
+                        if (this.continuousMode) {
+                            setTimeout(() => {
+                                document.getElementById('qtyInput').value = 1;
+                                this.confirmItem();
+                            }, 300);
+                        }
+                    }
+                },
+                (error) => {}
+            );
+
+            console.log('📷 Scanner เริ่มทำงานแล้ว');
+            this.scanning = true;
+            this.showToast('📷 กล้องพร้อมสแกน (ต้องมี 13 หลักเท่านั้น)', 'success');
+            document.getElementById('scannerStatus').innerHTML = '<i class="fas fa-circle" style="color:var(--success);font-size:8px;"></i> พร้อมสแกน (13 หลัก)';
+            document.getElementById('scannerStatus').className = 'scanner-status success';
+
+        } catch (err) {
+            console.error('❌ Scanner error:', err);
+            document.getElementById('scannerStatus').innerHTML = '<i class="fas fa-exclamation-circle"></i> ' + (err.message || 'เกิดข้อผิดพลาด');
+            document.getElementById('scannerStatus').className = 'scanner-status error';
+            this.showToast('❌ เปิดกล้องไม่สำเร็จ: ' + (err.message || 'ไม่ทราบสาเหตุ'), 'error');
+            this.stopScanner();
+        }
     }
-}
 
     playBeepSound() {
         try {
@@ -2521,23 +2463,97 @@ class StockApp {
     }
 
     // ================================================================
-    // CHECK DUPLICATE WITH LOCATION
+    // ✅ CHECK DUPLICATE WITH LOCATION (แก้ไขแล้ว)
     // ================================================================
     checkDuplicateWithLocation(barcode, locationId) {
-        const existing = this.sessionItems.find(item => item.barcode === barcode && item.location === locationId);
+        // หาสินค้าที่มีบาร์โค้ดเดียวกัน AND ตำแหน่งเดียวกัน
+        const existing = this.sessionItems.find(item => 
+            item.barcode === barcode && 
+            item.location === locationId
+        );
+        
         if (existing) {
-            this.showToast(`⚠️ สินค้า "${existing.name}" ถูกนับในตำแหน่งนี้แล้ว (${existing.counted_qty} ชิ้น)`, 'warning');
-            if (navigator.vibrate) navigator.vibrate([200, 100, 200, 100, 200]);
-            return true;
+            // ✅ ถ้าสินค้าอยู่ในตำแหน่งเดิม ให้แจ้งและแนะนำให้ใช้ปุ่ม "นับเพิ่ม"
+            this.showToast(
+                `⚠️ สินค้า "${existing.name}" ถูกนับในตำแหน่งนี้แล้ว (${existing.counted_qty} ชิ้น)`, 
+                'warning',
+                '💡 ต้องการเพิ่มจำนวน? กดปุ่ม "นับเพิ่ม" ที่ด้านล่าง'
+            );
+            if (navigator.vibrate) navigator.vibrate([100, 100, 100]);
+            return true; // บล็อกไม่ให้สแกนซ้ำ
         }
+        
+        // ถ้าคนละตำแหน่ง ให้ถามว่านับใหม่หรือไม่
         const sameProduct = this.sessionItems.find(item => item.barcode === barcode);
         if (sameProduct) {
-            return !confirm(
+            if (!confirm(
                 `📦 พบสินค้า "${sameProduct.name}" ในตำแหน่งอื่น (${sameProduct.locationName})\n` +
-                `ต้องการนับเพิ่มในตำแหน่งนี้ใช่หรือไม่?`
-            );
+                `ต้องการนับในตำแหน่งนี้ใช่หรือไม่?`
+            )) {
+                return true; // บล็อก
+            }
+            return false; // ปล่อยให้ไปต่อ
         }
-        return false;
+        
+        return false; // ไม่ซ้ำ ให้นับได้
+    }
+
+    // ================================================================
+    // ✅ ADD MORE COUNT (นับเพิ่ม)
+    // ================================================================
+    addMoreCount() {
+        if (!this.currentProduct) {
+            this.showToast('⚠️ กรุณาเลือกสินค้าก่อน', 'warning');
+            return;
+        }
+        
+        const product = this.currentProduct;
+        const barcode = product.primaryBarcode || (product.barcodes && product.barcodes[0]);
+        const location = this.getSelectedLocation();
+        
+        if (!location.isValid) {
+            this.showToast('⚠️ กรุณาเลือกตำแหน่งก่อน', 'warning');
+            return;
+        }
+        
+        // หารายการที่มีอยู่
+        const existingIndex = this.sessionItems.findIndex(item => 
+            item.barcode === barcode && 
+            item.location === location.id
+        );
+        
+        if (existingIndex === -1) {
+            this.showToast('ℹ️ สินค้านี้ยังไม่ได้นับในตำแหน่งนี้ ใช้ปุ่ม "ยืนยันการนับ" แทน', 'info');
+            return;
+        }
+        
+        const qty = parseInt(document.getElementById('qtyInput').value) || 1;
+        if (qty <= 0) {
+            this.showToast('⚠️ จำนวนต้องมากกว่า 0', 'warning');
+            return;
+        }
+        
+        const existing = this.sessionItems[existingIndex];
+        
+        existing.counted_qty += qty;
+        existing.difference = existing.counted_qty - existing.system_qty;
+        existing.cost_diff = existing.difference * existing.cost;
+        existing.sell_diff = existing.difference * existing.sellPrice;
+        existing.profit_loss = existing.difference * (existing.sellPrice - existing.cost);
+        existing.note = document.getElementById('noteInput').value.trim() || existing.note;
+        
+        this.sessionItems[existingIndex] = existing;
+        this.renderRecentScans();
+        this.updateProgress();
+        this.updateScanBadge();
+        this.saveSession();
+        this.emergencyBackup();
+        this.runAnalytics();
+        
+        this.showToast(`✅ เพิ่ม ${product.name} +${qty} ชิ้น (รวม ${existing.counted_qty} ชิ้น)`, 'success');
+        document.getElementById('productDetail').style.display = 'none';
+        document.getElementById('noteInput').value = '';
+        this.currentProduct = null;
     }
 
     // ================================================================
@@ -3024,7 +3040,7 @@ class StockApp {
     }
 
     // ================================================================
-    // CONFIRM ITEM
+    // ✅ CONFIRM ITEM (แก้ไขแล้ว)
     // ================================================================
     confirmItem() {
         const qty = parseInt(document.getElementById('qtyInput').value) || 0;
@@ -3037,29 +3053,20 @@ class StockApp {
         }
         const product = this.currentProduct;
         const barcode = product.primaryBarcode || (product.barcodes && product.barcodes[0]);
-        if (this.checkDuplicateWithLocation(barcode, location.id)) return;
+        
+        // ✅ ตรวจสอบการนับซ้ำ (แบบมีตำแหน่ง)
+        if (this.checkDuplicateWithLocation(barcode, location.id)) {
+            return;
+        }
 
-        const existingIndex = this.sessionItems.findIndex(item => item.barcode === barcode && item.location === location.id);
+        const existingIndex = this.sessionItems.findIndex(item => 
+            item.barcode === barcode && 
+            item.location === location.id
+        );
+
         if (existingIndex !== -1) {
-            const existing = this.sessionItems[existingIndex];
-            if (!confirm(`⚠️ สินค้า "${product.name}" ถูกนับในตำแหน่งนี้แล้ว (${existing.counted_qty} ชิ้น)\nต้องการเพิ่มจำนวน หรือนับใหม่?`)) return;
-            existing.counted_qty += qty;
-            existing.difference = existing.counted_qty - existing.system_qty;
-            existing.cost_diff = existing.difference * existing.cost;
-            existing.sell_diff = existing.difference * existing.sellPrice;
-            existing.profit_loss = existing.difference * (existing.sellPrice - existing.cost);
-            existing.note = document.getElementById('noteInput').value.trim() || existing.note;
-            this.sessionItems[existingIndex] = existing;
-            this.renderRecentScans();
-            this.updateProgress();
-            this.updateScanBadge();
-            this.saveSession();
-            this.emergencyBackup();
-            this.runAnalytics();
-            this.showToast(`✅ อัปเดต ${product.name} +${qty} ชิ้น (รวม ${existing.counted_qty} ชิ้น)`, 'success');
-            document.getElementById('productDetail').style.display = 'none';
-            document.getElementById('noteInput').value = '';
-            this.currentProduct = null;
+            // ✅ ถ้ามีอยู่แล้ว ให้ไปใช้ฟังก์ชัน addMoreCount แทน
+            this.showToast('💡 สินค้านี้ถูกนับในตำแหน่งนี้แล้ว ใช้ปุ่ม "นับเพิ่ม" เพื่อเพิ่มจำนวน', 'info');
             return;
         }
 
@@ -3069,29 +3076,44 @@ class StockApp {
         const sellDiff = diff * sellPrice;
         const profitLoss = diff * (sellPrice - (product.costPerUnit || 0));
         const note = document.getElementById('noteInput').value.trim() || '';
+
         const isNewlyPaired = this.newlyPairedBarcodes.some(b => b.barcode === this.currentBarcode);
         const barcodeStatus = isNewlyPaired ? '🆕 ผูกใหม่' : (product.primaryBarcode ? '✅ มีในระบบ' : '⚠️ ไม่มีบาร์โค้ด');
 
         const item = {
             id: Date.now() + Math.random() * 1000,
             barcode: product.primaryBarcode || (product.barcodes || [])[0] || '',
-            name: product.name, lot: product.lot || '',
-            system_qty: product.stock || 0, counted_qty: qty, difference: diff,
-            cost: product.costPerUnit || 0, sellPrice: sellPrice,
-            cost_diff: costDiff, sell_diff: sellDiff, profit_loss: profitLoss,
+            name: product.name,
+            lot: product.lot || '',
+            system_qty: product.stock || 0,
+            counted_qty: qty,
+            difference: diff,
+            cost: product.costPerUnit || 0,
+            sellPrice: sellPrice,
+            cost_diff: costDiff,
+            sell_diff: sellDiff,
+            profit_loss: profitLoss,
             expiry: product.expiryDate || '',
-            location: location.id, locationName: location.name, locationType: location.type, locationTypeName: location.typeName,
-            timestamp: new Date().toISOString(), barcodeStatus: barcodeStatus, isNewlyPaired: isNewlyPaired,
-            note: note, selectedLotIndex: this.selectedLotIndex || 0
+            location: location.id,
+            locationName: location.name,
+            locationType: location.type,
+            locationTypeName: location.typeName,
+            timestamp: new Date().toISOString(),
+            barcodeStatus: barcodeStatus,
+            isNewlyPaired: isNewlyPaired,
+            note: note,
+            selectedLotIndex: this.selectedLotIndex || 0
         };
 
         this.sessionItems.push(item);
         this.offlineQueue.push(item);
         localStorage.setItem('offlineQueue', JSON.stringify(this.offlineQueue));
         this.saveCountHistory(item);
+
         document.getElementById('productDetail').style.display = 'none';
         document.getElementById('noteInput').value = '';
         this.currentProduct = null;
+
         this.renderRecentScans();
         this.updateProgress();
         this.updateScanBadge();
@@ -3099,6 +3121,7 @@ class StockApp {
         this.saveSession();
         this.emergencyBackup();
         this.runAnalytics();
+
         this.showToast(`✅ ${product.name} (${qty} ชิ้น) ${location.name}${note ? ' | 📝 ' + note : ''}`, 'success');
     }
 
@@ -3204,7 +3227,7 @@ class StockApp {
         this.locations.push(cabinet);
         this.saveLocations();
         this.updateLocationDropdowns();
-        this.renderFloorPlan();
+        this.renderMap();
         document.getElementById('scanNewCabinetName').value = '';
         this.closeAddCabinetScanModal();
         this.showToast(`✅ เพิ่มตู้ "${name}" สำเร็จ`, 'success');
@@ -3230,7 +3253,7 @@ class StockApp {
         cabinet.shelves.push({ id: Date.now(), name: shelfName, number: cabinet.shelves.length + 1 });
         this.saveLocations();
         this.updateShelfDropdown();
-        this.renderFloorPlan();
+        this.renderMap();
         document.getElementById('scanNewShelfName').value = '';
         this.closeAddShelfScanModal();
         this.showToast(`✅ เพิ่มชั้น "${shelfName}" สำเร็จ`, 'success');
@@ -3297,12 +3320,24 @@ class StockApp {
         input.value = val;
     }
 
+    // ✅ แก้ไขฟังก์ชัน saveEditItem() (แก้ปัญหาค้าง)
     saveEditItem() {
         const index = this.editingIndex;
-        if (index < 0 || index >= this.sessionItems.length) { this.showToast('⚠️ ไม่พบรายการ', 'error'); return; }
+        if (index < 0 || index >= this.sessionItems.length) {
+            this.showToast('⚠️ ไม่พบรายการ', 'error');
+            this.closeEditItemModal();
+            return;
+        }
+        
         const item = this.sessionItems[index];
         const newQty = parseInt(document.getElementById('editQtyInput').value) || 0;
         const newNote = document.getElementById('editNoteInput').value.trim() || '';
+
+        if (newQty < 0) {
+            this.showToast('⚠️ จำนวนต้องไม่ติดลบ', 'warning');
+            return;
+        }
+
         const diff = newQty - item.system_qty;
         item.counted_qty = newQty;
         item.difference = diff;
@@ -3310,11 +3345,13 @@ class StockApp {
         item.sell_diff = diff * item.sellPrice;
         item.profit_loss = diff * (item.sellPrice - item.cost);
         item.note = newNote;
+
         this.sessionItems[index] = item;
         this.saveSession();
         this.emergencyBackup();
         this.renderRecentScans();
         this.updateProgress();
+        this.updateScanBadge();
         this.closeEditItemModal();
         this.runAnalytics();
         this.showToast(`✅ แก้ไข ${item.name} เป็น ${newQty} ชิ้น${newNote ? ' | 📝 ' + newNote : ''}`, 'success');
@@ -3400,247 +3437,197 @@ class StockApp {
     }
 
     // ================================================================
-    // FLOOR PLAN (LAYOUT)
+    // LAYOUT (MAP)
     // ================================================================
-    renderFloorPlan() {
-        const container = document.getElementById('floorPlan');
-        if (!container) return;
-        
-        const rows = {
-            front: this.locations.filter(l => l.type === 'front'),
-            middle: this.locations.filter(l => l.type === 'middle'),
-            back: this.locations.filter(l => l.type === 'back')
-        };
-        
-        const rowNames = { front: '🏪 หน้าร้าน', middle: '🏬 กลางร้าน', back: '📦 หลังร้าน (คลัง)' };
-        const rowColors = { front: 'type-front', middle: 'type-middle', back: 'type-back' };
-        
-        let html = '';
-        let hasCabinets = false;
-        
-        for (const [rowKey, cabinets] of Object.entries(rows)) {
-            if (cabinets.length === 0) continue;
-            hasCabinets = true;
-            html += `<div class="floor-plan-row-label">${rowNames[rowKey]}</div>`;
-            const sortedCabinets = [...cabinets].sort((a, b) => (a.layout?.col ?? 999) - (b.layout?.col ?? 999));
-            for (const cabinet of sortedCabinets) {
-                const hasItems = this.sessionItems.some(i => i.location && i.location.includes(String(cabinet.id)));
-                const counted = this.sessionItems.filter(i => i.location && i.location.includes(String(cabinet.id))).length;
-                const isCounted = counted > 0;
-                const typeClass = rowColors[rowKey] || '';
-                const statusClass = hasItems ? 'has-items' : (isCounted ? 'counted' : '');
-                html += `
-                    <div class="floor-cabinet ${typeClass} ${statusClass}" 
-                         data-cabinet="${cabinet.id}"
-                         onclick="app.selectCabinetFromFloor(${cabinet.id})"
-                         ondblclick="app.goToCabinetScan(${cabinet.id})"
-                         draggable="${this.isEditMode ? 'true' : 'false'}"
-                         ondragstart="app.dragCabinet(event, ${cabinet.id})"
-                         ondragover="event.preventDefault()"
-                         ondrop="app.dropCabinet(event, ${cabinet.id})">
-                        <button class="cabinet-delete" onclick="event.stopPropagation(); app.deleteCabinetFromFloor(${cabinet.id})"><i class="fas fa-times"></i></button>
-                        <div class="cabinet-icon"><i class="fas fa-archive"></i></div>
-                        <div class="cabinet-name">${cabinet.name}</div>
-                        <div class="cabinet-detail">${cabinet.shelves?.length || 0} ชั้น ${counted > 0 ? `• ✅ นับ ${counted}` : ''} ${hasItems ? '• ⚠️ มีสินค้า' : ''}</div>
-                    </div>
-                `;
-            }
-        }
-        
-        if (!hasCabinets) {
-            html = `<div style="text-align:center;color:var(--text-muted);padding:40px;grid-column:1/-1;font-size:14px;">
-                <i class="fas fa-boxes" style="font-size:32px;display:block;margin-bottom:8px;opacity:0.5;"></i>
-                ยังไม่มีตู้ในผังร้าน<br><small>เพิ่มตู้ด้านล่าง แล้วจะปรากฏในผังอัตโนมัติ</small>
-            </div>`;
-        }
-        
-        container.innerHTML = html;
-        if (this.isEditMode) {
-            container.closest('.floor-plan')?.classList.add('edit-mode');
-        } else {
-            container.closest('.floor-plan')?.classList.remove('edit-mode');
-        }
-    }
-
-    toggleFloorPlanEdit() {
-        this.isEditMode = !this.isEditMode;
-        const hint = document.getElementById('editModeHint');
-        if (this.isEditMode) {
-            hint.textContent = '🔄 โหมดแก้ไข: ลากตู้เพื่อเปลี่ยนตำแหน่ง หรือกด ✕ เพื่อลบตู้';
-            document.querySelector('.floor-plan')?.classList.add('edit-mode');
-        } else {
-            hint.textContent = 'กด "จัดเรียงตำแหน่ง" เพื่อย้ายตู้ในผัง';
-            document.querySelector('.floor-plan')?.classList.remove('edit-mode');
-            this.renderFloorPlan();
-        }
-    }
-
-    dragCabinet(event, cabinetId) {
-        if (!this.isEditMode) return;
-        event.dataTransfer.setData('text/plain', cabinetId);
-    }
-
-    dropCabinet(event, targetCabinetId) {
-        if (!this.isEditMode) return;
-        event.preventDefault();
-        const draggedId = parseInt(event.dataTransfer.getData('text/plain'));
-        if (draggedId === targetCabinetId) return;
-        const draggedCabinet = this.locations.find(l => l.id === draggedId);
-        const targetCabinet = this.locations.find(l => l.id === targetCabinetId);
-        if (!draggedCabinet || !targetCabinet) return;
-        const tempRow = draggedCabinet.layout?.row ?? 0;
-        const tempCol = draggedCabinet.layout?.col ?? 0;
-        if (!draggedCabinet.layout) draggedCabinet.layout = { row: 0, col: 0 };
-        if (!targetCabinet.layout) targetCabinet.layout = { row: 0, col: 0 };
-        draggedCabinet.layout.row = targetCabinet.layout.row;
-        draggedCabinet.layout.col = targetCabinet.layout.col;
-        targetCabinet.layout.row = tempRow;
-        targetCabinet.layout.col = tempCol;
-        this.saveLocations();
-        this.renderFloorPlan();
-        this.showToast(`🔄 สลับตำแหน่ง "${draggedCabinet.name}" ↔ "${targetCabinet.name}"`, 'info');
-    }
-
-    selectCabinetFromFloor(cabinetId) {
-        this.selectCabinet(cabinetId);
-        this.switchTab('layout');
-    }
-
-    goToCabinetScan(cabinetId) {
-        const cabinet = this.locations.find(l => l.id === cabinetId);
-        if (!cabinet) return;
-        this.selectScanLocation('cab_' + cabinetId);
-        this.switchTab('scan');
-        this.showToast(`📍 ไปนับสินค้าใน "${cabinet.name}"`, 'success');
-    }
-
-    deleteCabinetFromFloor(cabinetId) {
-        if (!confirm(`🗑️ ยืนยันลบตู้นี้? (สินค้าที่ยังไม่ได้นับจะหายไป)`)) return;
-        this.deleteCabinet(cabinetId);
-    }
-
-    addCabinetWithLayout() {
+    addCabinet() {
         const type = document.getElementById('newCabinetType').value;
         const name = document.getElementById('newCabinetName').value.trim();
         if (!name) { this.showToast('⚠️ กรุณาใส่ชื่อตู้', 'warning'); return; }
-        if (this.locations.some(l => l.name === name)) { this.showToast('⚠️ มีชื่อตู้นี้อยู่แล้ว', 'warning'); return; }
-        const typeMap = { 'front': 'front', 'middle': 'front', 'back': 'back' };
-        const cabinet = {
-            id: Date.now(),
-            name: name,
-            type: typeMap[type] || 'front',
-            displayType: type,
-            shelves: [],
-            layout: { row: type === 'front' ? 0 : (type === 'middle' ? 1 : 2), col: this.locations.filter(l => l.type === typeMap[type]).length, width: 1, height: 1 },
-            createdAt: new Date().toISOString()
-        };
+        const cabinet = { id: Date.now(), name: name, type: type, shelves: [], createdAt: new Date().toISOString() };
         this.locations.push(cabinet);
         this.saveLocations();
-        this.renderFloorPlan();
+        this.renderMap();
         this.updateLocationDropdowns();
         document.getElementById('newCabinetName').value = '';
-        this.showToast(`✅ เพิ่มตู้ "${name}" ในผังร้านสำเร็จ`, 'success');
+        this.showToast('✅ เพิ่มตู้ ' + name + ' (' + (type === 'front' ? 'หน้าร้าน' : 'หลังร้าน') + ') สำเร็จ', 'success');
     }
 
-    // ================================================================
-    // EXPORT FLOOR PLAN PDF
-    // ================================================================
-    exportFloorPlanPDF() {
-        const { jsPDF } = window.jspdf;
-        if (!jsPDF) { this.showToast('⚠️ ไลบรารี PDF ไม่ถูกโหลด', 'error'); return; }
-        
-        const doc = new jsPDF('landscape', 'mm', 'a4');
-        const pageWidth = 297, pageHeight = 210, margin = 15;
-        const startX = margin, startY = margin + 30;
-        
-        doc.setFontSize(18);
-        doc.setFont('helvetica', 'bold');
-        doc.text('📋 ผังร้าน MediStock', pageWidth / 2, 15, { align: 'center' });
-        doc.setFontSize(12);
-        doc.setFont('helvetica', 'normal');
-        const branchName = this.branches.find(b => b.id === this.branchId)?.name || 'สาขาหลัก';
-        doc.text(`ร้าน: ${branchName}`, pageWidth / 2, 22, { align: 'center' });
-        doc.text(`วันที่: ${new Date().toLocaleDateString('th-TH')}`, pageWidth / 2, 29, { align: 'center' });
-        
-        const rows = {
-            front: { label: '🏪 หน้าร้าน', color: '#dcfce7', cabinets: [] },
-            middle: { label: '🏬 กลางร้าน', color: '#fef3c7', cabinets: [] },
-            back: { label: '📦 หลังร้าน', color: '#fee2e2', cabinets: [] }
-        };
-        
-        for (const cabinet of this.locations) {
-            const row = cabinet.layout?.row ?? (cabinet.type === 'front' ? 0 : cabinet.type === 'back' ? 2 : 1);
-            const rowKey = row === 0 ? 'front' : row === 1 ? 'middle' : 'back';
-            if (rows[rowKey]) rows[rowKey].cabinets.push(cabinet);
-        }
-        
-        const activeRows = Object.entries(rows).filter(([key, data]) => data.cabinets.length > 0);
-        if (activeRows.length === 0) {
-            doc.setFontSize(14);
-            doc.text('⚠️ ยังไม่มีตู้ในผังร้าน', pageWidth / 2, pageHeight / 2, { align: 'center' });
-            doc.save('floor_plan_empty.pdf');
-            this.showToast('⚠️ ยังไม่มีตู้ในผังร้าน', 'warning');
+    deleteCabinet(id) {
+        const hasItems = this.sessionItems.some(i => i.location && i.location.includes('cab_' + id));
+        if (hasItems) {
+            this.showToast('⚠️ ไม่สามารถลบตู้ได้ เพราะมีสินค้าอยู่ในตู้นี้!', 'warning');
             return;
         }
-        
-        let y = startY;
-        for (const [rowKey, data] of activeRows) {
-            doc.setFontSize(11);
-            doc.setFont('helvetica', 'bold');
-            doc.text(data.label, startX, y - 2);
-            const cabinets = data.cabinets;
-            const cellWidth = Math.min(65, (pageWidth - margin * 2 - 20) / cabinets.length);
-            const cellHeight = 40;
-            for (let i = 0; i < cabinets.length; i++) {
-                const cabinet = cabinets[i];
-                const x = startX + (i * (cellWidth + 6));
-                const yPos = y;
-                const color = this.hexToRgb(data.color);
-                doc.setDrawColor(0, 0, 0);
-                doc.setFillColor(color.r, color.g, color.b);
-                doc.roundedRect(x, yPos, cellWidth, cellHeight, 3, 3, 'FD');
-                doc.setFontSize(11);
-                doc.setFont('helvetica', 'bold');
-                doc.text(cabinet.name, x + cellWidth / 2, yPos + 10, { align: 'center' });
-                doc.setFontSize(8);
-                doc.setFont('helvetica', 'normal');
-                const shelfCount = cabinet.shelves?.length || 0;
-                doc.text(`${shelfCount} ชั้น`, x + cellWidth / 2, yPos + 22, { align: 'center' });
-                const counted = this.sessionItems.filter(i => i.location && i.location.includes(String(cabinet.id))).length;
-                if (counted > 0) {
-                    doc.setFontSize(8);
-                    doc.setTextColor(0, 128, 0);
-                    doc.text(`✅ นับ ${counted}`, x + cellWidth / 2, yPos + 32, { align: 'center' });
-                    doc.setTextColor(0, 0, 0);
-                }
-                const hasItems = this.sessionItems.some(i => i.location && i.location.includes(String(cabinet.id)));
-                if (hasItems && counted === 0) {
-                    doc.setFontSize(8);
-                    doc.setTextColor(255, 165, 0);
-                    doc.text('⚠️ มีสินค้า', x + cellWidth / 2, yPos + 32, { align: 'center' });
-                    doc.setTextColor(0, 0, 0);
-                }
-            }
-            y += cellHeight + 10;
+        if (!confirm('🗑️ ยืนยันลบตู้นี้?')) return;
+        this.locations = this.locations.filter(l => l.id !== id);
+        this.saveLocations();
+        this.renderMap();
+        this.updateLocationDropdowns();
+        if (this.selectedCabinetId === id) {
+            this.selectedCabinetId = null;
+            document.getElementById('shelfCard').style.display = 'none';
         }
-        
-        const footerY = Math.min(y + 15, pageHeight - 20);
-        doc.setFontSize(10);
-        doc.setFont('helvetica', 'normal');
-        doc.text(`✅ จำนวนตู้ทั้งหมด: ${this.locations.length} ตู้`, margin, footerY);
-        const totalShelves = this.locations.reduce((sum, c) => sum + (c.shelves?.length || 0), 0);
-        doc.text(`✅ ชั้นวางทั้งหมด: ${totalShelves} ชั้น`, margin + 80, footerY);
-        const totalItems = this.products.filter(p => (p.stock || 0) > 0).length;
-        const countedItems = this.sessionItems.length;
-        const pct = totalItems > 0 ? Math.round(countedItems / totalItems * 100) : 0;
-        doc.text(`📊 สินค้านับแล้ว: ${countedItems}/${totalItems} (${pct}%)`, margin + 180, footerY);
-        doc.save(`floor_plan_${this.branchId}_${Date.now()}.pdf`);
-        this.showToast('✅ ส่งออกผังร้าน PDF สำเร็จ!', 'success');
+        this.showToast('🗑️ ลบตู้เรียบร้อย', 'info');
     }
 
-    hexToRgb(hex) {
-        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-        return result ? { r: parseInt(result[1], 16), g: parseInt(result[2], 16), b: parseInt(result[3], 16) } : { r: 255, g: 255, b: 255 };
+    addShelfToCabinet() {
+        if (!this.selectedCabinetId) { this.showToast('⚠️ กรุณาเลือกตู้ก่อน', 'warning'); return; }
+        const shelfName = document.getElementById('newShelfName').value.trim();
+        if (!shelfName) {
+            this.showToast('⚠️ กรุณาใส่ชื่อชั้น', 'warning');
+            return;
+        }
+        const cabinet = this.locations.find(l => l.id === this.selectedCabinetId);
+        if (!cabinet) return;
+        if (cabinet.shelves.find(s => s.name === shelfName)) {
+            this.showToast('⚠️ มีชื่อชั้นนี้อยู่แล้ว', 'warning');
+            return;
+        }
+        cabinet.shelves.push({
+            id: Date.now(),
+            name: shelfName,
+            number: cabinet.shelves.length + 1
+        });
+        this.saveLocations();
+        this.renderMap();
+        this.updateLocationDropdowns();
+        this.renderShelfList(cabinet);
+        document.getElementById('newShelfName').value = '';
+        this.showToast('✅ เพิ่มชั้น "' + shelfName + '" สำเร็จ', 'success');
+    }
+
+    deleteShelf(cabinetId, shelfId) {
+        const hasItems = this.sessionItems.some(i => i.location === 'cab_' + cabinetId + '_shelf_' + shelfId);
+        if (hasItems) {
+            this.showToast('⚠️ ไม่สามารถลบชั้นได้ เพราะมีสินค้าอยู่ในชั้นนี้!', 'warning');
+            return;
+        }
+        const cabinet = this.locations.find(l => l.id === cabinetId);
+        if (cabinet) {
+            cabinet.shelves = cabinet.shelves.filter(s => s.id !== shelfId);
+            this.saveLocations();
+            this.renderMap();
+            this.updateLocationDropdowns();
+            this.renderShelfList(cabinet);
+        }
+    }
+
+    selectCabinet(cabinetId) {
+        this.selectedCabinetId = cabinetId;
+        document.getElementById('shelfCard').style.display = 'block';
+        const cabinet = this.locations.find(l => l.id === cabinetId);
+        if (cabinet) {
+            document.getElementById('shelfCardTitle').innerHTML = `<i class="fas fa-layer-group"></i> จัดการชั้นใน ${cabinet.name} (${cabinet.type === 'front' ? '🏪 หน้าร้าน' : '📦 หลังร้าน'})`;
+            this.renderShelfList(cabinet);
+        }
+        document.querySelectorAll('.cabinet-block').forEach(b => b.classList.remove('selected'));
+        document.querySelector('[data-cabinet="' + cabinetId + '"]')?.classList.add('selected');
+    }
+
+    renderShelfList(cabinet) {
+        const list = document.getElementById('shelfList');
+        if (cabinet.shelves.length === 0) {
+            list.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:12px;font-size:13px;">ยังไม่มีชั้นในตู้นี้</p>';
+            return;
+        }
+        list.innerHTML = cabinet.shelves.map(s =>
+            `<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 10px;background:var(--bg-body);border-radius:6px;margin-bottom:4px;border:1px solid var(--border-color);">
+                <span style="font-weight:600;font-size:13px;">📚 ${s.name}</span>
+                <button class="btn btn-danger btn-sm" onclick="app.deleteShelf(${cabinet.id}, ${s.id})" style="font-size:11px;padding:4px 10px;min-height:30px;"><i class="fas fa-trash"></i> ลบ</button>
+            </div>`
+        ).join('');
+    }
+
+    renderMap() {
+        const grid = document.getElementById('cabinetGrid');
+        if (this.locations.length === 0) {
+            grid.innerHTML = `<div style="text-align:center;color:var(--text-muted);padding:28px;grid-column:1/-1;font-size:14px;">
+                <i class="fas fa-boxes" style="font-size:32px;display:block;margin-bottom:6px;opacity:0.5;"></i>
+                ยังไม่มีตู้สินค้า<br><small>เพิ่มตู้ด้านบนเพื่อเริ่มจัดผังร้าน</small>
+            </div>`;
+            return;
+        }
+
+        const frontCabinets = this.locations.filter(l => l.type === 'front');
+        const backCabinets = this.locations.filter(l => l.type === 'back');
+
+        let html = '';
+
+        html += `<div style="grid-column:1/-1;margin:4px 0;padding:6px 10px;background:var(--success-light);border-radius:var(--radius-sm);font-size:12px;font-weight:700;color:#065f46;">
+            <i class="fas fa-store"></i> หน้าร้าน (${frontCabinets.length} ตู้)
+        </div>`;
+        if (frontCabinets.length === 0) {
+            html += `<div style="grid-column:1/-1;text-align:center;color:var(--text-muted);padding:10px;font-size:12px;">ยังไม่มีตู้ในหน้าร้าน</div>`;
+        } else {
+            frontCabinets.forEach(cabinet => {
+                html += this.renderCabinetBlock(cabinet);
+            });
+        }
+
+        html += `<div style="grid-column:1/-1;margin:4px 0;padding:6px 10px;background:var(--warning-light);border-radius:var(--radius-sm);font-size:12px;font-weight:700;color:#92400e;">
+            <i class="fas fa-warehouse"></i> หลังร้าน (${backCabinets.length} ตู้)
+        </div>`;
+        if (backCabinets.length === 0) {
+            html += `<div style="grid-column:1/-1;text-align:center;color:var(--text-muted);padding:10px;font-size:12px;">ยังไม่มีตู้ในหลังร้าน</div>`;
+        } else {
+            backCabinets.forEach(cabinet => {
+                html += this.renderCabinetBlock(cabinet);
+            });
+        }
+
+        grid.innerHTML = html;
+    }
+
+    renderCabinetBlock(cabinet) {
+        const counted = this.sessionItems.filter(i => i.location && i.location.includes(String(cabinet.id))).length;
+        const typeLabel = cabinet.type === 'front' ? '🏪 หน้าร้าน' : '📦 หลังร้าน';
+        const typeClass = cabinet.type === 'front' ? 'front' : 'back';
+        const hasItems = this.sessionItems.some(i => i.location && i.location.includes('cab_' + cabinet.id));
+
+        return `<div class="cabinet-block ${this.selectedCabinetId === cabinet.id ? 'selected' : ''}" data-cabinet="${cabinet.id}" onclick="app.selectCabinet(${cabinet.id})" ondblclick="app.selectScanLocation('cab_${cabinet.id}'); app.switchTab('scan')">
+            <div class="cabinet-icon"><i class="fas fa-archive"></i></div>
+            <div class="cabinet-name">${cabinet.name}</div>
+            <div><span class="cabinet-type ${typeClass}">${typeLabel}</span></div>
+            <div style="font-size:10px;color:var(--text-muted);">${cabinet.shelves.length} ชั้นวาง</div>
+            ${counted > 0 ? `<div style="font-size:9px;color:var(--success);margin-top:2px;font-weight:600;"><i class="fas fa-check-circle"></i> นับแล้ว ${counted}</div>` : ''}
+            ${hasItems ? `<div style="font-size:8px;color:var(--warning);margin-top:1px;">⚠️ มีสินค้าอยู่</div>` : ''}
+            <div class="cabinet-shelves">
+                ${cabinet.shelves.slice(0,3).map(s => {
+                    const countedOnShelf = this.sessionItems.filter(i => i.location === 'cab_' + cabinet.id + '_shelf_' + s.id).length;
+                    const hasShelfItems = this.sessionItems.some(i => i.location === 'cab_' + cabinet.id + '_shelf_' + s.id);
+                    return `<div class="shelf-row ${countedOnShelf > 0 ? 'selected' : ''}" onclick="event.stopPropagation(); app.selectScanLocation('cab_${cabinet.id}_shelf_${s.id}'); app.switchTab('scan');">
+                            <span>${s.name}${hasShelfItems ? ' ⚠️' : ''}</span>
+                            ${countedOnShelf > 0 ? '<span class="shelf-count"><i class="fas fa-check"></i></span>' : '<span class="shelf-count">-</span>'}
+                        </div>`;
+                }).join('')}
+                ${cabinet.shelves.length > 3 ? `<div style="font-size:9px;color:var(--text-muted);text-align:center;margin-top:2px;">+ อีก ${cabinet.shelves.length - 3} ชั้น</div>` : ''}
+            </div>
+            <button class="btn btn-danger btn-sm" onclick="event.stopPropagation(); app.deleteCabinet(${cabinet.id})" style="margin-top:6px;width:100%;font-size:10px;padding:3px;min-height:28px;"><i class="fas fa-trash"></i> ลบตู้</button>
+        </div>`;
+    }
+
+    selectScanLocation(locationId) {
+        this.currentLocation = locationId;
+        const parts = locationId.replace('cab_', '').split('_shelf_');
+        const cabinetId = parts[0];
+        const shelfId = parts.length > 1 ? parts[1] : null;
+
+        const cabinet = this.locations.find(l => l.id === parseInt(cabinetId));
+        if (cabinet) {
+            document.getElementById('locationType').value = cabinet.type || 'front';
+            this.updateLocationDropdowns();
+            document.getElementById('locationCabinet').value = cabinet.id;
+            this.updateShelfDropdown();
+            if (shelfId) {
+                document.getElementById('locationShelf').value = parseInt(shelfId);
+            }
+            this.updateLocationDisplay();
+        }
+
+        document.querySelectorAll('.cabinet-block').forEach(b => b.classList.remove('selected'));
+        if (cabinetId) {
+            document.querySelector('[data-cabinet="' + cabinetId + '"]')?.classList.add('selected');
+        }
     }
 
     // ================================================================
@@ -4309,7 +4296,7 @@ class StockApp {
             }
             await this.loadProducts();
             await this.loadLocations();
-            this.renderFloorPlan();
+            this.renderMap();
             this.updateProgress();
             this.updateAlerts();
             this.runAnalytics();
@@ -4349,7 +4336,7 @@ class StockApp {
                 'ขวด': 1, 'หลอด': 1, 'ซอง': 1, 'แพ็ค': 1, 'แผ่น': 1,
                 'กระปุก': 1, 'ขีด': 1, 'ถุง': 1
             };
-            this.renderFloorPlan();
+            this.renderMap();
             this.updateLocationDropdowns();
             this.updateProgress();
             this.renderRecentScans();
