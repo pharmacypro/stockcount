@@ -8,7 +8,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="MediStock">
     <meta name="theme-color" content="#0ea5e9">
-    <title>MediStock v4.0</title>
+    <title>MediStock v4.0.1</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -139,6 +139,28 @@
         .input { width:100%; padding:12px 16px; border:2px solid var(--border-color); border-radius:var(--radius-md); font-size:15px; color:var(--text-main); background:var(--bg-body); transition:var(--transition); font-family:'Plus Jakarta Sans',sans-serif; min-height:48px; }
         .input:focus { outline:none; border-color:var(--primary); box-shadow:0 0 0 3px rgba(14,165,233,0.15); }
 
+        .scanner-wrapper { position:relative; border-radius:var(--radius-md); overflow:hidden; background:#0f172a; min-height:220px; box-shadow:inset 0 2px 20px rgba(0,0,0,0.4); }
+        .scanner-wrapper #reader { width:100%; min-height:220px; }
+        .scanner-wrapper #reader video { width:100%; height:auto; max-height:340px; object-fit:cover; display:block; }
+        .scanner-placeholder { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:220px; color:#94a3b8; text-align:center; padding:20px 14px; position:absolute; top:0; left:0; right:0; bottom:0; background:#0f172a; z-index:2; pointer-events:none; }
+        .scanner-placeholder i { font-size:40px; margin-bottom:8px; color:#475569; }
+        .scanner-placeholder p { font-size:14px; }
+        .scanner-placeholder small { font-size:12px; }
+        .scanner-overlay { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:65%; height:70px; border:2px solid #34d399; border-radius:var(--radius-sm); pointer-events:none; display:none; z-index:3; box-shadow:0 0 0 9999px rgba(15,23,42,0.5); }
+        .scanner-overlay .corner { position:absolute; width:12px; height:12px; border-color:#34d399; border-style:solid; border-width:0; }
+        .scanner-overlay .corner-tl { top:-2px; left:-2px; border-top-width:3px; border-left-width:3px; }
+        .scanner-overlay .corner-tr { top:-2px; right:-2px; border-top-width:3px; border-right-width:3px; }
+        .scanner-overlay .corner-bl { bottom:-2px; left:-2px; border-bottom-width:3px; border-left-width:3px; }
+        .scanner-overlay .corner-br { bottom:-2px; right:-2px; border-bottom-width:3px; border-right-width:3px; }
+        .scanner-status { text-align:center; padding:6px; font-size:13px; font-weight:500; margin-top:5px; }
+        .scanner-status.success { color:var(--success); }
+        .scanner-status.error { color:var(--danger); }
+        .scanner-status.idle { color:var(--text-muted); }
+
+        .scanner-controls { display:flex; gap:6px; margin-top:6px; flex-wrap:wrap; }
+        .scanner-controls .btn { flex:1; font-size:13px; padding:8px 12px; min-height:42px; }
+        .scanner-controls .btn-sm { flex:0 1 auto; font-size:12px; padding:6px 12px; min-height:36px; }
+
         /* ✅ Fullscreen Scanner CSS */
         .scanner-fullscreen {
             position: fixed;
@@ -240,29 +262,6 @@
             background: rgba(255, 215, 0, 0.25);
             border-color: #ffd700;
         }
-
-        /* ✅ Scanner placeholder (เดิม) */
-        .scanner-wrapper { position:relative; border-radius:var(--radius-md); overflow:hidden; background:#0f172a; min-height:220px; box-shadow:inset 0 2px 20px rgba(0,0,0,0.4); }
-        .scanner-wrapper #reader { width:100%; min-height:220px; }
-        .scanner-wrapper #reader video { width:100%; height:auto; max-height:340px; object-fit:cover; display:block; }
-        .scanner-placeholder { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:220px; color:#94a3b8; text-align:center; padding:20px 14px; position:absolute; top:0; left:0; right:0; bottom:0; background:#0f172a; z-index:2; pointer-events:none; }
-        .scanner-placeholder i { font-size:40px; margin-bottom:8px; color:#475569; }
-        .scanner-placeholder p { font-size:14px; }
-        .scanner-placeholder small { font-size:12px; }
-        .scanner-overlay { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:65%; height:70px; border:2px solid #34d399; border-radius:var(--radius-sm); pointer-events:none; display:none; z-index:3; box-shadow:0 0 0 9999px rgba(15,23,42,0.5); }
-        .scanner-overlay .corner { position:absolute; width:12px; height:12px; border-color:#34d399; border-style:solid; border-width:0; }
-        .scanner-overlay .corner-tl { top:-2px; left:-2px; border-top-width:3px; border-left-width:3px; }
-        .scanner-overlay .corner-tr { top:-2px; right:-2px; border-top-width:3px; border-right-width:3px; }
-        .scanner-overlay .corner-bl { bottom:-2px; left:-2px; border-bottom-width:3px; border-left-width:3px; }
-        .scanner-overlay .corner-br { bottom:-2px; right:-2px; border-bottom-width:3px; border-right-width:3px; }
-        .scanner-status { text-align:center; padding:6px; font-size:13px; font-weight:500; margin-top:5px; }
-        .scanner-status.success { color:var(--success); }
-        .scanner-status.error { color:var(--danger); }
-        .scanner-status.idle { color:var(--text-muted); }
-
-        .scanner-controls { display:flex; gap:6px; margin-top:6px; flex-wrap:wrap; }
-        .scanner-controls .btn { flex:1; font-size:13px; padding:8px 12px; min-height:42px; }
-        .scanner-controls .btn-sm { flex:0 1 auto; font-size:12px; padding:6px 12px; min-height:36px; }
 
         .product-detail { background:linear-gradient(135deg, var(--success-light) 0%, #f0fdf4 100%); border:2px solid #6ee7b7; border-radius:var(--radius-lg); padding:16px; margin-bottom:10px; display:none; }
         [data-theme="dark"] .product-detail { background:linear-gradient(135deg, #064e3b 0%, #065f46 100%); border-color:#34d399; }
@@ -615,21 +614,6 @@
         .onboarding-card .btn-group { display:flex; gap:8px; }
         .onboarding-card .btn-group .btn { flex:1; }
 
-        /* ✅ Unit Check Modal */
-        .unit-check-modal .unit-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 12px;
-            border-bottom: 1px solid var(--border-color);
-        }
-        .unit-check-modal .unit-item:last-child { border-bottom: none; }
-        .unit-check-modal .unit-item .unit-name { font-weight: 600; }
-        .unit-check-modal .unit-item .unit-factor { color: var(--text-muted); font-size: 13px; }
-        .unit-check-modal .unit-item .unit-status { font-size: 13px; }
-        .unit-check-modal .unit-item .unit-status.match { color: var(--success); }
-        .unit-check-modal .unit-item .unit-status.mismatch { color: var(--danger); }
-
         @media (max-width:480px) {
             .logo-icon { width:34px; height:34px; font-size:15px; }
             .logo-text .brand .main { font-size:14px; }
@@ -666,7 +650,7 @@
             <div class="logo-text">
                 <span class="brand">
                     <span class="main">MediStock</span>
-                    <span class="version">v4.0</span>
+                    <span class="version">v4.0.1</span>
                 </span>
                 <span class="tagline"><i class="fas fa-circle" style="font-size:4px;color:#34d399;margin-right:3px;"></i>ระบบนับสต็อกสินค้ายา</span>
             </div>
@@ -708,7 +692,7 @@
         <div class="card">
             <div class="card-title"><i class="fas fa-file-import"></i> นำเข้าข้อมูลสินค้า</div>
             <div style="font-size:11px;color:var(--text-muted);margin-bottom:6px;padding:4px 10px;background:var(--bg-body);border-radius:var(--radius-sm);">
-                <i class="fas fa-info-circle"></i> โหมด <strong>Append</strong> (เพิ่มข้อมูลต่อท้าย ไม่ลบของเดิม)
+                <i class="fas fa-info-circle"></i> โหมด <strong>Append</strong> (เพิ่มข้อมูลต่อท้าย ไม่ลบของเดิม) • รองรับ <strong>หลาย LOT</strong>
             </div>
             <div id="dropZone" onclick="document.getElementById('fileInput').click()" style="border:2px dashed var(--border-color);border-radius:var(--radius-md);padding:28px 16px;text-align:center;cursor:pointer;background:var(--bg-body);margin-bottom:8px;">
                 <i class="fas fa-cloud-upload-alt" style="font-size:32px;color:var(--primary);display:block;margin-bottom:6px;"></i>
@@ -729,7 +713,7 @@
         <div class="card" id="mappingCard" style="display:none;">
             <div class="card-title"><i class="fas fa-cog"></i> กำหนดคอลัมน์</div>
             <div class="mapping-grid" id="mappingFields"></div>
-            <button class="btn btn-primary btn-block" onclick="confirmMapping()" style="margin-top:8px;font-size:14px;padding:12px;"><i class="fas fa-check"></i> ยืนยันและนำเข้าข้อมูล (Append)</button>
+            <button class="btn btn-primary btn-block" onclick="confirmMapping()" style="margin-top:8px;font-size:14px;padding:12px;"><i class="fas fa-check"></i> ยืนยันและนำเข้าข้อมูล (Append + หลาย LOT)</button>
         </div>
 
         <div class="card" id="previewCard" style="display:none;">
@@ -760,7 +744,7 @@
             <div class="flex-between" style="flex-wrap:wrap;gap:4px;">
                 <button class="btn btn-primary btn-sm" onclick="showAddProductModal()" style="font-size:12px;padding:6px 14px;min-height:36px;"><i class="fas fa-plus"></i> เพิ่มสินค้า</button>
                 <div style="font-size:12px;font-weight:600;color:var(--text-muted);">
-                    <i class="fas fa-info-circle"></i> เลือกตำแหน่งก่อนนับ
+                    <i class="fas fa-info-circle"></i> เลือกตำแหน่งก่อนนับ • รองรับหลาย LOT
                 </div>
             </div>
         </div>
@@ -833,12 +817,14 @@
             </div>
             
             <!-- ✅ Lot Selection (รองรับหลาย LOT) -->
-            <div id="lotSelection" style="display:none;margin-top:6px;">
+            <div id="lotSelection" style="display:block;margin-top:6px;">
                 <label style="font-weight:600;font-size:14px;color:#065f46;display:flex;align-items:center;gap:6px;">
                     <i class="fas fa-tag"></i> เลือก Lot สินค้า:
                     <span style="font-size:11px;color:var(--text-muted);font-weight:400;">(คลิกเพื่อเลือก)</span>
                 </label>
-                <div id="lotList" style="margin-top:4px;"></div>
+                <div id="lotList" style="margin-top:4px;">
+                    <div style="text-align:center;color:var(--text-muted);padding:8px;font-size:13px;">กำลังโหลดข้อมูล LOT...</div>
+                </div>
             </div>
             
             <div class="qty-control">
@@ -1154,7 +1140,7 @@
                 เพิ่ม/แก้ไขหน่วยนับสินค้า (ใช้สำหรับแปลงหน่วย)
             </p>
             <div style="display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap;">
-                <input type="text" class="input" id="newUnitName" placeholder="ชื่อหน่วย (เช่น โหล)" style="flex:1;font-size:13px;padding:8px 12px;min-height:38px;">
+                <input type="text" class="input" id="newUnitName" placeholder="ชื่อหน่วย (เช่น โหล, ตลับ)" style="flex:1;font-size:13px;padding:8px 12px;min-height:38px;">
                 <input type="number" class="input" id="newUnitFactor" placeholder="เท่ากับกี่ชิ้น" style="flex:1;font-size:13px;padding:8px 12px;min-height:38px;" value="12">
                 <button class="btn btn-primary" onclick="addUnit()" style="font-size:13px;padding:8px 14px;min-height:38px;"><i class="fas fa-plus"></i> เพิ่มหน่วย</button>
             </div>
@@ -1248,13 +1234,13 @@
         <div class="modal-handle"></div>
         <div class="modal-title"><i class="fas fa-plus-circle"></i> เพิ่มสินค้าใหม่</div>
         <div style="margin-bottom:6px;padding:6px 12px;background:var(--warning-light);border-radius:var(--radius-sm);font-size:12px;color:#92400e;">
-            <i class="fas fa-info-circle"></i> ราคาทุนจะถูกตั้งเป็น 0 โดยอัตโนมัติ (ไม่ต้องกรอก)
+            <i class="fas fa-info-circle"></i> ราคาทุนจะถูกตั้งเป็น 0 โดยอัตโนมัติ (ไม่ต้องกรอก) • รองรับหลาย LOT
         </div>
         <input type="text" class="input" id="newProductBarcode" placeholder="📱 บาร์โค้ด (ถ้ามี)" style="margin-bottom:6px;font-size:14px;padding:10px 14px;min-height:44px;">
         <input type="text" class="input" id="newProductName" placeholder="📦 ชื่อสินค้า *" style="margin-bottom:6px;font-size:14px;padding:10px 14px;min-height:44px;">
         <input type="text" class="input" id="newProductLot" placeholder="🔖 เลขที่ผลิต (Lot)" style="margin-bottom:6px;font-size:14px;padding:10px 14px;min-height:44px;">
         <input type="number" class="input" id="newProductSellPrice" placeholder="💰 ราคาขายต่อหน่วย" style="margin-bottom:6px;font-size:14px;padding:10px 14px;min-height:44px;" step="0.01">
-        <input type="text" class="input" id="newProductUnit" placeholder="📦 หน่วยนับ (เช่น ชิ้น, ขวด)" style="margin-bottom:6px;font-size:14px;padding:10px 14px;min-height:44px;">
+        <input type="text" class="input" id="newProductUnit" placeholder="📦 หน่วยนับ (เช่น ชิ้น, ขวด, ตลับ)" style="margin-bottom:6px;font-size:14px;padding:10px 14px;min-height:44px;">
         <input type="date" class="input" id="newProductExpiry" placeholder="⏳ วันหมดอายุ" style="margin-bottom:6px;font-size:14px;padding:10px 14px;min-height:44px;">
         <div style="display:flex;gap:6px;margin-top:4px;">
             <input type="number" class="input" id="newProductMinStock" placeholder="จำนวนขั้นต่ำ (Min)" style="flex:1;font-size:14px;padding:10px 14px;min-height:44px;" value="5">
@@ -1422,6 +1408,7 @@
                 <option value="ขวด">ขวด (1 ขวด = 1 ชิ้น)</option>
                 <option value="หลอด">หลอด (1 หลอด = 1 ชิ้น)</option>
                 <option value="ซอง">ซอง (1 ซอง = 1 ชิ้น)</option>
+                <option value="ตลับ">ตลับ (1 ตลับ = 1 ชิ้น)</option>
                 <option value="custom">➕ เพิ่มหน่วยใหม่</option>
             </select>
             <input type="number" id="customUnitFactor" placeholder="เท่ากับกี่ชิ้น?" style="flex:1;padding:10px;border:2px solid var(--border-color);border-radius:var(--radius-sm);font-size:14px;min-height:44px;display:none;">
@@ -1442,7 +1429,7 @@
     <div class="onboarding-card">
         <div class="icon" id="onboardingIcon">📷</div>
         <h3 id="onboardingTitle">ยินดีต้อนรับสู่ MediStock!</h3>
-        <p id="onboardingDesc">ระบบนับสต็อกสินค้ายา ใช้งานง่าย พร้อมช่วยให้คุณจัดการสต็อกได้อย่างมีประสิทธิภาพ</p>
+        <p id="onboardingDesc">ระบบนับสต็อกสินค้ายา ใช้งานง่าย ไม่ต้องลงโปรแกรม เปิดเว็บก็ใช้ได้</p>
         <div class="step-indicator" id="onboardingIndicator">
             <span class="dot active"></span>
             <span class="dot"></span>
@@ -1476,14 +1463,14 @@ if ('serviceWorker' in navigator) {
 }
 
 // ================================================================
-// ✅ JavaScript - MediStock v4.0 (ฉบับสมบูรณ์)
+// ✅ JavaScript - MediStock v4.0.1 (ฉบับสมบูรณ์)
 // ================================================================
 eruda.init();
-console.log('✅ MediStock v4.0 กำลังเริ่มต้น...');
+console.log('✅ MediStock v4.0.1 กำลังเริ่มต้น...');
 
 const CONFIG = {
     APP_NAME: 'MediStock',
-    VERSION: '4.0',
+    VERSION: '4.0.1',
     STORE_ID: localStorage.getItem('storeId') || 'default',
     EXPIRY_WARNING_DAYS: 90,
     MIN_STOCK_ALERT: 5,
@@ -1533,7 +1520,7 @@ class StockApp {
         this.isEditMode = false;
         this._qrProduct = null;
 
-        // ระบบแปลงหน่วย
+        // ระบบแปลงหน่วย (เพิ่ม "ตลับ")
         this.unitMap = {
             'ชิ้น': 1,
             'โหล': 12,
@@ -1547,7 +1534,8 @@ class StockApp {
             'แผ่น': 1,
             'กระปุก': 1,
             'ขีด': 1,
-            'ถุง': 1
+            'ถุง': 1,
+            'ตลับ': 1    // ✅ เพิ่มหน่วย "ตลับ"
         };
         this.unknownUnits = [];
         this._pendingUnknownUnit = null;
@@ -1558,7 +1546,7 @@ class StockApp {
         this.onboardingStep = 0;
         this.onboardingSteps = [
             { icon: '🏪', title: 'ยินดีต้อนรับสู่ MediStock!', desc: 'ระบบนับสต็อกสินค้ายา ใช้งานง่าย ไม่ต้องลงโปรแกรม เปิดเว็บก็ใช้ได้' },
-            { icon: '📥', title: 'ขั้นตอนที่ 1: นำเข้าสินค้า', desc: 'ไปที่แท็บ "นำเข้า" → อัปโหลดไฟล์ Excel หรือ CSV ที่มีข้อมูลสินค้า' },
+            { icon: '📥', title: 'ขั้นตอนที่ 1: นำเข้าสินค้า', desc: 'ไปที่แท็บ "นำเข้า" → อัปโหลดไฟล์ Excel หรือ CSV ที่มีข้อมูลสินค้า (รองรับหลาย LOT)' },
             { icon: '📸', title: 'ขั้นตอนที่ 2: เปิดกล้องสแกน', desc: 'ไปที่แท็บ "นับสต็อก" → กด "เปิดสแกน (เต็มจอ)" → ส่องบาร์โค้ดห่าง 10-15 ซม.' },
             { icon: '📍', title: 'ขั้นตอนที่ 3: เลือกตำแหน่ง', desc: 'เลือกหน้าร้าน/หลังร้าน → เลือกตู้ → เลือกชั้นวาง (ถ้ายังไม่มีให้สร้างใหม่)' },
             { icon: '✏️', title: 'ขั้นตอนที่ 4: ใส่จำนวน', desc: 'ใส่จำนวนที่นับ → กด "ยืนยันการนับ" (ถ้านับผิด แก้ไขได้ที่รายการล่าสุด)' },
@@ -1589,7 +1577,7 @@ class StockApp {
         this.loadUnits();
         this.checkEmergencyBackup();
         this.showOnboarding();
-        console.log('✅ MediStock v4.0 พร้อมใช้งาน!');
+        console.log('✅ MediStock v4.0.1 พร้อมใช้งาน!');
         if (this.products.length === 0) {
             this.updateStatus('📥 กรุณานำเข้าข้อมูลสินค้าก่อนใช้งาน');
             this.showToast('📥 กรุณานำเข้าข้อมูลสินค้าจาก Excel หรือ Google Sheets', 'info');
@@ -1956,7 +1944,6 @@ class StockApp {
 
     formatDate(dateStr) {
         if (!dateStr) return '-';
-        // ✅ ถ้าเป็นข้อความ ให้คืนค่าข้อความนั้น
         if (typeof dateStr === 'string' && isNaN(new Date(dateStr).getTime())) {
             return dateStr;
         }
@@ -2114,11 +2101,11 @@ class StockApp {
             'นำเข้า': {
                 title: '📥 คู่มือการนำเข้าสินค้า',
                 steps: [
-                    '1. เตรียมไฟล์ Excel หรือ CSV ที่มีข้อมูลสินค้า (ชื่อ, บาร์โค้ด, ราคา, จำนวน)',
+                    '1. เตรียมไฟล์ Excel หรือ CSV ที่มีข้อมูลสินค้า (ชื่อ, บาร์โค้ด, ราคา, จำนวน, LOT)',
                     '2. คลิกที่ช่องอัปโหลด หรือลากไฟล์มาวางในช่อง',
                     '3. ระบบจะแสดงตัวอย่างข้อมูล ให้เลือกว่าคอลัมน์ไหนตรงกับฟิลด์อะไร',
                     '4. กด "ยืนยันและนำเข้าข้อมูล" ระบบจะเพิ่มสินค้าเข้าไป (แบบ Append ไม่ลบของเดิม)',
-                    '5. ถ้าไม่มีไฟล์ Excel สามารถใช้ Google Sheets แทนได้ โดยใส่ URL แล้วกดนำเข้า'
+                    '5. รองรับหลาย LOT: ถ้ารหัสสินค้าซ้ำแต่ LOT ต่างกัน จะเพิ่มเป็น LOT ใหม่'
                 ],
                 tip: '💡 ถ้าอัปโหลดซ้ำ ระบบจะอัปเดตข้อมูลสินค้าที่มีอยู่แล้ว (ไม่ซ้ำ)'
             },
@@ -2127,10 +2114,10 @@ class StockApp {
                 steps: [
                     '1. กด "เปิดสแกน (เต็มจอ)" เพื่อเริ่มสแกนบาร์โค้ด (วางห่าง 10-15 ซม.)',
                     '2. ถ้าไม่มีบาร์โค้ด ให้พิมพ์ชื่อสินค้าในช่องค้นหา',
-                    '3. เลือกตำแหน่งสินค้า: หน้าร้าน/หลังร้าน → ตู้ → ชั้นวาง',
-                    '4. ใส่จำนวนที่นับ แล้วกด "ยืนยันการนับ"',
-                    '5. ถ้านับผิด แก้ไขได้ที่ "รายการนับล่าสุด" (คลิก ✏️)',
-                    '6. ถ้าสินค้ามีหลายตำแหน่ง ให้เปลี่ยนตำแหน่งแล้วนับเพิ่ม'
+                    '3. เลือก LOT ที่ต้องการนับ (ถ้ามีหลาย LOT)',
+                    '4. เลือกตำแหน่งสินค้า: หน้าร้าน/หลังร้าน → ตู้ → ชั้นวาง',
+                    '5. ใส่จำนวนที่นับ แล้วกด "ยืนยันการนับ"',
+                    '6. ถ้านับผิด แก้ไขได้ที่ "รายการนับล่าสุด" (คลิก ✏️)'
                 ],
                 tip: '💡 โหมดต่อเนื่อง: เปิดไว้จะนับ 1 ชิ้นทันทีเมื่อสแกน (ไม่ต้องกดยืนยัน)'
             },
@@ -2169,7 +2156,7 @@ class StockApp {
                 title: '⚙️ คู่มือการตั้งค่าระบบ',
                 steps: [
                     '1. จัดการสาขา: เพิ่ม/แก้ไข/ลบ สาขา (ข้อมูลแยกกัน)',
-                    '2. จัดการหน่วยนับ: เพิ่มหน่วย เช่น โหล, ลัง, แผง',
+                    '2. จัดการหน่วยนับ: เพิ่มหน่วย เช่น โหล, ลัง, แผง, ตลับ',
                     '3. Google Sheets: ตั้งค่า API Key เพื่อซิงค์ข้อมูลกับทีม',
                     '4. Backup/Restore: สำรองและกู้คืนข้อมูล (แนะนำทุกวัน)'
                 ],
@@ -2289,7 +2276,7 @@ class StockApp {
     }
 
     // ================================================================
-    // ✅ BARCODE VALIDATION (13 หลักเท่านั้น)
+    // ✅ BARCODE VALIDATION (13 หลัก + Checksum)
     // ================================================================
     validateBarcode(barcode) {
         const clean = String(barcode).replace(/[^0-9]/g, '');
@@ -2302,11 +2289,34 @@ class StockApp {
                 message: `❌ บาร์โค้ดต้องมี 13 หลักเท่านั้น (พบ ${clean.length} หลัก)`
             };
         }
+        // ✅ ตรวจสอบ Checksum
+        if (!this.validateEAN13Checksum(clean)) {
+            return {
+                valid: false,
+                message: `❌ บาร์โค้ดไม่ถูกต้อง (Checksum Error)`
+            };
+        }
         return { valid: true, barcode: clean };
     }
 
+    // ✅ ฟังก์ชันตรวจสอบ EAN-13 Checksum
+    validateEAN13Checksum(barcode) {
+        if (barcode.length !== 13) return false;
+        let sum = 0;
+        for (let i = 0; i < 12; i++) {
+            const digit = parseInt(barcode[i]);
+            if (i % 2 === 0) {
+                sum += digit;
+            } else {
+                sum += digit * 3;
+            }
+        }
+        const checksum = (10 - (sum % 10)) % 10;
+        return checksum === parseInt(barcode[12]);
+    }
+
     // ================================================================
-    // ✅ FULLSCREEN SCANNER
+    // ✅ FULLSCREEN SCANNER (พร้อมปรับโฟกัสและ Checksum)
     // ================================================================
     async openFullscreenScanner() {
         console.log('📷 เปิด Fullscreen Scanner...');
@@ -2340,10 +2350,16 @@ class StockApp {
         try {
             this.html5Scanner = new Html5Qrcode("reader-fullscreen");
             
+            // ✅ ปรับการตั้งค่าให้โฟกัสดีขึ้น
             const config = {
                 fps: 30,
                 qrbox: { width: 300, height: 200 },
                 aspectRatio: 1.333,
+                // ✅ เพิ่ม videoConstraints เพื่อปรับโฟกัส
+                videoConstraints: {
+                    focusMode: "continuous",
+                    facingMode: "environment"
+                },
                 formatsToSupport: [
                     Html5QrcodeSupportedFormats.EAN_13,
                     Html5QrcodeSupportedFormats.EAN_8,
@@ -2371,6 +2387,14 @@ class StockApp {
                     
                     if (cleanBarcode.length !== 13) {
                         document.getElementById('scannerStatusFull').textContent = `⚠️ ต้องมี 13 หลัก (พบ ${cleanBarcode.length} หลัก)`;
+                        document.getElementById('scannerStatusFull').style.color = '#f59e0b';
+                        if (navigator.vibrate) navigator.vibrate([100, 100, 100]);
+                        return;
+                    }
+
+                    // ✅ ตรวจสอบ Checksum
+                    if (!this.validateEAN13Checksum(cleanBarcode)) {
+                        document.getElementById('scannerStatusFull').textContent = '⚠️ บาร์โค้ดไม่ถูกต้อง (Checksum Error) กรุณาสแกนใหม่';
                         document.getElementById('scannerStatusFull').style.color = '#f59e0b';
                         if (navigator.vibrate) navigator.vibrate([100, 100, 100]);
                         return;
@@ -2708,7 +2732,9 @@ class StockApp {
             const barcodeMatch = p.primaryBarcode && p.primaryBarcode.includes(q);
             const lotMatch = p.lot && p.lot.toLowerCase().includes(q);
             const barcodeListMatch = p.barcodes && p.barcodes.some(b => b.includes(q));
-            return nameMatch || codeMatch || barcodeMatch || lotMatch || barcodeListMatch;
+            // ✅ ค้นหาใน LOT ด้วย
+            const lotListMatch = p.lots && p.lots.some(l => l.lot && l.lot.toLowerCase().includes(q));
+            return nameMatch || codeMatch || barcodeMatch || lotMatch || barcodeListMatch || lotListMatch;
         });
         this.currentPage = 0;
         this.renderSearchResults();
@@ -2732,15 +2758,18 @@ class StockApp {
         }
 
         const hasPending = !!this.pendingBarcode;
-        let html = batch.map(p => `
-            <div class="search-result-item" onclick="window.selectProductFromSearch('${p.id}')">
+        let html = batch.map(p => {
+            // ✅ แสดงจำนวน LOT
+            const lotCount = p.lots ? p.lots.length : (p.lot ? 1 : 0);
+            const lotDisplay = lotCount > 0 ? ` (${lotCount} LOT)` : '';
+            return `<div class="search-result-item" onclick="window.selectProductFromSearch('${p.id}')">
                 <div class="info">
                     <div class="name">${p.name}</div>
-                    <div class="detail">${p.code ? 'รหัส: '+p.code : ''} | 📦 ${p.stock || 0} ชิ้น | 💰 ${(p.sellPrice1 || p.costPerUnit || 0).toFixed(2)} บาท</div>
+                    <div class="detail">${p.code ? 'รหัส: '+p.code : ''} | 📦 ${p.stock || 0} ชิ้น${lotDisplay}</div>
                 </div>
                 <span class="${hasPending ? 'badge-pair' : 'badge-select'}">${hasPending ? '📎 จับคู่' : '✅ เลือก'}</span>
-            </div>
-        `).join('');
+            </div>`;
+        }).join('');
 
         if (end < this.filteredProducts.length) {
             html += `<div style="padding:8px;text-align:center;">
@@ -2817,25 +2846,45 @@ class StockApp {
         const lotList = document.getElementById('lotList');
         const lotSelection = document.getElementById('lotSelection');
         
-        // ✅ ถ้ามีหลาย LOT ให้แสดงทั้งหมด
-        if (product.lots && product.lots.length > 1) {
+        // ✅ ถ้ามีหลาย LOT หรือมี LOT อย่างน้อย 1
+        if (product.lots && product.lots.length > 0) {
             lotSelection.style.display = 'block';
             lotList.innerHTML = product.lots.map((lot, index) => {
                 const isSelected = index === this.selectedLotIndex;
                 const expiryInfo = lot.expiry ? this.formatDate(lot.expiry) : 'ไม่ระบุ';
+                const lotName = lot.lot || 'N/A';
                 return `<div class="lot-item ${isSelected ? 'selected' : ''}" onclick="app.selectLot(${index})">
                             <div class="lot-radio"></div>
                             <div style="flex:1;">
-                                <strong style="font-size:14px;">🔖 Lot: ${lot.lot}</strong>
+                                <strong style="font-size:14px;">🔖 LOT: ${lotName}</strong>
                                 <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">
+                                    📦 เหลือ: ${lot.stock || 0} ชิ้น
                                     💰 ทุน: ${(lot.cost || 0).toFixed(2)} | 💵 ขาย: ${(lot.sellPrice || 0).toFixed(2)}
                                     ${expiryInfo !== 'ไม่ระบุ' ? ' | ⏳ หมดอายุ: ' + expiryInfo : ''}
-                                    ${lot.location ? ' | 📍 ' + lot.location : ''}
                                 </div>
                             </div>
                         </div>`;
             }).join('');
-            this.selectedLotIndex = 0;
+            // ✅ ถ้าไม่มี LOT ที่เลือก ให้เลือกตัวแรก
+            if (this.selectedLotIndex >= product.lots.length) {
+                this.selectedLotIndex = 0;
+            }
+        } else if (product.lot) {
+            // ✅ ถ้ามี LOT เดียว
+            lotSelection.style.display = 'block';
+            lotList.innerHTML = `
+                <div class="lot-item selected">
+                    <div class="lot-radio"></div>
+                    <div style="flex:1;">
+                        <strong style="font-size:14px;">🔖 LOT: ${product.lot}</strong>
+                        <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">
+                            📦 เหลือ: ${product.stock || 0} ชิ้น
+                            💰 ทุน: ${(product.costPerUnit || 0).toFixed(2)} | 💵 ขาย: ${(product.sellPrice1 || 0).toFixed(2)}
+                            ${product.expiryDate ? ' | ⏳ หมดอายุ: ' + this.formatDate(product.expiryDate) : ''}
+                        </div>
+                    </div>
+                </div>
+            `;
         } else {
             lotSelection.style.display = 'none';
         }
@@ -2848,18 +2897,23 @@ class StockApp {
     }
 
     showExpiryWarning(product) {
-        if (product.expiryDate) {
-            const expiryDate = new Date(product.expiryDate);
+        // ✅ ตรวจสอบจาก LOT ที่เลือกก่อน
+        let expiryDate = product.expiryDate;
+        if (product.lots && product.lots[this.selectedLotIndex]) {
+            expiryDate = product.lots[this.selectedLotIndex].expiry || product.expiryDate;
+        }
+        if (expiryDate) {
+            const expiryDateObj = new Date(expiryDate);
             const today = new Date();
-            const diffDays = Math.ceil((expiryDate - today) / (1000 * 60 * 60 * 24));
+            const diffDays = Math.ceil((expiryDateObj - today) / (1000 * 60 * 60 * 24));
             const warning = document.getElementById('expiryWarning');
             const text = document.getElementById('expiryWarningText');
             if (diffDays < 0) {
                 warning.style.display = 'flex';
-                text.textContent = '🚫 สินค้าหมดอายุแล้ว! (หมดอายุเมื่อ ' + this.formatDate(product.expiryDate) + ')';
+                text.textContent = '🚫 สินค้าหมดอายุแล้ว! (หมดอายุเมื่อ ' + this.formatDate(expiryDate) + ')';
             } else if (diffDays <= CONFIG.EXPIRY_WARNING_DAYS) {
                 warning.style.display = 'flex';
-                text.textContent = '⚠️ สินค้าหมดอายุใน ' + diffDays + ' วัน (หมดอายุ ' + this.formatDate(product.expiryDate) + ')';
+                text.textContent = '⚠️ สินค้าหมดอายุใน ' + diffDays + ' วัน (หมดอายุ ' + this.formatDate(expiryDate) + ')';
             } else {
                 warning.style.display = 'none';
             }
@@ -2994,7 +3048,7 @@ class StockApp {
             id: newId, code: newId, name: name, lot: lot, stock: 0, costPerUnit: 0, sellPrice1: sellPrice,
             unit: unit, expiryDate: expiry, supplier: 'เพิ่มใหม่', barcodes: barcode ? [barcode] : [],
             primaryBarcode: barcode || '', minStock: minStock, maxStock: maxStock,
-            lots: lot ? [{ lot: lot, cost: 0, sellPrice: sellPrice, expiry: expiry, stock: 0 }] : [],
+            lots: lot ? [{ lot: lot, stock: 0, cost: 0, sellPrice: sellPrice, expiry: expiry }] : [],
             createdAt: new Date().toISOString(), isNew: true
         };
         await this.saveProduct(product);
@@ -3033,6 +3087,10 @@ class StockApp {
             const clean = String(barcode).replace(/[^0-9]/g, '');
             if (clean.length !== 13) {
                 this.showToast(`⚠️ บาร์โค้ดต้องมี 13 หลักเท่านั้น (พบ ${clean.length} หลัก)`, 'warning');
+                return;
+            }
+            if (!this.validateEAN13Checksum(clean)) {
+                this.showToast(`⚠️ บาร์โค้ดไม่ถูกต้อง (Checksum Error)`, 'warning');
                 return;
             }
             this.closeBarcodeModal();
@@ -3080,7 +3138,7 @@ class StockApp {
     }
 
     // ================================================================
-    // ✅ CONFIRM ITEM (พร้อมตรวจสอบหน่วย)
+    // ✅ CONFIRM ITEM (พร้อมตรวจสอบหน่วยและ LOT)
     // ================================================================
     confirmItem() {
         const qty = parseInt(document.getElementById('qtyInput').value) || 0;
@@ -3093,22 +3151,6 @@ class StockApp {
         }
         const product = this.currentProduct;
         const barcode = product.primaryBarcode || (product.barcodes && product.barcodes[0]);
-        
-        // ✅ ตรวจสอบหน่วย (ถ้าหน่วยในระบบกับหน่วยที่นับไม่ตรงกัน)
-        const systemUnit = product.unit || 'ชิ้น';
-        const countUnit = document.getElementById('countUnit')?.value || 'ชิ้น';
-        
-        if (systemUnit !== countUnit) {
-            // แสดงข้อความแจ้งเตือนและให้แปลง
-            const confirmMsg = confirm(
-                `⚠️ หน่วยในระบบคือ "${systemUnit}" แต่คุณกำลังนับเป็น "${countUnit}"\n` +
-                `ต้องการแปลงหน่วยอัตโนมัติหรือไม่? (${qty} ${countUnit} = ${this.convertToBase(qty, countUnit)} ${systemUnit})`
-            );
-            if (!confirmMsg) {
-                this.showToast('⚠️ กรุณาเปลี่ยนหน่วยให้ตรงกันหรือยกเลิก', 'warning');
-                return;
-            }
-        }
         
         // ✅ ตรวจสอบการนับซ้ำ
         if (this.checkDuplicateWithLocation(barcode, location.id)) {
@@ -3125,6 +3167,18 @@ class StockApp {
             return;
         }
 
+        // ✅ เลือก LOT ที่ต้องการนับ
+        let selectedLot = null;
+        let lotName = product.lot || '';
+        if (product.lots && product.lots.length > 0) {
+            selectedLot = product.lots[this.selectedLotIndex] || product.lots[0];
+            lotName = selectedLot.lot || '';
+        }
+
+        // ✅ ตรวจสอบหน่วย (ถ้าหน่วยในระบบกับหน่วยที่นับไม่ตรงกัน)
+        const systemUnit = product.unit || 'ชิ้น';
+        const countUnit = 'ชิ้น'; // เราใช้ชิ้นเป็นหน่วยนับหลัก
+        
         // ✅ แปลงจำนวนเป็นหน่วยชิ้น
         const qtyInBase = this.convertToBase(qty, countUnit);
         const diff = qtyInBase - (product.stock || 0);
@@ -3141,7 +3195,7 @@ class StockApp {
             id: Date.now() + Math.random() * 1000,
             barcode: product.primaryBarcode || (product.barcodes || [])[0] || '',
             name: product.name,
-            lot: product.lot || '',
+            lot: lotName,
             system_qty: product.stock || 0,
             counted_qty: qtyInBase,
             counted_unit: countUnit,
@@ -3161,7 +3215,8 @@ class StockApp {
             barcodeStatus: barcodeStatus,
             isNewlyPaired: isNewlyPaired,
             note: note,
-            selectedLotIndex: this.selectedLotIndex || 0
+            selectedLotIndex: this.selectedLotIndex || 0,
+            lotName: lotName
         };
 
         this.sessionItems.push(item);
@@ -3182,7 +3237,8 @@ class StockApp {
         this.runAnalytics();
 
         const displayQty = this.convertFromBase(qtyInBase, systemUnit);
-        this.showToast(`✅ ${product.name} (${displayQty} ${systemUnit}) ${location.name}${note ? ' | 📝 ' + note : ''}`, 'success');
+        const lotDisplay = lotName ? ` (LOT: ${lotName})` : '';
+        this.showToast(`✅ ${product.name}${lotDisplay} (${displayQty} ${systemUnit}) ${location.name}${note ? ' | 📝 ' + note : ''}`, 'success');
     }
 
     async saveCountHistory(item) {
@@ -3362,7 +3418,7 @@ class StockApp {
         const item = this.sessionItems[index];
         if (!item) { this.showToast('⚠️ ไม่พบรายการ', 'error'); return; }
         document.getElementById('editItemName').textContent = '📦 ' + item.name;
-        document.getElementById('editItemDetail').textContent = `Lot: ${item.lot || '-'} | ระบบ: ${item.system_qty} | ตำแหน่ง: ${item.locationName || 'ทั้งร้าน'}`;
+        document.getElementById('editItemDetail').textContent = `Lot: ${item.lotName || item.lot || '-'} | ระบบ: ${item.system_qty} | ตำแหน่ง: ${item.locationName || 'ทั้งร้าน'}`;
         document.getElementById('editQtyInput').value = item.counted_qty;
         document.getElementById('editNoteInput').value = item.note || '';
         document.getElementById('editItemModal').classList.add('show');
@@ -3481,11 +3537,12 @@ class StockApp {
             const diffText = item.difference > 0 ? '+' + item.difference : item.difference;
             const typeIcon = item.locationType === 'front' ? '🏪' : '📦';
             const noteDisplay = item.note ? ' | 📝 ' + item.note : '';
+            const lotDisplay = item.lotName || item.lot ? ` LOT: ${item.lotName || item.lot}` : '';
             const unitDisplay = item.system_unit ? ` (${item.system_unit})` : '';
             return `<div class="recent-item">
                     <div>
                         <div class="name">${item.name}</div>
-                        <div class="detail">${item.lot ? 'Lot: ' + item.lot : ''} ระบบ: ${item.system_qty}${unitDisplay} | นับ: ${item.counted_qty}${unitDisplay} ${item.locationName ? '| ' + typeIcon + ' ' + item.locationName : ''}${noteDisplay}</div>
+                        <div class="detail">${lotDisplay} ระบบ: ${item.system_qty}${unitDisplay} | นับ: ${item.counted_qty}${unitDisplay} ${item.locationName ? '| ' + typeIcon + ' ' + item.locationName : ''}${noteDisplay}</div>
                     </div>
                     <div style="display:flex;gap:4px;align-items:center;">
                         <span class="qty-diff ${diffClass}">${diffText}</span>
@@ -3736,7 +3793,7 @@ class StockApp {
             document.getElementById('previewCard').style.display = 'block';
             this.showMapping();
             this.showPreview();
-            this.showToast('📋 กรุณากำหนดคอลัมน์ให้ตรงกับข้อมูล (Append Mode)', 'info');
+            this.showToast('📋 กรุณากำหนดคอลัมน์ให้ตรงกับข้อมูล (Append Mode + หลาย LOT)', 'info');
         } catch (err) {
             console.error('File read error:', err);
             this.showToast('❌ อ่านไฟล์ไม่สำเร็จ', 'error');
@@ -3791,6 +3848,7 @@ class StockApp {
         `).join('');
     }
 
+    // ✅ แก้ไขฟังก์ชัน confirmMapping() ให้รองรับหลาย LOT
     async confirmMapping() {
         if (!this.pendingRows || this.pendingRows.length === 0) {
             this.showToast('⚠️ ไม่มีข้อมูลที่จะนำเข้า', 'warning');
@@ -3804,7 +3862,7 @@ class StockApp {
 
         let errorCount = 0, successCount = 0, duplicateCount = 0;
         const existingCodes = new Set(this.products.map(p => p.code));
-        this.showToast('📥 กำลังตรวจสอบและนำเข้าข้อมูล...', 'info');
+        this.showToast('📥 กำลังตรวจสอบและนำเข้าข้อมูล (รองรับหลาย LOT)...', 'info');
 
         try {
             const tx = this.db.transaction('products', 'readwrite');
@@ -3816,70 +3874,110 @@ class StockApp {
                 };
                 const code = idx('code') >= 0 ? String(row[idx('code')] || '').trim() : '';
                 const name = idx('name') >= 0 ? String(row[idx('name')] || '').trim() : '';
-                if (!name) { errorCount++; continue; }
-                if (code && existingCodes.has(code)) { duplicateCount++; continue; }
-
-                const rawStock = idx('stock') >= 0 ? parseFloat(row[idx('stock')]) || 0 : 0;
+                const lot = idx('lot') >= 0 ? String(row[idx('lot')] || '').trim() : '';
+                const stock = idx('stock') >= 0 ? parseFloat(row[idx('stock')]) || 0 : 0;
                 const unit = idx('unit') >= 0 ? String(row[idx('unit')] || '').trim() : 'ชิ้น';
-                let baseStock = rawStock;
-                if (unit && !this.unitMap[unit]) {
+                const cost = idx('costPerUnit') >= 0 ? parseFloat(row[idx('costPerUnit')]) || 0 : 0;
+                const sellPrice = idx('sellPrice') >= 0 ? parseFloat(row[idx('sellPrice')]) || 0 : 0;
+                const expiry = idx('expiryDate') >= 0 ? String(row[idx('expiryDate')] || '').trim() : '';
+                const barcode = idx('barcode') >= 0 ? String(row[idx('barcode')] || '').trim() : '';
+                const supplier = idx('supplier') >= 0 ? String(row[idx('supplier')] || '').trim() : '';
+                const minStock = idx('minStock') >= 0 ? parseInt(row[idx('minStock')]) || CONFIG.MIN_STOCK_ALERT : CONFIG.MIN_STOCK_ALERT;
+                const maxStock = idx('maxStock') >= 0 ? parseInt(row[idx('maxStock')]) || CONFIG.MAX_STOCK_ALERT : CONFIG.MAX_STOCK_ALERT;
+
+                if (!name) { errorCount++; continue; }
+
+                // ✅ แปลงหน่วย
+                let baseStock = stock;
+                if (unit && this.unitMap[unit]) {
+                    baseStock = this.convertToBase(stock, unit);
+                } else if (unit) {
                     const factor = prompt(`⚠️ ไม่รู้จักหน่วย "${unit}"\nกรุณาใส่จำนวนเท่ากับกี่ชิ้น (เช่น 12 = 1 โหล):`, '1');
                     if (factor && parseFloat(factor) > 0) {
                         this.unitMap[unit] = parseFloat(factor);
                         this.saveUnit(unit, parseFloat(factor));
-                        baseStock = rawStock * parseFloat(factor);
-                    } else { baseStock = rawStock; }
-                } else {
-                    baseStock = this.convertToBase(rawStock, unit);
+                        baseStock = stock * parseFloat(factor);
+                    }
                 }
 
-                const barcode = idx('barcode') >= 0 ? String(row[idx('barcode')] || '').trim() : '';
-                let finalBarcode = '';
-                if (barcode) {
-                    const result = this.validateBarcode(barcode);
-                    if (result.valid) { finalBarcode = result.barcode; }
+                // ✅ หาสินค้าที่มีอยู่แล้ว (จากรหัส หรือ ชื่อ)
+                let product = null;
+                if (code) {
+                    product = this.products.find(p => p.code === code || p.id === code);
                 }
-                const minStock = idx('minStock') >= 0 ? parseInt(row[idx('minStock')]) || CONFIG.MIN_STOCK_ALERT : CONFIG.MIN_STOCK_ALERT;
-                const maxStock = idx('maxStock') >= 0 ? parseInt(row[idx('maxStock')]) || CONFIG.MAX_STOCK_ALERT : CONFIG.MAX_STOCK_ALERT;
+                if (!product && name) {
+                    product = this.products.find(p => p.name === name && p.supplier === supplier);
+                }
 
-                let existingProduct = null;
-                if (code) { existingProduct = this.products.find(p => p.code === code || p.id === code); }
+                if (product) {
+                    // ✅ ถ้ามีสินค้าแล้ว → เพิ่ม LOT ใหม่ (ไม่ข้าม!)
+                    if (lot) {
+                        // ✅ ตรวจสอบว่า LOT นี้มีอยู่แล้วหรือยัง
+                        if (!product.lots) product.lots = [];
+                        const existingLot = product.lots.find(l => l.lot === lot);
+                        if (!existingLot) {
+                            // ✅ LOT ใหม่ → เพิ่มเข้าไป
+                            product.lots.push({
+                                lot: lot,
+                                stock: baseStock,
+                                cost: cost,
+                                sellPrice: sellPrice,
+                                expiry: expiry,
+                                location: ''
+                            });
+                            product.stock = (product.stock || 0) + baseStock;
+                            successCount++;
+                        } else {
+                            // ✅ LOT มีอยู่แล้ว → อัปเดตจำนวน
+                            existingLot.stock += baseStock;
+                            product.stock = (product.stock || 0) + baseStock;
+                            successCount++;
+                        }
+                    } else {
+                        // ✅ ไม่มี LOT → อัปเดตสต็อกหลัก
+                        product.stock = (product.stock || 0) + baseStock;
+                        successCount++;
+                    }
 
-                if (existingProduct) {
-                    if (finalBarcode && !existingProduct.barcodes.includes(finalBarcode)) { existingProduct.barcodes.push(finalBarcode); }
-                    if (finalBarcode && !existingProduct.primaryBarcode) { existingProduct.primaryBarcode = finalBarcode; }
-                    existingProduct.stock = baseStock;
-                    existingProduct.name = name || existingProduct.name;
-                    existingProduct.lot = idx('lot') >= 0 ? String(row[idx('lot')] || '').trim() : existingProduct.lot;
-                    existingProduct.costPerUnit = idx('costPerUnit') >= 0 ? parseFloat(row[idx('costPerUnit')]) || 0 : existingProduct.costPerUnit;
-                    existingProduct.sellPrice1 = idx('sellPrice') >= 0 ? parseFloat(row[idx('sellPrice')]) || 0 : existingProduct.sellPrice1;
-                    existingProduct.expiryDate = idx('expiryDate') >= 0 ? String(row[idx('expiryDate')] || '').trim() : existingProduct.expiryDate;
-                    existingProduct.supplier = idx('supplier') >= 0 ? String(row[idx('supplier')] || '').trim() : existingProduct.supplier;
-                    existingProduct.unit = unit || existingProduct.unit;
-                    existingProduct.minStock = minStock;
-                    existingProduct.maxStock = maxStock;
-                    await new Promise(r => { const req = store.put(existingProduct); req.onsuccess = () => { successCount++; r(); }; req.onerror = () => r(); });
+                    // ✅ อัปเดตข้อมูลอื่นๆ
+                    if (barcode && !product.barcodes?.includes(barcode)) {
+                        if (!product.barcodes) product.barcodes = [];
+                        product.barcodes.push(barcode);
+                    }
+                    if (!product.primaryBarcode && barcode) {
+                        product.primaryBarcode = barcode;
+                    }
+                    if (cost) product.costPerUnit = cost;
+                    if (sellPrice) product.sellPrice1 = sellPrice;
+                    if (supplier) product.supplier = supplier;
+                    if (unit) product.unit = unit;
+                    if (minStock) product.minStock = minStock;
+                    if (maxStock) product.maxStock = maxStock;
+
+                    await this.saveProduct(product);
                 } else {
+                    // ✅ สินค้าใหม่ → สร้างใหม่
                     const newId = code || ('PCO' + String(Date.now() + successCount).padStart(10, '0'));
-                    const product = {
-                        id: newId, code: code || newId, name: name,
-                        lot: idx('lot') >= 0 ? String(row[idx('lot')] || '').trim() : '',
-                        mfgDate: idx('mfgDate') >= 0 ? String(row[idx('mfgDate')] || '').trim() : '',
-                        expiryDate: idx('expiryDate') >= 0 ? String(row[idx('expiryDate')] || '').trim() : '',
-                        sellPrice1: idx('sellPrice') >= 0 ? parseFloat(row[idx('sellPrice')]) || 0 : 0,
-                        costPerUnit: idx('costPerUnit') >= 0 ? parseFloat(row[idx('costPerUnit')]) || 0 : 0,
-                        stock: baseStock,
-                        supplier: idx('supplier') >= 0 ? String(row[idx('supplier')] || '').trim() : '',
-                        primaryBarcode: finalBarcode,
-                        barcodes: finalBarcode ? [finalBarcode] : [],
+                    const newProduct = {
+                        id: newId,
+                        code: code || newId,
+                        name: name,
+                        supplier: supplier || '',
+                        primaryBarcode: barcode || '',
+                        barcodes: barcode ? [barcode] : [],
+                        costPerUnit: cost || 0,
+                        sellPrice1: sellPrice || 0,
                         unit: unit || 'ชิ้น',
-                        minStock: minStock,
-                        maxStock: maxStock,
+                        stock: baseStock || 0,
+                        minStock: minStock || CONFIG.MIN_STOCK_ALERT,
+                        maxStock: maxStock || CONFIG.MAX_STOCK_ALERT,
+                        lots: lot ? [{ lot: lot, stock: baseStock, cost: cost, sellPrice: sellPrice, expiry: expiry }] : [],
                         createdAt: new Date().toISOString()
                     };
-                    await new Promise(r => { const req = store.put(product); req.onsuccess = () => { successCount++; r(); }; req.onerror = () => r(); });
-                    this.products.push(product);
+                    await this.saveProduct(newProduct);
+                    this.products.push(newProduct);
                     existingCodes.add(code || newId);
+                    successCount++;
                 }
             }
 
@@ -3889,7 +3987,7 @@ class StockApp {
             this.updateAlerts();
             this.runAnalytics();
             this.renderUnitList();
-            let msg = `✅ นำเข้าสำเร็จ ${successCount} รายการ`;
+            let msg = `✅ นำเข้าสำเร็จ ${successCount} รายการ (รวมหลาย LOT)`;
             if (errorCount > 0) msg += `, ข้าม ${errorCount} รายการที่ข้อมูลไม่สมบูรณ์`;
             if (duplicateCount > 0) msg += `, ข้าม ${duplicateCount} รายการที่รหัสซ้ำ`;
             this.updateStatus(msg);
@@ -3906,7 +4004,6 @@ class StockApp {
         let spreadsheetId = url;
         const match = url.match(/\/d\/([a-zA-Z0-9-_]+)/);
         if (match) spreadsheetId = match[1];
-        // ✅ ใช้ localStorage โดยตรง (เหมือนหน้า Settings)
         const apiKey = localStorage.getItem('gs_api_key') || '';
         if (!apiKey) {
             this.showToast('⚠️ ต้องตั้งค่า API Key ในหน้า Settings ก่อน', 'warning');
@@ -3988,14 +4085,14 @@ class StockApp {
             diffCard.style.display = 'block';
             document.getElementById('overItems').innerHTML = overItems.length > 0
                 ? overItems.map(i => `<div style="padding:3px 0;border-bottom:1px dashed rgba(0,0,0,0.1);">
-                        <strong>${i.name}</strong> ${i.lot ? 'Lot: '+i.lot : ''}
+                        <strong>${i.name}</strong> ${i.lotName || i.lot ? 'LOT: '+(i.lotName||i.lot) : ''}
                         +${i.difference} ชิ้น | ทุน ${(i.cost*i.difference).toFixed(2)} | ขาย ${(i.sellPrice*i.difference).toFixed(2)}
                         ${i.note ? ' | 📝 ' + i.note : ''}
                     </div>`).join('')
                 : 'ไม่มีสินค้าเกิน';
             document.getElementById('shortItems').innerHTML = shortItems.length > 0
                 ? shortItems.map(i => `<div style="padding:3px 0;border-bottom:1px dashed rgba(0,0,0,0.1);">
-                        <strong>${i.name}</strong> ${i.lot ? 'Lot: '+i.lot : ''}
+                        <strong>${i.name}</strong> ${i.lotName || i.lot ? 'LOT: '+(i.lotName||i.lot) : ''}
                         ${i.difference} ชิ้น | ทุน ${(i.cost*i.difference).toFixed(2)} | ขาย ${(i.sellPrice*i.difference).toFixed(2)}
                         ${i.note ? ' | 📝 ' + i.note : ''}
                     </div>`).join('')
@@ -4073,7 +4170,7 @@ class StockApp {
                         </div>
                         ${data.items.map(i => `
                             <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--border-color);font-size:11px;">
-                                <span>${i.name} ${i.lot ? 'Lot:'+i.lot : ''}${i.note ? ' 📝'+i.note : ''}</span>
+                                <span>${i.name} ${i.lotName || i.lot ? 'LOT:'+(i.lotName||i.lot) : ''}${i.note ? ' 📝'+i.note : ''}</span>
                                 <span style="color:${i.difference < 0 ? 'var(--danger)' : i.difference > 0 ? 'var(--success)' : 'var(--text-muted)'}">
                                      ระบบ:${i.system_qty} → นับ:${i.counted_qty} (${i.difference > 0 ? '+' : ''}${i.difference})
                                 </span>
@@ -4123,10 +4220,11 @@ class StockApp {
             const locationLabel = loc.name;
             const noteDisplay = item.note ? item.note : '';
             const unitDisplay = item.system_unit ? ` (${item.system_unit})` : '';
+            const lotDisplay = item.lotName || item.lot ? ` LOT: ${item.lotName || item.lot}` : '';
             return `<tr>
                     <td>${item.barcode || '-'}</td>
                     <td><strong>${item.name}</strong></td>
-                    <td>${item.lot || '-'}</td>
+                    <td>${lotDisplay}</td>
                     <td><span class="badge ${loc.type === 'front' ? 'badge-front' : loc.type === 'back' ? 'badge-back' : 'badge-info'}">${typeLabel}</span></td>
                     <td><span>${locationLabel}</span></td>
                     <td>${item.system_qty}${unitDisplay}</td>
@@ -4159,10 +4257,21 @@ class StockApp {
             const loc = getLocationDetail(item.location);
             return {
                 barcode: item.barcode || '-',
-                name: item.name, lot: item.lot || '-', type: loc.type, cabinet: loc.cabinet, shelf: loc.shelf,
-                system_qty: item.system_qty, counted_qty: item.counted_qty, difference: item.difference,
-                cost: item.cost, sellPrice: item.sellPrice || 0, cost_diff: item.cost_diff, sell_diff: item.sell_diff || 0,
-                profit_loss: item.profit_loss || 0, note: item.note || '', barcode_status: item.isNewlyPaired ? '🆕 ผูกใหม่' : (item.barcode ? '✅ มีในระบบ' : '⚠️ ไม่มี'),
+                name: item.name,
+                lot: item.lotName || item.lot || '-',
+                type: loc.type,
+                cabinet: loc.cabinet,
+                shelf: loc.shelf,
+                system_qty: item.system_qty,
+                counted_qty: item.counted_qty,
+                difference: item.difference,
+                cost: item.cost,
+                sellPrice: item.sellPrice || 0,
+                cost_diff: item.cost_diff,
+                sell_diff: item.sell_diff || 0,
+                profit_loss: item.profit_loss || 0,
+                note: item.note || '',
+                barcode_status: item.isNewlyPaired ? '🆕 ผูกใหม่' : (item.barcode ? '✅ มีในระบบ' : '⚠️ ไม่มี'),
                 unit: item.system_unit || 'ชิ้น'
             };
         });
@@ -4202,7 +4311,7 @@ class StockApp {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF('landscape');
         doc.setFontSize(14);
-        doc.text('MediStock - รายงานการนับสต็อก v4.0', 14, 20);
+        doc.text('MediStock - รายงานการนับสต็อก v4.0.1', 14, 20);
         const tableData = rows.map(row => row.map(v => v !== undefined ? String(v) : ''));
         doc.autoTable({ head: [headers.map(h => String(h))], body: tableData, startY: 30, styles: { fontSize: 7 } });
         doc.save(`${type}_${Date.now()}.pdf`);
@@ -4216,7 +4325,8 @@ class StockApp {
         data.forEach(p => {
             const barcodes = p.barcodes && p.barcodes.length > 0 ? p.barcodes.join('; ') : '';
             const status = p.isNew ? '🆕 เพิ่มใหม่' : '✅ มีในระบบ';
-            csv += `${p.id},${p.name},${p.lot || ''},${p.primaryBarcode || ''},${barcodes},${p.costPerUnit || 0},${p.sellPrice1 || 0},${p.unit || ''},${p.supplier || ''},${p.expiryDate || ''},${status}\n`;
+            const lots = p.lots && p.lots.length > 0 ? p.lots.map(l => l.lot).join(', ') : (p.lot || '');
+            csv += `${p.id},${p.name},${lots},${p.primaryBarcode || ''},${barcodes},${p.costPerUnit || 0},${p.sellPrice1 || 0},${p.unit || ''},${p.supplier || ''},${p.expiryDate || ''},${status}\n`;
         });
         const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
         this.download(blob, `barcode_master_${Date.now()}.csv`);
@@ -4238,11 +4348,21 @@ class StockApp {
         const data = items.map(item => {
             const loc = getLocationDetail(item.location);
             return {
-                barcode: item.barcode || '-', name: item.name, lot: item.lot || '-',
-                type: loc.type, cabinet: loc.cabinet, shelf: loc.shelf,
-                system_qty: item.system_qty, counted_qty: item.counted_qty, difference: item.difference,
-                cost: item.cost, sellPrice: item.sellPrice || 0, cost_diff: item.cost_diff, sell_diff: item.sell_diff || 0,
-                note: item.note || '', unit: item.system_unit || 'ชิ้น'
+                barcode: item.barcode || '-',
+                name: item.name,
+                lot: item.lotName || item.lot || '-',
+                type: loc.type,
+                cabinet: loc.cabinet,
+                shelf: loc.shelf,
+                system_qty: item.system_qty,
+                counted_qty: item.counted_qty,
+                difference: item.difference,
+                cost: item.cost,
+                sellPrice: item.sellPrice || 0,
+                cost_diff: item.cost_diff,
+                sell_diff: item.sell_diff || 0,
+                note: item.note || '',
+                unit: item.system_unit || 'ชิ้น'
             };
         });
         const headers = ['บาร์โค้ด', 'ชื่อสินค้า', 'Lot', 'ประเภท', 'ตู้', 'ชั้น', 'ระบบ', 'นับ', 'หน่วย', 'ต่าง', 'ทุน', 'ขาย', 'ต่าง(ทุน)', 'ต่าง(ขาย)', 'หมายเหตุ'];
@@ -4283,9 +4403,17 @@ class StockApp {
         const headers = ['วันที่', 'บาร์โค้ด', 'ชื่อสินค้า', 'Lot', 'ระบบ', 'นับ', 'หน่วย', 'ต่าง', 'ทุน', 'ขาย', 'ต่าง(ทุน)', 'ต่าง(ขาย)', 'หมายเหตุ'];
         const rows = this.history.map(item => [
             new Date(item.timestamp).toLocaleString(),
-            item.barcode || '-', item.name, item.lot || '-',
-            item.system_qty, item.counted_qty, item.system_unit || 'ชิ้น', item.difference,
-            item.cost, item.sellPrice, item.cost_diff, item.sell_diff,
+            item.barcode || '-',
+            item.name,
+            item.lotName || item.lot || '-',
+            item.system_qty,
+            item.counted_qty,
+            item.system_unit || 'ชิ้น',
+            item.difference,
+            item.cost,
+            item.sellPrice,
+            item.cost_diff,
+            item.sell_diff,
             item.note || ''
         ]);
         this.exportGenericCSV(headers, rows, 'history');
@@ -4400,7 +4528,7 @@ class StockApp {
             this.unitMap = {
                 'ชิ้น': 1, 'โหล': 12, 'ลัง': 12, 'กล่อง': 1, 'แผง': 10,
                 'ขวด': 1, 'หลอด': 1, 'ซอง': 1, 'แพ็ค': 1, 'แผ่น': 1,
-                'กระปุก': 1, 'ขีด': 1, 'ถุง': 1
+                'กระปุก': 1, 'ขีด': 1, 'ถุง': 1, 'ตลับ': 1
             };
             this.renderMap();
             this.updateLocationDropdowns();
@@ -4784,7 +4912,7 @@ class StockApp {
             const headers = [['วันที่', 'เวลา', 'บาร์โค้ด', 'ชื่อสินค้า', 'Lot', 'ระบบ', 'นับ', 'หน่วย', 'ต่าง', 'ตำแหน่ง', 'ประเภท', 'หมายเหตุ', 'สาขา']];
             const rows = this.sessionItems.map(item => [
                 new Date().toLocaleDateString('th-TH'), new Date().toLocaleTimeString('th-TH'),
-                item.barcode || '', item.name || '', item.lot || '',
+                item.barcode || '', item.name || '', item.lotName || item.lot || '',
                 item.system_qty || 0, item.counted_qty || 0, item.system_unit || 'ชิ้น',
                 item.difference || 0,
                 item.locationName || '', item.locationType || '', item.note || '',
@@ -4980,7 +5108,7 @@ let app = null;
 document.addEventListener('DOMContentLoaded', function() {
     app = new StockApp();
     window.app = app;
-    console.log('✅ MediStock v4.0 พร้อมใช้งาน!');
+    console.log('✅ MediStock v4.0.1 พร้อมใช้งาน!');
 });
 
 // ✅ เก็บ deferredPrompt ไว้
@@ -5067,8 +5195,8 @@ window.clearPendingBarcode = function() {
     if (app) app.clearPendingBarcode();
 };
 
-console.log('✅ MediStock v4.0 พร้อมใช้งาน!');
-console.log('✨ MediStock v4.0: Fullscreen Scanner + หลาย LOT + ตรวจสอบหน่วย + แก้ไข Google Sheets');
+console.log('✅ MediStock v4.0.1 พร้อมใช้งาน!');
+console.log('✨ MediStock v4.0.1: Fullscreen Scanner + หลาย LOT + Checksum + หน่วยตลับ');
 </script>
 
 <!-- ✅ ปิดท้ายไฟล์ -->
