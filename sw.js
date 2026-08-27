@@ -1,5 +1,5 @@
-// sw.js - Service Worker สำหรับ MediStock v3.5.0
-const CACHE_NAME = 'medistock-v3.5.0';
+// sw.js - Service Worker สำหรับ MediStock v4.0
+const CACHE_NAME = 'medistock-v4.0';
 const urlsToCache = [
     './',
     './index.html',
@@ -21,22 +21,18 @@ const urlsToCache = [
     'https://cdn.jsdelivr.net/npm/chart.js'
 ];
 
-// ✅ ติดตั้ง Service Worker
 self.addEventListener('install', event => {
     event.waitUntil(
         caches.open(CACHE_NAME)
             .then(cache => {
-                console.log('✅ เปิด Cache สำเร็จ');
+                console.log('✅ เปิด Cache สำเร็จ (v4.0)');
                 return cache.addAll(urlsToCache);
             })
-            .catch(err => {
-                console.error('❌ Cache error:', err);
-            })
+            .catch(err => console.error('❌ Cache error:', err))
     );
     self.skipWaiting();
 });
 
-// ✅ เปิดใช้งาน Service Worker
 self.addEventListener('activate', event => {
     event.waitUntil(
         caches.keys().then(cacheNames => {
@@ -48,31 +44,18 @@ self.addEventListener('activate', event => {
                     }
                 })
             );
-        }).then(() => {
-            return self.clients.claim();
-        })
+        }).then(() => self.clients.claim())
     );
 });
 
-// ✅ ตอบสนองการร้องขอ
 self.addEventListener('fetch', event => {
     event.respondWith(
         caches.match(event.request)
-            .then(response => {
-                if (response) {
-                    return response;
-                }
-                return fetch(event.request).catch(() => {
-                    return new Response('⚠️ ไม่สามารถเชื่อมต่อได้\nกรุณาตรวจสอบอินเทอร์เน็ต', {
-                        status: 503,
-                        statusText: 'Offline'
-                    });
-                });
-            })
+            .then(response => response || fetch(event.request))
+            .catch(() => new Response('⚠️ ไม่สามารถเชื่อมต่อได้', { status: 503 }))
     );
 });
 
-// ✅ รับข้อความจาก client
 self.addEventListener('message', event => {
     if (event.data && event.data.type === 'SKIP_WAITING') {
         self.skipWaiting();
