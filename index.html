@@ -2336,115 +2336,150 @@ class StockApp {
     }
 
     async startScanner() {
-        console.log('📷 startScanner ถูกเรียก');
+       console.log('📷 startScanner ถูกเรียก');
+       console.log('🔍 Protocol:', location.protocol);
 
-        try {
-            console.log('📷 กำลังขออนุญาตกล้อง...');
-            const stream = await navigator.mediaDevices.getUserMedia({
-                video: { facingMode: "environment", width: { ideal: 640 }, height: { ideal: 480 } }
-            });
-            stream.getTracks().forEach(track => track.stop());
-            console.log('✅ ได้รับอนุญาตกล้องแล้ว');
-        } catch (err) {
-            console.error('❌ ขออนุญาตกล้องไม่สำเร็จ:', err);
-            let msg = '❌ เปิดกล้องไม่สำเร็จ: ';
-            if (err.name === 'NotAllowedError') {
-                msg += 'กรุณาอนุญาตให้เว็บไซต์เข้าถึงกล้อง (คลิกที่ไอคอนกล้องในแถบ URL)';
-            } else if (err.name === 'NotFoundError') {
-                msg += 'ไม่พบกล้องในอุปกรณ์นี้';
-            } else {
-                msg += err.message || 'ไม่ทราบสาเหตุ';
-            }
-            document.getElementById('scannerStatus').textContent = msg;
-            document.getElementById('scannerStatus').className = 'scanner-status error';
-            this.showToast(msg, 'error');
-            return;
-        }
-
-        if (typeof Html5Qrcode === 'undefined') {
-            console.error('❌ Html5Qrcode ไม่ถูกโหลด');
-            this.showToast('⚠️ ไลบรารีสแกนโหลดไม่สำเร็จ กรุณารีเฟรชหน้า', 'error');
-            return;
-        }
-
-        if (this.html5Scanner) {
-            try { await this.html5Scanner.stop(); this.html5Scanner.clear(); } catch(e) {}
-            this.html5Scanner = null;
-        }
-
-        document.getElementById('scannerPlaceholder').style.display = 'none';
-        document.getElementById('scannerOverlay').style.display = 'block';
-        document.getElementById('scannerStatus').innerHTML = '<i class="fas fa-circle" style="color:var(--success);font-size:8px;"></i> กำลังเปิดกล้อง...';
-        document.getElementById('scannerStatus').className = 'scanner-status success';
-        document.getElementById('btnToggleScanner').innerHTML = '<i class="fas fa-stop"></i> ปิดกล้อง';
-
-        try {
-            this.html5Scanner = new Html5Qrcode("reader");
-            const config = {
-                fps: 30,
-                qrbox: { width: 300, height: 200 },
-                aspectRatio: 1.333,
-                formatsToSupport: [
-                    Html5QrcodeSupportedFormats.EAN_13,
-                    Html5QrcodeSupportedFormats.EAN_8,
-                    Html5QrcodeSupportedFormats.UPC_A,
-                    Html5QrcodeSupportedFormats.UPC_E,
-                    Html5QrcodeSupportedFormats.CODE_128,
-                    Html5QrcodeSupportedFormats.CODE_39,
-                    Html5QrcodeSupportedFormats.CODE_93,
-                    Html5QrcodeSupportedFormats.QR_CODE,
-                    Html5QrcodeSupportedFormats.DATA_MATRIX,
-                    Html5QrcodeSupportedFormats.ITF,
-                    Html5QrcodeSupportedFormats.AZTEC,
-                    Html5QrcodeSupportedFormats.CODABAR,
-                    Html5QrcodeSupportedFormats.PDF_417,
-                    Html5QrcodeSupportedFormats.MAXICODE
-                ]
-            };
-
-            await this.html5Scanner.start(
-                { facingMode: "environment", focusMode: "continuous" },
-                config,
-                (decodedText) => {
-                    const now = Date.now();
-                    if (now - this.lastScan > 1500) {
-                        this.lastScan = now;
-                        const cleanBarcode = String(decodedText).replace(/[^0-9]/g, '');
-                        if (cleanBarcode.length !== 13) {
-                            this.showToast(`⚠️ บาร์โค้ดต้องมี 13 หลักเท่านั้น (พบ ${cleanBarcode.length} หลัก)`, 'warning');
-                            document.getElementById('scannerStatus').innerHTML = `⚠️ ต้องมี 13 หลัก (พบ ${cleanBarcode.length} หลัก)`;
-                            document.getElementById('scannerStatus').className = 'scanner-status error';
-                            if (navigator.vibrate) navigator.vibrate([100, 100, 100]);
-                            return;
-                        }
-                        if (navigator.vibrate) navigator.vibrate(200);
-                        this.playBeepSound();
-                        const location = this.getSelectedLocation();
-                        if (this.checkDuplicateWithLocation(cleanBarcode, location.id)) return;
-                        this.onScan(cleanBarcode);
-                        if (this.continuousMode) {
-                            setTimeout(() => {
-                                document.getElementById('qtyInput').value = 1;
-                                this.confirmItem();
-                            }, 300);
-                        }
-                    }
-                },
-                (error) => {}
-            );
-
-            this.scanning = true;
-            this.showToast('📷 กล้องพร้อมสแกน (ต้องมี 13 หลักเท่านั้น)', 'success');
-            document.getElementById('scannerStatus').innerHTML = '<i class="fas fa-circle" style="color:var(--success);font-size:8px;"></i> พร้อมสแกน (13 หลัก)';
-            document.getElementById('scannerStatus').className = 'scanner-status success';
-        } catch (err) {
-            console.error('❌ Scanner error:', err);
-            document.getElementById('scannerStatus').innerHTML = '<i class="fas fa-exclamation-circle"></i> ' + (err.message || 'เกิดข้อผิดพลาด');
-            document.getElementById('scannerStatus').className = 'scanner-status error';
-            this.showToast('❌ เปิดกล้องไม่สำเร็จ: ' + (err.message || 'ไม่ทราบสาเหตุ'), 'error');
-            this.stopScanner();
-        }
+    // ✅ ตรวจสอบ HTTPS
+    if (location.protocol !== 'https:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+        const msg = '⚠️ ต้องใช้ HTTPS ในการเปิดกล้อง\nกรุณาใช้ GitHub Pages หรือ ngrok';
+        document.getElementById('scannerStatus').textContent = msg;
+        document.getElementById('scannerStatus').className = 'scanner-status error';
+        this.showToast(msg, 'error');
+        return;
     }
+
+    // ✅ ขออนุญาตกล้องก่อน
+    try {
+        console.log('📷 กำลังขออนุญาตกล้อง...');
+        const stream = await navigator.mediaDevices.getUserMedia({
+            video: { 
+                facingMode: "environment",
+                width: { ideal: 640 },
+                height: { ideal: 480 }
+            }
+        });
+        stream.getTracks().forEach(track => track.stop());
+        console.log('✅ ได้รับอนุญาตกล้องแล้ว');
+    } catch (err) {
+        console.error('❌ ขออนุญาตกล้องไม่สำเร็จ:', err);
+        let msg = '❌ เปิดกล้องไม่สำเร็จ: ';
+        if (err.name === 'NotAllowedError') {
+            msg += 'กรุณาอนุญาตให้เว็บไซต์เข้าถึงกล้อง (คลิกที่ไอคอนกล้องในแถบ URL)';
+        } else if (err.name === 'NotFoundError') {
+            msg += 'ไม่พบกล้องในอุปกรณ์นี้';
+        } else if (err.name === 'SecurityError') {
+            msg += 'ต้องใช้ HTTPS เท่านั้น (ใช้ GitHub Pages)';
+        } else {
+            msg += err.message || 'ไม่ทราบสาเหตุ';
+        }
+        document.getElementById('scannerStatus').textContent = msg;
+        document.getElementById('scannerStatus').className = 'scanner-status error';
+        this.showToast(msg, 'error');
+        return;
+    }
+
+    // ✅ ตรวจสอบไลบรารี
+    if (typeof Html5Qrcode === 'undefined') {
+        console.error('❌ Html5Qrcode ไม่ถูกโหลด');
+        this.showToast('⚠️ ไลบรารีสแกนโหลดไม่สำเร็จ กรุณารีเฟรชหน้า', 'error');
+        return;
+    }
+
+    // ✅ ปิด Scanner เดิมถ้ามี
+    if (this.html5Scanner) {
+        try {
+            await this.html5Scanner.stop();
+            this.html5Scanner.clear();
+        } catch(e) {}
+        this.html5Scanner = null;
+    }
+
+    // ✅ อัปเดต UI
+    document.getElementById('scannerPlaceholder').style.display = 'none';
+    document.getElementById('scannerOverlay').style.display = 'block';
+    document.getElementById('scannerStatus').innerHTML = '<i class="fas fa-circle" style="color:var(--success);font-size:8px;"></i> กำลังเปิดกล้อง...';
+    document.getElementById('scannerStatus').className = 'scanner-status success';
+    document.getElementById('btnToggleScanner').innerHTML = '<i class="fas fa-stop"></i> ปิดกล้อง';
+
+    console.log('📷 กำลังสร้าง Html5Qrcode...');
+
+    try {
+        this.html5Scanner = new Html5Qrcode("reader");
+        const config = {
+            fps: 30,
+            qrbox: { width: 300, height: 200 },
+            aspectRatio: 1.333,
+            formatsToSupport: [
+                Html5QrcodeSupportedFormats.EAN_13,
+                Html5QrcodeSupportedFormats.EAN_8,
+                Html5QrcodeSupportedFormats.UPC_A,
+                Html5QrcodeSupportedFormats.UPC_E,
+                Html5QrcodeSupportedFormats.CODE_128,
+                Html5QrcodeSupportedFormats.CODE_39,
+                Html5QrcodeSupportedFormats.CODE_93,
+                Html5QrcodeSupportedFormats.QR_CODE,
+                Html5QrcodeSupportedFormats.DATA_MATRIX,
+                Html5QrcodeSupportedFormats.ITF,
+                Html5QrcodeSupportedFormats.AZTEC,
+                Html5QrcodeSupportedFormats.CODABAR,
+                Html5QrcodeSupportedFormats.PDF_417,
+                Html5QrcodeSupportedFormats.MAXICODE
+            ]
+        };
+
+        console.log('📷 กำลังเริ่มสแกน...');
+
+        // ✅ แก้ไขตรงนี้! ส่งแค่ facingMode อย่างเดียว
+        await this.html5Scanner.start(
+            { facingMode: "environment" },  // ✅ มีแค่ 1 คีย์
+            config,
+            (decodedText) => {
+                console.log('📷 สแกนได้ Raw:', decodedText);
+                const now = Date.now();
+                if (now - this.lastScan > 1500) {
+                    this.lastScan = now;
+                    const cleanBarcode = String(decodedText).replace(/[^0-9]/g, '');
+                    console.log('📷 ทำความสะอาด:', cleanBarcode);
+                    
+                    if (cleanBarcode.length !== 13) {
+                        this.showToast(`⚠️ บาร์โค้ดต้องมี 13 หลัก (พบ ${cleanBarcode.length} หลัก)`, 'warning');
+                        document.getElementById('scannerStatus').innerHTML = `⚠️ ต้องมี 13 หลัก (พบ ${cleanBarcode.length} หลัก)`;
+                        document.getElementById('scannerStatus').className = 'scanner-status error';
+                        if (navigator.vibrate) navigator.vibrate([100, 100, 100]);
+                        return;
+                    }
+                    
+                    if (navigator.vibrate) navigator.vibrate(200);
+                    this.playBeepSound();
+                    const location = this.getSelectedLocation();
+                    if (this.checkDuplicateWithLocation(cleanBarcode, location.id)) return;
+                    this.onScan(cleanBarcode);
+                    
+                    if (this.continuousMode) {
+                        setTimeout(() => {
+                            document.getElementById('qtyInput').value = 1;
+                            this.confirmItem();
+                        }, 300);
+                    }
+                }
+            },
+            (error) => {}
+        );
+
+        console.log('📷 Scanner เริ่มทำงานแล้ว');
+        this.scanning = true;
+        this.showToast('📷 กล้องพร้อมสแกน (ต้องมี 13 หลักเท่านั้น)', 'success');
+        document.getElementById('scannerStatus').innerHTML = '<i class="fas fa-circle" style="color:var(--success);font-size:8px;"></i> พร้อมสแกน (13 หลัก)';
+        document.getElementById('scannerStatus').className = 'scanner-status success';
+
+    } catch (err) {
+        console.error('❌ Scanner error:', err);
+        document.getElementById('scannerStatus').innerHTML = '<i class="fas fa-exclamation-circle"></i> ' + (err.message || 'เกิดข้อผิดพลาด');
+        document.getElementById('scannerStatus').className = 'scanner-status error';
+        this.showToast('❌ เปิดกล้องไม่สำเร็จ: ' + (err.message || 'ไม่ทราบสาเหตุ'), 'error');
+        this.stopScanner();
+    }
+}
 
     playBeepSound() {
         try {
