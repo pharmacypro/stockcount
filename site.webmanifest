@@ -1,7 +1,7 @@
 {
-    "name": "MediStock - ระบบนับสต็อกยา",
-    "short_name": "MediStock",
-    "description": "ระบบนับสต็อกสินค้ายา ใช้งานง่าย พร้อมสแกนบาร์โค้ด",
+    "name": "MediStock - ระบบนับสต็อกยา v4.0",
+    "short_name": "MediStock v4.0",
+    "description": "ระบบนับสต็อกสินค้ายา ใช้งานง่าย พร้อมสแกนบาร์โค้ดแบบเต็มจอ",
     "start_url": "./index.html",
     "display": "standalone",
     "orientation": "portrait",
