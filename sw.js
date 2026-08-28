@@ -1,5 +1,5 @@
-// sw.js - Service Worker สำหรับ MediStock v4.0
-const CACHE_NAME = 'medistock-v4.0';
+// sw.js - Service Worker สำหรับ MediStock v4.0.2
+const CACHE_NAME = 'medistock-v4.0.2';
 const urlsToCache = [
     './',
     './index.html',
@@ -21,11 +21,12 @@ const urlsToCache = [
     'https://cdn.jsdelivr.net/npm/chart.js'
 ];
 
+// ✅ ติดตั้ง Service Worker
 self.addEventListener('install', event => {
     event.waitUntil(
         caches.open(CACHE_NAME)
             .then(cache => {
-                console.log('✅ เปิด Cache สำเร็จ (v4.0)');
+                console.log('✅ เปิด Cache สำเร็จ (v4.0.2)');
                 return cache.addAll(urlsToCache);
             })
             .catch(err => console.error('❌ Cache error:', err))
@@ -33,6 +34,7 @@ self.addEventListener('install', event => {
     self.skipWaiting();
 });
 
+// ✅ เปิดใช้งาน Service Worker
 self.addEventListener('activate', event => {
     event.waitUntil(
         caches.keys().then(cacheNames => {
@@ -48,6 +50,7 @@ self.addEventListener('activate', event => {
     );
 });
 
+// ✅ ตอบสนองการร้องขอ
 self.addEventListener('fetch', event => {
     event.respondWith(
         caches.match(event.request)
@@ -56,6 +59,7 @@ self.addEventListener('fetch', event => {
     );
 });
 
+// ✅ รับข้อความจาก client
 self.addEventListener('message', event => {
     if (event.data && event.data.type === 'SKIP_WAITING') {
         self.skipWaiting();
