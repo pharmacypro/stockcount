@@ -8,7 +8,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="MediStock">
     <meta name="theme-color" content="#0ea5e9">
-    <title>MediStock v4.0.2</title>
+    <title>MediStock v4.0.3</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,6 +19,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
     <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+    
+    <!-- ✅ ZXing WASM (สแกนเร็ว แม่นยำ) -->
+    <script src="https://unpkg.com/@zxing/library@0.19.1/umd/index.min.js"></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
     <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -135,6 +139,23 @@
         .btn-sm { padding:8px 14px; font-size:12px; min-height:36px; }
         .btn-block { width:100%; }
         .btn-warning { background:var(--warning); color:#fff; }
+        .btn-camera {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(16,185,129,0.3);
+        }
+        .btn-camera:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(16,185,129,0.4); }
+        .btn-camera:active { transform: scale(0.96); }
 
         .input { width:100%; padding:12px 16px; border:2px solid var(--border-color); border-radius:var(--radius-md); font-size:15px; color:var(--text-main); background:var(--bg-body); transition:var(--transition); font-family:'Plus Jakarta Sans',sans-serif; min-height:48px; }
         .input:focus { outline:none; border-color:var(--primary); box-shadow:0 0 0 3px rgba(14,165,233,0.15); }
@@ -240,7 +261,6 @@
             background: rgba(255, 215, 0, 0.25);
             border-color: #ffd700;
         }
-        /* ✅ ปุ่มซูม */
         .scanner-zoom-btn {
             position: absolute;
             right: 20px;
@@ -257,15 +277,9 @@
             min-width: 48px;
             text-align: center;
         }
-        .scanner-zoom-btn:hover {
-            background: rgba(255,255,255,0.25);
-        }
-        .scanner-zoom-btn.zoom-in {
-            bottom: 120px;
-        }
-        .scanner-zoom-btn.zoom-out {
-            bottom: 175px;
-        }
+        .scanner-zoom-btn:hover { background: rgba(255,255,255,0.25); }
+        .scanner-zoom-btn.zoom-in { bottom: 120px; }
+        .scanner-zoom-btn.zoom-out { bottom: 175px; }
 
         .product-detail { background:linear-gradient(135deg, var(--success-light) 0%, #f0fdf4 100%); border:2px solid #6ee7b7; border-radius:var(--radius-lg); padding:16px; margin-bottom:10px; display:none; }
         [data-theme="dark"] .product-detail { background:linear-gradient(135deg, #064e3b 0%, #065f46 100%); border-color:#34d399; }
@@ -286,7 +300,6 @@
         .location-select-group { display:flex; flex-wrap:wrap; gap:6px; }
         .location-select-group select { flex:1; min-width:80px; padding:8px 10px; border:2px solid var(--border-color); border-radius:var(--radius-sm); font-size:13px; background:var(--bg-card); color:var(--text-main); min-height:42px; }
 
-        /* ✅ Lot List */
         .lot-item { display:flex; align-items:center; padding:10px 12px; border:2px solid var(--border-color); border-radius:var(--radius-md); margin-bottom:6px; cursor:pointer; gap:10px; background:var(--bg-card); transition:var(--transition); }
         .lot-item:hover { border-color:var(--primary-light); }
         .lot-item.selected { border-color:var(--primary); background:#eef2ff; box-shadow:0 0 0 3px rgba(14,165,233,0.15); }
@@ -657,7 +670,7 @@
             <div class="logo-text">
                 <span class="brand">
                     <span class="main">MediStock</span>
-                    <span class="version">v4.0.2</span>
+                    <span class="version">v4.0.3</span>
                 </span>
                 <span class="tagline"><i class="fas fa-circle" style="font-size:4px;color:#34d399;margin-right:3px;"></i>ระบบนับสต็อกสินค้ายา</span>
             </div>
@@ -761,7 +774,7 @@
             <div class="progress-container"><div class="progress-bar" id="progressBar" style="width:0%;"></div></div>
         </div>
         
-        <!-- SCANNER (เหลือไว้สำหรับโหมดเก่า) -->
+        <!-- SCANNER -->
         <div class="card" style="padding:8px;">
             <div class="scanner-wrapper" id="scannerWrapper">
                 <div id="reader" style="width:100%;min-height:200px;"></div>
@@ -783,6 +796,13 @@
                 <button class="btn btn-primary" onclick="app.openFullscreenScanner()" id="btnFullscreenScanner" style="font-size:15px;padding:12px;">
                     <i class="fas fa-expand"></i> 📷 เปิดสแกน (เต็มจอ)
                 </button>
+                
+                <!-- ✅ ปุ่มถ่ายรูปบาร์โค้ด (ใช้ได้ทุกมือถือ) -->
+                <input type="file" id="imageUpload" accept="image/*" capture="environment" style="display:none" onchange="app.scanImage(event)">
+                <button class="btn btn-success" onclick="document.getElementById('imageUpload').click()" style="font-size:14px;padding:10px 16px;">
+                    <i class="fas fa-camera"></i> 📷 ถ่ายรูปบาร์โค้ด
+                </button>
+                
                 <button class="btn btn-outline btn-sm" onclick="manualBarcode()"><i class="fas fa-keyboard"></i> ใส่รหัส</button>
                 <button class="btn btn-sm" onclick="toggleContinuousMode()" id="btnContinuous" style="background:var(--text-muted);color:#fff;"><i class="fas fa-infinity"></i> ต่อเนื่อง: ปิด</button>
                 <button class="btn btn-sm" onclick="app.testCamera()" style="background:var(--info);color:#fff;min-height:36px;padding:6px 12px;font-size:11px;"><i class="fas fa-bug"></i> ทดสอบ</button>
@@ -1223,7 +1243,6 @@
     <button class="scanner-flash-btn" id="scannerFlashBtn" onclick="app.toggleFlashFullscreen()">
         <i class="fas fa-bolt"></i> เปิดไฟฉาย
     </button>
-    <!-- ✅ ปุ่มซูม -->
     <button class="scanner-zoom-btn zoom-in" onclick="app.zoomIn()" title="ซูมเข้า">
         <i class="fas fa-search-plus"></i>
     </button>
@@ -1477,14 +1496,14 @@ if ('serviceWorker' in navigator) {
 }
 
 // ================================================================
-// ✅ JavaScript - MediStock v4.0.2 (ฉบับสมบูรณ์)
+// ✅ JavaScript - MediStock v4.0.3 (ใช้ ZXing + 3 ระบบ)
 // ================================================================
 eruda.init();
-console.log('✅ MediStock v4.0.2 กำลังเริ่มต้น...');
+console.log('✅ MediStock v4.0.3 กำลังเริ่มต้น...');
 
 const CONFIG = {
     APP_NAME: 'MediStock',
-    VERSION: '4.0.2',
+    VERSION: '4.0.3',
     STORE_ID: localStorage.getItem('storeId') || 'default',
     EXPIRY_WARNING_DAYS: 90,
     MIN_STOCK_ALERT: 5,
@@ -1534,7 +1553,7 @@ class StockApp {
         this.isEditMode = false;
         this._qrProduct = null;
 
-        // ระบบแปลงหน่วย (เพิ่ม "ตลับ")
+        // ระบบแปลงหน่วย
         this.unitMap = {
             'ชิ้น': 1,
             'โหล': 12,
@@ -1549,22 +1568,22 @@ class StockApp {
             'กระปุก': 1,
             'ขีด': 1,
             'ถุง': 1,
-            'ตลับ': 1    // ✅ เพิ่มหน่วย "ตลับ"
+            'ตลับ': 1
         };
         this.unknownUnits = [];
         this._pendingUnknownUnit = null;
         this._pendingConvertedValue = null;
         this._pendingImportCallback = null;
         
-        // Onboarding state
+        // Onboarding
         this.onboardingStep = 0;
         this.onboardingSteps = [
             { icon: '🏪', title: 'ยินดีต้อนรับสู่ MediStock!', desc: 'ระบบนับสต็อกสินค้ายา ใช้งานง่าย ไม่ต้องลงโปรแกรม เปิดเว็บก็ใช้ได้' },
-            { icon: '📥', title: 'ขั้นตอนที่ 1: นำเข้าสินค้า', desc: 'ไปที่แท็บ "นำเข้า" → อัปโหลดไฟล์ Excel หรือ CSV ที่มีข้อมูลสินค้า (รองรับหลาย LOT)' },
-            { icon: '📸', title: 'ขั้นตอนที่ 2: เปิดกล้องสแกน', desc: 'ไปที่แท็บ "นับสต็อก" → กด "เปิดสแกน (เต็มจอ)" → ส่องบาร์โค้ดห่าง 10-15 ซม.' },
-            { icon: '📍', title: 'ขั้นตอนที่ 3: เลือกตำแหน่ง', desc: 'เลือกหน้าร้าน/หลังร้าน → เลือกตู้ → เลือกชั้นวาง (ถ้ายังไม่มีให้สร้างใหม่)' },
-            { icon: '✏️', title: 'ขั้นตอนที่ 4: ใส่จำนวน', desc: 'ใส่จำนวนที่นับ → กด "ยืนยันการนับ" (ถ้านับผิด แก้ไขได้ที่รายการล่าสุด)' },
-            { icon: '📊', title: 'ขั้นตอนที่ 5: สรุปผล', desc: 'นับเสร็จ → กด "สรุปผล" → ดูรายงาน → กด Export เพื่อส่งออก CSV/Excel/PDF' }
+            { icon: '📥', title: 'ขั้นตอนที่ 1: นำเข้าสินค้า', desc: 'ไปที่แท็บ "นำเข้า" → อัปโหลดไฟล์ Excel หรือ CSV' },
+            { icon: '📸', title: 'ขั้นตอนที่ 2: สแกนบาร์โค้ด', desc: 'กด "เปิดสแกน" หรือ "ถ่ายรูปบาร์โค้ด" เพื่ออ่านบาร์โค้ด' },
+            { icon: '📍', title: 'ขั้นตอนที่ 3: เลือกตำแหน่ง', desc: 'เลือกหน้าร้าน/หลังร้าน → ตู้ → ชั้นวาง' },
+            { icon: '✏️', title: 'ขั้นตอนที่ 4: ใส่จำนวน', desc: 'ใส่จำนวนที่นับ → กด "ยืนยันการนับ"' },
+            { icon: '📊', title: 'ขั้นตอนที่ 5: สรุปผล', desc: 'นับเสร็จ → กด "สรุปผล" → Export CSV/Excel/PDF' }
         ];
 
         this.init();
@@ -1591,7 +1610,9 @@ class StockApp {
         this.loadUnits();
         this.checkEmergencyBackup();
         this.showOnboarding();
-        console.log('✅ MediStock v4.0.2 พร้อมใช้งาน!');
+        console.log('✅ MediStock v4.0.3 พร้อมใช้งาน!');
+        console.log('📊 ZXing พร้อมใช้งาน:', typeof ZXing !== 'undefined');
+        console.log('📊 BarcodeDetector:', 'BarcodeDetector' in window);
         if (this.products.length === 0) {
             this.updateStatus('📥 กรุณานำเข้าข้อมูลสินค้าก่อนใช้งาน');
             this.showToast('📥 กรุณานำเข้าข้อมูลสินค้าจาก Excel หรือ Google Sheets', 'info');
@@ -2115,18 +2136,18 @@ class StockApp {
             'นำเข้า': {
                 title: '📥 คู่มือการนำเข้าสินค้า',
                 steps: [
-                    '1. เตรียมไฟล์ Excel หรือ CSV ที่มีข้อมูลสินค้า (ชื่อ, บาร์โค้ด, ราคา, จำนวน, LOT)',
-                    '2. คลิกที่ช่องอัปโหลด หรือลากไฟล์มาวางในช่อง',
+                    '1. เตรียมไฟล์ Excel หรือ CSV ที่มีข้อมูลสินค้า',
+                    '2. คลิกที่ช่องอัปโหลด หรือลากไฟล์มาวาง',
                     '3. ระบบจะแสดงตัวอย่างข้อมูล ให้เลือกว่าคอลัมน์ไหนตรงกับฟิลด์อะไร',
-                    '4. กด "ยืนยันและนำเข้าข้อมูล" ระบบจะเพิ่มสินค้าเข้าไป (แบบ Append ไม่ลบของเดิม)',
-                    '5. รองรับหลาย LOT: ถ้ารหัสสินค้าซ้ำแต่ LOT ต่างกัน จะเพิ่มเป็น LOT ใหม่'
+                    '4. กด "ยืนยันและนำเข้าข้อมูล" ระบบจะเพิ่มสินค้าเข้าไป (แบบ Append)',
+                    '5. รองรับหลาย LOT: ถ้ารหัสซ้ำแต่ LOT ต่างกัน จะเพิ่มเป็น LOT ใหม่'
                 ],
-                tip: '💡 ถ้าอัปโหลดซ้ำ ระบบจะอัปเดตข้อมูลสินค้าที่มีอยู่แล้ว (ไม่ซ้ำ)'
+                tip: '💡 ถ้าอัปโหลดซ้ำ ระบบจะอัปเดตข้อมูลสินค้าที่มีอยู่แล้ว'
             },
             'นับสต็อก': {
                 title: '📸 คู่มือการนับสต็อก',
                 steps: [
-                    '1. กด "เปิดสแกน (เต็มจอ)" เพื่อเริ่มสแกนบาร์โค้ด (วางห่าง 10-15 ซม.)',
+                    '1. กด "เปิดสแกน (เต็มจอ)" หรือ "ถ่ายรูปบาร์โค้ด" เพื่ออ่านบาร์โค้ด',
                     '2. ถ้าไม่มีบาร์โค้ด ให้พิมพ์ชื่อสินค้าในช่องค้นหา',
                     '3. เลือก LOT ที่ต้องการนับ (ถ้ามีหลาย LOT)',
                     '4. เลือกตำแหน่งสินค้า: หน้าร้าน/หลังร้าน → ตู้ → ชั้นวาง',
@@ -2298,7 +2319,6 @@ class StockApp {
             return { valid: false, message: '❌ ไม่พบข้อมูลบาร์โค้ด' };
         }
         
-        // ✅ รองรับ 8, 12, 13 หลัก
         if (clean.length === 13) {
             if (!this.validateEAN13Checksum(clean)) {
                 return { valid: false, message: '❌ Checksum ไม่ถูกต้อง' };
@@ -2307,7 +2327,6 @@ class StockApp {
         }
         
         if (clean.length === 12) {
-            // ✅ UPC-A: เติม 0 ข้างหน้าให้เป็น 13 หลัก
             const ean13 = '0' + clean;
             if (this.validateEAN13Checksum(ean13)) {
                 return { valid: true, barcode: ean13, type: 'UPC-A→EAN-13' };
@@ -2316,7 +2335,6 @@ class StockApp {
         }
         
         if (clean.length === 8) {
-            // ✅ EAN-8: เติม 00000 ข้างหน้าให้เป็น 13 หลัก
             const ean13 = '00000' + clean;
             if (this.validateEAN13Checksum(ean13)) {
                 return { valid: true, barcode: ean13, type: 'EAN-8→EAN-13' };
@@ -2330,7 +2348,6 @@ class StockApp {
         };
     }
 
-    // ✅ ฟังก์ชันตรวจสอบ EAN-13 Checksum
     validateEAN13Checksum(barcode) {
         if (barcode.length !== 13) return false;
         let sum = 0;
@@ -2346,40 +2363,159 @@ class StockApp {
         return checksum === parseInt(barcode[12]);
     }
 
-    // ✅ ฟังก์ชันกลางสำหรับประมวลผลบาร์โค้ด
-    processScannedBarcode(barcode, type) {
+    // ================================================================
+    // ✅ SCAN IMAGE (3 ระบบ: ZXing + html5-qrcode + BarcodeDetector)
+    // ================================================================
+    async scanImage(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        
+        this.showToast('📷 กำลังอ่านบาร์โค้ดจากรูป...', 'info');
+        document.getElementById('scannerStatus').textContent = '📷 กำลังอ่านบาร์โค้ด...';
+        document.getElementById('scannerStatus').className = 'scanner-status info';
+        
+        try {
+            const imageUrl = URL.createObjectURL(file);
+            const img = new Image();
+            img.src = imageUrl;
+            await new Promise((resolve, reject) => {
+                img.onload = resolve;
+                img.onerror = reject;
+            });
+            
+            let result = null;
+            let method = '';
+            
+            // ✅ วิธีที่ 1: ZXing
+            try {
+                if (typeof ZXing !== 'undefined') {
+                    console.log('🔍 ลองใช้ ZXing...');
+                    const codeReader = new ZXing.BrowserMultiFormatReader();
+                    const hints = new Map();
+                    const formats = [
+                        ZXing.BarcodeFormat.EAN_13,
+                        ZXing.BarcodeFormat.EAN_8,
+                        ZXing.BarcodeFormat.UPC_A,
+                        ZXing.BarcodeFormat.QR_CODE,
+                        ZXing.BarcodeFormat.CODE_128,
+                        ZXing.BarcodeFormat.CODE_39,
+                        ZXing.BarcodeFormat.CODE_93,
+                        ZXing.BarcodeFormat.ITF,
+                        ZXing.BarcodeFormat.AZTEC,
+                        ZXing.BarcodeFormat.PDF_417
+                    ];
+                    hints.set(ZXing.DecodeHintType.POSSIBLE_FORMATS, formats);
+                    const decoded = await codeReader.decodeFromImageElement(img, hints);
+                    if (decoded && decoded.getText()) {
+                        result = decoded.getText();
+                        method = 'ZXing';
+                        console.log('✅ ZXing อ่านได้:', result);
+                    }
+                }
+            } catch (e) {
+                console.log('⚠️ ZXing อ่านไม่สำเร็จ:', e.message);
+            }
+            
+            // ✅ วิธีที่ 2: html5-qrcode
+            if (!result) {
+                try {
+                    console.log('🔍 ลองใช้ html5-qrcode...');
+                    const scanner = new Html5Qrcode("reader-fullscreen");
+                    const decoded = await scanner.scanFile(file, true);
+                    if (decoded) {
+                        result = decoded;
+                        method = 'html5-qrcode';
+                        console.log('✅ html5-qrcode อ่านได้:', result);
+                    }
+                } catch (e) {
+                    console.log('⚠️ html5-qrcode อ่านไม่สำเร็จ:', e.message);
+                }
+            }
+            
+            // ✅ วิธีที่ 3: BarcodeDetector API
+            if (!result) {
+                try {
+                    if ('BarcodeDetector' in window) {
+                        console.log('🔍 ลองใช้ BarcodeDetector API...');
+                        const detector = new BarcodeDetector({
+                            formats: ['ean_13', 'ean_8', 'upc_a', 'qr_code', 'code_128', 'code_39']
+                        });
+                        const barcodes = await detector.detect(img);
+                        if (barcodes && barcodes.length > 0) {
+                            result = barcodes[0].rawValue;
+                            method = 'BarcodeDetector API';
+                            console.log('✅ BarcodeDetector อ่านได้:', result);
+                        }
+                    }
+                } catch (e) {
+                    console.log('⚠️ BarcodeDetector อ่านไม่สำเร็จ:', e.message);
+                }
+            }
+            
+            URL.revokeObjectURL(imageUrl);
+            
+            if (result) {
+                const cleanBarcode = String(result).replace(/[^0-9]/g, '');
+                const validateResult = this.validateBarcode(cleanBarcode);
+                
+                if (validateResult.valid) {
+                    document.getElementById('scannerStatus').textContent = `✅ สแกนสำเร็จ! (${method})`;
+                    document.getElementById('scannerStatus').className = 'scanner-status success';
+                    this.showToast(`✅ อ่านบาร์โค้ดได้! (${method})`, 'success');
+                    this.processScannedBarcode(validateResult.barcode, method);
+                    return;
+                } else {
+                    this.showToast(validateResult.message, 'warning');
+                    document.getElementById('scannerStatus').textContent = validateResult.message;
+                    document.getElementById('scannerStatus').className = 'scanner-status error';
+                    return;
+                }
+            }
+            
+            document.getElementById('scannerStatus').textContent = '❌ ไม่พบบาร์โค้ดในรูป กรุณาถ่ายใหม่';
+            document.getElementById('scannerStatus').className = 'scanner-status error';
+            this.showToast('❌ ไม่พบบาร์โค้ดในรูป กรุณาถ่ายใหม่', 'error');
+            
+        } catch (err) {
+            console.error('❌ scanImage error:', err);
+            this.showToast('❌ อ่านบาร์โค้ดไม่สำเร็จ: ' + err.message, 'error');
+            document.getElementById('scannerStatus').textContent = '❌ ' + err.message;
+            document.getElementById('scannerStatus').className = 'scanner-status error';
+        }
+        
+        event.target.value = '';
+    }
+
+    processScannedBarcode(barcode, method = '') {
         if (navigator.vibrate) navigator.vibrate(200);
         this.playBeepSound();
-        const displayMsg = type ? `${type}: ${barcode}` : `✅ สแกนสำเร็จ! ${barcode}`;
-        document.getElementById('scannerStatusFull').textContent = displayMsg;
-        document.getElementById('scannerStatusFull').style.color = '#34d399';
         
-        setTimeout(() => {
-            this.closeFullscreenScanner();
-            this.onScan(barcode);
-            document.getElementById('productDetail').scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }, 500);
+        const msg = method ? `✅ สแกนสำเร็จ! (${method})` : `✅ สแกนสำเร็จ! ${barcode}`;
+        this.showToast(msg, 'success');
+        document.getElementById('scannerStatus').textContent = msg;
+        document.getElementById('scannerStatus').className = 'scanner-status success';
+        
+        this.closeFullscreenScanner();
+        this.onScan(barcode);
+        document.getElementById('productDetail').scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
     // ================================================================
-    // ✅ FULLSCREEN SCANNER (พร้อมปรับโฟกัส ซูม และ Checksum)
+    // ✅ FULLSCREEN SCANNER (ปรับ FPS เป็น 15)
     // ================================================================
     async openFullscreenScanner() {
         console.log('📷 เปิด Fullscreen Scanner...');
         
-        // ✅ ขออนุญาตกล้องด้วยความละเอียดสูง
         try {
             const stream = await navigator.mediaDevices.getUserMedia({
                 video: {
                     facingMode: "environment",
-                    width: { ideal: 3840, min: 1920 },
-                    height: { ideal: 2160, min: 1080 },
-                    zoom: { ideal: 1.5, max: 3.0 }
+                    width: { ideal: 1920 },
+                    height: { ideal: 1080 }
                 }
             });
             stream.getTracks().forEach(track => track.stop());
         } catch (err) {
-            // ถ้าไม่รองรับความละเอียดสูง ให้ใช้ปกติ
             try {
                 const stream = await navigator.mediaDevices.getUserMedia({
                     video: { facingMode: "environment" }
@@ -2391,13 +2527,11 @@ class StockApp {
             }
         }
 
-        // ✅ แสดง Fullscreen
         const container = document.getElementById('scannerFullscreen');
         container.classList.add('show');
         document.getElementById('scannerStatusFull').textContent = '📷 กำลังเปิดกล้อง...';
         document.getElementById('scannerStatusFull').style.color = '#fff';
 
-        // ✅ หยุด Scanner เดิม (ถ้ามี)
         if (this.html5Scanner) {
             try {
                 await this.html5Scanner.stop();
@@ -2409,9 +2543,8 @@ class StockApp {
         try {
             this.html5Scanner = new Html5Qrcode("reader-fullscreen");
             
-            // ✅ ปรับการตั้งค่าให้โฟกัสดีขึ้น
             const config = {
-                fps: 30,
+                fps: 15,  // ✅ ลดจาก 30 เป็น 15
                 qrbox: { width: 280, height: 180 },
                 aspectRatio: 1.333,
                 videoConstraints: {
@@ -2444,8 +2577,6 @@ class StockApp {
                 (decodedText) => {
                     console.log('📷 Fullscreen สแกนได้:', decodedText);
                     const cleanBarcode = String(decodedText).replace(/[^0-9]/g, '');
-                    
-                    // ✅ ตรวจสอบความยาวและ Checksum
                     const result = this.validateBarcode(cleanBarcode);
                     
                     if (!result.valid) {
@@ -2455,8 +2586,7 @@ class StockApp {
                         return;
                     }
 
-                    // ✅ สแกนสำเร็จ!
-                    this.processScannedBarcode(result.barcode, result.type);
+                    this.processScannedBarcode(result.barcode, 'Fullscreen');
                 },
                 (error) => {}
             );
@@ -2473,7 +2603,6 @@ class StockApp {
         }
     }
 
-    // ✅ ปิด Fullscreen Scanner
     async closeFullscreenScanner() {
         const container = document.getElementById('scannerFullscreen');
         container.classList.remove('show');
@@ -2488,13 +2617,14 @@ class StockApp {
         this.scanning = false;
     }
 
-    // ✅ เปิด/ปิดไฟฉายใน Fullscreen
+    // ================================================================
+    // ✅ FLASH / ZOOM (เก็บไว้ แต่ไม่บังคับใช้)
+    // ================================================================
     async toggleFlashFullscreen() {
         if (!this.html5Scanner) {
             this.showToast('⚠️ ยังไม่เปิดกล้อง', 'warning');
             return;
         }
-        
         try {
             const video = this.html5Scanner._videoElement;
             if (video && video.srcObject) {
@@ -2521,7 +2651,6 @@ class StockApp {
         }
     }
 
-    // ✅ ซูมเข้า
     async zoomIn() {
         if (!this.html5Scanner) {
             this.showToast('⚠️ ยังไม่เปิดกล้อง', 'warning');
@@ -2548,7 +2677,6 @@ class StockApp {
         }
     }
 
-    // ✅ ซูมออก
     async zoomOut() {
         if (!this.html5Scanner) {
             this.showToast('⚠️ ยังไม่เปิดกล้อง', 'warning');
@@ -2588,7 +2716,14 @@ class StockApp {
                 video: { facingMode: "environment", width: { ideal: 640 }, height: { ideal: 480 } }
             });
             stream.getTracks().forEach(track => track.stop());
-            this.showToast('✅ กล้องทำงานปกติ!', 'success');
+            
+            const zxingStatus = typeof ZXing !== 'undefined' ? '✅ ZXing พร้อม' : '⚠️ ZXing ไม่พร้อม';
+            const detectorStatus = 'BarcodeDetector' in window ? '✅ BarcodeDetector พร้อม' : '⚠️ BarcodeDetector ไม่รองรับ';
+            
+            this.showToast(`✅ กล้องทำงานปกติ! ${zxingStatus} | ${detectorStatus}`, 'success');
+            console.log('✅ กล้องทำงานปกติ');
+            console.log('📊 ZXing:', zxingStatus);
+            console.log('📊 BarcodeDetector:', detectorStatus);
             return true;
         } catch (err) {
             console.error('❌ ทดสอบกล้องล้มเหลว:', err);
@@ -2624,7 +2759,7 @@ class StockApp {
     }
 
     // ================================================================
-    // CHECK DUPLICATE WITH LOCATION
+    // CHECK DUPLICATE
     // ================================================================
     checkDuplicateWithLocation(barcode, locationId) {
         const existing = this.sessionItems.find(item => 
@@ -2656,9 +2791,6 @@ class StockApp {
         return false;
     }
 
-    // ================================================================
-    // ADD MORE COUNT
-    // ================================================================
     addMoreCount() {
         if (!this.currentProduct) {
             this.showToast('⚠️ กรุณาเลือกสินค้าก่อน', 'warning');
@@ -2717,7 +2849,6 @@ class StockApp {
     // BARCODE LOOKUP
     // ================================================================
     onScan(barcode) {
-        // ✅ ตรวจสอบความยาวและ Checksum
         const result = this.validateBarcode(barcode);
         if (!result.valid) {
             this.showToast(result.message, 'warning');
@@ -2920,7 +3051,7 @@ class StockApp {
     }
 
     // ================================================================
-    // SHOW PRODUCT (พร้อมหลาย LOT)
+    // SHOW PRODUCT
     // ================================================================
     showProduct(product) {
         const detail = document.getElementById('productDetail');
@@ -2940,7 +3071,6 @@ class StockApp {
         document.getElementById('qtyInput').value = 1;
         this.showExpiryWarning(product);
 
-        // ✅ แสดงหลาย LOT
         const lotList = document.getElementById('lotList');
         const lotSelection = document.getElementById('lotSelection');
         
@@ -3076,9 +3206,6 @@ class StockApp {
         document.getElementById('editProductModal').classList.remove('show');
     }
 
-    // ================================================================
-    // RECOUNT PRODUCT
-    // ================================================================
     recountProduct() {
         if (!this.currentProduct) { this.showToast('⚠️ กรุณาเลือกสินค้าก่อน', 'warning'); return; }
         const product = this.currentProduct;
@@ -3228,7 +3355,7 @@ class StockApp {
     }
 
     // ================================================================
-    // ✅ CONFIRM ITEM (พร้อมตรวจสอบหน่วยและ LOT)
+    // CONFIRM ITEM
     // ================================================================
     confirmItem() {
         const qty = parseInt(document.getElementById('qtyInput').value) || 0;
@@ -3934,7 +4061,6 @@ class StockApp {
         `).join('');
     }
 
-    // ✅ แก้ไขฟังก์ชัน confirmMapping() ให้รองรับหลาย LOT
     async confirmMapping() {
         if (!this.pendingRows || this.pendingRows.length === 0) {
             this.showToast('⚠️ ไม่มีข้อมูลที่จะนำเข้า', 'warning');
@@ -3973,7 +4099,6 @@ class StockApp {
 
                 if (!name) { errorCount++; continue; }
 
-                // ✅ แปลงหน่วย
                 let baseStock = stock;
                 if (unit && this.unitMap[unit]) {
                     baseStock = this.convertToBase(stock, unit);
@@ -3986,7 +4111,6 @@ class StockApp {
                     }
                 }
 
-                // ✅ หาสินค้าที่มีอยู่แล้ว (จากรหัส หรือ ชื่อ)
                 let product = null;
                 if (code) {
                     product = this.products.find(p => p.code === code || p.id === code);
@@ -3996,7 +4120,6 @@ class StockApp {
                 }
 
                 if (product) {
-                    // ✅ ถ้ามีสินค้าแล้ว → เพิ่ม LOT ใหม่ (ไม่ข้าม!)
                     if (lot) {
                         if (!product.lots) product.lots = [];
                         const existingLot = product.lots.find(l => l.lot === lot);
@@ -4111,7 +4234,7 @@ class StockApp {
     }
 
     // ================================================================
-    // REPORT
+    // REPORT (ย่อลงเพื่อประหยัดพื้นที่)
     // ================================================================
     finishCount() {
         if (this.sessionItems.length === 0) { this.showToast('⚠️ ยังไม่มีรายการนับ', 'warning'); return; }
@@ -4320,7 +4443,7 @@ class StockApp {
     }
 
     // ================================================================
-    // EXPORT
+    // EXPORT (ย่อเพื่อประหยัดพื้นที่)
     // ================================================================
     exportData(format) {
         if (this.sessionItems.length === 0) { this.showToast('⚠️ ไม่มีข้อมูลสำหรับส่งออก', 'warning'); return; }
@@ -4391,7 +4514,7 @@ class StockApp {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF('landscape');
         doc.setFontSize(14);
-        doc.text('MediStock - รายงานการนับสต็อก v4.0.2', 14, 20);
+        doc.text('MediStock - รายงานการนับสต็อก v4.0.3', 14, 20);
         const tableData = rows.map(row => row.map(v => v !== undefined ? String(v) : ''));
         doc.autoTable({ head: [headers.map(h => String(h))], body: tableData, startY: 30, styles: { fontSize: 7 } });
         doc.save(`${type}_${Date.now()}.pdf`);
@@ -4935,7 +5058,6 @@ class StockApp {
         }
         try {
             const url = `https://sheets.googleapis.com/v4/spreadsheets/${config.spreadsheetId}/values/${config.sheetName}!${range}?key=${config.apiKey}`;
-            console.log('📡 เรียก URL:', url);
             const response = await fetch(url);
             if (!response.ok) {
                 const errorText = await response.text();
@@ -4943,7 +5065,6 @@ class StockApp {
                 throw new Error(`HTTP ${response.status}: ${response.statusText}`);
             }
             const data = await response.json();
-            console.log('📊 ข้อมูลที่ได้:', data);
             return data.values || [];
         } catch (e) {
             console.error('❌ อ่าน Google Sheets ไม่สำเร็จ:', e);
@@ -5188,10 +5309,9 @@ let app = null;
 document.addEventListener('DOMContentLoaded', function() {
     app = new StockApp();
     window.app = app;
-    console.log('✅ MediStock v4.0.2 พร้อมใช้งาน!');
+    console.log('✅ MediStock v4.0.3 พร้อมใช้งาน!');
 });
 
-// ✅ เก็บ deferredPrompt ไว้
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     window.deferredPrompt = e;
@@ -5214,7 +5334,7 @@ window.addEventListener('appinstalled', () => {
 });
 
 // ================================================================
-// ✅ GLOBAL FUNCTIONS (for HTML onclick)
+// ✅ GLOBAL FUNCTIONS
 // ================================================================
 function switchTab(name) { if (app) app.switchTab(name); }
 function toggleTheme() { if (app) app.toggleTheme(); }
@@ -5275,8 +5395,8 @@ window.clearPendingBarcode = function() {
     if (app) app.clearPendingBarcode();
 };
 
-console.log('✅ MediStock v4.0.2 พร้อมใช้งาน!');
-console.log('✨ MediStock v4.0.2: Fullscreen Scanner + หลาย LOT + Checksum + รองรับ 8-13 หลัก + ปุ่มซูม');
+console.log('✅ MediStock v4.0.3 พร้อมใช้งาน!');
+console.log('✨ MediStock v4.0.3: 3 ระบบสแกน (ZXing + html5-qrcode + BarcodeDetector)');
 </script>
 
 <!-- ✅ ปิดท้ายไฟล์ -->
